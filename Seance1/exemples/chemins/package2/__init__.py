@@ -1,0 +1,1 @@
+ma_variable = 25
