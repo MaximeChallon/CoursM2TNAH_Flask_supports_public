@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension vscode.markdown-math */
+@font-face{font-family:KaTeX_AMS;font-style:normal;font-weight:400;src:url(fonts/KaTeX_AMS-Regular.woff2) format("woff2"),url(fonts/KaTeX_AMS-Regular.woff) format("woff"),url(fonts/KaTeX_AMS-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Caligraphic;font-style:normal;font-weight:700;src:url(fonts/KaTeX_Caligraphic-Bold.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Bold.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Bold.ttf) format("truetype")}@font-face{font-family:KaTeX_Caligraphic;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Caligraphic-Regular.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Regular.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Fraktur;font-style:normal;font-weight:700;src:url(fonts/KaTeX_Fraktur-Bold.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Bold.woff) format("woff"),url(fonts/KaTeX_Fraktur-Bold.ttf) format("truetype")}@font-face{font-family:KaTeX_Fraktur;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Fraktur-Regular.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Regular.woff) format("woff"),url(fonts/KaTeX_Fraktur-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:normal;font-weight:700;src:url(fonts/KaTeX_Main-Bold.woff2) format("woff2"),url(fonts/KaTeX_Main-Bold.woff) format("woff"),url(fonts/KaTeX_Main-Bold.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:italic;font-weight:700;src:url(fonts/KaTeX_Main-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Main-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Main-BoldItalic.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:italic;font-weight:400;src:url(fonts/KaTeX_Main-Italic.woff2) format("woff2"),url(fonts/KaTeX_Main-Italic.woff) format("woff"),url(fonts/KaTeX_Main-Italic.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Main-Regular.woff2) format("woff2"),url(fonts/KaTeX_Main-Regular.woff) format("woff"),url(fonts/KaTeX_Main-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Math;font-style:italic;font-weight:700;src:url(fonts/KaTeX_Math-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Math-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Math-BoldItalic.ttf) format("truetype")}@font-face{font-family:KaTeX_Math;font-style:italic;font-weight:400;src:url(fonts/KaTeX_Math-Italic.woff2) format("woff2"),url(fonts/KaTeX_Math-Italic.woff) format("woff"),url(fonts/KaTeX_Math-Italic.ttf) format("truetype")}@font-face{font-family:"KaTeX_SansSerif";font-style:normal;font-weight:700;src:url(fonts/KaTeX_SansSerif-Bold.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Bold.woff) format("woff"),url(fonts/KaTeX_SansSerif-Bold.ttf) format("truetype")}@font-face{font-family:"KaTeX_SansSerif";font-style:italic;font-weight:400;src:url(fonts/KaTeX_SansSerif-Italic.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Italic.woff) format("woff"),url(fonts/KaTeX_SansSerif-Italic.ttf) format("truetype")}@font-face{font-family:"KaTeX_SansSerif";font-style:normal;font-weight:400;src:url(fonts/KaTeX_SansSerif-Regular.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Regular.woff) format("woff"),url(fonts/KaTeX_SansSerif-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Script;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Script-Regular.woff2) format("woff2"),url(fonts/KaTeX_Script-Regular.woff) format("woff"),url(fonts/KaTeX_Script-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size1;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size1-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size1-Regular.woff) format("woff"),url(fonts/KaTeX_Size1-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size2;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size2-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size2-Regular.woff) format("woff"),url(fonts/KaTeX_Size2-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size3;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size3-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size3-Regular.woff) format("woff"),url(fonts/KaTeX_Size3-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size4;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size4-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size4-Regular.woff) format("woff"),url(fonts/KaTeX_Size4-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Typewriter;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Typewriter-Regular.woff2) format("woff2"),url(fonts/KaTeX_Typewriter-Regular.woff) format("woff"),url(fonts/KaTeX_Typewriter-Regular.ttf) format("truetype")}.katex{text-rendering:auto;font:normal 1.21em KaTeX_Main,Times New Roman,serif;line-height:1.2;text-indent:0}.katex *{-ms-high-contrast-adjust:none!important;border-color:currentColor}.katex .katex-version:after{content:"0.16.2"}.katex .katex-mathml{clip:rect(1px,1px,1px,1px);border:0;height:1px;overflow:hidden;padding:0;position:absolute;width:1px}.katex .katex-html>.newline{display:block}.katex .base{position:relative;white-space:nowrap;width:-webkit-min-content;width:-moz-min-content;width:min-content}.katex .base,.katex .strut{display:inline-block}.katex .textbf{font-weight:700}.katex .textit{font-style:italic}.katex .textrm{font-family:KaTeX_Main}.katex .textsf{font-family:KaTeX_SansSerif}.katex .texttt{font-family:KaTeX_Typewriter}.katex .mathnormal{font-family:KaTeX_Math;font-style:italic}.katex .mathit{font-family:KaTeX_Main;font-style:italic}.katex .mathrm{font-style:normal}.katex .mathbf{font-family:KaTeX_Main;font-weight:700}.katex .boldsymbol{font-family:KaTeX_Math;font-style:italic;font-weight:700}.katex .amsrm,.katex .mathbb,.katex .textbb{font-family:KaTeX_AMS}.katex .mathcal{font-family:KaTeX_Caligraphic}.katex .mathfrak,.katex .textfrak{font-family:KaTeX_Fraktur}.katex .mathtt{font-family:KaTeX_Typewriter}.katex .mathscr,.katex .textscr{font-family:KaTeX_Script}.katex .mathsf,.katex .textsf{font-family:KaTeX_SansSerif}.katex .mathboldsf,.katex .textboldsf{font-family:KaTeX_SansSerif;font-weight:700}.katex .mathitsf,.katex .textitsf{font-family:KaTeX_SansSerif;font-style:italic}.katex .mainrm{font-family:KaTeX_Main;font-style:normal}.katex .vlist-t{border-collapse:collapse;display:inline-table;table-layout:fixed}.katex .vlist-r{display:table-row}.katex .vlist{display:table-cell;position:relative;vertical-align:bottom}.katex .vlist>span{display:block;height:0;position:relative}.katex .vlist>span>span{display:inline-block}.katex .vlist>span>.pstrut{overflow:hidden;width:0}.katex .vlist-t2{margin-right:-2px}.katex .vlist-s{display:table-cell;font-size:1px;min-width:2px;vertical-align:bottom;width:2px}.katex .vbox{align-items:baseline;display:inline-flex;flex-direction:column}.katex .hbox{width:100%}.katex .hbox,.katex .thinbox{display:inline-flex;flex-direction:row}.katex .thinbox{max-width:0;width:0}.katex .msupsub{text-align:left}.katex .mfrac>span>span{text-align:center}.katex .mfrac .frac-line{border-bottom-style:solid;display:inline-block;width:100%}.katex .hdashline,.katex .hline,.katex .mfrac .frac-line,.katex .overline .overline-line,.katex .rule,.katex .underline .underline-line{min-height:1px}.katex .mspace{display:inline-block}.katex .clap,.katex .llap,.katex .rlap{position:relative;width:0}.katex .clap>.inner,.katex .llap>.inner,.katex .rlap>.inner{position:absolute}.katex .clap>.fix,.katex .llap>.fix,.katex .rlap>.fix{display:inline-block}.katex .llap>.inner{right:0}.katex .clap>.inner,.katex .rlap>.inner{left:0}.katex .clap>.inner>span{margin-left:-50%;margin-right:50%}.katex .rule{border:0 solid;display:inline-block;position:relative}.katex .hline,.katex .overline .overline-line,.katex .underline .underline-line{border-bottom-style:solid;display:inline-block;width:100%}.katex .hdashline{border-bottom-style:dashed;display:inline-block;width:100%}.katex .sqrt>.root{margin-left:.27777778em;margin-right:-.55555556em}.katex .fontsize-ensurer.reset-size1.size1,.katex .sizing.reset-size1.size1{font-size:1em}.katex .fontsize-ensurer.reset-size1.size2,.katex .sizing.reset-size1.size2{font-size:1.2em}.katex .fontsize-ensurer.reset-size1.size3,.katex .sizing.reset-size1.size3{font-size:1.4em}.katex .fontsize-ensurer.reset-size1.size4,.katex .sizing.reset-size1.size4{font-size:1.6em}.katex .fontsize-ensurer.reset-size1.size5,.katex .sizing.reset-size1.size5{font-size:1.8em}.katex .fontsize-ensurer.reset-size1.size6,.katex .sizing.reset-size1.size6{font-size:2em}.katex .fontsize-ensurer.reset-size1.size7,.katex .sizing.reset-size1.size7{font-size:2.4em}.katex .fontsize-ensurer.reset-size1.size8,.katex .sizing.reset-size1.size8{font-size:2.88em}.katex .fontsize-ensurer.reset-size1.size9,.katex .sizing.reset-size1.size9{font-size:3.456em}.katex .fontsize-ensurer.reset-size1.size10,.katex .sizing.reset-size1.size10{font-size:4.148em}.katex .fontsize-ensurer.reset-size1.size11,.katex .sizing.reset-size1.size11{font-size:4.976em}.katex .fontsize-ensurer.reset-size2.size1,.katex .sizing.reset-size2.size1{font-size:.83333333em}.katex .fontsize-ensurer.reset-size2.size2,.katex .sizing.reset-size2.size2{font-size:1em}.katex .fontsize-ensurer.reset-size2.size3,.katex .sizing.reset-size2.size3{font-size:1.16666667em}.katex .fontsize-ensurer.reset-size2.size4,.katex .sizing.reset-size2.size4{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size2.size5,.katex .sizing.reset-size2.size5{font-size:1.5em}.katex .fontsize-ensurer.reset-size2.size6,.katex .sizing.reset-size2.size6{font-size:1.66666667em}.katex .fontsize-ensurer.reset-size2.size7,.katex .sizing.reset-size2.size7{font-size:2em}.katex .fontsize-ensurer.reset-size2.size8,.katex .sizing.reset-size2.size8{font-size:2.4em}.katex .fontsize-ensurer.reset-size2.size9,.katex .sizing.reset-size2.size9{font-size:2.88em}.katex .fontsize-ensurer.reset-size2.size10,.katex .sizing.reset-size2.size10{font-size:3.45666667em}.katex .fontsize-ensurer.reset-size2.size11,.katex .sizing.reset-size2.size11{font-size:4.14666667em}.katex .fontsize-ensurer.reset-size3.size1,.katex .sizing.reset-size3.size1{font-size:.71428571em}.katex .fontsize-ensurer.reset-size3.size2,.katex .sizing.reset-size3.size2{font-size:.85714286em}.katex .fontsize-ensurer.reset-size3.size3,.katex .sizing.reset-size3.size3{font-size:1em}.katex .fontsize-ensurer.reset-size3.size4,.katex .sizing.reset-size3.size4{font-size:1.14285714em}.katex .fontsize-ensurer.reset-size3.size5,.katex .sizing.reset-size3.size5{font-size:1.28571429em}.katex .fontsize-ensurer.reset-size3.size6,.katex .sizing.reset-size3.size6{font-size:1.42857143em}.katex .fontsize-ensurer.reset-size3.size7,.katex .sizing.reset-size3.size7{font-size:1.71428571em}.katex .fontsize-ensurer.reset-size3.size8,.katex .sizing.reset-size3.size8{font-size:2.05714286em}.katex .fontsize-ensurer.reset-size3.size9,.katex .sizing.reset-size3.size9{font-size:2.46857143em}.katex .fontsize-ensurer.reset-size3.size10,.katex .sizing.reset-size3.size10{font-size:2.96285714em}.katex .fontsize-ensurer.reset-size3.size11,.katex .sizing.reset-size3.size11{font-size:3.55428571em}.katex .fontsize-ensurer.reset-size4.size1,.katex .sizing.reset-size4.size1{font-size:.625em}.katex .fontsize-ensurer.reset-size4.size2,.katex .sizing.reset-size4.size2{font-size:.75em}.katex .fontsize-ensurer.reset-size4.size3,.katex .sizing.reset-size4.size3{font-size:.875em}.katex .fontsize-ensurer.reset-size4.size4,.katex .sizing.reset-size4.size4{font-size:1em}.katex .fontsize-ensurer.reset-size4.size5,.katex .sizing.reset-size4.size5{font-size:1.125em}.katex .fontsize-ensurer.reset-size4.size6,.katex .sizing.reset-size4.size6{font-size:1.25em}.katex .fontsize-ensurer.reset-size4.size7,.katex .sizing.reset-size4.size7{font-size:1.5em}.katex .fontsize-ensurer.reset-size4.size8,.katex .sizing.reset-size4.size8{font-size:1.8em}.katex .fontsize-ensurer.reset-size4.size9,.katex .sizing.reset-size4.size9{font-size:2.16em}.katex .fontsize-ensurer.reset-size4.size10,.katex .sizing.reset-size4.size10{font-size:2.5925em}.katex .fontsize-ensurer.reset-size4.size11,.katex .sizing.reset-size4.size11{font-size:3.11em}.katex .fontsize-ensurer.reset-size5.size1,.katex .sizing.reset-size5.size1{font-size:.55555556em}.katex .fontsize-ensurer.reset-size5.size2,.katex .sizing.reset-size5.size2{font-size:.66666667em}.katex .fontsize-ensurer.reset-size5.size3,.katex .sizing.reset-size5.size3{font-size:.77777778em}.katex .fontsize-ensurer.reset-size5.size4,.katex .sizing.reset-size5.size4{font-size:.88888889em}.katex .fontsize-ensurer.reset-size5.size5,.katex .sizing.reset-size5.size5{font-size:1em}.katex .fontsize-ensurer.reset-size5.size6,.katex .sizing.reset-size5.size6{font-size:1.11111111em}.katex .fontsize-ensurer.reset-size5.size7,.katex .sizing.reset-size5.size7{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size5.size8,.katex .sizing.reset-size5.size8{font-size:1.6em}.katex .fontsize-ensurer.reset-size5.size9,.katex .sizing.reset-size5.size9{font-size:1.92em}.katex .fontsize-ensurer.reset-size5.size10,.katex .sizing.reset-size5.size10{font-size:2.30444444em}.katex .fontsize-ensurer.reset-size5.size11,.katex .sizing.reset-size5.size11{font-size:2.76444444em}.katex .fontsize-ensurer.reset-size6.size1,.katex .sizing.reset-size6.size1{font-size:.5em}.katex .fontsize-ensurer.reset-size6.size2,.katex .sizing.reset-size6.size2{font-size:.6em}.katex .fontsize-ensurer.reset-size6.size3,.katex .sizing.reset-size6.size3{font-size:.7em}.katex .fontsize-ensurer.reset-size6.size4,.katex .sizing.reset-size6.size4{font-size:.8em}.katex .fontsize-ensurer.reset-size6.size5,.katex .sizing.reset-size6.size5{font-size:.9em}.katex .fontsize-ensurer.reset-size6.size6,.katex .sizing.reset-size6.size6{font-size:1em}.katex .fontsize-ensurer.reset-size6.size7,.katex .sizing.reset-size6.size7{font-size:1.2em}.katex .fontsize-ensurer.reset-size6.size8,.katex .sizing.reset-size6.size8{font-size:1.44em}.katex .fontsize-ensurer.reset-size6.size9,.katex .sizing.reset-size6.size9{font-size:1.728em}.katex .fontsize-ensurer.reset-size6.size10,.katex .sizing.reset-size6.size10{font-size:2.074em}.katex .fontsize-ensurer.reset-size6.size11,.katex .sizing.reset-size6.size11{font-size:2.488em}.katex .fontsize-ensurer.reset-size7.size1,.katex .sizing.reset-size7.size1{font-size:.41666667em}.katex .fontsize-ensurer.reset-size7.size2,.katex .sizing.reset-size7.size2{font-size:.5em}.katex .fontsize-ensurer.reset-size7.size3,.katex .sizing.reset-size7.size3{font-size:.58333333em}.katex .fontsize-ensurer.reset-size7.size4,.katex .sizing.reset-size7.size4{font-size:.66666667em}.katex .fontsize-ensurer.reset-size7.size5,.katex .sizing.reset-size7.size5{font-size:.75em}.katex .fontsize-ensurer.reset-size7.size6,.katex .sizing.reset-size7.size6{font-size:.83333333em}.katex .fontsize-ensurer.reset-size7.size7,.katex .sizing.reset-size7.size7{font-size:1em}.katex .fontsize-ensurer.reset-size7.size8,.katex .sizing.reset-size7.size8{font-size:1.2em}.katex .fontsize-ensurer.reset-size7.size9,.katex .sizing.reset-size7.size9{font-size:1.44em}.katex .fontsize-ensurer.reset-size7.size10,.katex .sizing.reset-size7.size10{font-size:1.72833333em}.katex .fontsize-ensurer.reset-size7.size11,.katex .sizing.reset-size7.size11{font-size:2.07333333em}.katex .fontsize-ensurer.reset-size8.size1,.katex .sizing.reset-size8.size1{font-size:.34722222em}.katex .fontsize-ensurer.reset-size8.size2,.katex .sizing.reset-size8.size2{font-size:.41666667em}.katex .fontsize-ensurer.reset-size8.size3,.katex .sizing.reset-size8.size3{font-size:.48611111em}.katex .fontsize-ensurer.reset-size8.size4,.katex .sizing.reset-size8.size4{font-size:.55555556em}.katex .fontsize-ensurer.reset-size8.size5,.katex .sizing.reset-size8.size5{font-size:.625em}.katex .fontsize-ensurer.reset-size8.size6,.katex .sizing.reset-size8.size6{font-size:.69444444em}.katex .fontsize-ensurer.reset-size8.size7,.katex .sizing.reset-size8.size7{font-size:.83333333em}.katex .fontsize-ensurer.reset-size8.size8,.katex .sizing.reset-size8.size8{font-size:1em}.katex .fontsize-ensurer.reset-size8.size9,.katex .sizing.reset-size8.size9{font-size:1.2em}.katex .fontsize-ensurer.reset-size8.size10,.katex .sizing.reset-size8.size10{font-size:1.44027778em}.katex .fontsize-ensurer.reset-size8.size11,.katex .sizing.reset-size8.size11{font-size:1.72777778em}.katex .fontsize-ensurer.reset-size9.size1,.katex .sizing.reset-size9.size1{font-size:.28935185em}.katex .fontsize-ensurer.reset-size9.size2,.katex .sizing.reset-size9.size2{font-size:.34722222em}.katex .fontsize-ensurer.reset-size9.size3,.katex .sizing.reset-size9.size3{font-size:.40509259em}.katex .fontsize-ensurer.reset-size9.size4,.katex .sizing.reset-size9.size4{font-size:.46296296em}.katex .fontsize-ensurer.reset-size9.size5,.katex .sizing.reset-size9.size5{font-size:.52083333em}.katex .fontsize-ensurer.reset-size9.size6,.katex .sizing.reset-size9.size6{font-size:.5787037em}.katex .fontsize-ensurer.reset-size9.size7,.katex .sizing.reset-size9.size7{font-size:.69444444em}.katex .fontsize-ensurer.reset-size9.size8,.katex .sizing.reset-size9.size8{font-size:.83333333em}.katex .fontsize-ensurer.reset-size9.size9,.katex .sizing.reset-size9.size9{font-size:1em}.katex .fontsize-ensurer.reset-size9.size10,.katex .sizing.reset-size9.size10{font-size:1.20023148em}.katex .fontsize-ensurer.reset-size9.size11,.katex .sizing.reset-size9.size11{font-size:1.43981481em}.katex .fontsize-ensurer.reset-size10.size1,.katex .sizing.reset-size10.size1{font-size:.24108004em}.katex .fontsize-ensurer.reset-size10.size2,.katex .sizing.reset-size10.size2{font-size:.28929605em}.katex .fontsize-ensurer.reset-size10.size3,.katex .sizing.reset-size10.size3{font-size:.33751205em}.katex .fontsize-ensurer.reset-size10.size4,.katex .sizing.reset-size10.size4{font-size:.38572806em}.katex .fontsize-ensurer.reset-size10.size5,.katex .sizing.reset-size10.size5{font-size:.43394407em}.katex .fontsize-ensurer.reset-size10.size6,.katex .sizing.reset-size10.size6{font-size:.48216008em}.katex .fontsize-ensurer.reset-size10.size7,.katex .sizing.reset-size10.size7{font-size:.57859209em}.katex .fontsize-ensurer.reset-size10.size8,.katex .sizing.reset-size10.size8{font-size:.69431051em}.katex .fontsize-ensurer.reset-size10.size9,.katex .sizing.reset-size10.size9{font-size:.83317261em}.katex .fontsize-ensurer.reset-size10.size10,.katex .sizing.reset-size10.size10{font-size:1em}.katex .fontsize-ensurer.reset-size10.size11,.katex .sizing.reset-size10.size11{font-size:1.19961427em}.katex .fontsize-ensurer.reset-size11.size1,.katex .sizing.reset-size11.size1{font-size:.20096463em}.katex .fontsize-ensurer.reset-size11.size2,.katex .sizing.reset-size11.size2{font-size:.24115756em}.katex .fontsize-ensurer.reset-size11.size3,.katex .sizing.reset-size11.size3{font-size:.28135048em}.katex .fontsize-ensurer.reset-size11.size4,.katex .sizing.reset-size11.size4{font-size:.32154341em}.katex .fontsize-ensurer.reset-size11.size5,.katex .sizing.reset-size11.size5{font-size:.36173633em}.katex .fontsize-ensurer.reset-size11.size6,.katex .sizing.reset-size11.size6{font-size:.40192926em}.katex .fontsize-ensurer.reset-size11.size7,.katex .sizing.reset-size11.size7{font-size:.48231511em}.katex .fontsize-ensurer.reset-size11.size8,.katex .sizing.reset-size11.size8{font-size:.57877814em}.katex .fontsize-ensurer.reset-size11.size9,.katex .sizing.reset-size11.size9{font-size:.69453376em}.katex .fontsize-ensurer.reset-size11.size10,.katex .sizing.reset-size11.size10{font-size:.83360129em}.katex .fontsize-ensurer.reset-size11.size11,.katex .sizing.reset-size11.size11{font-size:1em}.katex .delimsizing.size1{font-family:KaTeX_Size1}.katex .delimsizing.size2{font-family:KaTeX_Size2}.katex .delimsizing.size3{font-family:KaTeX_Size3}.katex .delimsizing.size4{font-family:KaTeX_Size4}.katex .delimsizing.mult .delim-size1>span{font-family:KaTeX_Size1}.katex .delimsizing.mult .delim-size4>span{font-family:KaTeX_Size4}.katex .nulldelimiter{display:inline-block;width:.12em}.katex .delimcenter,.katex .op-symbol{position:relative}.katex .op-symbol.small-op{font-family:KaTeX_Size1}.katex .op-symbol.large-op{font-family:KaTeX_Size2}.katex .accent>.vlist-t,.katex .op-limits>.vlist-t{text-align:center}.katex .accent .accent-body{position:relative}.katex .accent .accent-body:not(.accent-full){width:0}.katex .overlay{display:block}.katex .mtable .vertical-separator{display:inline-block;min-width:1px}.katex .mtable .arraycolsep{display:inline-block}.katex .mtable .col-align-c>.vlist-t{text-align:center}.katex .mtable .col-align-l>.vlist-t{text-align:left}.katex .mtable .col-align-r>.vlist-t{text-align:right}.katex .svg-align{text-align:left}.katex svg{fill:currentColor;stroke:currentColor;fill-rule:nonzero;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:block;height:inherit;position:absolute;width:100%}.katex svg path{stroke:none}.katex img{border-style:none;max-height:none;max-width:none;min-height:0;min-width:0}.katex .stretchy{display:block;overflow:hidden;position:relative;width:100%}.katex .stretchy:after,.katex .stretchy:before{content:""}.katex .hide-tail{overflow:hidden;position:relative;width:100%}.katex .halfarrow-left{left:0;overflow:hidden;position:absolute;width:50.2%}.katex .halfarrow-right{overflow:hidden;position:absolute;right:0;width:50.2%}.katex .brace-left{left:0;overflow:hidden;position:absolute;width:25.1%}.katex .brace-center{left:25%;overflow:hidden;position:absolute;width:50%}.katex .brace-right{overflow:hidden;position:absolute;right:0;width:25.1%}.katex .x-arrow-pad{padding:0 .5em}.katex .cd-arrow-pad{padding:0 .55556em 0 .27778em}.katex .mover,.katex .munder,.katex .x-arrow{text-align:center}.katex .boxpad{padding:0 .3em}.katex .fbox,.katex .fcolorbox{border:.04em solid;box-sizing:border-box}.katex .cancel-pad{padding:0 .2em}.katex .cancel-lap{margin-left:-.2em;margin-right:-.2em}.katex .sout{border-bottom-style:solid;border-bottom-width:.08em}.katex .angl{border-right:.049em solid;border-top:.049em solid;box-sizing:border-box;margin-right:.03889em}.katex .anglpad{padding:0 .03889em}.katex .eqn-num:before{content:"(" counter(katexEqnNo) ")";counter-increment:katexEqnNo}.katex .mml-eqn-num:before{content:"(" counter(mmlEqnNo) ")";counter-increment:mmlEqnNo}.katex .mtr-glue{width:50%}.katex .cd-vert-arrow{display:inline-block;position:relative}.katex .cd-label-left{display:inline-block;position:absolute;right:calc(50% + .3em);text-align:left}.katex .cd-label-right{display:inline-block;left:calc(50% + .3em);position:absolute;text-align:right}.katex-display{display:block;margin:1em 0;text-align:center}.katex-display>.katex{display:block;text-align:center;white-space:nowrap}.katex-display>.katex>.katex-html{display:block;position:relative}.katex-display>.katex>.katex-html>.tag{position:absolute;right:0}.katex-display.leqno>.katex>.katex-html>.tag{left:0;right:auto}.katex-display.fleqn>.katex{padding-left:2em;text-align:left}body{counter-reset:katexEqnNo mmlEqnNo}
+
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.katex-error {
+	color: var(--vscode-editorError-foreground);
+}
+
+/* From extension marp-team.marp-vscode */
+#__marp-vscode {
+  all: initial;
+}
+
+/* Override VS Code default CSS rules reverting to initial
+   https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
+body.marp-vscode {
+  padding: 0;
+}
+
+body.marp-vscode img {
+  max-width: unset;
+  max-height: unset;
+}
+
+body.marp-vscode a,
+body.marp-vscode a:hover,
+body.marp-vscode code {
+  color: unset;
+}
+
+body.marp-vscode blockquote {
+  background: unset;
+  border-color: unset;
+}
+
+@media screen {
+  body.marp-vscode {
+    overflow-y: scroll;
+  }
+
+  #__marp-vscode [data-marp-vscode-slide-wrapper] {
+    margin: 20px;
+  }
+
+  #__marp-vscode svg[data-marpit-svg] {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+    display: block;
+    margin: 0;
+  }
+
+  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+  #code-csp-warning {
+    background-color: #444;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+    color: white;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    margin: 16px;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    word-wrap: break-word;
+  }
+
+  #code-csp-warning:hover {
+    text-decoration: none;
+    background-color: #007acc;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  }
+}
+
+@media print {
+  body.marp-vscode #code-csp-warning {
+    display: none;
+  }
+}
+
+/* From extension ms-toolsai.jupyter */
+/* These classnames are inherited from bootstrap, but are present in most notebook renderers */
+
+.alert {
+    width: auto;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.alert > *:last-child {
+    margin-bottom: 0;
+}
+#preview > .alert:last-child {
+    /* Prevent this being set to zero by the default notebook stylesheet */
+    padding-bottom: 1em;
+}
+
+.alert-success {
+    /* Note there is no suitable color available, so we just copy "info" */
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-info {
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-warning {
+    background-color: var(--theme-warning-background);
+    color: var(--theme-warning-foreground);
+}
+.alert-danger {
+    background-color: var(--theme-error-background);
+    color: var(--theme-error-foreground);
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+/********************************************************************* This is free and unencumbered software released into the public domain. Anyone is free to copy, modify, publish, use, compile, sell, or distribute this software, either in source code form or as a compiled binary, for any purpose, commercial or non-commercial, and by any means. For more information, please refer to <http://unlicense.org/> *********************************************************************/ /* WiTeX https://github.com/AndrewBelt/WiTeX */ /* Latin Modern (LaTeX default) font */ @font-face { font-family: 'Latin Modern Roman'; font-weight: normal; font-style: normal; src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff'); } @font-face { font-family: 'Latin Modern Roman'; font-weight: bold; font-style: normal; src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff'); } @font-face { font-family: 'Latin Modern Roman'; font-weight: normal; font-style: italic; src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff'); } @font-face { font-family: 'Latin Modern Roman'; font-weight: bold; font-style: italic; src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff'); } @font-face { font-family: 'Latin Modern Mono'; font-weight: normal; font-style: normal; src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff'); } @font-face { font-family: 'Latin Modern Mono'; font-weight: normal; font-style: italic; src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff'); } /* Page Layout */ body { background: none; font-size: 14pt; font-family: 'Latin Modern Roman', serif; color: black; } h1, h2, h3, h4, h5, h6 { border: none; font-weight: bold; } a, a:visited { color: #a00; } a.new, a.new:visited { color: black; } ul { list-style: disc; } #mw-navigation, #mw-page-base, #mw-head-base, #footer { /* nuke everything but the content */ display: none; } /* Content Box */ .mw-body { max-width: 720px; margin: 1em auto; } #content, div#content { border: none; color: black; } #firstHeading, #siteSub { text-align: center; display: block; } #siteSub { margin-top: -0.5em; margin-bottom: 4em; } /* Article Body */ .mw-body-content { font-size: inherit; text-align: justify; -moz-hyphens: auto; -webkit-hyphens: auto; hyphens: auto; line-height: 1.5em; } .mw-body { padding: 2em 0; } .mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6, div#content h1, div#content h2, div#content #firstHeading { font-family: inherit; line-height: 1.5em; margin-bottom: 0.5em; } .mw-body h1, div#content h1 { font-size: 2em; } .mw-body h2, div#content h2 { font-size: 1.5em; } .mw-body h3 { font-size: 1.2em; } .mw-body h4 { font-size: 1.1em; } .mw-body h5, .mw-body h6 { font-size: 1.0em; } .mw-body p { margin: 0; } .mw-body p + p { text-indent: 2em; } .mw-editsection { /* hide more non-content */ display: none; } table.ambox { margin-bottom: 1em; } dl dd { /* center definitions (most useful for display equations) */ text-align: center; } span.texhtml { /* revert inline math to default font */ font-family: inherit; font-size: inherit; line-height: inherit; } /* Table of Contents */ #toc, .toc { border: none; padding: 0; background: none; font-size: inherit; /* span 100% of the width */ display: block; } .mw-body #toc h2, .mw-body .toc h2 { font-family: inherit; font-size: 1.5em; } #toc h2, .toc h2 { display: block; } #toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle { text-align: left; } .toctoggle { display: none; } /* Figures */ div.tright { margin: 0.5em 0 0.5em 1.5em; } div.tleft { margin: 0.5em 1.5em 0.5em 0; } /* Code */ .mw-code { margin: 1em 0; } pre, code { font-family: "Latin Modern Mono", monospace !important; } sup { text-indent: 0; }
+</style>
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
+<h2 id="séance-2--routes-et-templates">Séance 2 : Routes et templates</h2>
+<ol>
+<li><a href="#intro">Introduction aux templates</a></li>
+<li><a href="#utilisation">Utilisation des templates</a></li>
+<li><a href="#jinja">Jinja2 </a>
+<ol>
+<li><a href="#appels">Appels de paramètres et filtres</a></li>
+<li><a href="#controle">Structures de contrôle</a>
+<ol>
+<li><a href="#if">La boucle <em>if</em></a></li>
+<li><a href="#for">La boucle <em>for</em></a></li>
+</ol>
+</li>
+<li><a href="#dico">Dictionnaires</a></li>
+<li><a href="#heritages">Héritages</a>
+<ol>
+<li><a href="#extends">Les <em>extends</em></a></li>
+<li><a href="#includes">Les <em>include</em></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#liens">Liens internes</a></li>
+<li><a href="#statiques">Les statiques: CSS et JS</a></li>
+</ol>
+<h3 id="introduction-aux-templates-">Introduction aux templates <a id="intro"></a></h3>
+<p>Plutôt que de renvoyer une chaîne de caractères brute aux routes Flask, il est possible de renvoyer du HTML. Prenons l'exemple d'une barre de navigation sur une page Web, le retour de la fonction serait le suivant pour la route <code>/home</code>:</p>
+<pre><code class="language-python"><div><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/home&quot;</span></span>)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">home</span>():</span>
+   <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;&#x27;
+      &lt;html&gt;
+         &lt;body&gt;
+            &lt;nav&gt;
+               &lt;ol&gt;
+                  &lt;li&gt;Lien1&lt;/li&gt;
+                  &lt;li&gt;Lien2&lt;/li&gt;
+               &lt;/ol&gt;
+            &lt;/nav&gt;
+         &lt;/body&gt;
+      &lt;/html&gt;
+   &#x27;&#x27;&#x27;</span>
+</div></code></pre>
+<p>Une barre de navigation est normalement partagée entre toutes les pages du site. La route <code>/page</code> suivante renverrait donc cette barre également:</p>
+<pre><code class="language-python"><div><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/page&quot;</span></span>)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">page</span>():</span>
+   <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;&#x27;
+      &lt;html&gt;
+         &lt;body&gt;
+            &lt;nav&gt;
+               &lt;ol&gt;
+                  &lt;li&gt;Lien1&lt;/li&gt;
+                  &lt;li&gt;Lien2&lt;/li&gt;
+               &lt;/ol&gt;
+            &lt;/nav&gt;
+         &lt;/body&gt;
+      &lt;/html&gt;
+   &#x27;&#x27;&#x27;</span>
+</div></code></pre>
+<p>Si maintenant on veut ajouter un lien dans cette barre de navigation, il faut l'ajouter dans chaque des pages du site! Pas très pratique et efficient... De plus, le code HTML d'une page peut être incroyablement long, surtout quand on génrérera plus tard le HTML à la volée en fonction des données: pas question donc de le mettre directement dans le return de la fonction.</p>
+<h3 id="utilisation-des-templates-">Utilisation des templates <a id="utilisation"></a></h3>
+<p>La plupart des frameworks offrent un système de templates. Un template est dans notre cas un fichier HTML qui sera rempli par les données qu'on lui fournira quand nous l'appelerons en sortie de fonction.</p>
+<p>Les templates sont rangés dans le dossier <code>templates/</code> pour plusieurs raisons:</p>
+<ul>
+<li>il faut séparer l'application de sa représentation graphique: <code>templates/</code> devient donc un module de notre application</li>
+<li>écarter les templates peut permettre à un Web designer d'être recruté et de ne travailler que sur ce dossier, sans qu'il n'ait de connaissances sur le fonctionnement applicatif</li>
+<li>l'intérieur du module peut lui-même être ordonné selon une logique propre à chacun</li>
+</ul>
+<p><em>Note</em>: si le dossier des templates s'appele autrement que <code>templates/</code>, il est possible d'indiquer le nom de notre module lors de l'initialisation de Flask.</p>
+<pre><code class="language-python"><div><span class="hljs-comment">#app.py</span>
+...
+app = Flask(
+   __name__,
+   template_folder=<span class="hljs-string">&#x27;nom_du_module&#x27;</span>
+   )
+...
+</div></code></pre>
+<p><em>Note 2</em>: A partir de maintenant, nous allons développer une petite application autour des données du World Factbook de la CIA. Une base SQLITE comprenant les données est disponible au lien suivant: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/blob/e96e6bdb031c4a20e25aeeb45bbc6f21953b8df9/factbook.sqlite">https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/blob/master/factbook.sqlite</a>. Bootstrap sera utilisé pour mettre en page le site.</p>
+<p>Commençons par construire une page d'accueil, c'est à dire une route et un template.</p>
+<pre><code class="language-python"><div><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> render_template
+
+...
+
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/&quot;</span></span>)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">accueil</span>():</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/accueil.html&quot;</span>)
+</div></code></pre>
+<p><code>render_template()</code> est la fonction qui va parser les templates que nous créons, et va y rajouter, au besoin, les données que l'on souhaitera (ce que nous verrons plus loin). Cette fonction accepte en premier argument le chemin relatif vers le template depuis le module <code>templates/</code>, et dans les arguments suivants les variables que l'on souhaite transmettre au template.</p>
+<pre><code class="language-html"><div><span class="hljs-comment">&lt;!-- templates/accueil.html --&gt;</span>
+<span class="hljs-meta">&lt;!doctype <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Factbook<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">integrity</span>=<span class="hljs-string">&quot;sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi&quot;</span> <span class="hljs-attr">crossorigin</span>=<span class="hljs-string">&quot;anonymous&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Bienvenue sur l&#x27;application du Factbook!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;</span> <span class="hljs-attr">integrity</span>=<span class="hljs-string">&quot;sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3&quot;</span> <span class="hljs-attr">crossorigin</span>=<span class="hljs-string">&quot;anonymous&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<p><em>Note 3</em>: Naturellement, nous venons de mettre la route dans <code>app.py</code>. Maintenant que nous débutons le développement d'une application, il est temps d'utiliser au maximum les modules Python. Dans la <a href="../Seance1/Seance1_app.html">Séance1</a>, nous avons abordé la structure de l'application, et notamment le dossier <code>routes/</code>. C'est ce dossier que va contenir nos routes, et nous plus le fichier d'initialisation <code>app.py</code>. Pour cela; il est nécessaire de créer le module <code>routes</code> avec un script Python <code>generales.py</code> qui accueillera nos premières routes:</p>
+<pre><code class="language-tree"><code><div>app
+| app.py
+| templates/
+| routes/
+|  |-- __init__.py
+|  |-- generales.py
+</div></code></code></pre>
+<p>Il va falloir ensuite indiquer dans <code>app.py</code> où se trouvent nos routes. Pour cela, il faut ajouter à la toute fin du fichier (à la fin du fichier est important puisque <code>generales.py</code> contient un appel à <code>app</code>, il faut donc que <code>app</code> soit initialisé pour que <code>generales.py</code> puisse fonctionner sans erreurs) :</p>
+<pre><code class="language-python"><div><span class="hljs-comment">#app.py</span>
+...
+<span class="hljs-keyword">from</span> .routes <span class="hljs-keyword">import</span> generales
+</div></code></pre>
+<p>De même, dans <code>generales.py</code>, il faut indiquer que l'on importe <code>app</code> depuis <code>app.py</code> (avec un chemin relatif bien entendu!).</p>
+<pre><code class="language-python"><div><span class="hljs-comment"># generale.py</span>
+<span class="hljs-keyword">from</span> ..app <span class="hljs-keyword">import</span> app
+...
+</div></code></pre>
+<p><em>Exemple concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance2/premiers_templates">Seance2/premiers_templates</a></p>
+<p>L'utilisation des templates n'est pas plus compliqué! Seulement, nous avons encore des pages uniquement statiques, nos fonctions Python ne font que renvoyer vers un template HTML qui ne bouge pas pour le moment.</p>
+<h3 id="jinja2-">Jinja2 <a id="jinja"></a></h3>
+<p>Le système de templates de Flask s'appelle Jinja2: il n'est pas spécifique à Flask et est aussi utilisé dans d'autres frameworks.</p>
+<h4 id="appels-de-paramètres-et-filtres-">Appels de paramètres et filtres <a id="appels"></a></h4>
+<p>Le World Factbook contient des données sur tous les pays. Imaginons que nous souhaitions récupérer les données d'un pays spécifique, nous pourrions simplement l'indiquer dans les paramètres de l'URL. Développons une route Flask qui affiche dans le titre de la page le pays sélectionné.</p>
+<pre><code class="language-python"><div><span class="hljs-comment"># la route</span>
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/pays/&lt;string:nom&gt;&quot;</span></span>)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pays</span>(<span class="hljs-params">nom</span>):</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/pays.html&quot;</span>, pays=nom)
+</div></code></pre>
+<p>Comme vu dans <a href="./Seance2_routes.md#une-route-get-avec-param%C3%A8tres">la partie sur les routes avec des paramètres</a>, le paramètre <code>nom</code> de la route est appelé dans la fonction <code>pays()</code>. C'est la valeur de ce paramètre qui est transmise à Jinja via <code>render_template()</code>:</p>
+<ul>
+<li><code>pays</code> est le nom de la variable que l'on retrouvera dans Jinja et que l'on appelera dans le template</li>
+<li>la valeur de <code>pays</code> est une string (comme défini dans le paramètre de la route, car aucun traitement n'a été effectué dans la fonction <code>pays()</code> sur cette donnée)</li>
+</ul>
+<pre><code class="language-html"><div><span class="hljs-comment">&lt;!-- dans le body du template--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Bienvenue sur l&#x27;application du Factbook!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Voici le lien vers le site officiel : <span class="hljs-tag">&lt;<span class="hljs-name">a</span>
+                <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://www.cia.gov/the-world-factbook/&quot;</span>&gt;</span>https://www.cia.gov/the-world-factbook/<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Vous avez choisi d&#x27;afficher les données du pays suivant: {{pays}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div></code></pre>
+<p>Commentaires:</p>
+<ul>
+<li>dans Jinja, les variables sont appelées dans les blocks <code>{{...}}</code></li>
+<li><code>{{pays}}</code> appele le paramètre <code>pays</code> retourné dans la fonction <code>render_template()</code></li>
+<li>on peut faire appel à des blocks Jinja n'importe où dans le template HTML: dans <code>&lt;head&gt;&lt;/head&gt;</code>, <code>&lt;body&gt;&lt;/body&gt;</code>, etc.</li>
+</ul>
+<p><em>Exemple concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance2/variables_jinja">Seance2/variables_jinja</a></p>
+<p>Un autre point fort de Jinja est qu'il permet de faire des opérations simples sur les paramètres qu'il reçoit: ces opérations sont nommées 'filtres'. Différents <a href="https://jinja.palletsprojects.com/en/3.0.x/templates/#builtin-filters">filtres existent</a>, les plus courants et utiles étant les suivants:</p>
+<ul>
+<li><code>length()</code></li>
+<li><code>sum()</code></li>
+<li><code>upper()</code>  et <code>lower()</code></li>
+</ul>
+<p>Il s'utilisent comme suit: <code>{{paramètre|length}}</code></p>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Bienvenue sur l&#x27;application du Factbook!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Voici le lien vers le site officiel : <span class="hljs-tag">&lt;<span class="hljs-name">a</span>
+                <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://www.cia.gov/the-world-factbook/&quot;</span>&gt;</span>https://www.cia.gov/the-world-factbook/<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Vous avez choisi d&#x27;afficher les données du pays suivant: {{pays}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Longueur de la chaîne de caractères du pays choisi: {{pays|length}} caractères<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div></code></pre>
+<p><em>Exemple concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance2/filtres_jinja">Seance2/filtres_jinja</a></p>
+<h4 id="structures-de-contrôle-">Structures de contrôle <a id="controle"></a></h4>
+<h5 id="la-boucle-if-">La boucle <em>if</em> <a id="if"></a></h5>
+<p>Jinja n'accepte pas seulement des blocs de variables (les <code>{{...}}</code>): les structures de contrôle sont permises avec des blocs <code>{%...%}...{%end...%}</code>. Voyons d'abord un bloc avec une condition <em>if</em>: la syntaxe est identique à celle de PYthon et n'est pas trop déroutante, il ne faut juste pas oublié de l'entourer par la syntaxe Jinja.</p>
+<p>Les blocs <em>if</em> s'écrivent de la manière suivante:</p>
+<pre><code class="language-html"><div>{%if condition %}
+   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Du HTML correspondant à la condition réussie<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+{%else%}
+   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Du HTML correspondant à la condition non réussie<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+{%endif%}
+</div></code></pre>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Bienvenue sur l&#x27;application du Factbook!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Voici le lien vers le site officiel : <span class="hljs-tag">&lt;<span class="hljs-name">a</span>
+                <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://www.cia.gov/the-world-factbook/&quot;</span>&gt;</span>https://www.cia.gov/the-world-factbook/<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Vous avez choisi d&#x27;afficher les données du pays suivant: {{pays}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Longueur de la chaîne de caractères du pays choisi: {{pays|length}} caractères<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        {%if pays|length &gt; 10%}
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>C&#x27;est un long nom de pays<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        {%else%}
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>C&#x27;est un nom de pays plutôt court<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        {%endif%}
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div></code></pre>
+<p>Testons les deux URLs suivantes pour s'assurer du bon fonctionnement de notre structure de contrôle:</p>
+<ul>
+<li><a href="http://localhost:5000/pays/France">http://localhost:5000/pays/France</a></li>
+<li><a href="http://localhost:5000/pays/R%C3%A9publique-Tch%C3%A8que">http://localhost:5000/pays/République-Tchèque</a></li>
+</ul>
+<p><em>Exemple concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance2/if_jinja">Seance2/if_jinja</a></p>
+<h5 id="la-boucle-for-">La boucle <em>for</em> <a id="for"></a></h5>
+<p>Voyons maintenant une autre structure de contrôle: le <em>for</em>. Avant de l'utiliser, il va falloir renvoyer non pas une string à Jinja, mais une liste (le for s'exécutant généralement sur une liste). Renvoyer une liste ne pose pas de problème avec Flask et <code>render_template()</code>. En effet, les paramètres de <code>render_template()</code> acceptent n'importe quel type de donnée (string, integer, list, tuple, etc.).</p>
+<pre><code class="language-python"><div><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/pays/&lt;string:nom&gt;&quot;</span></span>)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pays</span>(<span class="hljs-params">nom</span>):</span>
+   grandes_villes = []
+   <span class="hljs-keyword">if</span> nom ==<span class="hljs-string">&#x27;France&#x27;</span>:
+      grandes_villes = [<span class="hljs-string">&#x27;Paris&#x27;</span>, <span class="hljs-string">&#x27;Lyon&#x27;</span>, <span class="hljs-string">&#x27;Marseille&#x27;</span>]
+   <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/pays.html&quot;</span>, pays=nom, grandes_villes=grandes_villes)
+</div></code></pre>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Grandes villes de {{pays}}<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+        {%if grandes_villes %}
+        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+            {%for ville in grandes_villes %}
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>{{ville}}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            {%endfor%}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+        {%else%}
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Il n&#x27;y a pas de grande ville connue pour ce pays<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        {%endif%}
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div></code></pre>
+<p>Commentaires:</p>
+<ul>
+<li>avant de boucler avec un <em>for</em>, il est conseillé de s'assurer avec un <em>if</em> de la présence d'une liste dans notre paramètres, et de son remplissage par au moins une valeur; c'est pourquoi il y a <code>{%if grandes_villes %}</code> au début</li>
+<li>la structure du <em>for</em> avec Jinja s'écrit ainsi: <code>{% for element in liste %} ... {% endfor %}</code></li>
+<li>il est possible d'écrire du HTML au sein des boucles: c'est l'exemple de <code>&lt;li&gt;{{ville}}&lt;/li&gt;</code></li>
+<li>il est commun d'utiliser la boucle <em>for</em> avec les listes HTML: c'est ainsi que l'on peut générer du HTML à la volée, en fonction des données retournées par la fonction de la route</li>
+</ul>
+<p><em>Exemple concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance2/for_jinja">Seance2/for_jinja</a></p>
+<h4 id="dictionnaires-">Dictionnaires <a id="dico"></a></h4>
+<p>La transmission de données, remontées d'une base de données par exemple, se fait généralement via JSON dans une application Web. Ainsi, un seul paramètre de <code>render_template()</code> prendra l'ensemble du JSON remonté depuis la source de données. Jinja va ensuite pouvoir parser ce paramètre et afficher ce qu'on lui demande.</p>
+<p>Tentons de créer une route <code>pays/</code> (sans paramètre cette fois-ci) qui affichera, pour tous les pays stockés dans notre source de données,  une table HTML avec les champs suivants:</p>
+<ul>
+<li>nom du pays</li>
+<li>capitale</li>
+<li>continent</li>
+</ul>
+<p>Pour cela, réfléchissons aux besoins:</p>
+<ul>
+<li>afficher des champs spécifiques pour chaque pays: la représentation d'un pays va se faire via un objet JSON</li>
+<li>construire une table HTML avec tous les pays: cela implique d'avoir une liste afin d'ajouter des lignes de table à la volée, selon le nombre de pays renvoyé par la source de données. Cette liste sera composée de toutes les représentations JSON des pays</li>
+</ul>
+<p>Il faut débuter par la création de la route et des données (nous verrons dans d'autres séances comment récupérer des données dans une base; en attendant, nous créons la liste d'objets <code>donnees</code> à la main):</p>
+<pre><code class="language-python"><div><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/pays&quot;</span></span>)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pays</span>():</span>
+    donnees = [{
+        <span class="hljs-string">&quot;nom&quot;</span>:<span class="hljs-string">&quot;France&quot;</span>,
+        <span class="hljs-string">&quot;capitale&quot;</span>:<span class="hljs-string">&quot;Paris&quot;</span>,
+        <span class="hljs-string">&quot;continent&quot;</span>:<span class="hljs-string">&quot;Europe&quot;</span>
+    },{
+        <span class="hljs-string">&quot;nom&quot;</span>:<span class="hljs-string">&quot;Etats-Unis&quot;</span>,
+        <span class="hljs-string">&quot;capitale&quot;</span>:<span class="hljs-string">&quot;Washington&quot;</span>,
+        <span class="hljs-string">&quot;continent&quot;</span>:<span class="hljs-string">&quot;Amérique&quot;</span>
+    },{
+        <span class="hljs-string">&quot;nom&quot;</span>:<span class="hljs-string">&quot;Egypte&quot;</span>,
+        <span class="hljs-string">&quot;capitale&quot;</span>:<span class="hljs-string">&quot;Le Caire&quot;</span>,
+        <span class="hljs-string">&quot;continent&quot;</span>:<span class="hljs-string">&quot;Afrique&quot;</span>
+    },{
+        <span class="hljs-string">&quot;nom&quot;</span>:<span class="hljs-string">&quot;Chine&quot;</span>,
+        <span class="hljs-string">&quot;capitale&quot;</span>:<span class="hljs-string">&quot;Pékin&quot;</span>,
+        <span class="hljs-string">&quot;continent&quot;</span>:<span class="hljs-string">&quot;Asie&quot;</span>
+    }]
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/pays.html&quot;</span>, donnees=donnees)
+</div></code></pre>
+<pre><code class="language-html"><div>{%if donnees%}
+        <span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;table&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;col&quot;</span>&gt;</span>#<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;col&quot;</span>&gt;</span>Nom<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;col&quot;</span>&gt;</span>Capitale<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;col&quot;</span>&gt;</span>Continent<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span>&gt;</span>
+                {%for pays in donnees%}
+                <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;row&quot;</span>&gt;</span>{{loop.index}}<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>{{pays.nom}}<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>{{pays.capitale}}<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>{{pays.continent}}<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+                {%endfor%}
+            <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+{%endif%}
+</div></code></pre>
+<p>Commentaires:</p>
+<ul>
+<li><code>{{loop.index}}</code> permet d'afficher l'index de notre boucle courante</li>
+<li>dans le <em>for</em>, <code>pays</code> renvoie par exemple<pre><code class="language-json"><div> {
+      <span class="hljs-attr">&quot;nom&quot;</span>:<span class="hljs-string">&quot;Etats-Unis&quot;</span>,
+      <span class="hljs-attr">&quot;capitale&quot;</span>:<span class="hljs-string">&quot;Washington&quot;</span>,
+      <span class="hljs-attr">&quot;continent&quot;</span>:<span class="hljs-string">&quot;Amérique&quot;</span>
+ }
+</div></code></pre>
+</li>
+<li>pour accéder aux champs d'un objet, c'est un simple parcours JSON: <code>nom_objet.champ</code></li>
+<li>la boucle <em>for</em> n'est pas nécessaire dans tous les cas: si l'on veut afficher seulement le premier pays des données, il faut appeler <code>donnees[0]</code>; pour avoir son nom, il faut écrire <code>donnees[0][&quot;nom&quot;]</code></li>
+</ul>
+<p><em>Exemple concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance2/dico_jinja">Seance2/dico_jinja</a></p>
+<h3 id="héritages-">Héritages <a id="heritages"></a></h3>
+<p>Comme vu au début de l'UE dans le cours HTML/CSS/JS, une page Web est composée de plusieurs parties, parmi lesquelles:</p>
+<ul>
+<li>header</li>
+<li>menu et navbar</li>
+<li>body</li>
+<li>footer</li>
+</ul>
+<p>Trois de ces parties sont répétées entre toutes les pages du site Web (header, menu et navbar, et footer). Comme il est impensable de devoir changer toutes les pages HTML de notre site dès qu'il y a un changement fait sur l'une de ces trois parties, il convient de conteneuriser chacune des parties, et de les lier ensuite entre elles grâce à Jinja. On se retrouvera alors avec un seul template HTML pour le menu; il sera appelé ensuite par toutes les pages: c'est ce que l'on appele l'héritage de templates.</p>
+<p><img src="https://raw.githubusercontent.com/MaximeChallon/Cours_Python_M2TNAH/03ee2c3da1d9800292cff74a2a8c30723809a9ac/images/incrustation.site.png" alt=""></p>
+<h4 id="les-extends-">Les <em>extends</em> <a id="extends"></a></h4>
+<p>Dans le template qui sert de conteneur, on va déclarer un (ou plusieurs) bloc qui sera complété par le(s) template(s) qui étend(ront) ce conteneur.</p>
+<pre><code class="language-html"><div><span class="hljs-comment">&lt;!-- partials/conteneur.html --&gt;</span>
+<span class="hljs-meta">&lt;!doctype <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Factbook | {{sous_titre}}<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    {% block body%}{%endblock%}
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<p>Dans le conteneur, on déclare ici:</p>
+<ul>
+<li>une variable <code>sous_titre</code>: toutes les fonctions de route pourront donc renvoyer un paramètre avec un sous-titre</li>
+<li>un bloc <code>body</code> avec la syntaxe <code>{% block nom_du_block %}...{%endblock%}</code></li>
+</ul>
+<pre><code class="language-html"><div><span class="hljs-comment">&lt;!-- pages/pays.html --&gt;</span>
+{% extends &quot;partials/conteneur.html&quot; %}
+
+{% block body %}
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Bienvenue sur l&#x27;application du Factbook!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Voici le lien vers le site officiel : <span class="hljs-tag">&lt;<span class="hljs-name">a</span>
+                <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://www.cia.gov/the-world-factbook/&quot;</span>&gt;</span>https://www.cia.gov/the-world-factbook/<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      
+      ...
+
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+{% endblock %}
+</div></code></pre>
+<p>Dans ce template, on rempli le bloc <code>body</code> avec du html et l'on n'a plus à se soucier des autres parties de la page comme le menu ou le header. La syntaxe est la suivante:</p>
+<ul>
+<li>on indique clairement au début du template quel conteneur on étend avec <code>{% extends &quot;chemin/relatif/vers/conteneur&quot; %}</code></li>
+<li>on rempli les blocs définis dans le conteneur avec <code>{% block nom_bloc %}...{% endblock %}</code></li>
+</ul>
+<p>Avec Jinja, on peut emboîter des conteneurs à l'infini grâce à ce jeu de blocs étendus.</p>
+<p><em>Exemple concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance2/extends_jinja">Seance2/extends_jinja</a></p>
+<h4 id="les-include-">Les <em>include</em> <a id="includes"></a></h4>
+<p>En plus d'étendre un template, Flask donne la possibilité d'inclure un template. On peut alors insérer des sous-éléments dans des conteneurs ou des pages.</p>
+<p><img src="https://raw.githubusercontent.com/MaximeChallon/Cours_Python_M2TNAH/03ee2c3da1d9800292cff74a2a8c30723809a9ac//images/incrustation.avancee.png" alt=""></p>
+<p>L'inclusion, et l'extension,  sont  très pratiques. Prenons l'exemple du <code>&lt;head&gt;...&lt;/head&gt;</code> d'un fichier HTML (ici <code>partials/conteneur.html</code>):</p>
+<pre><code class="language-html"><div><span class="hljs-comment">&lt;!-- partials/conteneur.html --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>{%block titre %}{%endblock%} | {{sous_titre}}<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    {% include &quot;partials/css.html&quot; %}
+    {% include &quot;partials/metadata.html&quot; %}
+    {% include &quot;partials/js.html&quot; %}
+    {% block js %}{%endblock%}
+    {% block css %}{%endblock%}
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+</div></code></pre>
+<p>On permet ici plusieurs choses:</p>
+<ul>
+<li>l'inclusion de balises CSS et JS préformatées dans d'autres templates: ce sont les <code>{% include &quot;partials/css.html&quot; %}</code></li>
+<li>l'inclusion de bloc HTML metadata avec <code>{% include &quot;partials/metadata.html&quot; %}</code></li>
+<li>la définition de blocs acceptant l'extension: <code>{% block js %}{%endblock%}</code>. Ces blocs sont utiles si au cours d'une page spécifique il y a du CSS ou du JS à rajouter. Cela peut alors se faire en remplissant ces blocs dans les templates concernés.</li>
+</ul>
+<p><em>Exemple concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance2/include_jinja">Seance2/include_jinja</a></p>
+<h3 id="liens-internes-">Liens internes <a id="liens"></a></h3>
+<p>La navigation de l'utilisateur au sein d'un site Web est primordiale: cliquer sur des liens est constant afin de se diriger vers les bonnes pages de notre site (nous évoquerons ici seulement les liens internes). Créons/réutilisons la route <code>/pays</code> d'affichage de tous les pays disponibles, et la route <code>/pays/&lt;string:nom&gt;</code> spécifique à un pays.</p>
+<pre><code class="language-python"><div><span class="hljs-comment"># generales.py</span>
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/pays&quot;</span></span>)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pays</span>():</span>
+    donnees = [{
+        <span class="hljs-string">&quot;nom&quot;</span>:<span class="hljs-string">&quot;France&quot;</span>,
+        <span class="hljs-string">&quot;capitale&quot;</span>:<span class="hljs-string">&quot;Paris&quot;</span>,
+        <span class="hljs-string">&quot;continent&quot;</span>:<span class="hljs-string">&quot;Europe&quot;</span>
+    },{
+        <span class="hljs-string">&quot;nom&quot;</span>:<span class="hljs-string">&quot;Etats-Unis&quot;</span>,
+        <span class="hljs-string">&quot;capitale&quot;</span>:<span class="hljs-string">&quot;Washington&quot;</span>,
+        <span class="hljs-string">&quot;continent&quot;</span>:<span class="hljs-string">&quot;Amérique&quot;</span>
+    },{
+        <span class="hljs-string">&quot;nom&quot;</span>:<span class="hljs-string">&quot;Egypte&quot;</span>,
+        <span class="hljs-string">&quot;capitale&quot;</span>:<span class="hljs-string">&quot;Le Caire&quot;</span>,
+        <span class="hljs-string">&quot;continent&quot;</span>:<span class="hljs-string">&quot;Afrique&quot;</span>
+    },{
+        <span class="hljs-string">&quot;nom&quot;</span>:<span class="hljs-string">&quot;Chine&quot;</span>,
+        <span class="hljs-string">&quot;capitale&quot;</span>:<span class="hljs-string">&quot;Pékin&quot;</span>,
+        <span class="hljs-string">&quot;continent&quot;</span>:<span class="hljs-string">&quot;Asie&quot;</span>
+    }]
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/tous_pays.html&quot;</span>, donnees=donnees, sous_titre=<span class="hljs-string">&quot;Tous les pays&quot;</span>)
+
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/pays/&lt;string:nom&gt;&quot;</span></span>)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pays_specifique</span>(<span class="hljs-params">nom</span>):</span>
+    grandes_villes = []
+    <span class="hljs-keyword">if</span> nom ==<span class="hljs-string">&#x27;France&#x27;</span>:
+        grandes_villes = [<span class="hljs-string">&#x27;Paris&#x27;</span>, <span class="hljs-string">&#x27;Lyon&#x27;</span>, <span class="hljs-string">&#x27;Marseille&#x27;</span>]
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/pays.html&quot;</span>, pays=nom, grandes_villes=grandes_villes, sous_titre=nom)
+</div></code></pre>
+<p>Afin de renvoyer vers la page du pays, il faut créer un lien vers <code>/pays/&lt;string:nom&gt;</code> dans le tableau de la page <code>/pays</code>. Ce lien est créé dans le template grâce à la fonction <code>url_for()</code>. Le premier argument de cette fonction est le nom de la fonction Python associée à une route Flask -- et non le nom de la route elle-même --; les autres arguments sont les paramètres nécessaires au fonctionnement de la fonction. <strong>Aucune URL ne doit être écrite en dur dans le code</strong>, ainsi, pour appeler <code>localhost:5000/pays/France</code>, il faut écrire <code>url_for(pays_specifique, nom=&quot;France&quot;)</code>.</p>
+<pre><code class="language-html"><div><span class="hljs-comment">&lt;!-- pages/tous_pays.html --&gt;</span>
+{%for pays in donnees%}
+   <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;row&quot;</span>&gt;</span>{{loop.index}}<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{{url_for(&#x27;pays_specifique&#x27;, nom=pays.nom)}}&quot;</span>&gt;</span>{{pays.nom}}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>{{pays.capitale}}<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>{{pays.continent}}<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+   <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+{%endfor%}
+</div></code></pre>
+<p><em>Note</em>: Il ne devra y avoir aucune URL absolue dans les devoirs, les liens internes doivent s'écrire avec <code>url_for()</code>: si l'on décide de modifier le nom de la route, ou son chemin, seul <code>app.route()</code> sera impacté et l'on n'aura pas à réécrire tous nos liens dans les templates.</p>
+<p><em>Exemple concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance2/url_for">Seance2/url_for</a></p>
+<h3 id="les-statiques-css-et-js-">Les statiques: CSS et JS <a id="statiques"></a></h3>
+<p>Jusqu'à présent, nous avons vu comment importer du JS ou du CSS depuis une URL externe. Mais il est parfois nécessaire d'uiliser du CSS ou du JS maisons: ce sont des assets pour Flask, ou encore des fichiers statiques. Ces fichiers sont rangés dans le dossier <code>app/statics/</code> comme le montre l'arbre suivant:</p>
+<pre><code class="language-tree"><code><div>| app
+|  |-- statics
+|  |  |-- css
+|  |  |  |-- css.css
+|  |  |-- js
+|  |  |  |-- js.js
+|  |  |-- img
+</div></code></code></pre>
+<p>A la différence des templates, le dossier des statiques n'est pas un module, simplement un dossier de rangements de fichiers (CSS, jS? données, imagers, etc.) nécessaires au bon fonctionnement de l'application.
+Si l'on nomme le dossier <code>static</code>, Flask comprendra par défaut qu'il doit y chercher les fichiers qu'on appelera par la suite dans l'application. Si le dossier est nommé autrement, comme <code>statics</code>, il va falloir l'indiquer, comme pour les templates, dans l'initialisation de Flask dans <code>app.py</code>.</p>
+<pre><code class="language-python"><div><span class="hljs-comment"># app.py</span>
+...
+app = Flask(
+    __name__, 
+    template_folder=<span class="hljs-string">&#x27;templates&#x27;</span>,
+    static_folder=<span class="hljs-string">&#x27;statics&#x27;</span>)
+...
+</div></code></pre>
+<p>Maintenant que nous avons un fichier CSS dans les statics, il faut l'importer dans les templates, ou plutôt dans le HTML. Cet import se fait via une balise <code>&lt;link ...&gt;</code> dans le <code>&lt;head&gt;&lt;/head&gt;</code>. Le meilleur endroit pour importer un CSS statique est le template <code>partials/css.html</code>:</p>
+<ul>
+<li>on n'a à écrire l'import de <code>statics/css/font-awesome.css</code> qu'une seule fois dans notre application (dans <code>partials/css.html</code>)</li>
+<li><code>partials/css.html</code> est le template logique pour l'y mettre</li>
+<li>comme c'est un template, il faut penser à utiliser le <code>url_for()</code></li>
+</ul>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{{ url_for(&#x27;static&#x27;, filename=&#x27;css/font-awesome.css&#x27;)}}&quot;</span>&gt;</span>
+</div></code></pre>
+<p><em>Remarque</em>: si l'on regarde les logs de Flask, on remarque que l'import d'une ressource statique interne est en réalité un appel GET de cette ressource sur le serveur</p>
+<pre><code class="language-bash"><div>127.0.0.1 - - [06/Nov/2022 16:13:31] <span class="hljs-string">&quot;GET /pays HTTP/1.1&quot;</span> 200 -
+127.0.0.1 - - [06/Nov/2022 16:13:31] <span class="hljs-string">&quot;GET /statics/css/font-awesome.css HTTP/1.1&quot;</span> 200 -
+</div></code></pre>
+<p><em>Exemple concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance2/statics">Seance2/statics</a></p>
+
+        
+        <script async type="text/javascript">
+/* From extension marp-team.marp-vscode */
+(()=>{var j=Object.defineProperty;var a=(V,S)=>j(V,"name",{value:S,configurable:!0});(()=>{var V={676:(_,g,s)=>{_.exports=s(185)},185:(_,g)=>{"use strict";var s;s={value:!0};const A="marpitSVGPolyfill:setZoomFactor,",i=Symbol();let n,e;function y(o){const l=typeof o=="object"&&o.target||document,p=typeof o=="object"?o.zoom:o;window[i]||(Object.defineProperty(window,i,{configurable:!0,value:!0}),window.addEventListener("message",({data:t,origin:f})=>{if(f===window.origin)try{if(t&&typeof t=="string"&&t.startsWith(A)){const[,r]=t.split(","),c=Number.parseFloat(r);Number.isNaN(c)||(e=c)}}catch(r){console.error(r)}}));let h=!1;Array.from(l.querySelectorAll("svg[data-marpit-svg]"),t=>{var f,r,c,w;t.style.transform||(t.style.transform="translateZ(0)");const b=p||e||t.currentScale||1;n!==b&&(n=b,h=b);const $=t.getBoundingClientRect(),{length:M}=t.children;for(let m=0;m<M;m+=1){const v=t.children[m];if(v.getScreenCTM){const d=v.getScreenCTM();if(d){const k=(r=(f=v.x)===null||f===void 0?void 0:f.baseVal.value)!==null&&r!==void 0?r:0,q=(w=(c=v.y)===null||c===void 0?void 0:c.baseVal.value)!==null&&w!==void 0?w:0,E=v.children.length;for(let x=0;x<E;x+=1){const F=v.children[x];if(F.tagName==="SECTION"){const{style:B}=F;B.transformOrigin||(B.transformOrigin=`${-k}px ${-q}px`),B.transform=`scale(${b}) matrix(${d.a}, ${d.b}, ${d.c}, ${d.d}, ${d.e-$.left}, ${d.f-$.top}) translateZ(0.0001px)`;break}}}}}}),h!==!1&&Array.from(l.querySelectorAll("iframe"),({contentWindow:t})=>{t==null||t.postMessage(`${A}${h}`,window.origin==="null"?"*":window.origin)})}a(y,"n"),n=1,e=void 0;const u=a((o,l,p)=>{if(o.getAttribute(l)!==p)return o.setAttribute(l,p),!0},"i");function N({once:o=!1,target:l=document}={}){const p=navigator.vendor==="Apple Computer, Inc."?[y]:[];let h=!o;const t=a(()=>{for(const f of p)f({target:l});(function(f=document){Array.from(f.querySelectorAll('svg[data-marp-fitting="svg"]'),r=>{var c;const w=r.firstChild,b=w.firstChild,{scrollWidth:$,scrollHeight:M}=b;let m,v=1;if(r.hasAttribute("data-marp-fitting-code")&&(m=(c=r.parentElement)===null||c===void 0?void 0:c.parentElement),r.hasAttribute("data-marp-fitting-math")&&(m=r.parentElement),m){const E=getComputedStyle(m),x=Math.ceil(m.clientWidth-parseFloat(E.paddingLeft||"0")-parseFloat(E.paddingRight||"0"));x&&(v=x)}const d=Math.max($,v),k=Math.max(M,1),q=`0 0 ${d} ${k}`;u(w,"width",`${d}`),u(w,"height",`${k}`),u(r,"preserveAspectRatio",getComputedStyle(r).getPropertyValue("--preserve-aspect-ratio")||"xMinYMin meet"),u(r,"viewBox",q)&&r.classList.toggle("__reflow__")})})(l),h&&window.requestAnimationFrame(t)},"a");return t(),()=>{h=!1}}a(N,"a");const C=Symbol(),O=a((o=document)=>{if(typeof window=="undefined")throw new Error("Marp Core's browser script is valid only in browser context.");if(o[C])return o[C];const l=N({target:o}),p=a(()=>{l(),delete o[C]},"r");return Object.defineProperty(o,C,{configurable:!0,value:p}),p},"s");s=O,s=O,g.observer=N}},S={};function L(_){var g=S[_];if(g!==void 0)return g.exports;var s=S[_]={exports:{}};return V[_](s,s.exports,L),s.exports}a(L,"__webpack_require__");var H={};(()=>{"use strict";var _=L(676);function g(){let i,n;const e=a(()=>{const u=!!document.getElementById("__marp-vscode");i!==u&&(document.body.classList.toggle("marp-vscode",u),u?n=(0,_.observer)():(n==null||n(),n=void 0),i=u),i?s():A()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(e,100)),window.addEventListener("vscode.markdown.updateContent",e),e()}a(g,"preview");const s=a(()=>{const i=document.querySelectorAll("style:not(#__marp-vscode-style):not(#_defaultStyles):not([data-marp-vscode-body])"),n=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');i.forEach(e=>{var y;e.closest("#__marp-vscode")||(e.dataset.marpVscodeBody=(y=e.textContent)!=null?y:"",e.textContent="")}),n.forEach(e=>{if(e.closest("#__marp-vscode"))return;const{href:y}=e;e.dataset.marpVscodeHref=y,e.removeAttribute("href")})},"removeStyles"),A=a(()=>{const i=document.querySelectorAll("style[data-marp-vscode-body]"),n=document.querySelectorAll("link[data-marp-vscode-href]");i.forEach(e=>{e.textContent=e.dataset.marpVscodeBody||"",delete e.dataset.marpVscodeBody}),n.forEach(e=>{e.href=e.dataset.marpVscodeHref||"",delete e.dataset.marpVscodeHref})},"restoreStyles");g()})()})();})();
+
+</script>
+
+    </body>
+    </html>
