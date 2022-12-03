@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension marp-team.marp-vscode */
+#__marp-vscode {
+  all: initial;
+}
+
+/* Override VS Code default CSS rules reverting to initial
+   https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
+body.marp-vscode {
+  padding: 0;
+}
+
+body.marp-vscode img {
+  max-width: unset;
+  max-height: unset;
+}
+
+body.marp-vscode a,
+body.marp-vscode a:hover,
+body.marp-vscode code {
+  color: unset;
+}
+
+body.marp-vscode blockquote {
+  background: unset;
+  border-color: unset;
+}
+
+@media screen {
+  body.marp-vscode {
+    overflow-y: scroll;
+  }
+
+  #__marp-vscode [data-marp-vscode-slide-wrapper] {
+    margin: 20px;
+  }
+
+  #__marp-vscode svg[data-marpit-svg] {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+    display: block;
+    margin: 0;
+  }
+
+  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+  #code-csp-warning {
+    background-color: #444;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+    color: white;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    margin: 16px;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    word-wrap: break-word;
+  }
+
+  #code-csp-warning:hover {
+    text-decoration: none;
+    background-color: #007acc;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  }
+}
+
+@media print {
+  body.marp-vscode #code-csp-warning {
+    display: none;
+  }
+}
+
+/* From extension ms-toolsai.jupyter */
+/* These classnames are inherited from bootstrap, but are present in most notebook renderers */
+
+.alert {
+    width: auto;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.alert > *:last-child {
+    margin-bottom: 0;
+}
+#preview > .alert:last-child {
+    /* Prevent this being set to zero by the default notebook stylesheet */
+    padding-bottom: 1em;
+}
+
+.alert-success {
+    /* Note there is no suitable color available, so we just copy "info" */
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-info {
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-warning {
+    background-color: var(--theme-warning-background);
+    color: var(--theme-warning-foreground);
+}
+.alert-danger {
+    background-color: var(--theme-error-background);
+    color: var(--theme-error-foreground);
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        <style>
+/*********************************************************************
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+For more information, please refer to <http://unlicense.org/>
+*********************************************************************/
+
+/*
+WiTeX
+https://github.com/AndrewBelt/WiTeX
+*/
+
+
+/* Latin Modern (LaTeX default) font */
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
+}
+
+/* Page Layout */
+
+body {
+	background: none;
+	font-size: 14pt;
+	font-family: 'Latin Modern Roman', serif;
+	color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	border: none;
+	font-weight: bold;
+}
+
+a, a:visited {
+	color: #a00;
+}
+
+a.new, a.new:visited {
+	color: black;
+}
+
+ul {
+	list-style: disc;
+}
+
+#mw-navigation, #mw-page-base, #mw-head-base, #footer {
+	/* nuke everything but the content */
+	display: none;
+}
+
+/* Content Box */
+
+.mw-body {
+	max-width: 720px;
+	margin: 1em auto;
+}
+
+#content, div#content {
+	border: none;
+	color: black;
+}
+
+#firstHeading, #siteSub {
+	text-align: center;
+	display: block;
+}
+
+#siteSub {
+	margin-top: -0.5em;
+	margin-bottom: 4em;
+}
+
+/* Article Body */
+
+.mw-body-content {
+	font-size: inherit;
+	text-align: justify;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	line-height: 1.5em;
+}
+
+.mw-body {
+	padding: 2em 0;
+}
+
+.mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6, div#content h1, div#content h2, div#content #firstHeading {
+	font-family: inherit;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.mw-body h1, div#content h1 {
+	font-size: 2em;
+}
+
+.mw-body h2, div#content h2 {
+	font-size: 1.5em;
+}
+
+.mw-body h3 {
+	font-size: 1.2em;
+}
+
+.mw-body h4 {
+	font-size: 1.1em;
+}
+
+.mw-body h5, .mw-body h6 {
+	font-size: 1.0em;
+}
+
+.mw-body p {
+	margin: 0;
+}
+
+.mw-body p + p {
+	text-indent: 2em;
+}
+
+.mw-editsection {
+	/* hide more non-content */
+	display: none;
+}
+
+table.ambox {
+	margin-bottom: 1em;
+}
+
+dl dd {
+	/* center definitions (most useful for display equations) */
+	text-align: center;
+}
+
+span.texhtml {
+	/* revert inline math to default font */
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+/* Table of Contents */
+
+#toc, .toc {
+	border: none;
+	padding: 0;
+	background: none;
+	font-size: inherit;
+	/* span 100% of the width */
+	display: block;
+}
+
+.mw-body #toc h2, .mw-body .toc h2 {
+	font-family: inherit;
+	font-size: 1.5em;
+}
+
+#toc h2, .toc h2 {
+	display: block;
+}
+
+#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle {
+	text-align: left;
+}
+
+.toctoggle {
+	display: none;
+}
+
+/* Figures */
+
+div.tright {
+	margin: 0.5em 0 0.5em 1.5em;
+}
+
+div.tleft {
+	margin: 0.5em 1.5em 0.5em 0;
+}
+
+/* Code */
+
+.mw-code {
+	margin: 1em 0;
+}
+
+pre, code {
+	font-family: "Latin Modern Mono", monospace !important;
+}
+
+sup {
+	text-indent: 0;
+}
+</style>
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
+<h2 id="séance-3--penser-les-données-par-un-orm-les-modèles">Séance 3 : Penser les données par un ORM: les modèles</h2>
+<ol>
+<li><a href="#install">Installation et configuration de Flask-Sqlalchemy</a>
+<ol>
+<li><a href="#requis">Pré-requis</a></li>
+<li><a href="#orm">Introduction aux ORM</a></li>
+<li><a href="#flask_sql">Flask-SQLAlchemy</a></li>
+</ol>
+</li>
+<li><a href="#modeles">Du modèle de données aux modèles SQLAlchemy</a>
+<ol>
+<li><a href="#debut">Une requête simple pour s'assurer de la bonne connectivité avec la base</a></li>
+<li><a href="#modele">Les modèles de base de données</a>
+<ol>
+<li><a href="#table">Représenter une table en modèle</a></li>
+<li><a href="#contraintes">Poser des contraintes sur un modèle</a></li>
+<li><a href="#methodes">Quelques méthodes de classe utiles</a></li>
+</ol>
+</li>
+<li><a href="#orm_un">Une première requête avec l'ORM</a></li>
+</ol>
+</li>
+<li><a href="#relations">Les relations entre modèles</a>
+<ol>
+<li><a href="#one">One-to-many</a></li>
+<li><a href="#many">Maany-to-many</a></li>
+</ol>
+</li>
+</ol>
+<h3 id="installation-et-configuration-de-flask-sqlalchemy-">Installation et configuration de Flask-Sqlalchemy <a id="install"></a></h3>
+<h4 id="pré-requis">Pré-requis<a id="requis"></a></h4>
+<p>Dans le cadre de ce cours, nous utiliserons une base SQLite plutôt qu'un serveur MySQL ou PostGreSQL. Il est nécessaire d'avoir SQLite3 installé sur son poste:</p>
+<ul>
+<li>pour Ubuntu et autres distributions Linux: <code>sudo apt-get install sqlite3</code></li>
+<li>pour Windows: choisir le zip correspondant sur <a href="https://www.sqlite.org/download.html">https://www.sqlite.org/download.html</a>; le lancement de sqlite3 se fera dans un terminal au niveau du dossier qui contient le <code>sqlite3.exe</code></li>
+<li>pour Mac: <code>brew install sqlite3</code></li>
+</ul>
+<h4 id="introduction-aux-orm-">Introduction aux ORM <a id="orm"></a></h4>
+<p>Avec Python, l'ORM le plus utilisé est SQLAlchemy. Un ORM (Object Relational Mapping) est un ensemble de librairies qui permet, grâce à un langage de programmation (Python dans notre cas), d'interagir facilement avec les données grâce à des objets: l'ORM est une couche d'abstraction entre le code et les données. L'ORM, nous le verrons, apporte de nombreux avantages au développeur, mais aussi des inconvénients et certaines limites.</p>
+<p>L'avantage certain de l'ORM est la réduction (parfois considérable) du nombre de lignes de code SQL à écrire. L'ORM peut aussi rendre la requête plus lisible, puisqu'elle tient généralement en une seule ligne de code. Modifier de moteur SQL est aussi très simple, l'ORM se chargera d'écrire la rtequête SQL comme il convient (par exemple, si la base est OracleSQL, un <code>rownum</code> sera utilisé là où les autres SGBD utilisent <code>limit</code>). Enfin, un autre avantage certain est que l'utilisation d'un ORM permet une varaibilisation plus facile du code: en cas de changeemnt de nom de table ou de champ, il est facile de changer une variable dans le code Python, plutôt que de modifier toutes les requêtes SQL concernées.</p>
+<p>En revanche, dès lors que le modèle de données devient complexe, et que les opérations à effectuer sur les données dépassent le simple select ou delete sur une ligne particulière, l'ORM montre ses limites. Par exemple, effectuer de nombreuses jointures avec un ORM est extrêmement complexe à écrire (et long à exécuter finalement sur la base); alors qu'écrire directement la requête et l'intégrer dans le code est plus facile et plus rapide.</p>
+<p>Si SQLAlchemy est très répandu avec Python, ce n'est pas le cas de tous les ORM. Attention donc aux ORM choisis, un changement de version peut casser tout notre code, alors que le SQL est stable et qu'une requête écrite en dure pourrait toujours s'exécuter.</p>
+<h4 id="flask-sqlalchemy">Flask-SQLAlchemy<a id="flask_sql"></a></h4>
+<p>Flask-SQLAlchemy est l'adaptation pour Flask de SQLAlchemy. SQLAlchemy est requis pour permettre à FLask-SQLAlchemy de fonctionner, mais il est importé directement en effectuant la commande suivante dans l'environnement virtuel:</p>
+<pre><code class="language-bash">pip install flask_sqlalchemy
+</code></pre>
+<pre><code class="language-bash">Collecting flask_sqlalchemy
+  Downloading Flask_SQLAlchemy-3.0.2-py3-none-any.whl (24 kB)
+Requirement already satisfied: Flask&gt;=2.2 <span class="hljs-keyword">in</span> c:\<span class="hljs-built_in">users</span>\maxim\documents\formations\tnah\python_flask\coursm2tnah_flask_code\<span class="hljs-built_in">env</span>\lib\site-packages (from flask_sqlalchemy) (2.2.2)
+Collecting SQLAlchemy&gt;=1.4.18
+  Downloading SQLAlchemy-1.4.44-cp311-cp311-win_amd64.whl (1.6 MB)
+     ---------------------------------------- 1.6/1.6 MB 2.3 MB/s eta 0:00:00
+Requirement already satisfied: Werkzeug&gt;=2.2.2 <span class="hljs-keyword">in</span> c:\<span class="hljs-built_in">users</span>\maxim\documents\formations\tnah\python_flask\coursm2tnah_flask_code\<span class="hljs-built_in">env</span>\lib\site-packages (from Flask&gt;=2.2-&gt;flask_sqlalchemy) (2.2.2)
+Requirement already satisfied: Jinja2&gt;=3.0 <span class="hljs-keyword">in</span> c:\<span class="hljs-built_in">users</span>\maxim\documents\formations\tnah\python_flask\coursm2tnah_flask_code\<span class="hljs-built_in">env</span>\lib\site-packages (from Flask&gt;=2.2-&gt;flask_sqlalchemy) (3.1.2)
+Requirement already satisfied: itsdangerous&gt;=2.0 <span class="hljs-keyword">in</span> c:\<span class="hljs-built_in">users</span>\maxim\documents\formations\tnah\python_flask\coursm2tnah_flask_code\<span class="hljs-built_in">env</span>\lib\site-packages (from Flask&gt;=2.2-&gt;flask_sqlalchemy) (2.1.2)
+Requirement already satisfied: click&gt;=8.0 <span class="hljs-keyword">in</span> c:\<span class="hljs-built_in">users</span>\maxim\documents\formations\tnah\python_flask\coursm2tnah_flask_code\<span class="hljs-built_in">env</span>\lib\site-packages (from Flask&gt;=2.2-&gt;flask_sqlalchemy) (8.1.3)
+Collecting greenlet!=0.4.17
+  Downloading greenlet-2.0.1-cp311-cp311-win_amd64.whl (191 kB)
+     -------------------------------------- 191.2/191.2 kB 5.8 MB/s eta 0:00:00
+Requirement already satisfied: colorama <span class="hljs-keyword">in</span> c:\<span class="hljs-built_in">users</span>\maxim\documents\formations\tnah\python_flask\coursm2tnah_flask_code\<span class="hljs-built_in">env</span>\lib\site-packages (from click&gt;=8.0-&gt;Flask&gt;=2.2-&gt;flask_sqlalchemy) (0.4.6)
+Requirement already satisfied: MarkupSafe&gt;=2.0 <span class="hljs-keyword">in</span> c:\<span class="hljs-built_in">users</span>\maxim\documents\formations\tnah\python_flask\coursm2tnah_flask_code\<span class="hljs-built_in">env</span>\lib\site-packages (from Jinja2&gt;=3.0-&gt;Flask&gt;=2.2-&gt;flask_sqlalchemy) (2.1.1)
+Installing collected packages: greenlet, SQLAlchemy, flask_sqlalchemy
+Successfully installed SQLAlchemy-1.4.44 flask_sqlalchemy-3.0.2 greenlet-2.0.1
+</code></pre>
+<p>La connection de Flask-SQLAlchemy à l'application Flask est très simple:</p>
+<pre><code class="language-python"><span class="hljs-comment">#app.py</span>
+
+...
+<span class="hljs-keyword">from</span> flask_sqlalchemy <span class="hljs-keyword">import</span> SQLAlchemy
+...
+<span class="hljs-comment"># app.config[&#x27;SQLALCHEMY_DATABASE_URI&#x27;] = Config().SQLALCHEMY_DATABASE_URI</span>
+
+db = SQLAlchemy(app)
+...
+<span class="hljs-keyword">from</span> .routes <span class="hljs-keyword">import</span> generales
+</code></pre>
+<p>Comme nous pouvons le remarquer, il est nécessaire de créer une nouvelle variable de contexte dans la classe <code>Config()</code>, sans oublier de l'ajouter dans le fichier <code>.env</code>.
+Quelques remarques sur la valeur à donner à cette variable de contexte <code>SQLALCHEMY_DATABASE_URI</code>:</p>
+<ul>
+<li>la convention d'écriture est <code>[DB_TYPE]+[DB_CONNECTOR]://[USERNAME]:[PASSWORD]@[HOST]:[PORT]/[DB_NAME]</code>: c'est valable pour tous les serveurs de bases de données relationnelles</li>
+<li>comme SQLite n'est pas un serveur mais un fichier, la valeur s'écrit de deux manières:
+<ul>
+<li>si l'on souhaite donner un chemin relatif vers le fichier : <code>sqlite:///chemin/vers/fichier</code></li>
+<li>si l'on veut donner un chemin absolu: <code>sqlite:////chemin/vers/fichier</code></li>
+<li>Attention, pour Windows, le chemin absolu s'écrira de la manière suivante: <code>sqlite:///chemin\\vers\\fichier</code></li>
+</ul>
+</li>
+</ul>
+<p>Commentons le code de <code>app.py</code>:</p>
+<ul>
+<li>l'import de Flask-SQLAlchemy est requis uniquement dans <code>app.py</code> afin d'instancier <code>SQLAlchemy()</code></li>
+<li>il n'est pas nécessaire d'ajouter la ligne commentée <code>app.config</code> car nous avons mis plus haut qu'il fallait configurer <code>app</code> avec <code>Config()</code>: l'ajout de <code>SQLALCHEMY_DATABASE_URI</code> dans la classe <code>Config()</code> est suffisant</li>
+<li><code>db</code> est la variable d'instanciation de <code>SQLAlchemy</code> avec notre instance de Flask nommée <code>app</code></li>
+<li>désormais, pour utiliser la base de données dans les routes, il suffira de faire <code>from ..app import db </code>: nous verrons par la suite comment utiliser cette instance de SQLAlchemy</li>
+</ul>
+<p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance3/flask_sqlalchemy">Seance3/flask_sqlalchemy</a></p>
+<h3 id="du-modèle-de-données-aux-modèles-sqlalchemy-">Du modèle de données aux modèles SQLAlchemy <a id="modeles"></a></h3>
+<p>Le modèle de données physique de notre base de données sur le Factbook est le suivant: <img src="img/factbook_model.png" alt="h:300"></p>
+<h4 id="une-requête-simple-pour-sassurer-de-la-bonne-connectivité-avec-la-base-">Une requête simple pour s'assurer de la bonne connectivité avec la base <a id="debut"></a></h4>
+<p>SQLalchemy permet d'effectuer des requêtes SQL sans utiliser les possibilités de l'ORM. Pour cela, on insère la requête dans le code suivant; pour les besoins de l'exercice nous jouerons une requête sur une table puis nous afficherons les résultats avec un <code>print()</code>:</p>
+<pre><code class="language-python"><span class="hljs-comment">#generales.py /pays</span>
+
+<span class="hljs-built_in">print</span>(db.session.execute(<span class="hljs-string">&quot;SELECT * FROM country LIMIT 2&quot;</span>).fetchall())
+</code></pre>
+<p>Quelques commentaires:</p>
+<ul>
+<li><code>db</code> est l'instance de la base de données créée dans <code>app.py</code> plus haut</li>
+<li>il est nécessaire de créer une session avant d'eéxcuter une requête</li>
+<li>un limit est effectué afin de réduire les données affichées</li>
+<li><code>fetchall()</code> permet de retourner les valeurs sous forme d'une liste de tuples; sans cela, les données ne sont pas lisibles en sortie de base avec SQLAlchemy (la sortie est en réalité un objet <code>ResultProxy</code>)</li>
+</ul>
+<p>Le résultat de ce code doit être le suivant</p>
+<pre><code class="language-bash">[(<span class="hljs-string">&quot;&lt;p&gt;Algeria has known many empires and dynasties starting with the ancient Numidians (3rd century B.C.), Phoenicians, Carthaginians, Romans, Vandals,  ... (
+2790 characters truncated) ... arbon revenues to fund the government and finance the large subsidies for the population has fallen under stress because of dec
+lining oil prices.&lt;/p&gt;&quot;</span>, <span class="hljs-string">&#x27;ag&#x27;</span>, <span class="hljs-string">&#x27;Algeria&#x27;</span>, <span class="hljs-string">&#x27;sovereign&#x27;</span>), (<span class="hljs-string">&quot;From the late 14th to the mid 19th century a Kingdom of Kongo stretched across central Africa from p
+resent-day northern Angola into the current Congo ... (1141 characters truncated) ...  He pushed through a new constitution in 2010. Joao LOURENCO was elected
+ president in August 2017 and became president of the MPLA in September 2018.&quot;</span>, <span class="hljs-string">&#x27;ao&#x27;</span>, <span class="hljs-string">&#x27;Angola&#x27;</span>, <span class="hljs-string">&#x27;sovereign&#x27;</span>)]
+127.0.0.1 - - [27/Nov/2022 17:18:40] <span class="hljs-string">&quot;GET /pays HTTP/1.1&quot;</span> 200 -
+</code></pre>
+<p>Si un résultat similaire est obtenu, alors la base de données est correctement branchée; dans le cas contraire, vérifier le chemin donné en variable <code>SQLALCHEMY_DATABASE_URI</code>.</p>
+<p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance3/premiere_requete">Seance3/premiere_requete</a></p>
+<h4 id="les-modèles-de-base-de-données-">Les modèles de base de données <a id="modele"></a></h4>
+<h5 id="représenter-une-table-en-modèle-">Représenter une table en modèle <a id="table"></a></h5>
+<p>Plutôt que d'effectuer des requêtes SQL à la main, l'ORM propose de les générer à notre place. Pour cela, il est nécessaire d'indiquer à l'ORM une représentation de nos données. Les données conservées en base sont alors représentées en une collection d'objets (de classes), ce qui est nommé modèles de base de données. La couche ORM va alors effectuer le mapping modèle&gt;table elle-même.</p>
+<p>Chaque table est représentée par un modèle, qui est lui-même une classe Python dérivée de <code>SQLAlchemy(app).Model</code> qui porte le même nom que la table (l'ORM est insensible à la casse pour le nom de table; par convention, il est préférable de nommer chaque classe en camelCase). Les modèles sont stockés dans un au plusieurs fichiers Python dans le module <code>models</code>.</p>
+<pre><code class="language-python"><span class="hljs-comment"># models/factbook.py</span>
+<span class="hljs-keyword">from</span> ..app <span class="hljs-keyword">import</span> app, db
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Country</span>(db.Model):
+    ...
+
+</code></pre>
+<p>La déclaration des champs d'une table se fait sous la forme suivante : <code>nom = db.Colmun(type de colonne, paramètres supplémentaires)</code>. Il est important d'indiquer le type du champ, la <a href="https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/">documentation de SQLAlchemy</a> propose les suivants:</p>
+<ul>
+<li>Integer</li>
+<li>String(size)</li>
+<li>Text</li>
+<li>DateTime</li>
+<li>Float</li>
+<li>Boolean</li>
+<li>PickleType</li>
+<li>LargeBinary</li>
+</ul>
+<pre><code class="language-python"><span class="hljs-comment"># models/factbook.py</span>
+<span class="hljs-keyword">from</span> ..app <span class="hljs-keyword">import</span> app, db
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Country</span>(db.Model):
+    <span class="hljs-built_in">id</span> = db.Column(db.String(<span class="hljs-number">10</span>))
+    Introduction = db.Column(db.Text)
+    name = db.Column(db.String(<span class="hljs-number">500</span>))
+    <span class="hljs-built_in">type</span> = db.Column(db.String(<span class="hljs-number">100</span>))
+</code></pre>
+<p><em>Note</em>: dans le jeu d'exemple du Factbook, les données sont sales; ainsi, les champs Integer n'ont pas pu être initilisés en base et se retrouvent en base. Avec un véritable jeu de données, il convient évidemment de typer correctement les colonnes des tables, et par conséquent les objets des modèles.</p>
+<p><em>Note 2</em>: dans le code lié à cette partie du cours, seuls les modèles des tables qui ne sont pas des tables de relations many-to-many sont converties en modèles. Voir la partie suivante pour les jointures.</p>
+<p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance3/modeles">Seance3/modeles</a> ; ce code n'est pas fonctionnel car les contraintes déclarées en base de données ne sont pas déclarées dans nos modèles</p>
+<h5 id="poser-des-contraintes-sur-un-modèle-">Poser des contraintes sur un modèle <a id="contraintes"></a></h5>
+<p>SQLAlchemy permet de déclarer les contraintes présentes dans la base de données. Ainsi, le modèle prend en charge les contraintes en amont de la transaction relationnelle: ce sera alors SQLAlchemy qui remontera une erreur, au lieu de la base de données. Cette partie va aborder les contraintes SQLAlchemy, à l'exception des clés étrangères (abordées dans la partie sur les <a href="#relations">relations entre modèles (les jointures)</a>).</p>
+<ul>
+<li>la clé primaire d'une table est déclarée par la contrainte <code>primary_key = True</code> dans la déclaration du modèle</li>
+</ul>
+<pre><code class="language-python"><span class="hljs-comment"># models/factbook.py</span>
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Country</span>(db.Model):
+    <span class="hljs-built_in">id</span> = db.Column(db.String(<span class="hljs-number">10</span>), primary_key=<span class="hljs-literal">True</span>)
+    Introduction = db.Column(db.Text)
+    name = db.Column(db.String(<span class="hljs-number">500</span>))
+    <span class="hljs-built_in">type</span> = db.Column(db.String(<span class="hljs-number">100</span>))
+</code></pre>
+<ul>
+<li>les valeurs d'un champ déclaré comme clé primaire sont nécessairement uniques, mais il peut arriver que d'autres colonnes de la table n'acceptent que des valeurs uniques, sans qu'elles soient déclarées comme clés primaires; ainsi la contrainte <code>unique=True</code> existe</li>
+</ul>
+<pre><code class="language-python"><span class="hljs-comment"># models/factbook.py</span>
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Country</span>(db.Model):
+    <span class="hljs-built_in">id</span> = db.Column(db.String(<span class="hljs-number">10</span>), primary_key=<span class="hljs-literal">True</span>)
+    Introduction = db.Column(db.Text)
+    name = db.Column(db.String(<span class="hljs-number">500</span>), unique=<span class="hljs-literal">True</span>)
+    <span class="hljs-built_in">type</span> = db.Column(db.String(<span class="hljs-number">100</span>))
+</code></pre>
+<ul>
+<li>la contrainte <code>NOT NULL</code> SQL est transposée dans SQLAlchemy par <code>nullable=False</code> ou <code>nullable=True</code></li>
+</ul>
+<pre><code class="language-python"><span class="hljs-comment"># models/factbook.py</span>
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Country</span>(db.Model):
+    <span class="hljs-built_in">id</span> = db.Column(db.String(<span class="hljs-number">10</span>), primary_key=<span class="hljs-literal">True</span>)
+    Introduction = db.Column(db.Text)
+    name = db.Column(db.String(<span class="hljs-number">500</span>), unique=<span class="hljs-literal">True</span>, nullable=<span class="hljs-literal">False</span>)
+    <span class="hljs-built_in">type</span> = db.Column(db.String(<span class="hljs-number">100</span>))
+</code></pre>
+<h5 id="quelques-attributs-et-méthodes-de-classe-utiles-">Quelques attributs et méthodes de classe utiles <a id="methodes"></a></h5>
+<p>En plus de déclarer les champs de chaque table, il est possible d'apporter plus de précisions dans les modèles concernant la table elle-même:</p>
+<ul>
+<li>l'attribut le plus utile est <code>__tablename__</code>: il permet d'indiquer le nom de la table dans la base de données; ainsi, si le nom de la table change, il ne sera pas nécessaire de changer le nom de la classe (ce qui nécessiterait de modifier tous les appels à cette classe dans le code de l'application)</li>
+<li>SQLAlchemy a une autre alternative à <code>__tablename__</code> pour l'affichage du nom de la table: l'attribut <code>__table__</code>:</li>
+</ul>
+<pre><code class="language-python"><span class="hljs-comment"># routes/generales.py pays</span>
+
+...
+<span class="hljs-keyword">from</span> ..models.Country <span class="hljs-keyword">import</span> Country
+...
+<span class="hljs-built_in">print</span>(Country.__table__)
+...
+</code></pre>
+<ul>
+<li>certaines bases de données divergent entre-elles et introduisent des notions comme les schémas (dans PostGreSQL par exemple) ou les engines (comme ceux de MySQL). Afin de préciser pour chaque table ces spécificités, il existe l'attribut <code>__table_args__</code> qui prend un dictionnaire comme valeur:
+<ul>
+<li><code>__table_args__ = {&quot;mysql_engine&quot;: &quot;TokuDB&quot;}</code></li>
+<li><code>__table_args__ = {&quot;schema&quot;: &quot;nom_du_schema&quot;}</code></li>
+</ul>
+</li>
+</ul>
+<p>Enfin, certaines méthodes des classes représentant nos tables sont communes dans Flask-SQLAlchemy. C'est le cas de <code>__repr__(self)</code>. Elle permet d'indiquer la forme dans laquelle retourner les objets de la classe. Cette méthode est très utile pour le débuggage.</p>
+<pre><code class="language-python"><span class="hljs-comment"># models/factbook.py</span>
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Country</span>(db.Model):
+    __tablename__ = <span class="hljs-string">&quot;country&quot;</span>
+
+    <span class="hljs-built_in">id</span> = db.Column(db.String(<span class="hljs-number">10</span>), primary_key=<span class="hljs-literal">True</span>)
+    Introduction = db.Column(db.Text)
+    name = db.Column(db.String(<span class="hljs-number">500</span>), unique=<span class="hljs-literal">True</span>, nullable=<span class="hljs-literal">False</span>)
+    <span class="hljs-built_in">type</span> = db.Column(db.String(<span class="hljs-number">100</span>))
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__repr__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;Country %r&gt;&#x27;</span> % (self.name)
+</code></pre>
+<p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance3/contraintes">Seance3/contraintes</a> ; ce code n'est pas fonctionnel (pour le faire fonctionner, supprimer toutes les classes sauf <code>Country()</code>)</p>
+<h4 id="une-première-requête-avec-lorm--">Une première requête avec l'ORM  <a id="orm_un"></a></h4>
+<p>Maintenant que notre base de données est branchée à l'application, et que les modèles sont créés, nous pouvons afficher les données de la table <code>country</code> dans la page <code>/pays</code>. Pour cela, il faut:</p>
+<ul>
+<li>interroger les données via l'ORM</li>
+<li>lire les résultats pour construire les données de la variable <code>donnees</code> de la route <code>/pays</code></li>
+<li>le template n'aura pas besoin d'être modifié si <code>donnees</code> est correctement formatté</li>
+</ul>
+<p><img src="img/requete_orm_result.png" alt="h:300"></p>
+<pre><code class="language-python"><span class="hljs-comment">#routes/generales.py</span>
+
+...
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/pays&quot;</span></span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">pays</span>():
+    donnees = []
+    <span class="hljs-keyword">for</span> country <span class="hljs-keyword">in</span> Country.query.<span class="hljs-built_in">all</span>():
+        donnees.append({
+            <span class="hljs-string">&quot;nom&quot;</span>: country.name,
+            <span class="hljs-string">&quot;capitale&quot;</span>:<span class="hljs-string">&quot;inconnu&quot;</span>,
+            <span class="hljs-string">&quot;continent&quot;</span>:<span class="hljs-string">&quot;inconnu&quot;</span>
+        })
+    
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/tous_pays.html&quot;</span>, donnees=donnees, sous_titre=<span class="hljs-string">&quot;Tous les pays&quot;</span>)
+</code></pre>
+<p>Commentaires:</p>
+<ul>
+<li>il faut en premier lieu initialiser une variable <code>donnees</code> en liste vide afin de servir de réceptable aux objets qui y seront insérés</li>
+<li><code>Country.query.all()</code> est notre première requête via l'ORM:
+<ul>
+<li><code>Country</code> est le nom de la classe dans le modèle (dans notre cas, c'est également le nom de la table)</li>
+<li><code>query.all()</code> est l'équivalent de <code>SELECT * FROM country</code> sans aucune condition dans la requête: tous les pays sont donc remontés</li>
+<li>le résultat de la requête est une liste d'objets représentés selon la méthode <code>__repr__</code> (voir <a href="#methodes">Quelques attributs et méthodes de classes utiles</a>) : <code>[&lt;Country 'Algeria'&gt;, &lt;Country 'Angola'&gt;,...]</code></li>
+<li>chacun des objets du résultat de la requête est composé d'un dictionnaire où les clés sont les noms des colonnes</li>
+</ul>
+</li>
+<li>on itère sur les résultats de la requête pour transformer les données reçues de chaque pays dans le format qui nous convient
+<ul>
+<li>pour obtenir le nom du pays, il suffit d'appeler la clé du nom du champ en base, ici <code>name</code></li>
+</ul>
+</li>
+</ul>
+<p><em>NB</em>: pour les besoins de cet exemple, toutes les classes autres que <code>Country()</code> ont été supprimées du modèle</p>
+<p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance3/requete_orm">Seance3/requete_orm</a></p>
+<h3 id="les-relations-entre-modèles">Les relations entre modèles<a id="relations"></h3>
+<p>Il existe deux grands types de relations entre tables de la base de données:</p>
+<ul>
+<li>one-to-many: la relation entre country et area en est une</li>
+<li>many-to-many: la relation logique entre country et resources en est une; une table country_resources s'intercale dans le modèle physique pour faire la relation</li>
+</ul>
+<p>Ces deux types de relations sont pris en charge simplement par SQLALchemy.</p>
+<h4 id="one-to-many">One-to-many<a id="one"></h4>
+<p>Partons de la relation entre la table <code>country</code> et la table <code>area</code> et supposons qu'il est possible pour un pays d'avoir plusieurs aires. Alors il nous faut lier ces deux tables dans la base relationnelle (par une clé étrangère posée dans <code>area</code>) et donc les deux classes <code>Country()</code> et <code>Area()</code>. Pour ce faire, SQLAlchemy offre plusieurs fonctions et propriétés qui permettent de le déclarer.</p>
+<p>Théoriquement, la syntaxe pour lier deux tables est la suivante :</p>
+<pre><code class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>(db.Model):
+   cle_primaire = db.Column(db.String(<span class="hljs-number">100</span>), primary_key=<span class="hljs-literal">True</span>)
+   un_champ_de_la_table = db.Column(db.String(<span class="hljs-number">100</span>))
+
+   propriete_de_relation = db.relationship(
+        <span class="hljs-string">&quot;classe_liee&quot;</span>,
+        backref=<span class="hljs-string">&quot;classes_liees&quot;</span>,
+        lazy=<span class="hljs-string">&quot;dynamic
+    )
+class classe_liee(db.Model):
+   un_champ_de_la_table = db.Column(db.String(100))
+   
+   a_id = db.Column(db.String(100), db.ForeignKey(&#x27;a.cle_primaire&#x27;))
+</span></code></pre>
+<p>Commentaires:</p>
+<ul>
+<li><code>db.relationship(nom_de_la_classe_liee, args)</code> permet de construire des relations directes entre les objets afin de naviguer facilement entre eux. Ainsi, plutôt que de donner l'identifiant de l'objet référencé par la clé, on donnera l'objet lui-même dans SQLAlchemy (cf.: prochain cours).</li>
+<li><code>backref</code> est un argument qui définit un champ qui sera ajouté aux objets de la classe 'many' et qui pointera en retour sur l'objet 'one'. Ici, cela veut dire que l'on peut utiliser <code>classe_liee.classes_liees</code> pour avoir l'instance A liée.</li>
+<li><code>lazy</code> détermine comment les objets liés sont requêtés</li>
+<li><code>A.propriete_de_relation</code> n'est pas un champ physique de la table de la base de données, mais simplement une propriété Python nécessaire à l'établissement de la relation entre deux classes; si l'on appele <code>A.propriete_de_relation</code>, SQLAlchemy retournera l'ensemble des objets liés à l'objet A</li>
+<li>dans <code>classe_liee()</code>, <code>a_id</code> est le champ physique de la table, qui est une clé étrangère pointant vers <code>A.cle_primaire</code>: le lien vers cette clé primaire se fait avec <code> db.ForeignKey('a.cle_primaire')</code></li>
+</ul>
+<p>Reprenons l'exemple de <code>country</code> et <code>area</code>, les classes deviennent alors:</p>
+<pre><code class="language-python"><span class="hljs-comment">#models.factbook.py</span>
+
+...
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Country</span>(db.Model):
+    __tablename__ = <span class="hljs-string">&quot;country&quot;</span>
+    <span class="hljs-built_in">id</span> = db.Column(db.String(<span class="hljs-number">10</span>), primary_key=<span class="hljs-literal">True</span>)
+    ...
+
+    <span class="hljs-comment"># propriétés de relation</span>
+    areas = db.relationship(
+        <span class="hljs-string">&#x27;Area&#x27;</span>, 
+        backref=<span class="hljs-string">&#x27;areas&#x27;</span>, 
+        lazy=<span class="hljs-literal">True</span>
+    )
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__repr__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;Country %r&gt;&#x27;</span> % (self.name) 
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Area</span>(db.Model):
+    __tablename__ = <span class="hljs-string">&quot;area&quot;</span>
+   ...
+    total = db.Column(db.String(<span class="hljs-number">100</span>), primary_key=<span class="hljs-literal">True</span>)
+    ...
+
+    <span class="hljs-comment"># clés étrangères</span>
+    <span class="hljs-built_in">id</span> = db.Column(
+        db.String(<span class="hljs-number">100</span>),  
+        db.ForeignKey(<span class="hljs-string">&#x27;country.id&#x27;</span>)
+    )
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__repr__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;Area %r&gt;&#x27;</span> % (self.total) 
+</code></pre>
+<p>Vérifions maintenant que la relation est correctement établie et remonte les objets <code>Area</code> lorsque l'on demande les pays:</p>
+<pre><code class="language-python"><span class="hljs-comment"># routes/generales.py /pays</span>
+
+<span class="hljs-keyword">for</span> country <span class="hljs-keyword">in</span> Country.query.<span class="hljs-built_in">all</span>():
+        ...
+        <span class="hljs-built_in">print</span>(country.areas)
+<span class="hljs-keyword">return</span> ...
+</code></pre>
+<p>Commentaires:</p>
+<ul>
+<li><code>areas</code> est ici l'équivalent de <code>propriete_de_relation</code>, c'est une colonne qui n'existe pas en base, mais qui est spécifique à l'application Python</li>
+<li>ce <code>print()</code> affiche, pour chaque pays, une liste d'objets <code>Area</code> formattés selon la fonction de représentation <code>__repr__</code> définie dans la classe <code>Area</code>:</li>
+</ul>
+<pre><code class="language-bash">...
+[&lt;Area <span class="hljs-string">&#x27;510.072 million sq km&#x27;</span>&gt;]
+...
+</code></pre>
+<p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance3/one_to_many">Seance3/one_to_many</a></p>
+<h4 id="many-to-many">Many-to-many<a id="many"></h4>
+<p>Dans une relation many-to-many, une table de relation s'intercale entre les deux tables principales de la relation. Cette table de relation est physiquement présente dans la base de données, et doit être déclarée dans les classes du modèle. C'est le cas pour les relations des pays vers les <code>map</code> et les <code>resources</code>, mais aussi pour la relation <code>country_country</code>.</p>
+<p>Reprenons la syntaxe d'un point de vue théorique:</p>
+<pre><code class="language-python">
+table_de_relation_a_vers_b = db.Table(
+    <span class="hljs-string">&quot;table_de_relation_a_vers_b&quot;</span>,
+    db.Column(<span class="hljs-string">&#x27;a_id&#x27;</span>, db.String(<span class="hljs-number">100</span>), db.ForeignKey(<span class="hljs-string">&#x27;a.id&#x27;</span>), primary_key=<span class="hljs-literal">True</span>),
+    db.Column(<span class="hljs-string">&#x27;b_id&#x27;</span>, db.String(<span class="hljs-number">100</span>), db.ForeignKey(<span class="hljs-string">&#x27;b.id&#x27;</span>), primary_key=<span class="hljs-literal">True</span>)
+)
+
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>(db.Model):
+   <span class="hljs-built_in">id</span> = db.Column(db.String(<span class="hljs-number">100</span>), primary_key=<span class="hljs-literal">True</span>)
+   un_champ_de_la_table = db.Column(db.String(<span class="hljs-number">100</span>))
+
+   bs = db.relationship(
+        <span class="hljs-string">&#x27;B&#x27;</span>, 
+        secondary=table_de_relation_a_vers_b, 
+        backref=<span class="hljs-string">&quot;bs&quot;</span>
+    )
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>(db.Model):
+   <span class="hljs-built_in">id</span> = db.Column(db.String(<span class="hljs-number">100</span>), primary_key=<span class="hljs-literal">True</span>)
+   un_champ_de_la_table = db.Column(db.String(<span class="hljs-number">100</span>))
+</code></pre>
+<p>Commentaires:</p>
+<ul>
+<li>comme indiqué dans la <a href="https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/#many-to-many-relationships">documentation</a>, il est fortement recommandé de ne pas utiliser de classe pour déclarer la table de relation, mais une Table SQLALchemy.</li>
+<li>la déclaration de toutes les tables de relation se fait au début du modèle</li>
+<li><code>db.Table()</code> prend les arguments suivants:
+<ul>
+<li>en premier, le nom de la table physique de la base de données</li>
+<li>puis ensuite autant de défintion de colonnes qu'il y a de colonnes dans la table: les deux colonnes qui servent de référence pour faire la relation comprennnent à la fois une clé étrangère et une clé primaire</li>
+</ul>
+</li>
+<li>dans la classe A, qui est le point de départ de la relation, il faut à nouveau déclarer une propriété de relation avec <code>db.relationship()</code> de la même manière que pour une relation one-to-many, à une différence prêt: <code>secondary</code>. Il faut ici indiquer le nom de la variable créée en début de modèle et qui comprend la table de relation</li>
+<li>l'utilisation de cette relation depuis <code>A</code> se fera comme pour one-to-many: <code>A.bs</code></li>
+</ul>
+<p>Reprenons à nouveau un exemple dans le Factbook avec la relation entre country et map:</p>
+<pre><code class="language-python"><span class="hljs-comment">#models/factbook.py </span>
+
+country_map = db.Table(
+    <span class="hljs-string">&quot;country_map&quot;</span>,
+    db.Column(<span class="hljs-string">&#x27;id&#x27;</span>, db.String(<span class="hljs-number">100</span>), db.ForeignKey(<span class="hljs-string">&#x27;country.id&#x27;</span>), primary_key=<span class="hljs-literal">True</span>),
+    db.Column(<span class="hljs-string">&#x27;map_ref&#x27;</span>, db.String(<span class="hljs-number">100</span>), db.ForeignKey(<span class="hljs-string">&#x27;map.name&#x27;</span>), primary_key=<span class="hljs-literal">True</span>)
+)
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Country</span>(db.Model):
+    __tablename__ = <span class="hljs-string">&quot;country&quot;</span>
+    <span class="hljs-built_in">id</span> = db.Column(db.String(<span class="hljs-number">10</span>), primary_key=<span class="hljs-literal">True</span>)
+    ...
+    <span class="hljs-comment"># propriétés de relation</span>
+    ...
+    maps = db.relationship(
+        <span class="hljs-string">&#x27;Map&#x27;</span>, 
+        secondary=country_map, 
+        backref=<span class="hljs-string">&quot;maps&quot;</span>
+    )
+   ...
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Map</span>(db.Model):
+    __tablename__ = <span class="hljs-string">&quot;map&quot;</span>
+    ...
+    name = db.Column(db.Text, primary_key=<span class="hljs-literal">True</span>)
+   ...
+</code></pre>
+<p>Pour obtenir tous les noms de la première map liée à chaque pays, il suffit de jouer:</p>
+<pre><code class="language-python"><span class="hljs-comment"># routes/generales.py /pays</span>
+
+<span class="hljs-keyword">for</span> country <span class="hljs-keyword">in</span> Country.query.<span class="hljs-built_in">all</span>():
+        ...
+        <span class="hljs-built_in">print</span>(country.maps[<span class="hljs-number">0</span>].name)
+<span class="hljs-keyword">return</span> ...
+</code></pre>
+<pre><code class="language-bash">...
+Asia
+Political Map of the World
+Asia
+Asia
+Asia
+Physical Map of the World
+...
+</code></pre>
+<p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance3/many_to_many">Seance3/many_to_many</a></p>
+
+        
+        <script async type="text/javascript">
+/* From extension marp-team.marp-vscode */
+(()=>{var j=Object.defineProperty;var a=(V,S)=>j(V,"name",{value:S,configurable:!0});(()=>{var V={676:(_,g,s)=>{_.exports=s(185)},185:(_,g)=>{"use strict";var s;s={value:!0};const A="marpitSVGPolyfill:setZoomFactor,",i=Symbol();let n,e;function y(o){const l=typeof o=="object"&&o.target||document,p=typeof o=="object"?o.zoom:o;window[i]||(Object.defineProperty(window,i,{configurable:!0,value:!0}),window.addEventListener("message",({data:t,origin:f})=>{if(f===window.origin)try{if(t&&typeof t=="string"&&t.startsWith(A)){const[,r]=t.split(","),c=Number.parseFloat(r);Number.isNaN(c)||(e=c)}}catch(r){console.error(r)}}));let h=!1;Array.from(l.querySelectorAll("svg[data-marpit-svg]"),t=>{var f,r,c,w;t.style.transform||(t.style.transform="translateZ(0)");const b=p||e||t.currentScale||1;n!==b&&(n=b,h=b);const $=t.getBoundingClientRect(),{length:M}=t.children;for(let m=0;m<M;m+=1){const v=t.children[m];if(v.getScreenCTM){const d=v.getScreenCTM();if(d){const k=(r=(f=v.x)===null||f===void 0?void 0:f.baseVal.value)!==null&&r!==void 0?r:0,q=(w=(c=v.y)===null||c===void 0?void 0:c.baseVal.value)!==null&&w!==void 0?w:0,E=v.children.length;for(let x=0;x<E;x+=1){const F=v.children[x];if(F.tagName==="SECTION"){const{style:B}=F;B.transformOrigin||(B.transformOrigin=`${-k}px ${-q}px`),B.transform=`scale(${b}) matrix(${d.a}, ${d.b}, ${d.c}, ${d.d}, ${d.e-$.left}, ${d.f-$.top}) translateZ(0.0001px)`;break}}}}}}),h!==!1&&Array.from(l.querySelectorAll("iframe"),({contentWindow:t})=>{t==null||t.postMessage(`${A}${h}`,window.origin==="null"?"*":window.origin)})}a(y,"n"),n=1,e=void 0;const u=a((o,l,p)=>{if(o.getAttribute(l)!==p)return o.setAttribute(l,p),!0},"i");function N({once:o=!1,target:l=document}={}){const p=navigator.vendor==="Apple Computer, Inc."?[y]:[];let h=!o;const t=a(()=>{for(const f of p)f({target:l});(function(f=document){Array.from(f.querySelectorAll('svg[data-marp-fitting="svg"]'),r=>{var c;const w=r.firstChild,b=w.firstChild,{scrollWidth:$,scrollHeight:M}=b;let m,v=1;if(r.hasAttribute("data-marp-fitting-code")&&(m=(c=r.parentElement)===null||c===void 0?void 0:c.parentElement),r.hasAttribute("data-marp-fitting-math")&&(m=r.parentElement),m){const E=getComputedStyle(m),x=Math.ceil(m.clientWidth-parseFloat(E.paddingLeft||"0")-parseFloat(E.paddingRight||"0"));x&&(v=x)}const d=Math.max($,v),k=Math.max(M,1),q=`0 0 ${d} ${k}`;u(w,"width",`${d}`),u(w,"height",`${k}`),u(r,"preserveAspectRatio",getComputedStyle(r).getPropertyValue("--preserve-aspect-ratio")||"xMinYMin meet"),u(r,"viewBox",q)&&r.classList.toggle("__reflow__")})})(l),h&&window.requestAnimationFrame(t)},"a");return t(),()=>{h=!1}}a(N,"a");const C=Symbol(),O=a((o=document)=>{if(typeof window=="undefined")throw new Error("Marp Core's browser script is valid only in browser context.");if(o[C])return o[C];const l=N({target:o}),p=a(()=>{l(),delete o[C]},"r");return Object.defineProperty(o,C,{configurable:!0,value:p}),p},"s");s=O,s=O,g.observer=N}},S={};function L(_){var g=S[_];if(g!==void 0)return g.exports;var s=S[_]={exports:{}};return V[_](s,s.exports,L),s.exports}a(L,"__webpack_require__");var H={};(()=>{"use strict";var _=L(676);function g(){let i,n;const e=a(()=>{const u=!!document.getElementById("__marp-vscode");i!==u&&(document.body.classList.toggle("marp-vscode",u),u?n=(0,_.observer)():(n==null||n(),n=void 0),i=u),i?s():A()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(e,100)),window.addEventListener("vscode.markdown.updateContent",e),e()}a(g,"preview");const s=a(()=>{const i=document.querySelectorAll("style:not(#__marp-vscode-style):not(#_defaultStyles):not([data-marp-vscode-body])"),n=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');i.forEach(e=>{var y;e.closest("#__marp-vscode")||(e.dataset.marpVscodeBody=(y=e.textContent)!=null?y:"",e.textContent="")}),n.forEach(e=>{if(e.closest("#__marp-vscode"))return;const{href:y}=e;e.dataset.marpVscodeHref=y,e.removeAttribute("href")})},"removeStyles"),A=a(()=>{const i=document.querySelectorAll("style[data-marp-vscode-body]"),n=document.querySelectorAll("link[data-marp-vscode-href]");i.forEach(e=>{e.textContent=e.dataset.marpVscodeBody||"",delete e.dataset.marpVscodeBody}),n.forEach(e=>{e.href=e.dataset.marpVscodeHref||"",delete e.dataset.marpVscodeHref})},"restoreStyles");g()})()})();})();
+
+</script>
+
+    </body>
+    </html>
