@@ -654,14 +654,14 @@ resent-day northern Angola into the current Congo ... (1141 characters truncated
 </ul>
 <p><em>NB</em>: pour les besoins de cet exemple, toutes les classes autres que <code>Country()</code> ont été supprimées du modèle</p>
 <p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance3/requete_orm">Seance3/requete_orm</a></p>
-<h3 id="les-relations-entre-modèles">Les relations entre modèles<a id="relations"></h3>
+<h3 id="les-relations-entre-modèles">Les relations entre modèles<a id="relations"></a></h3>
 <p>Il existe deux grands types de relations entre tables de la base de données:</p>
 <ul>
 <li>one-to-many: la relation entre country et area en est une</li>
 <li>many-to-many: la relation logique entre country et resources en est une; une table country_resources s'intercale dans le modèle physique pour faire la relation</li>
 </ul>
 <p>Ces deux types de relations sont pris en charge simplement par SQLALchemy.</p>
-<h4 id="one-to-many">One-to-many<a id="one"></h4>
+<h4 id="one-to-many">One-to-many<a id="one"></a></h4>
 <p>Partons de la relation entre la table <code>country</code> et la table <code>area</code> et supposons qu'il est possible pour un pays d'avoir plusieurs aires. Alors il nous faut lier ces deux tables dans la base relationnelle (par une clé étrangère posée dans <code>area</code>) et donc les deux classes <code>Country()</code> et <code>Area()</code>. Pour ce faire, SQLAlchemy offre plusieurs fonctions et propriétés qui permettent de le déclarer.</p>
 <p>Théoriquement, la syntaxe pour lier deux tables est la suivante :</p>
 <pre><code class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>(db.Model):
@@ -671,13 +671,13 @@ resent-day northern Angola into the current Congo ... (1141 characters truncated
    propriete_de_relation = db.relationship(
         <span class="hljs-string">&quot;classe_liee&quot;</span>,
         backref=<span class="hljs-string">&quot;classes_liees&quot;</span>,
-        lazy=<span class="hljs-string">&quot;dynamic
+        lazy=<span class="hljs-string">&quot;dynamic&quot;</span>
     )
-class classe_liee(db.Model):
-   un_champ_de_la_table = db.Column(db.String(100))
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">classe_liee</span>(db.Model):
+   un_champ_de_la_table = db.Column(db.String(<span class="hljs-number">100</span>))
    
-   a_id = db.Column(db.String(100), db.ForeignKey(&#x27;a.cle_primaire&#x27;))
-</span></code></pre>
+   a_id = db.Column(db.String(<span class="hljs-number">100</span>), db.ForeignKey(<span class="hljs-string">&#x27;a.cle_primaire&#x27;</span>))
+</code></pre>
 <p>Commentaires:</p>
 <ul>
 <li><code>db.relationship(nom_de_la_classe_liee, args)</code> permet de construire des relations directes entre les objets afin de naviguer facilement entre eux. Ainsi, plutôt que de donner l'identifiant de l'objet référencé par la clé, on donnera l'objet lui-même dans SQLAlchemy (cf.: prochain cours).</li>
@@ -738,7 +738,7 @@ class classe_liee(db.Model):
 ...
 </code></pre>
 <p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance3/one_to_many">Seance3/one_to_many</a></p>
-<h4 id="many-to-many">Many-to-many<a id="many"></h4>
+<h4 id="many-to-many">Many-to-many<a id="many"></a></h4>
 <p>Dans une relation many-to-many, une table de relation s'intercale entre les deux tables principales de la relation. Cette table de relation est physiquement présente dans la base de données, et doit être déclarée dans les classes du modèle. C'est le cas pour les relations des pays vers les <code>map</code> et les <code>resources</code>, mais aussi pour la relation <code>country_country</code>.</p>
 <p>Reprenons la syntaxe d'un point de vue théorique:</p>
 <pre><code class="language-python">
