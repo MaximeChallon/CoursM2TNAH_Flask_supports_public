@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension marp-team.marp-vscode */
+#__marp-vscode {
+  all: initial;
+}
+
+/* Override VS Code default CSS rules reverting to initial
+   https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
+body.marp-vscode {
+  padding: 0;
+}
+
+body.marp-vscode img {
+  max-width: unset;
+  max-height: unset;
+}
+
+body.marp-vscode a,
+body.marp-vscode a:hover,
+body.marp-vscode code {
+  color: unset;
+}
+
+body.marp-vscode blockquote {
+  background: unset;
+  border-color: unset;
+}
+
+@media screen {
+  body.marp-vscode {
+    overflow-y: scroll;
+  }
+
+  #__marp-vscode [data-marp-vscode-slide-wrapper] {
+    margin: 20px;
+  }
+
+  #__marp-vscode svg[data-marpit-svg] {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+    display: block;
+    margin: 0;
+  }
+
+  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+  #code-csp-warning {
+    background-color: #444;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+    color: white;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    margin: 16px;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    word-wrap: break-word;
+  }
+
+  #code-csp-warning:hover {
+    text-decoration: none;
+    background-color: #007acc;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  }
+}
+
+@media print {
+  body.marp-vscode #code-csp-warning {
+    display: none;
+  }
+}
+
+/* From extension ms-toolsai.jupyter */
+/* These classnames are inherited from bootstrap, but are present in most notebook renderers */
+
+.alert {
+    width: auto;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.alert > *:last-child {
+    margin-bottom: 0;
+}
+#preview > .alert:last-child {
+    /* Prevent this being set to zero by the default notebook stylesheet */
+    padding-bottom: 1em;
+}
+
+.alert-success {
+    /* Note there is no suitable color available, so we just copy "info" */
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-info {
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-warning {
+    background-color: var(--theme-warning-background);
+    color: var(--theme-warning-foreground);
+}
+.alert-danger {
+    background-color: var(--theme-error-background);
+    color: var(--theme-error-foreground);
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        <style>
+/*********************************************************************
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+For more information, please refer to <http://unlicense.org/>
+*********************************************************************/
+
+/*
+WiTeX
+https://github.com/AndrewBelt/WiTeX
+*/
+
+
+/* Latin Modern (LaTeX default) font */
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
+}
+
+/* Page Layout */
+
+body {
+	background: none;
+	font-size: 14pt;
+	font-family: 'Latin Modern Roman', serif;
+	color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	border: none;
+	font-weight: bold;
+}
+
+a, a:visited {
+	color: #a00;
+}
+
+a.new, a.new:visited {
+	color: black;
+}
+
+ul {
+	list-style: disc;
+}
+
+#mw-navigation, #mw-page-base, #mw-head-base, #footer {
+	/* nuke everything but the content */
+	display: none;
+}
+
+/* Content Box */
+
+.mw-body {
+	max-width: 720px;
+	margin: 1em auto;
+}
+
+#content, div#content {
+	border: none;
+	color: black;
+}
+
+#firstHeading, #siteSub {
+	text-align: center;
+	display: block;
+}
+
+#siteSub {
+	margin-top: -0.5em;
+	margin-bottom: 4em;
+}
+
+/* Article Body */
+
+.mw-body-content {
+	font-size: inherit;
+	text-align: justify;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	line-height: 1.5em;
+}
+
+.mw-body {
+	padding: 2em 0;
+}
+
+.mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6, div#content h1, div#content h2, div#content #firstHeading {
+	font-family: inherit;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.mw-body h1, div#content h1 {
+	font-size: 2em;
+}
+
+.mw-body h2, div#content h2 {
+	font-size: 1.5em;
+}
+
+.mw-body h3 {
+	font-size: 1.2em;
+}
+
+.mw-body h4 {
+	font-size: 1.1em;
+}
+
+.mw-body h5, .mw-body h6 {
+	font-size: 1.0em;
+}
+
+.mw-body p {
+	margin: 0;
+}
+
+.mw-body p + p {
+	text-indent: 2em;
+}
+
+.mw-editsection {
+	/* hide more non-content */
+	display: none;
+}
+
+table.ambox {
+	margin-bottom: 1em;
+}
+
+dl dd {
+	/* center definitions (most useful for display equations) */
+	text-align: center;
+}
+
+span.texhtml {
+	/* revert inline math to default font */
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+/* Table of Contents */
+
+#toc, .toc {
+	border: none;
+	padding: 0;
+	background: none;
+	font-size: inherit;
+	/* span 100% of the width */
+	display: block;
+}
+
+.mw-body #toc h2, .mw-body .toc h2 {
+	font-family: inherit;
+	font-size: 1.5em;
+}
+
+#toc h2, .toc h2 {
+	display: block;
+}
+
+#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle {
+	text-align: left;
+}
+
+.toctoggle {
+	display: none;
+}
+
+/* Figures */
+
+div.tright {
+	margin: 0.5em 0 0.5em 1.5em;
+}
+
+div.tleft {
+	margin: 0.5em 1.5em 0.5em 0;
+}
+
+/* Code */
+
+.mw-code {
+	margin: 1em 0;
+}
+
+pre, code {
+	font-family: "Latin Modern Mono", monospace !important;
+}
+
+sup {
+	text-indent: 0;
+}
+</style>
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
+<h2 id="séance-2--exercices">Séance 2 : Exercices</h2>
+<ol>
+<li><a href="#connect">REV-1: Connecter une base de données</a></li>
+<li><a href="#modele">REV-2: Ecrire un modèle de base de données</a></li>
+<li><a href="#autoinc">APP-1: Autoincrémentation des clés primaires</a></li>
+<li><a href="#default">APP-2: Valeurs par défaut dans les champs</a></li>
+<li><a href="#creer">REF-1: Créer une base de données et la connecter à l'application</a></li>
+</ol>
+<h2 id="rev-1-connecter-une-base-de-données-">REV-1: Connecter une base de données <a id="connect"></a></h2>
+<p>Brancher une base de données relationnelle fonctionnant sur un serveur local (PostGreSQL, MariaDB, MYSQL, etc.) à une application Flask. AU lancement de l'application, aucune erreur ne doit apparaître.</p>
+<p><em>NB</em>: Pour cet exercice, il n'est pas nécessaire de créer le modèle de la base dans Python, seule la connection est ici requise.</p>
+<h2 id="rev-2-ecrire-un-modèle-de-base-de-données-">REV-2: Ecrire un modèle de base de données <a id="modele"></a></h2>
+<p>A partir du modèle de données ci-dessous, écrire le modèle de base de données correspondant (i.e. le fichier models/donnees.py).</p>
+<p><em>NB</em>: Seul ce fichier est demandé dans l'exercice, le développement de l'application ou le branchement à une base de données ne sont pas nécessaires.</p>
+<p><img src="img/mrd.png" alt="h:300"></p>
+<h2 id="app-1-autoincrémentation-des-clés-primaires--">APP-1: Autoincrémentation des clés primaires  <a id="autoinc"></a></h2>
+<p>Soit le DDL suivant de deux tables d'une base de données relationnelle PostGreSQL, écrire le modèle SQLAlchemy.</p>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> <span class="hljs-keyword">user</span>
+  (
+     identifiant SERIAL,
+     nom         <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">55</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+     <span class="hljs-keyword">PRIMARY</span> KEY (identifiant)
+  );
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> adresse
+  (
+     identifiant      SERIAL,
+     user_identifiant <span class="hljs-type">INT</span>,
+     adresse          TEXT <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+     debut_validite   <span class="hljs-type">TIMESTAMP</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+     fin_validite     <span class="hljs-type">TIMESTAMP</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+     <span class="hljs-keyword">PRIMARY</span> KEY (identifiant),
+     <span class="hljs-keyword">CONSTRAINT</span> fk_user_identifiant 
+        <span class="hljs-keyword">FOREIGN</span> KEY (user_identifiant) 
+            <span class="hljs-keyword">REFERENCES</span> <span class="hljs-keyword">user</span>(identifiant)
+  ); 
+</code></pre>
+<h2 id="app-2-valeurs-par-défaut-dans-les-champs--">APP-2: Valeurs par défaut dans les champs  <a id="default"></a></h2>
+<p>Reprenons le DDL de l'exercice <a href="#autoninc">précédent</a>:  modifier le modèle SQLAlchemy pour qu'il corresponde.</p>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> <span class="hljs-keyword">user</span>
+  (
+     identifiant SERIAL,
+     nom         <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">55</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+     <span class="hljs-keyword">PRIMARY</span> KEY (identifiant)
+  );
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> adresse
+  (
+     identifiant      SERIAL,
+     user_identifiant <span class="hljs-type">INT</span>,
+     adresse          TEXT <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+     debut_validite   <span class="hljs-type">TIMESTAMP</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span>,
+     fin_validite     <span class="hljs-type">TIMESTAMP</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> (<span class="hljs-type">DATE</span>(<span class="hljs-string">&#x27;now&#x27;</span>) <span class="hljs-operator">+</span> <span class="hljs-type">INTERVAL</span> <span class="hljs-string">&#x27;10 year&#x27;</span>),
+     <span class="hljs-keyword">PRIMARY</span> KEY (identifiant),
+     <span class="hljs-keyword">CONSTRAINT</span> fk_user_identifiant 
+        <span class="hljs-keyword">FOREIGN</span> KEY (user_identifiant) 
+            <span class="hljs-keyword">REFERENCES</span> <span class="hljs-keyword">user</span>(identifiant)
+  ); 
+</code></pre>
+<h2 id="ref-1-créer-une-base-de-données-et-la-connecter-à-lapplication-">REF-1: Créer une base de données et la connecter à l'application <a id="creer"></a></h2>
+<p>A partir des données choisies pour le voir:</p>
+<ul>
+<li>concevoir la base de données si ce n'est pas déjà fait</li>
+<li>la connecter dans l'application</li>
+<li>concevoir les modèles de base de données dans l'application Flask en y intégrant les jointures</li>
+</ul>
+<p><em>NB</em>: il n'y aura pas de correction pour cet exercice, il est simplement ici pour aiguiller dans la conception de l'application; l'interrogation des données sera effectuée au prochain cours</p>
+
+        
+        <script async type="text/javascript">
+/* From extension marp-team.marp-vscode */
+(()=>{var j=Object.defineProperty;var a=(V,S)=>j(V,"name",{value:S,configurable:!0});(()=>{var V={676:(_,g,s)=>{_.exports=s(185)},185:(_,g)=>{"use strict";var s;s={value:!0};const A="marpitSVGPolyfill:setZoomFactor,",i=Symbol();let n,e;function y(o){const l=typeof o=="object"&&o.target||document,p=typeof o=="object"?o.zoom:o;window[i]||(Object.defineProperty(window,i,{configurable:!0,value:!0}),window.addEventListener("message",({data:t,origin:f})=>{if(f===window.origin)try{if(t&&typeof t=="string"&&t.startsWith(A)){const[,r]=t.split(","),c=Number.parseFloat(r);Number.isNaN(c)||(e=c)}}catch(r){console.error(r)}}));let h=!1;Array.from(l.querySelectorAll("svg[data-marpit-svg]"),t=>{var f,r,c,w;t.style.transform||(t.style.transform="translateZ(0)");const b=p||e||t.currentScale||1;n!==b&&(n=b,h=b);const $=t.getBoundingClientRect(),{length:M}=t.children;for(let m=0;m<M;m+=1){const v=t.children[m];if(v.getScreenCTM){const d=v.getScreenCTM();if(d){const k=(r=(f=v.x)===null||f===void 0?void 0:f.baseVal.value)!==null&&r!==void 0?r:0,q=(w=(c=v.y)===null||c===void 0?void 0:c.baseVal.value)!==null&&w!==void 0?w:0,E=v.children.length;for(let x=0;x<E;x+=1){const F=v.children[x];if(F.tagName==="SECTION"){const{style:B}=F;B.transformOrigin||(B.transformOrigin=`${-k}px ${-q}px`),B.transform=`scale(${b}) matrix(${d.a}, ${d.b}, ${d.c}, ${d.d}, ${d.e-$.left}, ${d.f-$.top}) translateZ(0.0001px)`;break}}}}}}),h!==!1&&Array.from(l.querySelectorAll("iframe"),({contentWindow:t})=>{t==null||t.postMessage(`${A}${h}`,window.origin==="null"?"*":window.origin)})}a(y,"n"),n=1,e=void 0;const u=a((o,l,p)=>{if(o.getAttribute(l)!==p)return o.setAttribute(l,p),!0},"i");function N({once:o=!1,target:l=document}={}){const p=navigator.vendor==="Apple Computer, Inc."?[y]:[];let h=!o;const t=a(()=>{for(const f of p)f({target:l});(function(f=document){Array.from(f.querySelectorAll('svg[data-marp-fitting="svg"]'),r=>{var c;const w=r.firstChild,b=w.firstChild,{scrollWidth:$,scrollHeight:M}=b;let m,v=1;if(r.hasAttribute("data-marp-fitting-code")&&(m=(c=r.parentElement)===null||c===void 0?void 0:c.parentElement),r.hasAttribute("data-marp-fitting-math")&&(m=r.parentElement),m){const E=getComputedStyle(m),x=Math.ceil(m.clientWidth-parseFloat(E.paddingLeft||"0")-parseFloat(E.paddingRight||"0"));x&&(v=x)}const d=Math.max($,v),k=Math.max(M,1),q=`0 0 ${d} ${k}`;u(w,"width",`${d}`),u(w,"height",`${k}`),u(r,"preserveAspectRatio",getComputedStyle(r).getPropertyValue("--preserve-aspect-ratio")||"xMinYMin meet"),u(r,"viewBox",q)&&r.classList.toggle("__reflow__")})})(l),h&&window.requestAnimationFrame(t)},"a");return t(),()=>{h=!1}}a(N,"a");const C=Symbol(),O=a((o=document)=>{if(typeof window=="undefined")throw new Error("Marp Core's browser script is valid only in browser context.");if(o[C])return o[C];const l=N({target:o}),p=a(()=>{l(),delete o[C]},"r");return Object.defineProperty(o,C,{configurable:!0,value:p}),p},"s");s=O,s=O,g.observer=N}},S={};function L(_){var g=S[_];if(g!==void 0)return g.exports;var s=S[_]={exports:{}};return V[_](s,s.exports,L),s.exports}a(L,"__webpack_require__");var H={};(()=>{"use strict";var _=L(676);function g(){let i,n;const e=a(()=>{const u=!!document.getElementById("__marp-vscode");i!==u&&(document.body.classList.toggle("marp-vscode",u),u?n=(0,_.observer)():(n==null||n(),n=void 0),i=u),i?s():A()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(e,100)),window.addEventListener("vscode.markdown.updateContent",e),e()}a(g,"preview");const s=a(()=>{const i=document.querySelectorAll("style:not(#__marp-vscode-style):not(#_defaultStyles):not([data-marp-vscode-body])"),n=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');i.forEach(e=>{var y;e.closest("#__marp-vscode")||(e.dataset.marpVscodeBody=(y=e.textContent)!=null?y:"",e.textContent="")}),n.forEach(e=>{if(e.closest("#__marp-vscode"))return;const{href:y}=e;e.dataset.marpVscodeHref=y,e.removeAttribute("href")})},"removeStyles"),A=a(()=>{const i=document.querySelectorAll("style[data-marp-vscode-body]"),n=document.querySelectorAll("link[data-marp-vscode-href]");i.forEach(e=>{e.textContent=e.dataset.marpVscodeBody||"",delete e.dataset.marpVscodeBody}),n.forEach(e=>{e.href=e.dataset.marpVscodeHref||"",delete e.dataset.marpVscodeHref})},"restoreStyles");g()})()})();})();
+
+</script>
+
+    </body>
+    </html>
