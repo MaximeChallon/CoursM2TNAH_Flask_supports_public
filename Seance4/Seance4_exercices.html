@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension marp-team.marp-vscode */
+#__marp-vscode {
+  all: initial;
+}
+
+/* Override VS Code default CSS rules reverting to initial
+   https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
+body.marp-vscode {
+  padding: 0;
+}
+
+body.marp-vscode img {
+  max-width: unset;
+  max-height: unset;
+}
+
+body.marp-vscode a,
+body.marp-vscode a:hover,
+body.marp-vscode code {
+  color: unset;
+}
+
+body.marp-vscode blockquote {
+  background: unset;
+  border-color: unset;
+}
+
+@media screen {
+  body.marp-vscode {
+    overflow-y: scroll;
+  }
+
+  #__marp-vscode [data-marp-vscode-slide-wrapper] {
+    margin: 20px;
+  }
+
+  #__marp-vscode svg[data-marpit-svg] {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+    display: block;
+    margin: 0;
+  }
+
+  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+  #code-csp-warning {
+    background-color: #444;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+    color: white;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    margin: 16px;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    word-wrap: break-word;
+  }
+
+  #code-csp-warning:hover {
+    text-decoration: none;
+    background-color: #007acc;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  }
+}
+
+@media print {
+  body.marp-vscode #code-csp-warning {
+    display: none;
+  }
+}
+
+/* From extension ms-toolsai.jupyter */
+/* These classnames are inherited from bootstrap, but are present in most notebook renderers */
+
+.alert {
+    width: auto;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.alert > *:last-child {
+    margin-bottom: 0;
+}
+#preview > .alert:last-child {
+    /* Prevent this being set to zero by the default notebook stylesheet */
+    padding-bottom: 1em;
+}
+
+.alert-success {
+    /* Note there is no suitable color available, so we just copy "info" */
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-info {
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-warning {
+    background-color: var(--theme-warning-background);
+    color: var(--theme-warning-foreground);
+}
+.alert-danger {
+    background-color: var(--theme-error-background);
+    color: var(--theme-error-foreground);
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        <style>
+/*********************************************************************
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+For more information, please refer to <http://unlicense.org/>
+*********************************************************************/
+
+/*
+WiTeX
+https://github.com/AndrewBelt/WiTeX
+*/
+
+
+/* Latin Modern (LaTeX default) font */
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
+}
+
+/* Page Layout */
+
+body {
+	background: none;
+	font-size: 14pt;
+	font-family: 'Latin Modern Roman', serif;
+	color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	border: none;
+	font-weight: bold;
+}
+
+a, a:visited {
+	color: #a00;
+}
+
+a.new, a.new:visited {
+	color: black;
+}
+
+ul {
+	list-style: disc;
+}
+
+#mw-navigation, #mw-page-base, #mw-head-base, #footer {
+	/* nuke everything but the content */
+	display: none;
+}
+
+/* Content Box */
+
+.mw-body {
+	max-width: 720px;
+	margin: 1em auto;
+}
+
+#content, div#content {
+	border: none;
+	color: black;
+}
+
+#firstHeading, #siteSub {
+	text-align: center;
+	display: block;
+}
+
+#siteSub {
+	margin-top: -0.5em;
+	margin-bottom: 4em;
+}
+
+/* Article Body */
+
+.mw-body-content {
+	font-size: inherit;
+	text-align: justify;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	line-height: 1.5em;
+}
+
+.mw-body {
+	padding: 2em 0;
+}
+
+.mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6, div#content h1, div#content h2, div#content #firstHeading {
+	font-family: inherit;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.mw-body h1, div#content h1 {
+	font-size: 2em;
+}
+
+.mw-body h2, div#content h2 {
+	font-size: 1.5em;
+}
+
+.mw-body h3 {
+	font-size: 1.2em;
+}
+
+.mw-body h4 {
+	font-size: 1.1em;
+}
+
+.mw-body h5, .mw-body h6 {
+	font-size: 1.0em;
+}
+
+.mw-body p {
+	margin: 0;
+}
+
+.mw-body p + p {
+	text-indent: 2em;
+}
+
+.mw-editsection {
+	/* hide more non-content */
+	display: none;
+}
+
+table.ambox {
+	margin-bottom: 1em;
+}
+
+dl dd {
+	/* center definitions (most useful for display equations) */
+	text-align: center;
+}
+
+span.texhtml {
+	/* revert inline math to default font */
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+/* Table of Contents */
+
+#toc, .toc {
+	border: none;
+	padding: 0;
+	background: none;
+	font-size: inherit;
+	/* span 100% of the width */
+	display: block;
+}
+
+.mw-body #toc h2, .mw-body .toc h2 {
+	font-family: inherit;
+	font-size: 1.5em;
+}
+
+#toc h2, .toc h2 {
+	display: block;
+}
+
+#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle {
+	text-align: left;
+}
+
+.toctoggle {
+	display: none;
+}
+
+/* Figures */
+
+div.tright {
+	margin: 0.5em 0 0.5em 1.5em;
+}
+
+div.tleft {
+	margin: 0.5em 1.5em 0.5em 0;
+}
+
+/* Code */
+
+.mw-code {
+	margin: 1em 0;
+}
+
+pre, code {
+	font-family: "Latin Modern Mono", monospace !important;
+}
+
+sup {
+	text-indent: 0;
+}
+</style>
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
+<h2 id="séance-4--exercices">Séance 4 : Exercices</h2>
+<ol>
+<li><a href="#sql">REV-1 : Du SQL à SQLAlchemy</a></li>
+<li><a href="#pagination">REV-2 : Pagination</a></li>
+<li><a href="#liens">REV-3 : Une application faite de liens</a></li>
+<li><a href="#fonctions">APP-1 : Des opérateurs utiles dans les requêtes</a></li>
+<li><a href="#avance">APP-2 : Un affichage avancé de données calculées</a></li>
+<li><a href="#methode">REF-1 : Des méthodes de classe</a></li>
+</ol>
+<h3 id="rev-1--du-sql-à-sqlalchemy-">REV-1 : Du SQL à SQLAlchemy <a id="sql"></a></h3>
+<p>Convertir les requêtes suivantes en requêtes SQLAlchemy:</p>
+<h4 id="filtre-avec-une-seule-condition">Filtre avec une seule condition</h4>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span>
+<span class="hljs-keyword">FROM</span> geography a
+<span class="hljs-keyword">WHERE</span> a.major_aquifers <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Congo Basin&#x27;</span>
+</code></pre>
+<h4 id="filtre-avec-plusieurs-conditions">Filtre avec plusieurs conditions</h4>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span>
+<span class="hljs-keyword">FROM</span> elevation a
+<span class="hljs-keyword">WHERE</span> (a.lowest_point <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Atlantic Ocean 0 m&#x27;</span> <span class="hljs-keyword">OR</span>  a.lowest_point <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Baltic Sea 0 m&#x27;</span>) 
+	<span class="hljs-keyword">AND</span> a.mean_elevation <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>  <span class="hljs-keyword">AND</span> a.mean_elevation <span class="hljs-operator">!=</span> &quot;&quot;
+</code></pre>
+<h4 id="jointure">Jointure</h4>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> 
+<span class="hljs-keyword">FROM</span> country a
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> country_map b <span class="hljs-keyword">on</span> b.id <span class="hljs-operator">=</span> a.id
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> map c <span class="hljs-keyword">on</span> b.map_ref <span class="hljs-operator">=</span> c.name
+</code></pre>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> 
+<span class="hljs-keyword">FROM</span> country a
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> geography b <span class="hljs-keyword">on</span> b.id <span class="hljs-operator">=</span> a.id
+</code></pre>
+<h4 id="sélection-des-champs-ramenés">Sélection des champs ramenés</h4>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> b.name, a.coordinates, a.climate
+<span class="hljs-keyword">FROM</span> geography a
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> country b <span class="hljs-keyword">on</span> b.id <span class="hljs-operator">=</span> a.id 
+<span class="hljs-keyword">WHERE</span> a.major_aquifers <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Congo Basin&#x27;</span>
+</code></pre>
+<h4 id="aggrégations">Aggrégations</h4>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> a.name, <span class="hljs-built_in">count</span>(a.id)
+<span class="hljs-keyword">FROM</span> country a
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> country_resources b <span class="hljs-keyword">on</span> b.id <span class="hljs-operator">=</span> a.id
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> resources c <span class="hljs-keyword">on</span> c.id <span class="hljs-operator">=</span> b.resource
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> a.id
+<span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">count</span>(a.id)<span class="hljs-operator">&gt;</span><span class="hljs-number">10</span>
+</code></pre>
+<h4 id="ordonner-les-résultats">Ordonner les résultats</h4>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> a.name, c.name
+<span class="hljs-keyword">FROM</span> country a
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> country_resources b <span class="hljs-keyword">on</span> b.id <span class="hljs-operator">=</span> a.id
+<span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> resources c <span class="hljs-keyword">on</span> c.id <span class="hljs-operator">=</span> b.resource
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> a.name <span class="hljs-keyword">DESC</span>, c.name <span class="hljs-keyword">ASC</span>
+</code></pre>
+<h3 id="rev-2--pagination-">REV-2 : Pagination <a id="pagination"></a></h3>
+<p>Créer une route Flask <code>/resources/&lt;nom_pays&gt;/&lt;page&gt;</code> affichant les ressources du pays demandé en ajoutant une pagination dans les résultats.</p>
+<h3 id="rev-3--une-application-faite-de-liens-">REV-3 : Une application faite de liens <a id="liens"></a></h3>
+<p>A partir des données du Factbook, créer une application qui contient les routes suivantes (avec de la pagination si besoin, et des liens vers des pages):</p>
+<ul>
+<li><code>/pays</code>: affiche tous les pays</li>
+<li><code>/pays/&lt;nom_pays&gt;</code>: affiche autant de données que possible sur le pays demandé</li>
+<li><code>/continents</code>: affiche tous les continents</li>
+<li><code>/continents/&lt;nom_continent&gt;</code>: affiche tous les pays du continent demandé</li>
+<li><code>/ressources</code>: affiche toutes les ressources</li>
+<li><code>/ressources/&lt;nom_ressource&gt;</code>: affiche les pays qui ont cette ressource</li>
+</ul>
+<h3 id="app-1--des-opérateurs-utiles-dans-les-requêtes-">APP-1 : Des opérateurs utiles dans les requêtes <a id="fonctions"></a></h3>
+<p>Traduire les requêtes SQL suivantes en code requête SQLAlchemy. Les requêtes SQL sont volontairement écrites sur des tables inexistantes, seules les quelques lignes Python sont à écrire, aucune application ou base de données n'est requise.</p>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span>
+<span class="hljs-keyword">FROM</span>   users
+<span class="hljs-keyword">WHERE</span>  name ILIKE <span class="hljs-string">&#x27;%luc%&#x27;</span>
+</code></pre>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span>
+<span class="hljs-keyword">FROM</span>   users
+<span class="hljs-keyword">WHERE</span>  identifiant <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">IN</span> ( <span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">9</span> ) 
+</code></pre>
+<p>Imaginons que la base de données est PostGreSQL:</p>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span>
+<span class="hljs-keyword">FROM</span>   users
+<span class="hljs-keyword">WHERE</span>   REGEXP_MATCHES(name, <span class="hljs-string">&#x27;^.*(L|l)uc.*&#x27;</span>)
+</code></pre>
+<p>Toujours avec PostGreSQL:</p>
+<pre><code class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span>
+<span class="hljs-keyword">FROM</span>   users
+<span class="hljs-keyword">WHERE</span>  REGEXP_REPLACE(name, <span class="hljs-string">&#x27;^.*(L|l)uc.*&#x27;</span>, <span class="hljs-string">&#x27;Simplement Luc&#x27;</span>)
+</code></pre>
+<h3 id="app-2--un-affichage-avancé-de-données-calculées-">APP-2 : Un affichage avancé de données calculées <a id="avance"></a></h3>
+<p>A partir de l'application de REV-3, pour les routes <code>/continents</code> et <code>/ressources</code>, afficher dans le lien &quot;Voir les pays contenant ...&quot; le nombre de pays concernés. Par exemple, il devra être affiché &quot;Voir les 64 pays contenant du petroleum&quot;.</p>
+<h3 id="ref-1--des-méthodes-de-classe-">REF-1 : Des méthodes de classe <a id="methode"></a></h3>
+<p>La création des modèles de base de données avec Flask-SQLAlchemy a permis la création de classes Python, comme <code>Country</code> ou bien <code>Resources</code>. Jusqu'à présent, seules des propriétés de classe sont définies, soit les noms des colonnes de la table en base de données. Dans la séance 6, nous utiliserons les méthodes de classes, c'est à dire des fonctions définies dans les classes. Le but de cet exercice est de mettre progressivement un pied dans les méthodes de classe.</p>
+<p>Pour commencer, créer la méthode <code>get_resourceid()</code> de la classe <code>Resources</code>. En appelant <code>Resources.get_resourceid(&lt;objet_sqlalchemy&gt;)</code>, le résultat suivant devra être retourné: <code>PET</code>.</p>
+<p><em>Exemple</em>:</p>
+<pre><code class="language-python"><span class="hljs-built_in">print</span>(Resources.get_resourceid(Resources.query.<span class="hljs-built_in">filter</span>(Resources.name == <span class="hljs-string">&quot;petroleum&quot;</span>).first()))
+</code></pre>
+<pre><code class="language-bash">PET
+</code></pre>
+<p>Cette première méthode n'est pas très utile. Nous pouvons en créer une deuxième dans la classe <code>Resources</code> pour retourner cette fois la liste des pays qui contiennent cette ressource. Ainsi, <code>Resources.get_pays(&lt;objet_sqlalchemy&gt;)</code> renverra une liste de pays.
+<em>Exemple</em>:</p>
+<pre><code class="language-python"><span class="hljs-built_in">print</span>(Resources.get_pays( Resources.query.<span class="hljs-built_in">filter</span>(Resources.name == <span class="hljs-string">&#x27;feldspar&#x27;</span>).first()))
+</code></pre>
+<pre><code class="language-bash">[<span class="hljs-string">&#x27;Angola&#x27;</span>, <span class="hljs-string">&#x27;Hong Kong&#x27;</span>, <span class="hljs-string">&#x27;France&#x27;</span>, <span class="hljs-string">&#x27;Italy&#x27;</span>, <span class="hljs-string">&#x27;Sweden&#x27;</span>, <span class="hljs-string">&#x27;Turkey&#x27;</span>]
+</code></pre>
+<p>Enfin, on peut remarquer que les valeurs numériques en base de données ne sont pas formattées correctement et ne sont pas exploitables en l'état. prenons le cas de <code>geography.coastline</code>: il y a 205 valeurs différentes, exprimées en chaînes de caractères et dans le format américain.</p>
+<pre><code class="language-bash">998 km
+1,600 km
+0 km (landlocked)
+121 km
+169 km
+37 km
+402 km
+340 km
+965 km
+314 km
+2,450 km
+...
+</code></pre>
+<p>Afin d'exploiter au mieux ces données dans le futur, il serait utile de créer une fonction qui puisse corriger ce svaleurs et ne récupérer que les nombres, pour n'importe quel champ de notre modèle de données.
+<em>Pistes de réflexion</em>:</p>
+<ul>
+<li>la fonction sera utilisée dans plusieurs classes, il ne s'agit donc pas de répéter le code pour chaque champ qui nécessite la transformation</li>
+<li>envisager la création d'un nouveau module <code>utils</code> dans l'application peut être une bonne chose pour y mettre du code factorisé qui n'est pas directement un modèle de base de données</li>
+<li>l'application de la fonction sur les champs de la table de la base de données se fera au travers d'une méthode de classe</li>
+<li>pour l'exercice, utiliser cette nouvelle fonction pour les propriétés de classe suivantes:
+<ul>
+<li><code>Geography.coastline</code></li>
+<li><code>Geography.irrigated_land</code></li>
+<li><code>Boundaries.total</code></li>
+</ul>
+</li>
+<li>voici un exemple du résultat attendu pour <code>Geography.coastline_int(Geography.query.filter(Geography.id == 'bn').first())</code>: <code>121</code>.</li>
+</ul>
+
+        
+        <script async type="text/javascript">
+/* From extension marp-team.marp-vscode */
+(()=>{var G=Object.defineProperty;var d=($,M)=>G($,"name",{value:M,configurable:!0});(()=>{var $={676:(g,f,h)=>{g.exports=h(185)},185:(g,f)=>{"use strict";var h;h={value:!0};const S={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},_="data-marp-auto-scaling-svg",p="data-marp-auto-scaling-container";class c extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const s=d(r=>([n])=>{const{width:e,height:t}=n.contentRect;this[r]={width:e,height:t},this.updateSVGRect()},"e");this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(s("containerSize")),this.wrapperObserver=new ResizeObserver((...r)=>{s("wrapperSize")(...r),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var s,r,n,e,t;this.shadowRoot.innerHTML=`
+<style>
+  svg[${_}] { display: block; width: 100%; height: auto; vertical-align: top; }
+  span[${p}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
+</style>
+<div data-marp-auto-scaling-wrapper>
+  <svg part="svg" ${_}>
+    <foreignObject><span ${p}><slot></slot></span></foreignObject>
+  </svg>
+</div>
+    `.split(/\n\s*/).join(""),this.wrapper=(s=this.shadowRoot.querySelector("div[data-marp-auto-scaling-wrapper]"))!==null&&s!==void 0?s:void 0;const i=this.svg;this.svg=(n=(r=this.wrapper)===null||r===void 0?void 0:r.querySelector(`svg[${_}]`))!==null&&n!==void 0?n:void 0,this.svg!==i&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=(t=(e=this.svg)===null||e===void 0?void 0:e.querySelector(`span[${p}]`))!==null&&t!==void 0?t:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:s}=this;s&&(s.style.display="inline",requestAnimationFrame(()=>{s.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(s){const r=d(()=>{const n=(()=>{const e=s.getPropertyValue("--preserve-aspect-ratio");return e?e.trim():`x${(({textAlign:t,direction:i})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if(t==="start"||t==="end"){let a=i==="rtl";return t==="end"&&(a=!a),a?"Max":"Min"}return"Mid"})(s)}YMid meet`})();n!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=n,this.updateSVGRect()),s===this.svgComputedStyle&&requestAnimationFrame(r)},"t");r()}updateSVGRect(){var s,r,n,e,t,i,a;let m=Math.ceil((r=(s=this.containerSize)===null||s===void 0?void 0:s.width)!==null&&r!==void 0?r:0);const v=Math.ceil((e=(n=this.containerSize)===null||n===void 0?void 0:n.height)!==null&&e!==void 0?e:0);this.dataset.downscaleOnly!==void 0&&(m=Math.max(m,(i=(t=this.wrapperSize)===null||t===void 0?void 0:t.width)!==null&&i!==void 0?i:0));const y=(a=this.svg)===null||a===void 0?void 0:a.querySelector(":scope > foreignObject");if(y?.setAttribute("width",`${m}`),y?.setAttribute("height",`${v}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${m} ${v}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=m<=0||v<=0?"0":""),this.container){const k=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=k.startsWith("xmid")||k.startsWith("xmax")?"auto":"0",this.container.style.marginRight=k.startsWith("xmi")?"auto":"0"}}}d(c,"n");const o=d((l,{attrs:s={},style:r})=>class extends l{constructor(...n){super(...n);for(const[e,t]of Object.entries(s))this.hasAttribute(e)||this.setAttribute(e,t);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const n=r?`<style>:host { ${r} }</style>`:"";let e="<slot></slot>";const{autoScaling:t}=this.dataset;t!==void 0&&(e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${t==="downscale-only"?"data-downscale-only":""}>${e}</marp-auto-scaling>`),this.shadowRoot.innerHTML=n+e}},"s");let u;const b=Symbol(),q="marpitSVGPolyfill:setZoomFactor,",V=Symbol();let A,C;function P(l){const s=typeof l=="object"&&l.target||document,r=typeof l=="object"?l.zoom:l;window[V]||(Object.defineProperty(window,V,{configurable:!0,value:!0}),window.addEventListener("message",({data:e,origin:t})=>{if(t===window.origin)try{if(e&&typeof e=="string"&&e.startsWith(q)){const[,i]=e.split(","),a=Number.parseFloat(i);Number.isNaN(a)||(C=a)}}catch(i){console.error(i)}}));let n=!1;Array.from(s.querySelectorAll("svg[data-marpit-svg]"),e=>{var t,i,a,m;e.style.transform||(e.style.transform="translateZ(0)");const v=r||C||e.currentScale||1;A!==v&&(A=v,n=v);const y=e.getBoundingClientRect(),{length:k}=e.children;for(let L=0;L<k;L+=1){const x=e.children[L];if(x.getScreenCTM){const w=x.getScreenCTM();if(w){const N=(i=(t=x.x)===null||t===void 0?void 0:t.baseVal.value)!==null&&i!==void 0?i:0,W=(m=(a=x.y)===null||a===void 0?void 0:a.baseVal.value)!==null&&m!==void 0?m:0,B=x.children.length;for(let T=0;T<B;T+=1){const j=x.children[T];if(j.tagName==="SECTION"){const{style:O}=j;O.transformOrigin||(O.transformOrigin=`${-N}px ${-W}px`),O.transform=`scale(${v}) matrix(${w.a}, ${w.b}, ${w.c}, ${w.d}, ${w.e-y.left}, ${w.f-y.top}) translateZ(0.0001px)`;break}}}}}}),n!==!1&&Array.from(s.querySelectorAll("iframe"),({contentWindow:e})=>{e?.postMessage(`${q}${n}`,window.origin==="null"?"*":window.origin)})}d(P,"p");function z({once:l=!1,target:s=document}={}){const r=navigator.vendor==="Apple Computer, Inc."?[P]:[];let n=!l;const e=d(()=>{for(const t of r)t({target:s});n&&window.requestAnimationFrame(e)},"s");return e(),()=>{n=!1}}d(z,"h"),A=1,C=void 0;const E=Symbol(),H=d((l=document)=>{if(typeof window>"u")throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const t=window[b];t||customElements.define("marp-auto-scaling",c);for(const i of Object.keys(S)){const a=`marp-${i}`,m=S[i].proto();u!=null||(u=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),u&&m!==HTMLElement?t||customElements.define(a,o(m,{style:S[i].style}),{extends:i}):(t||customElements.define(a,o(HTMLElement,S[i])),e.querySelectorAll(`${i}[is="${a}"]`).forEach(v=>{v.outerHTML=v.outerHTML.replace(new RegExp(`^<${i}`,"i"),`<${a}`).replace(new RegExp(`</${i}>$`,"i"),`</${a}>`)}))}window[b]=!0})(l),l[E])return l[E];const s=z({target:l}),r=d(()=>{s(),delete l[E]},"a"),n=Object.assign(r,{cleanup:r,update:()=>H(l)});return Object.defineProperty(l,E,{configurable:!0,value:n}),n},"m");f.browser=H,h=H,h=z}},M={};function R(g){var f=M[g];if(f!==void 0)return f.exports;var h=M[g]={exports:{}};return $[g](h,h.exports,R),h.exports}d(R,"__webpack_require__");var F={};(()=>{"use strict";var g=R(676);function f(){let p,c;const o=d(()=>{const u=document.getElementById("__marp-vscode"),b=!!u;p!==b?(document.body.classList.toggle("marp-vscode",b),b?c=(0,g.browser)():(c?.cleanup(),c=void 0),p=b):b&&c?.update(),p?(u&&h(u),S()):_()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(o,100)),window.addEventListener("vscode.markdown.updateContent",o),o()}d(f,"preview");const h=d(p=>{p.querySelectorAll("[is]").forEach(c=>{if(c.nodeName.includes("-")||document.createElement(c.nodeName).constructor!==c.constructor)return;const{outerHTML:u}=c;c.outerHTML=u,console.debug("[marp-vscode] Custom element has been upgraded forcibly:",u.slice(0,u.indexOf(">")+1||void 0))})},"forceUpgradeCustomElements"),S=d(()=>{const p=document.querySelectorAll("style:not(#__marp-vscode-style):not(#_defaultStyles):not([data-marp-vscode-body])"),c=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');p.forEach(o=>{o.closest("#__marp-vscode")||(o.dataset.marpVscodeBody=o.textContent??"",o.textContent="")}),c.forEach(o=>{if(o.closest("#__marp-vscode"))return;const{href:u}=o;o.dataset.marpVscodeHref=u,o.removeAttribute("href")})},"removeStyles"),_=d(()=>{const p=document.querySelectorAll("style[data-marp-vscode-body]"),c=document.querySelectorAll("link[data-marp-vscode-href]");p.forEach(o=>{o.textContent=o.dataset.marpVscodeBody||"",delete o.dataset.marpVscodeBody}),c.forEach(o=>{o.href=o.dataset.marpVscodeHref||"",delete o.dataset.marpVscodeHref})},"restoreStyles");f()})()})();})();
+
+</script>
+
+    </body>
+    </html>
