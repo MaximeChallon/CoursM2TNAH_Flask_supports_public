@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension marp-team.marp-vscode */
+#__marp-vscode {
+  all: initial;
+}
+
+/* Override VS Code default CSS rules reverting to initial
+   https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
+body.marp-vscode {
+  padding: 0;
+}
+
+body.marp-vscode img {
+  max-width: unset;
+  max-height: unset;
+}
+
+body.marp-vscode a,
+body.marp-vscode a:hover,
+body.marp-vscode code {
+  color: unset;
+}
+
+body.marp-vscode blockquote {
+  background: unset;
+  border-color: unset;
+}
+
+@media screen {
+  body.marp-vscode {
+    overflow-y: scroll;
+  }
+
+  #__marp-vscode [data-marp-vscode-slide-wrapper] {
+    margin: 20px;
+  }
+
+  #__marp-vscode svg[data-marpit-svg] {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+    display: block;
+    margin: 0;
+  }
+
+  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+  #code-csp-warning {
+    background-color: #444;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+    color: white;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    margin: 16px;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    word-wrap: break-word;
+  }
+
+  #code-csp-warning:hover {
+    text-decoration: none;
+    background-color: #007acc;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  }
+}
+
+@media print {
+  body.marp-vscode #code-csp-warning {
+    display: none;
+  }
+}
+
+/* From extension ms-toolsai.jupyter */
+/* These classnames are inherited from bootstrap, but are present in most notebook renderers */
+
+.alert {
+    width: auto;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.alert > *:last-child {
+    margin-bottom: 0;
+}
+#preview > .alert:last-child {
+    /* Prevent this being set to zero by the default notebook stylesheet */
+    padding-bottom: 1em;
+}
+
+.alert-success {
+    /* Note there is no suitable color available, so we just copy "info" */
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-info {
+    background-color: var(--theme-info-background);
+    color: var(--theme-info-foreground);
+}
+.alert-warning {
+    background-color: var(--theme-warning-background);
+    color: var(--theme-warning-foreground);
+}
+.alert-danger {
+    background-color: var(--theme-error-background);
+    color: var(--theme-error-foreground);
+}
+
+/* From extension ms-toolsai.jupyter-renderers */
+/*
+Found that the colors of the alert boxes do not change with different themes in jlab.
+Hence hardcoded them here.
+*/
+
+.alert {
+    width: auto;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+	border-style: solid;
+	border-width: 1px;
+}
+.alert > *:last-child {
+    margin-bottom: 0;
+}
+#preview > .alert:last-child {
+    /* Prevent this being set to zero by the default notebook stylesheet */
+    padding-bottom: 1em;
+}
+
+.alert-success {
+    background-color: rgb(200,230,201);
+    color: rgb(27,94,32);
+}
+.alert-info {
+    background-color: rgb(178,235,242);
+    color: rgb(0,96,100);
+}
+.alert-warning {
+    background-color: rgb(255,224,178);
+    color: rgb(230,81,0);
+}
+.alert-danger {
+    background-color: rgb(255,205,210);
+    color: rgb(183,28,28);
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        <style>
+/*********************************************************************
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+For more information, please refer to <http://unlicense.org/>
+*********************************************************************/
+
+/*
+WiTeX
+https://github.com/AndrewBelt/WiTeX
+*/
+
+
+/* Latin Modern (LaTeX default) font */
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
+}
+
+/* Page Layout */
+
+body {
+	background: none;
+	font-size: 14pt;
+	font-family: 'Latin Modern Roman', serif;
+	color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	border: none;
+	font-weight: bold;
+}
+
+a, a:visited {
+	color: #a00;
+}
+
+a.new, a.new:visited {
+	color: black;
+}
+
+ul {
+	list-style: disc;
+}
+
+#mw-navigation, #mw-page-base, #mw-head-base, #footer {
+	/* nuke everything but the content */
+	display: none;
+}
+
+/* Content Box */
+
+.mw-body {
+	max-width: 720px;
+	margin: 1em auto;
+}
+
+#content, div#content {
+	border: none;
+	color: black;
+}
+
+#firstHeading, #siteSub {
+	text-align: center;
+	display: block;
+}
+
+#siteSub {
+	margin-top: -0.5em;
+	margin-bottom: 4em;
+}
+
+/* Article Body */
+
+.mw-body-content {
+	font-size: inherit;
+	text-align: justify;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	line-height: 1.5em;
+}
+
+.mw-body {
+	padding: 2em 0;
+}
+
+.mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6, div#content h1, div#content h2, div#content #firstHeading {
+	font-family: inherit;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.mw-body h1, div#content h1 {
+	font-size: 2em;
+}
+
+.mw-body h2, div#content h2 {
+	font-size: 1.5em;
+}
+
+.mw-body h3 {
+	font-size: 1.2em;
+}
+
+.mw-body h4 {
+	font-size: 1.1em;
+}
+
+.mw-body h5, .mw-body h6 {
+	font-size: 1.0em;
+}
+
+.mw-body p {
+	margin: 0;
+}
+
+.mw-body p + p {
+	text-indent: 2em;
+}
+
+.mw-editsection {
+	/* hide more non-content */
+	display: none;
+}
+
+table.ambox {
+	margin-bottom: 1em;
+}
+
+dl dd {
+	/* center definitions (most useful for display equations) */
+	text-align: center;
+}
+
+span.texhtml {
+	/* revert inline math to default font */
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+/* Table of Contents */
+
+#toc, .toc {
+	border: none;
+	padding: 0;
+	background: none;
+	font-size: inherit;
+	/* span 100% of the width */
+	display: block;
+}
+
+.mw-body #toc h2, .mw-body .toc h2 {
+	font-family: inherit;
+	font-size: 1.5em;
+}
+
+#toc h2, .toc h2 {
+	display: block;
+}
+
+#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle {
+	text-align: left;
+}
+
+.toctoggle {
+	display: none;
+}
+
+/* Figures */
+
+div.tright {
+	margin: 0.5em 0 0.5em 1.5em;
+}
+
+div.tleft {
+	margin: 0.5em 1.5em 0.5em 0;
+}
+
+/* Code */
+
+.mw-code {
+	margin: 1em 0;
+}
+
+pre, code {
+	font-family: "Latin Modern Mono", monospace !important;
+}
+
+sup {
+	text-indent: 0;
+}
+</style>
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
+<h2 id="séance-5--interactions-avec-les-utilisateurs-les-formulaires">Séance 5 : Interactions avec les utilisateurs: les formulaires</h2>
+<ol>
+<li><a href="#get">Des formulaires de recherche avec la méthode GET</a>
+<ol>
+<li><a href="#simple">Une recherche simple fulltext</a></li>
+<li><a href="#avancee">Une recherche avancée multicritères</a></li>
+</ol>
+</li>
+<li><a href="#post">Des formulaires agissant sur les données avec POST</a>
+<ol>
+<li><a href="#get_post">Transformer la route GET <code>/recherche</code> en route POST <code>/recherche</code></a></li>
+<li><a href="#inserer">Insérer des données avec un formulaire</a></li>
+</ol>
+</li>
+</ol>
+<p>Jusqu'à présent, le site Web obtenu n'est que peu interactif et reste statique; il ne fait qu'afficher des données. Une des fonctionnalités attendues pour ce type de site peut être la recherche dans les données, ou bien la création ou la modification de ces dernières. Pour ce faire, c'est le formulaire qui sera entre l'utilisateur et la base de données, il permettra de formaliser les actions à effectuer sur les données.</p>
+<p>Les formulaires HTML ont été vus en cours HTML; quant aux méthodes HTTP <code>GET</code> et  <code>POST</code> qui nous sera utile de distinguer à partir de maintenant, se référer à la <a href="../Seance1/Seance1_sommaire.html">Séance 1</a>.</p>
+<h3 id="des-formulaires-de-recherche-avec-la-méthode-get-">Des formulaires de recherche avec la méthode GET <a id="get"></a></h3>
+<h4 id="une-recherche-simple-fulltext-">Une recherche simple fulltext <a id="simple"></a></h4>
+<p>Pour commencer, nous allons ajouter une barre de recherche dans la barre de navigation du site. Cette recherche s'effectuera sur plusieurs champs de la base de données:</p>
+<ul>
+<li><code>country.name</code></li>
+<li><code>country.Introduction</code></li>
+<li><code>country.type</code></li>
+<li>relation entre <code>country</code> et  <code>map</code></li>
+<li>relation entre <code>country</code> et  <code>resources</code></li>
+</ul>
+<p>De même que SQLAlchemy est une librairie utilisée dans Flask-SQLAlchemy pour interagir avec une base de données, il existe une librairie Flask-WTF utilisant WTForms pour la gestion des formulaires. Cette librairie facilitera le développement en:</p>
+<ul>
+<li>définissant des classes pour chaque formulaire</li>
+<li>rendant le formulaire avec peu de HTML à écrire côté developpeur</li>
+<li>personnalisant facilement le comportement du formulaire</li>
+</ul>
+<p>D'abord, il faut installer Flask-WTF:</p>
+<pre><code class="language-bash">pip install flask-wtf
+</code></pre>
+<p>Les classes représentant nos formulaires sont finalement des modèles au même titre que celles de la base de données. C'est pour cela que l'on peut les ranger dans <code>app/models/</code> dans un fichier <code>formulaires.py</code>. Ces modèles détermineront quelles données nos formulaires vont capturer, de même que les logiques de validation de ces dernières.</p>
+<p>Comme pour toute extension, Flask-WTF nécessite une petite configuration initiale avec 2 variables d'environnement supplémentaires:</p>
+<ul>
+<li><code>WTF_CSRF_ENABLE</code>: par défaut à True; si elle est activée, cette option permet de se prémunir contre l'attaque <a href="https://fr.wikipedia.org/wiki/Cross-site_request_forgery">&quot;Cross-site request forgery&quot;</a>. Sauf exception, cette option doit être toujours activée pour assurer la sécurité des échanges entre le client et le serveur, et la sécurité du site.</li>
+<li><code>SECRET_KEY</code> n'est demandé que si l'option précédente est activée; cette clé créé un jeton cryptographique qui servira à valider les formulaires</li>
+</ul>
+<p>Avant d'utiliser pleinement Flask-WTF, créons d'abord un formulaire simple en pur HTML:</p>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!-- templates/partials/formulaires/recherche_rapide.html--&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-inline&quot;</span>  <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;{{url_for(&#x27;recherche_rapide&#x27;)}}&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-control&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;search&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;chaine&quot;</span> 
+        <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Recherche&quot;</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Recherche&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn btn-outline-info&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span>&gt;</span>Rechercher<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</code></pre>
+<p>Commentaires:</p>
+<ul>
+<li>Ce template sera à insérer par la suite dans la navbar du <code>conteneur.html</code>. Il a l'avantage d'être également insérable n'importe où dans le site.</li>
+<li>lors du clic sur la recherche, Flask appelera la fonction <code>recherche_rapide</code></li>
+</ul>
+<p>A présent, il faut développer la fonction de rendu <code>recherche_rapide</code> dans les routes:</p>
+<pre><code class="language-python"><span class="hljs-comment"># app/routes/generales.py</span>
+
+...
+<span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> request
+
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/recherche_rapide&quot;</span></span>)</span>
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/recherche_rapide/&lt;int:page&gt;&quot;</span></span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">recherche_rapide</span>(<span class="hljs-params">page=<span class="hljs-number">1</span></span>):
+    chaine =  request.args.get(<span class="hljs-string">&quot;chaine&quot;</span>, <span class="hljs-literal">None</span>)
+
+    <span class="hljs-keyword">if</span> chaine:
+        resources = db.session.execute(<span class="hljs-string">&quot;&quot;&quot;select a.id from country a 
+            inner join country_resources b on b.id = a.id 
+            inner join resources c on c.name = b.resource and (c.name like &#x27;%&quot;&quot;&quot;</span>+chaine+<span class="hljs-string">&quot;&quot;&quot;%&#x27; or  c.id like &#x27;%&quot;&quot;&quot;</span>+chaine+<span class="hljs-string">&quot;&quot;&quot;%&#x27;)
+            &quot;&quot;&quot;</span>).fetchall()
+        
+        maps = db.session.execute(<span class="hljs-string">&quot;&quot;&quot;select a.id from country a 
+            inner join country_map b on b.id = a.id 
+            inner join map  c on c.name = b.map_ref and (c.name like &#x27;%&quot;&quot;&quot;</span>+chaine+<span class="hljs-string">&quot;&quot;&quot;%&#x27; or  c.id like &#x27;%&quot;&quot;&quot;</span>+chaine+<span class="hljs-string">&quot;&quot;&quot;%&#x27;)
+            &quot;&quot;&quot;</span>).fetchall()
+
+        resultats = Country.query.\
+            <span class="hljs-built_in">filter</span>(
+                or_(
+                    Country.name.ilike(<span class="hljs-string">&quot;%&quot;</span>+chaine+<span class="hljs-string">&quot;%&quot;</span>),
+                    Country.<span class="hljs-built_in">type</span>.ilike(<span class="hljs-string">&quot;%&quot;</span>+chaine+<span class="hljs-string">&quot;%&quot;</span>),
+                    Country.Introduction.ilike(<span class="hljs-string">&quot;%&quot;</span>+chaine+<span class="hljs-string">&quot;%&quot;</span>),
+                    Country.<span class="hljs-built_in">id</span>.in_([r.<span class="hljs-built_in">id</span> <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> resources] + [m.<span class="hljs-built_in">id</span> <span class="hljs-keyword">for</span> m <span class="hljs-keyword">in</span> maps])
+                )
+            ).\
+            distinct(Country.name).\
+            order_by(Country.name).\
+            paginate(page=page, per_page=app.config[<span class="hljs-string">&quot;PAYS_PER_PAGE&quot;</span>])
+    <span class="hljs-keyword">else</span>:
+        resultats = <span class="hljs-literal">None</span>
+        
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/resultats_recherche_pays.html&quot;</span>, 
+            sous_titre= <span class="hljs-string">&quot;Recherche | &quot;</span> + chaine, 
+            donnees=resultats,
+            requete=chaine)
+</code></pre>
+<p>Commentaires:</p>
+<ul>
+<li><code>flask</code> permet d'accéder aux paramètres d'URL avec la méthode <code>request</code> quand la méthode HTTP est GET comme ici (c'est la méthode par défaut): dans <code>/recherche_rapide?chaine=p</code>, nous accéderons alors à la valeur du paramètre <code>chaine</code> grâce à <code>request.args.get(&quot;chaine&quot;, None)</code></li>
+<li>la condition sur la présence de la chaîne est nécessaire pour éviter les erreurs sur un <code>chaine is None</code></li>
+<li>la sortie souhaitée est un objet <code>Paginate</code> comprenant tous les objets <code>Country</code> correspondant à la recherche effectuée</li>
+<li>les filtres sur les jointures many-to-many sont très difficiles à faire avec Flask et SQLAlchemy; pour contourner cette difficulté, l'une des solutions est de faire comme pour <code>maps</code> ou <code>resources</code> ci-dessus, à savoir récupérer les objets souhaités, puis filtrer sur <code>Country.id.in_</code> grâce aux identifiants des objets remontés</li>
+<li>dans <code>render_template</code>, il est important de renvoyer la requête effectuée pour gérer les redirections dans la pagination : il ne s'agit pas de renvoyer à l'URL <code>localhost:5000/recherche_rapide/2</code> alors que l'URL souhaitée est <code>localhost:5000/recherche_rapide/2?chaine=France</code></li>
+</ul>
+<p>Enfin, la dernière étape est de construire le template <code>pages/resultats_recherche_pays.html</code>:</p>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!--templates/pages/resultats_recherche_pays.html--&gt;</span>
+
+...
+{{pays.Introduction.replace(requete, &#x27;<span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;background-color: yellow;&quot;</span>&gt;</span>{}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>&#x27;.format(requete)) | safe}}
+...
+ <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{{ url_for(&#x27;recherche_rapide&#x27;, page=page_num, chaine=requete) }}&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn btn-dark&quot;</span>&gt;</span>
+...
+</code></pre>
+<p>Construire ce template est aisé et ne nécessite quasiment aucune modification par rapport à celui des pays:</p>
+<ul>
+<li><code>.replace(requete, '&lt;span style=&quot;background-color: yellow;&quot;&gt;{}&lt;/span&gt;'.format(requete))</code> permet de mettre en évidence le terme recherché par l'utilisateur</li>
+<li>par défaut, Jinja considère tout ce qui lui arrive en argument comme une chaîne de caractères pour des raisons de sécurité (notamment éviter les injections dans le code); ainsi, la <code>&lt;span&gt;</code> ajoutée n'est pas interprétée en HTML; pour cela, il faut forcer Jinja2 à le faire avec <code>safe</code></li>
+<li>selon la <a href="https://flask.palletsprojects.com/en/2.2.x/api/#flask.Flask.url_for">documentation SQLAlchemy sur url_for</a>, tout argument ajouté dans <code>url_for</code> et non déclaré dans la fonction de route est ajouté comme argument dans l'URL: c'est donc ce qu'il nous faut pour réexprimer la requête de l'utilisateur dans les liens de la pagination</li>
+</ul>
+<p>Le résultat obtenu est plutôt satisfaisant : <a href="http://localhost:5000/recherche_rapide/2?chaine=France">http://localhost:5000/recherche_rapide/2?chaine=France</a>:
+<img src="./img/get_simple_resultat.jpg" alt="h:300px"></p>
+<p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance5/get_simple">Seance5/get_simple</a></p>
+<h4 id="une-recherche-avancées-multicritères-">Une recherche avancées multicritères <a id="avancee"></a></h4>
+<p>Créons désormais un nouveau formulaire plus complet pour filtrer précisément les pays; il contiendra:</p>
+<ul>
+<li>un champ texte de recherche sur le nom du pays</li>
+<li>un champ de sélection d'une ressource possédée par les pays</li>
+<li>un champ de sélection d'un continent d'appartenance aux pays recherchés</li>
+</ul>
+<p>Cette partie est une transition entre la recherche GET précédente dans la barre de navigation, et la recherche POST qui suit. Elle a pour but d'aborder une première fois les classes <code>Form</code> avant de les utiliser en POST.</p>
+<p>Pour utiliser <code>Flask-WTF</code> installé dans la partie précédente, il faut d'abord créer la classe du formulaire de recherche dans <code>app/models/formulaires.py</code>:</p>
+<pre><code class="language-python"><span class="hljs-comment"># app/models/formulaires.py</span>
+
+<span class="hljs-keyword">from</span> flask_wtf <span class="hljs-keyword">import</span> FlaskForm
+<span class="hljs-keyword">from</span> wtforms <span class="hljs-keyword">import</span> StringField, SelectField
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Recherche</span>(<span class="hljs-title class_ inherited__">FlaskForm</span>):
+    nom_pays = StringField(<span class="hljs-string">&quot;nom_pays&quot;</span>, validators=[])
+    ressources = SelectField(<span class="hljs-string">&#x27;ressources&#x27;</span>, choices=[(<span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>),(<span class="hljs-string">&#x27;PET&#x27;</span>, <span class="hljs-string">&#x27;pétrole&#x27;</span>), (<span class="hljs-string">&#x27;GOL&#x27;</span>, <span class="hljs-string">&#x27;or&#x27;</span>)])
+    continents = SelectField(<span class="hljs-string">&#x27;continents&#x27;</span>, choices=[(<span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>),(<span class="hljs-string">&#x27;Europe&#x27;</span>, <span class="hljs-string">&#x27;Europe&#x27;</span>), (<span class="hljs-string">&#x27;Asia&#x27;</span>, <span class="hljs-string">&#x27;Asie&#x27;</span>), (<span class="hljs-string">&#x27;Africa&#x27;</span>, <span class="hljs-string">&#x27;Afrique&#x27;</span>)])
+</code></pre>
+<p>Commentaires:</p>
+<ul>
+<li><code>wtforms</code> est une dépendance de <code>flask-wtf</code> et a été téléchargé automatiquement lors du <code>pip install flask-wtf</code></li>
+<li>un formulaire = une classe</li>
+<li>chaque classe de formulaire hérite de <code>flask-wtf.FlaskForm</code></li>
+<li><code>StringField</code> indique le type d'<code>input</code> HTML désiré; ici, ce sera un <code>input</code> de type text. Son <code>id/name</code> sera &quot;nom_pays&quot;: le rendu sera alors <code>&lt;input type=&quot;text&quot; id=&quot;nom_pays&quot; name=&quot;nom_pays&quot;&gt;</code></li>
+<li><code>validators</code> reste ici vide, nous verrons plus tard comment appliquer des vérifications sur les données fournies dans le formulaire</li>
+<li><code>SelectField</code> rend le HTML suivant : <code>&lt;select id=&quot;ressources&quot; name=&quot;ressources&quot;&gt;&lt;option value=&quot;&quot;&gt;&lt;/option&gt;&lt;option value=&quot;PET&quot;&gt;pétrole&lt;/option&gt;&lt;option selected value=&quot;GOL&quot;&gt;or&lt;/option&gt;&lt;/select&gt;</code></li>
+<li>dans les <code>SelectField</code>, une première entrée vide est insérée afin de ne pas sélectionner par défaut le premier tuple de la liste</li>
+</ul>
+<p>Il faut maintenant créer le template du formulaire, ce qui est très simple grâce à Flask-WTF:</p>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!--templates/partials/formulaires.html--&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;{{url_for(&#x27;recherche&#x27;)}}&quot;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;get&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;recherche&quot;</span>&gt;</span>
+    {{ form.hidden_tag() }}
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;nom_pays&quot;</span>&gt;</span>Nom du pays recherché <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        {{ form.nom_pays(class_=&quot;form-control&quot;, placeholder_=&quot;Pays&quot;) }}
+        <span class="hljs-tag">&lt;<span class="hljs-name">small</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;nom_pays&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-text text-muted&quot;</span>&gt;</span>Entrer tout ou partie du nom d&#x27;un
+            pays<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;ressources&quot;</span>&gt;</span>Ressource possédées<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        {{ form.ressources(class_=&quot;form-control&quot;) }}
+        <span class="hljs-tag">&lt;<span class="hljs-name">small</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;ressources&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-text text-muted&quot;</span>&gt;</span>Sélectionner une ressource possédée dans le pays<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;continents&quot;</span>&gt;</span>Continent d&#x27;appartenance<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        {{ form.continents(class_=&quot;form-control&quot;) }}
+        <span class="hljs-tag">&lt;<span class="hljs-name">small</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;continents&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-text text-muted&quot;</span>&gt;</span>Sélectionner un 
+            continent<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Rechercher&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</code></pre>
+<p>Commentaires:</p>
+<ul>
+<li>Ce template sera à insérer par la suite plusieurs fois dans la page <code>recherche.html</code> pour éviter la répétition de code, d'où sa présence dans un template à part qui sera inclus dans <code>recherche.html</code></li>
+<li>un objet <code>form</code> instancié depuis la classe <code>Recherche()</code> est attendu dans ce template; dans la fonction (i.e. la route) qui rendra ce template, il faudra donc faire attention à bien envoyer cet objet <code>form</code> par la suite</li>
+<li><code>{{ form.hidden_tag() }}</code> est un champ caché implémentant la prévention CSRF indiquée dans la configuration effectuée plus tôt. Nous n'avons rien d'autre à faire (ni dans les templates, ni dans les fonctions de rendu) avec ce champ, Flask-WTF se chargera de tout</li>
+<li><code>{{ form.nom_pays() }}</code> est un champ de l'objet représentant le formulaire: c'est ici le <code>&lt;input&gt;</code> ou le <code>&lt;select&gt;</code></li>
+<li>en se référant à la <a href="https://wtforms.readthedocs.io/en/3.0.x/fields/#wtforms.fields.Field.__call__">documentation de Flask-WTF</a>, nous lisons qu'il est possible d'ajouter des attributs dans les balises selon la syntaxe suivante : <code>field(nomAttribut_=&quot;valeur&quot;)</code>; cette possibilité est très utile pour définir le style du champ</li>
+</ul>
+<p>Pour insérer ce formulaire <code>templates/partials/formulaires/recherche.html</code> dans <code>templates/pages/resultats_recherche.html</code>, il suffit d'effectuer un <code>include</code> avec Jinja2:</p>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!-- templates/pages/resultats_recherche.html --&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-sm-4&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-sm-4&quot;</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">data-toggle</span>=<span class="hljs-string">&quot;collapse&quot;</span> <span class="hljs-attr">data-target</span>=<span class="hljs-string">&quot;#collapseExample&quot;</span> <span class="hljs-attr">aria-expanded</span>=<span class="hljs-string">&quot;false&quot;</span>
+            <span class="hljs-attr">aria-controls</span>=<span class="hljs-string">&quot;collapseExample&quot;</span>&gt;</span>
+            Effectuer une recherche <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa-solid fa-caret-down&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;collapse show&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;collapseExample&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card card-body&quot;</span>&gt;</span>
+                {% include &quot;partials/formulaires/recherche.html&quot; %}
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-sm-4&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p>A ce stade du développement, nous avons un affichage complet du formulaire qui est possible afin d'obtenir le résultat suivant:
+<img src="img/get_avance_etape1.jpg" alt="h:200px"></p>
+<p>A présent, il est nécessaire d'écrire la route correspondante qui aura deux comportements:</p>
+<ul>
+<li>si aucun formulaire n'est soumis par l'utilisateur (ce qui est le cas quand on atterrit sur <code>/recherche</code> depuis la barre de navigation), la page <code>/recherche</code> affichera alors seulement le formulaire</li>
+<li>si un formulaire est soumis, alors il réapparaîtra en étant prérempli, et seront affichées en-dessous les éventuels résultats de la recherche</li>
+</ul>
+<p>Nous obtiendrons alors le résultat suivant (une recherche sur le nom de pays contenant <code>an</code>, le pays ayant du pétrole et se trouvant en Asie):
+<img src="img/get_avance_resultat.jpg" alt="h:200px"></p>
+<p>La route <code>/recherche</code> en GET peut s'écrire ainsi:</p>
+<pre><code class="language-python"><span class="hljs-comment"># generaleses.py /recherche</span>
+
+<span class="hljs-keyword">from</span> ..app <span class="hljs-keyword">import</span> app, db
+<span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> render_template, request
+<span class="hljs-keyword">from</span> ..models.factbook <span class="hljs-keyword">import</span> Country
+<span class="hljs-keyword">from</span> ..models.formulaires <span class="hljs-keyword">import</span> Recherche
+<span class="hljs-keyword">from</span> ..utils.transformations <span class="hljs-keyword">import</span>  clean_arg
+
+...
+
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/recherche&quot;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>]</span>)</span>
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/recherche/&lt;int:page&gt;&quot;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>]</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">recherche</span>(<span class="hljs-params">page=<span class="hljs-number">1</span></span>):
+    form = Recherche() 
+
+    <span class="hljs-comment"># récupération des éventuels arguments de l&#x27;URL qui seraient le signe de l&#x27;envoi d&#x27;un formulaire</span>
+    nom_pays =  clean_arg(request.args.get(<span class="hljs-string">&quot;nom_pays&quot;</span>, <span class="hljs-literal">None</span>))
+    ressource =  clean_arg(request.args.get(<span class="hljs-string">&quot;ressources&quot;</span>, <span class="hljs-literal">None</span>))
+    continent =  clean_arg(request.args.get(<span class="hljs-string">&quot;continents&quot;</span>, <span class="hljs-literal">None</span>))
+
+    <span class="hljs-comment"># initialisation des données de retour dans le cas où il n&#x27;y ait pas de requête</span>
+    donnees = []
+
+    <span class="hljs-comment"># si l&#x27;un des champs de recherche a une valeur, alors cela veut dire que le formulaire a été rempli et qu&#x27;il faut lancer une recherche </span>
+    <span class="hljs-comment"># dans les données</span>
+    <span class="hljs-keyword">if</span> nom_pays  <span class="hljs-keyword">or</span> continent <span class="hljs-keyword">or</span> ressource:
+        <span class="hljs-comment"># initialisation de la recherche; en fonction de la présence ou nom d&#x27;un filtre côté utilisateur, nous effectuerons des filtres SQLAlchemy,</span>
+        <span class="hljs-comment"># ce qui signifie que nous pouvons jouer ici plusieurs filtres d&#x27;affilée</span>
+        query_results = Country.query
+
+        <span class="hljs-keyword">if</span> nom_pays:
+            query_results = query_results.<span class="hljs-built_in">filter</span>(Country.name.ilike(<span class="hljs-string">&quot;%&quot;</span>+nom_pays.lower()+<span class="hljs-string">&quot;%&quot;</span>))
+        
+        <span class="hljs-keyword">if</span> ressource:
+            resource = db.session.execute(<span class="hljs-string">&quot;&quot;&quot;select a.id from country a 
+                inner join country_resources b on b.id = a.id and b.resource  == &#x27;&quot;&quot;&quot;</span>+ressource+<span class="hljs-string">&quot;&quot;&quot;&#x27;
+                &quot;&quot;&quot;</span>).fetchall()
+            query_results = query_results.<span class="hljs-built_in">filter</span>(Country.<span class="hljs-built_in">id</span>.in_([r.<span class="hljs-built_in">id</span> <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> resource] ))
+        
+        <span class="hljs-keyword">if</span> continent:
+            <span class="hljs-built_in">map</span> = db.session.execute(<span class="hljs-string">&quot;&quot;&quot;select a.id from country a 
+                inner join country_map b on b.id = a.id and map_ref == &#x27;&quot;&quot;&quot;</span>+continent+<span class="hljs-string">&quot;&quot;&quot;&#x27;
+                &quot;&quot;&quot;</span>).fetchall()
+            query_results = query_results.<span class="hljs-built_in">filter</span>(Country.<span class="hljs-built_in">id</span>.in_([m.<span class="hljs-built_in">id</span> <span class="hljs-keyword">for</span> m <span class="hljs-keyword">in</span> <span class="hljs-built_in">map</span>] ))
+        
+        donnees = query_results.order_by(Country.name).paginate(page=page, per_page=app.config[<span class="hljs-string">&quot;PAYS_PER_PAGE&quot;</span>])
+
+        <span class="hljs-comment"># renvoi des filtres de recherche pour préremplissage du formulaire</span>
+        form.nom_pays.data = nom_pays
+        form.continents.data = continent
+        form.ressources.data = ressource
+
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/resultats_recherche.html&quot;</span>, 
+            sous_titre= <span class="hljs-string">&quot;Recherche&quot;</span> , 
+            donnees=donnees,
+            form=form)
+</code></pre>
+<p>Décrivons-la:</p>
+<ul>
+<li>pour gérer la pagination, la fonction <code>recherche()</code> est en réalité appelée pour les routes <code>/recherche</code> et <code>/recherche/&lt;int:page&gt;</code>; par défaut, le numéro de page est mis à 1</li>
+<li>au tout début est instancié le formulaire <code>Recherche()</code> dans <code>form</code></li>
+<li>il faut ensuite récupérer les paramètres d'URL qui ont pu être transmis; la petite fonction <code>clean_arg()</code> permet de transformer une valeur vide en <code>None</code> pour le besoin de la suite de notre route</li>
+<li>puisqu'il n'y a pas forcément de paramètres d'URL (dans le cas d'une arrivée sur cette page via la barre de navigation par exemple), et par conséquent par de recherche effectuée, il est nécessaire d'initialiser une liste de résultats vide dans la variable <code>donnees</code>; ainsi, dans le template, <code>donnees</code> sera systématiquement une liste et ne provoquera pas d'erreurs</li>
+<li>si au moins un des paramètres n'est pas vide, alors une recherche peut être effectuée dans les données; si plusieurs paramètres sont non null, alors les filtres vont s'empiler</li>
+<li>la recherche est initialisée avec <code>Country.query</code> dans <code>query_results</code>; on se souvient que <code>query</code> peut avoir autant de méthodes que nécessaire, donc dans notre cas autant de <code>filter</code> que nous avons de parmètres non null:
+<ul>
+<li>pour le nom du pays, nous nous contenterons de faire un <code>ilike</code> autour de la chaîne reçue en paramètre</li>
+<li>pour le filtre sur les ressources, nous utiliserons un <code>in_</code> sur les <code>id</code> des <code>Country</code> récupérés dans une autre requête en amont:
+<ul>
+<li>1 - Sélection des pays qui ont la ressource passée en paramètre: les résultats sont stockés dans la variable <code>resource</code></li>
+<li>2 - Application à <code>query_results</code> d'un filtre sur les identifiants de pays présents dans la variables <code>resource</code> précédemment définie</li>
+</ul>
+</li>
+<li>pour le filtre sur le continent, la même approche que pour les ressources est utilisée</li>
+</ul>
+</li>
+<li>pour obtenir la liste finale des résultats dans <code>donnees</code>, il faut appliquer plusieurs autres méthodes sur <code>query_results</code> (qui comprend désormais le <code>Country.query()</code> initial, et au moins un des trois <code>filter()</code> effectué ensuite):
+<ul>
+<li><code>order_by</code> sur le nom du pays pour améliorer l'affichage</li>
+<li><code>paginate</code></li>
+</ul>
+</li>
+<li>il est commun, lors d'une recherche avec un formulaire, de faciliter l'expérience utilisateur en préremplissant le formulaire avec les valeurs qu'il nous avait envoyé; pour cela, l'utilisation de Flask-WTF est très utile puisque l'on peut assigner des valeurs à des champs spécifiques du formulaire avec la syntaxe <code>formulaire.NomChampFormulaire.data</code></li>
+</ul>
+<p>Enfin, le template <code>pages/resultats_recherche.html</code> utilise l'argument <code>donnees</code> passé en variable de la route. Ce template n'a rien de nouveau par rapport à ce qui a été vu jusqu'à présent, il s'agit de l'affichage de données depuis un <code>paginate</code>.</p>
+<p>Pour résumer, plusieurs étapes sont nécessaires pour développer et intégrer un formulaire dans une route avec Flask
+<img src="img/diagramme_get_avance.png" alt=""></p>
+<p><em>Note</em> : Le développement d'une route GET avec un formaulaire et un CSRF-token en clair n'est pas conventionnel. Nous l'avons ici fait afin d'aller progressivement vers le développement d'une route POST.</p>
+<p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance5/get_avance">Seance5/get_avance</a></p>
+<h3 id="des-formulaires-agissant-sur-les-données-avec-post-">Des formulaires agissant sur les données avec POST <a id="post"></a></h3>
+<p>Maintenant que nous avons la page <code>/recherche</code> développée, nous allons l'adapter pour qu'elle fonctionne avec la méthode HTTP POST. Cela permettra d'insérer ensuite, via une autre route, des données dans la base de données.</p>
+<h4 id="transformer-la-route-get-recherche-en-route-post-recherche">Transformer la route GET <code>/recherche</code> en route POST <code>/recherche</code><a id="get_post"></a></h4>
+<p>Peu de modifications sont nécessaires pour avoir un formulaire envoyant ses données en POST, et pour pouvoir les récupérer dans la route Flask.</p>
+<p>D'abord, il faut modifier la méthode indiquée dans le <code>method</code> de la balise <code>&lt;form&gt;</code> dans le template <code>partials/formulaires/recherche.html</code>.</p>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!-- partials/formulaires/recherche.html --&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;{{url_for(&#x27;recherche&#x27;)}}&quot;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;post&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;recherche&quot;</span>&gt;</span>
+</code></pre>
+<p>Ensuite, il faut modifier la route dans les méthodes HTTP qu'elle accepte, et dans la manière dont sont récupérées les données du formulaire.</p>
+<pre><code class="language-python"><span class="hljs-comment"># routes/generales.py /recherche</span>
+
+...
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/recherche&quot;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span>
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/recherche/&lt;int:page&gt;&quot;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span>
+...
+</code></pre>
+<p>Le simple ajout de la méthode POST dans les <code>methods</code> de <code>app.route</code> suffit. En revanche, désormais, puisque les valeurs ne sont plus transmises dans l'URL (conséquence du <code>method=&quot;post&quot;</code> dans le formulaire), il faut les récupérer autrement. Les modifications sont les suivantes et n'affectent que deux lignes de code:</p>
+<pre><code class="language-python"><span class="hljs-comment"># routes/generales.py /recherche</span>
+
+...
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">recherche</span>(<span class="hljs-params">page=<span class="hljs-number">1</span></span>):
+    form = Recherche() 
+
+    <span class="hljs-comment"># initialisation des données de retour dans le cas où il n&#x27;y ait pas de requête</span>
+    donnees = []
+
+    <span class="hljs-keyword">if</span> form.validate_on_submit():
+        <span class="hljs-comment"># récupération des éventuels arguments de l&#x27;URL qui seraient le signe de l&#x27;envoi d&#x27;un formulaire</span>
+        nom_pays =  clean_arg(request.form.get(<span class="hljs-string">&quot;nom_pays&quot;</span>, <span class="hljs-literal">None</span>))
+        ressource =  clean_arg(request.form.get(<span class="hljs-string">&quot;ressources&quot;</span>, <span class="hljs-literal">None</span>))
+        continent =  clean_arg(request.form.get(<span class="hljs-string">&quot;continents&quot;</span>, <span class="hljs-literal">None</span>))
+
+        <span class="hljs-comment"># si l&#x27;un des champs de recherche a une valeur, alors cela veut dire que le formulaire a été rempli et qu&#x27;il faut lancer une recherche </span>
+        <span class="hljs-comment"># dans les données</span>
+        <span class="hljs-keyword">if</span> nom_pays  <span class="hljs-keyword">or</span> continent <span class="hljs-keyword">or</span> ressource:
+            <span class="hljs-comment"># initialisation de la recherche; en fonction de la présence ou nom d&#x27;un filtre côté utilisateur, nous effectuerons des filtres SQLAlchemy,</span>
+            <span class="hljs-comment"># ce qui signifie que nous pouvons jouer ici plusieurs filtres d&#x27;affilée</span>
+            query_results = Country.query
+
+            <span class="hljs-keyword">if</span> nom_pays:
+                query_results = query_results.<span class="hljs-built_in">filter</span>(Country.name.ilike(<span class="hljs-string">&quot;%&quot;</span>+nom_pays.lower()+<span class="hljs-string">&quot;%&quot;</span>))
+            
+            <span class="hljs-keyword">if</span> ressource:
+                resource = db.session.execute(<span class="hljs-string">&quot;&quot;&quot;select a.id from country a 
+                    inner join country_resources b on b.id = a.id and b.resource  == &#x27;&quot;&quot;&quot;</span>+ressource+<span class="hljs-string">&quot;&quot;&quot;&#x27;
+                    &quot;&quot;&quot;</span>).fetchall()
+                query_results = query_results.<span class="hljs-built_in">filter</span>(Country.<span class="hljs-built_in">id</span>.in_([r.<span class="hljs-built_in">id</span> <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> resource] ))
+            
+            <span class="hljs-keyword">if</span> continent:
+                <span class="hljs-built_in">map</span> = db.session.execute(<span class="hljs-string">&quot;&quot;&quot;select a.id from country a 
+                    inner join country_map b on b.id = a.id and map_ref == &#x27;&quot;&quot;&quot;</span>+continent+<span class="hljs-string">&quot;&quot;&quot;&#x27;
+                    &quot;&quot;&quot;</span>).fetchall()
+                query_results = query_results.<span class="hljs-built_in">filter</span>(Country.<span class="hljs-built_in">id</span>.in_([m.<span class="hljs-built_in">id</span> <span class="hljs-keyword">for</span> m <span class="hljs-keyword">in</span> <span class="hljs-built_in">map</span>] ))
+            
+            donnees = query_results.order_by(Country.name).paginate(page=page, per_page=app.config[<span class="hljs-string">&quot;PAYS_PER_PAGE&quot;</span>])
+
+            <span class="hljs-comment"># renvoi des filtres de recherche pour préremplissage du formulaire</span>
+            form.nom_pays.data = nom_pays
+            form.continents.data = continent
+            form.ressources.data = ressource
+...
+</code></pre>
+<p>Commentaires:</p>
+<ul>
+<li>l'initialisation de <code>donnees</code> doit se faire au tout début, en dehors du traitement du formulaire</li>
+<li><code>if form.validate_on_submit()</code> permet de ne lancer la suite que si un formulaire est soumis par l'utilisateur (<code>validate_on_submit()</code> est une méthode de FlaskForm): l'exécution de la recherche, et le préremplissage du formulaire, ne se feront que si cette condition est remplie; à noter: si l'une des contraintes indiquée dans la déclaration du formulaire dans la classe de <code>models/formulaires.py</code> échoue, la condition <code>validate_on_submit</code> renverra False et renverra le formulaire à l'utilisateur pour qu'il puisse le corriger</li>
+</ul>
+<p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance5/post">Seance5/post</a></p>
+<h4 id="insérer-des-données-avec-un-formulaire">Insérer des données avec un formulaire<a id="inserer"></a></h4>
+<p>L'intérêt de POST est de pouvoir transmettre des données sans qu'elles soient en clair dans l'URL. c'est primordial lorsqu'il s'agit de mots de passe ou d'informations personnelles notamment. Nous allons développer une route qui permette d'ajouter un pays dans la base de données. A ce stade du cours, nous avons toutes les connaissances pour le faire. Reprenons la logique présentée dans <a href="#get_avance">la partie get_avance</a> pour le développement.
+<img src="img/diagramme_get_avance.png" alt=""></p>
+<p>Commençons par créer le modèle <code>InsertionPays</code> du formulaire hérité de <code>FlaskForm</code> de la même manière que vu dans la partie précédente:</p>
+<pre><code class="language-python"><span class="hljs-comment"># models/formulaires.py </span>
+
+...
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">InsertionPays</span>(<span class="hljs-title class_ inherited__">FlaskForm</span>):
+    code_pays =  StringField(<span class="hljs-string">&quot;code_pays&quot;</span>, validators=[]) 
+    nom_pays =  StringField(<span class="hljs-string">&quot;nom_pays&quot;</span>, validators=[])
+    <span class="hljs-built_in">type</span> = SelectField(<span class="hljs-string">&#x27;type&#x27;</span>, choices=[(<span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>),(<span class="hljs-string">&#x27;sovereign&#x27;</span>, <span class="hljs-string">&#x27;Souverain&#x27;</span>), (<span class="hljs-string">&#x27;dependency&#x27;</span>, <span class="hljs-string">&#x27;Dépendance&#x27;</span>), (<span class="hljs-string">&#x27;ocean&#x27;</span>, <span class="hljs-string">&#x27;Océan&#x27;</span>), (<span class="hljs-string">&#x27;other&#x27;</span>, <span class="hljs-string">&#x27;Autre&#x27;</span>)])
+    introduction =  TextAreaField(<span class="hljs-string">&quot;code_pays&quot;</span>, validators=[]) 
+    ressources = SelectMultipleField(<span class="hljs-string">&#x27;ressources&#x27;</span>, choices=[(<span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>),(<span class="hljs-string">&#x27;PET&#x27;</span>,<span class="hljs-string">&#x27;petroleum&#x27;</span>),(<span class="hljs-string">&#x27;NAT&#x27;</span>,<span class="hljs-string">&#x27;natural gas&#x27;</span>),...])
+    continent = SelectField(<span class="hljs-string">&#x27;ressources&#x27;</span>, choices=[(<span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>),(<span class="hljs-string">&#x27;Europe&#x27;</span>, <span class="hljs-string">&#x27;Europe&#x27;</span>), (<span class="hljs-string">&#x27;Asia&#x27;</span>, <span class="hljs-string">&#x27;Asie&#x27;</span>),...])
+</code></pre>
+<p>Il faut ensuite créer le template du formulaire HTML, toujours d'une manière identique à ce que nous avons réalisé plus tôt:</p>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!-- partials/formulaires/insertion_pays.html --&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;{{url_for(&#x27;insertion_pays&#x27;)}}&quot;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;post&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;insertion_pays&quot;</span>&gt;</span>
+    {{ form.hidden_tag() }}
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;nom_pays&quot;</span>&gt;</span>Nom du pays <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        {{ form.nom_pays(class_=&quot;form-control&quot;, placeholder_=&quot;Pays&quot;) }}
+        <span class="hljs-tag">&lt;<span class="hljs-name">small</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;nom_pays&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-text text-muted&quot;</span>&gt;</span>Entrer le nom du pays<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;code_pays&quot;</span>&gt;</span>Code du pays <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        {{ form.code_pays(class_=&quot;form-control&quot;, placeholder_=&quot;Code&quot;) }}
+        <span class="hljs-tag">&lt;<span class="hljs-name">small</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;code_pays&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-text text-muted&quot;</span>&gt;</span>Entrer le code du pays<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;type&quot;</span>&gt;</span>Type du pays<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        {{ form.type(class_=&quot;form-control&quot;) }}
+        <span class="hljs-tag">&lt;<span class="hljs-name">small</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;type&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-text text-muted&quot;</span>&gt;</span>Sélectionner le 
+            type du pays<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;introduction&quot;</span>&gt;</span>Description<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        {{ form.introduction(class_=&quot;form-control&quot;) }}
+        <span class="hljs-tag">&lt;<span class="hljs-name">small</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;introduction&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-text text-muted&quot;</span>&gt;</span>Description du pays<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;ressources&quot;</span>&gt;</span>Ressources possédées<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        {{ form.ressources(class_=&quot;form-control&quot;) }}
+        <span class="hljs-tag">&lt;<span class="hljs-name">small</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;ressources&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-text text-muted&quot;</span>&gt;</span>Sélectionner une ou plusieurs ressources possédées par le pays<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;continent&quot;</span>&gt;</span>Continent d&#x27;appartenance<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        {{ form.continent(class_=&quot;form-control&quot;) }}
+        <span class="hljs-tag">&lt;<span class="hljs-name">small</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;continent&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-text text-muted&quot;</span>&gt;</span>Sélectionner un 
+            continent<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Insérer&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</code></pre>
+<p>Jusqu'à présent, il n'y a rien de nouveau par rapport à ce qui a été vu. Il en sera de même pour la route <code>/insertions/pays</code> qui fera appel aux insertions de données via SQLAlchemy:</p>
+<pre><code class="language-python"><span class="hljs-comment"># routes/insertions.py /insertions/pays</span>
+
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/insertions/pays&quot;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">insertion_pays</span>():
+    form = InsertionPays() 
+
+    <span class="hljs-keyword">if</span> form.validate_on_submit():
+        nom_pays =  clean_arg(request.form.get(<span class="hljs-string">&quot;nom_pays&quot;</span>, <span class="hljs-literal">None</span>))
+        code_pays =  clean_arg(request.form.get(<span class="hljs-string">&quot;code_pays&quot;</span>, <span class="hljs-literal">None</span>))
+        <span class="hljs-built_in">type</span> =  clean_arg(request.form.get(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-literal">None</span>))
+        introduction =  clean_arg(request.form.get(<span class="hljs-string">&quot;introduction&quot;</span>, <span class="hljs-literal">None</span>))
+        ressources =  clean_arg(request.form.getlist(<span class="hljs-string">&quot;ressources&quot;</span>, <span class="hljs-literal">None</span>))
+        continent =  clean_arg(request.form.get(<span class="hljs-string">&quot;continent&quot;</span>, <span class="hljs-literal">None</span>))
+
+        nouveau_pays = Country(<span class="hljs-built_in">id</span>=code_pays, Introduction=introduction, name=nom_pays, <span class="hljs-built_in">type</span> = <span class="hljs-built_in">type</span>)
+
+        <span class="hljs-keyword">for</span> ressource <span class="hljs-keyword">in</span> ressources:
+            nouveau_pays.resources.append(Resources.query.<span class="hljs-built_in">filter</span>(Resources.<span class="hljs-built_in">id</span> == ressource).first())
+
+        nouveau_pays.maps.append(Map.query.<span class="hljs-built_in">filter</span>(Map.name==continent).first())
+
+        db.session.add(nouveau_pays)
+        db.session.commit()
+    
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/insertion_pays.html&quot;</span>, 
+            sous_titre= <span class="hljs-string">&quot;Insertion pays&quot;</span> , 
+            form=form)
+</code></pre>
+<p>Commentaires:</p>
+<ul>
+<li>les ressources sont un champ <code>FlaskForm</code> <code>SelectMultipleField</code>, ainsi les données reçues sont du type <code>list</code>. <code>request.form</code> permet de lire la liste entière via <code>getlist</code></li>
+<li>la méthodologie derrière cette route est logique:
+<ul>
+<li>il est nécessaire d'instancier en premier lieu un nouvel objet <code>Country</code> dans la variable <code>nouveau_pays</code></li>
+<li>pour chaque ressource indiquée par l'utilisateur, elle est ajoutée à cet objet en utilisant les relations entre classes SQLAlchemy</li>
+<li>le continent est également ajouté grâce aux relations</li>
+<li>il ne faut pas oublier d'effectuer la transaction SQL complète avec un <code>commit</code> à la fin</li>
+</ul>
+</li>
+</ul>
+<p>Nous l'aurons remarqué, cette nouvelle route a été rangée dans un nouveau module python <code>insertions.py</code> dans le package routes. Afin que l'application puisse le prendre en compte, il est nécessaire de l'importer dans <code>app.py</code></p>
+<pre><code class="language-python"><span class="hljs-comment"># app.py </span>
+
+...
+<span class="hljs-keyword">from</span> .routes <span class="hljs-keyword">import</span> generales, insertions
+</code></pre>
+<p>Il ne reste plus qu'a créer le template <code>pages/insertion_pays.html</code>, et à mettre à jour la barre de navigation pour pouvoir accéder à cette nouvelle route.</p>
+<p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance5/insertion">Seance5/insertion</a></p>
+
+        
+        <script async type="text/javascript">
+/* From extension marp-team.marp-vscode */
+(()=>{var F=Object.defineProperty;var d=(E,k)=>F(E,"name",{value:k,configurable:!0});(()=>{var E={676:(b,f,h)=>{b.exports=h(185)},185:(b,f)=>{"use strict";var h;h={value:!0};const S={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},M="data-marp-auto-scaling-wrapper",p="data-marp-auto-scaling-svg",l="data-marp-auto-scaling-container";class o extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const s=d(r=>([n])=>{const{width:e,height:t}=n.contentRect;this[r]={width:e,height:t},this.updateSVGRect()},"e");this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(s("containerSize")),this.wrapperObserver=new ResizeObserver((...r)=>{s("wrapperSize")(...r),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var s,r,n,e,t;this.shadowRoot.innerHTML=`
+<style>
+  svg[${p}] { display: block; width: 100%; height: auto; vertical-align: top; }
+  span[${l}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
+</style>
+<div ${M}>
+  <svg part="svg" ${p}>
+    <foreignObject><span ${l}><slot></slot></span></foreignObject>
+  </svg>
+</div>
+    `.split(/\n\s*/).join(""),this.wrapper=(s=this.shadowRoot.querySelector(`div[${M}]`))!==null&&s!==void 0?s:void 0;const i=this.svg;this.svg=(n=(r=this.wrapper)===null||r===void 0?void 0:r.querySelector(`svg[${p}]`))!==null&&n!==void 0?n:void 0,this.svg!==i&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=(t=(e=this.svg)===null||e===void 0?void 0:e.querySelector(`span[${l}]`))!==null&&t!==void 0?t:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:s}=this;s&&(s.style.display="inline",requestAnimationFrame(()=>{s.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(s){const r=d(()=>{const n=(()=>{const e=s.getPropertyValue("--preserve-aspect-ratio");return e?e.trim():`x${(({textAlign:t,direction:i})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if(t==="start"||t==="end"){let a=i==="rtl";return t==="end"&&(a=!a),a?"Max":"Min"}return"Mid"})(s)}YMid meet`})();n!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=n,this.updateSVGRect()),s===this.svgComputedStyle&&requestAnimationFrame(r)},"t");r()}updateSVGRect(){var s,r,n,e,t,i,a;let m=Math.ceil((r=(s=this.containerSize)===null||s===void 0?void 0:s.width)!==null&&r!==void 0?r:0);const v=Math.ceil((e=(n=this.containerSize)===null||n===void 0?void 0:n.height)!==null&&e!==void 0?e:0);this.dataset.downscaleOnly!==void 0&&(m=Math.max(m,(i=(t=this.wrapperSize)===null||t===void 0?void 0:t.width)!==null&&i!==void 0?i:0));const y=(a=this.svg)===null||a===void 0?void 0:a.querySelector(":scope > foreignObject");if(y?.setAttribute("width",`${m}`),y?.setAttribute("height",`${v}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${m} ${v}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=m<=0||v<=0?"0":""),this.container){const _=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=_.startsWith("xmid")||_.startsWith("xmax")?"auto":"0",this.container.style.marginRight=_.startsWith("xmi")?"auto":"0"}}}d(o,"s");const u=d((c,{attrs:s={},style:r})=>class extends c{constructor(...n){super(...n);for(const[e,t]of Object.entries(s))this.hasAttribute(e)||this.setAttribute(e,t);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const n=r?`<style>:host { ${r} }</style>`:"";let e="<slot></slot>";const{autoScaling:t}=this.dataset;t!==void 0&&(e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${t==="downscale-only"?"data-downscale-only":""}>${e}</marp-auto-scaling>`),this.shadowRoot.innerHTML=n+e}},"r");let g;const q=Symbol(),V="marpitSVGPolyfill:setZoomFactor,",z=Symbol();let A,C;function N(c){const s=typeof c=="object"&&c.target||document,r=typeof c=="object"?c.zoom:c;window[z]||(Object.defineProperty(window,z,{configurable:!0,value:!0}),window.addEventListener("message",({data:e,origin:t})=>{if(t===window.origin)try{if(e&&typeof e=="string"&&e.startsWith(V)){const[,i]=e.split(","),a=Number.parseFloat(i);Number.isNaN(a)||(C=a)}}catch(i){console.error(i)}}));let n=!1;Array.from(s.querySelectorAll("svg[data-marpit-svg]"),e=>{var t,i,a,m;e.style.transform||(e.style.transform="translateZ(0)");const v=r||C||e.currentScale||1;A!==v&&(A=v,n=v);const y=e.getBoundingClientRect(),{length:_}=e.children;for(let L=0;L<_;L+=1){const x=e.children[L];if(x.getScreenCTM){const w=x.getScreenCTM();if(w){const W=(i=(t=x.x)===null||t===void 0?void 0:t.baseVal.value)!==null&&i!==void 0?i:0,B=(m=(a=x.y)===null||a===void 0?void 0:a.baseVal.value)!==null&&m!==void 0?m:0,G=x.children.length;for(let T=0;T<G;T+=1){const P=x.children[T];if(P.tagName==="SECTION"){const{style:O}=P;O.transformOrigin||(O.transformOrigin=`${-W}px ${-B}px`),O.transform=`scale(${v}) matrix(${w.a}, ${w.b}, ${w.c}, ${w.d}, ${w.e-y.left}, ${w.f-y.top}) translateZ(0.0001px)`;break}}}}}}),n!==!1&&Array.from(s.querySelectorAll("iframe"),({contentWindow:e})=>{e?.postMessage(`${V}${n}`,window.origin==="null"?"*":window.origin)})}d(N,"h");function j({once:c=!1,target:s=document}={}){const r=navigator.vendor==="Apple Computer, Inc."?[N]:[];let n=!c;const e=d(()=>{for(const t of r)t({target:s});n&&window.requestAnimationFrame(e)},"s");return e(),()=>{n=!1}}d(j,"g"),A=1,C=void 0;const $=Symbol(),H=d((c=document)=>{if(typeof window>"u")throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const t=window[q];t||customElements.define("marp-auto-scaling",o);for(const i of Object.keys(S)){const a=`marp-${i}`,m=S[i].proto();g!=null||(g=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),g&&m!==HTMLElement?t||customElements.define(a,u(m,{style:S[i].style}),{extends:i}):(t||customElements.define(a,u(HTMLElement,S[i])),e.querySelectorAll(`${i}[is="${a}"]`).forEach(v=>{v.outerHTML=v.outerHTML.replace(new RegExp(`^<${i}`,"i"),`<${a}`).replace(new RegExp(`</${i}>$`,"i"),`</${a}>`)}))}window[q]=!0})(c),c[$])return c[$];const s=j({target:c}),r=d(()=>{s(),delete c[$]},"n"),n=Object.assign(r,{cleanup:r,update:()=>H(c)});return Object.defineProperty(c,$,{configurable:!0,value:n}),n},"v");f.browser=H,h=H,h=j}},k={};function R(b){var f=k[b];if(f!==void 0)return f.exports;var h=k[b]={exports:{}};return E[b](h,h.exports,R),h.exports}d(R,"__webpack_require__");var Z={};(()=>{"use strict";var b=R(676);function f(){let p,l;const o=d(()=>{const u=document.getElementById("__marp-vscode"),g=!!u;p!==g?(document.body.classList.toggle("marp-vscode",g),g?l=(0,b.browser)():(l?.cleanup(),l=void 0),p=g):g&&l?.update(),p?(u&&h(u),S()):M()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(o,100)),window.addEventListener("vscode.markdown.updateContent",o),o()}d(f,"preview");const h=d(p=>{p.querySelectorAll("[is]").forEach(l=>{if(l.nodeName.includes("-")||document.createElement(l.nodeName).constructor!==l.constructor)return;const{outerHTML:u}=l;l.outerHTML=u,console.debug("[marp-vscode] Custom element has been upgraded forcibly:",u.slice(0,u.indexOf(">")+1||void 0))})},"forceUpgradeCustomElements"),S=d(()=>{const p=document.querySelectorAll("style:not(#__marp-vscode-style):not(#_defaultStyles):not([data-marp-vscode-body])"),l=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');p.forEach(o=>{o.closest("#__marp-vscode")||(o.dataset.marpVscodeBody=o.textContent??"",o.textContent="")}),l.forEach(o=>{if(o.closest("#__marp-vscode"))return;const{href:u}=o;o.dataset.marpVscodeHref=u,o.removeAttribute("href")})},"removeStyles"),M=d(()=>{const p=document.querySelectorAll("style[data-marp-vscode-body]"),l=document.querySelectorAll("link[data-marp-vscode-href]");p.forEach(o=>{o.textContent=o.dataset.marpVscodeBody||"",delete o.dataset.marpVscodeBody}),l.forEach(o=>{o.href=o.dataset.marpVscodeHref||"",delete o.dataset.marpVscodeHref})},"restoreStyles");f()})()})();})();
+
+</script>
+
+    </body>
+    </html>
