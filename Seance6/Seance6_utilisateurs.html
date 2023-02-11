@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension marp-team.marp-vscode */
+#__marp-vscode {
+  all: initial;
+}
+
+/* Override VS Code default CSS rules reverting to initial
+   https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
+body.marp-vscode {
+  padding: 0;
+}
+
+body.marp-vscode img {
+  max-width: unset;
+  max-height: unset;
+}
+
+body.marp-vscode a,
+body.marp-vscode a:hover,
+body.marp-vscode code {
+  color: unset;
+}
+
+body.marp-vscode blockquote {
+  background: unset;
+  border-color: unset;
+}
+
+@media screen {
+  body.marp-vscode {
+    overflow-y: scroll;
+  }
+
+  #__marp-vscode [data-marp-vscode-slide-wrapper] {
+    margin: 20px;
+  }
+
+  #__marp-vscode svg[data-marpit-svg] {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+    display: block;
+    margin: 0;
+  }
+
+  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+  #code-csp-warning {
+    background-color: #444;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+    color: white;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    margin: 16px;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    word-wrap: break-word;
+  }
+
+  #code-csp-warning:hover {
+    text-decoration: none;
+    background-color: #007acc;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  }
+}
+
+@media print {
+  body.marp-vscode #code-csp-warning {
+    display: none;
+  }
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        <style>
+/*********************************************************************
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+For more information, please refer to <http://unlicense.org/>
+*********************************************************************/
+
+/*
+WiTeX
+https://github.com/AndrewBelt/WiTeX
+*/
+
+
+/* Latin Modern (LaTeX default) font */
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
+}
+
+/* Page Layout */
+
+body {
+	background: none;
+	font-size: 14pt;
+	font-family: 'Latin Modern Roman', serif;
+	color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	border: none;
+	font-weight: bold;
+}
+
+a, a:visited {
+	color: #a00;
+}
+
+a.new, a.new:visited {
+	color: black;
+}
+
+ul {
+	list-style: disc;
+}
+
+#mw-navigation, #mw-page-base, #mw-head-base, #footer {
+	/* nuke everything but the content */
+	display: none;
+}
+
+/* Content Box */
+
+.mw-body {
+	max-width: 720px;
+	margin: 1em auto;
+}
+
+#content, div#content {
+	border: none;
+	color: black;
+}
+
+#firstHeading, #siteSub {
+	text-align: center;
+	display: block;
+}
+
+#siteSub {
+	margin-top: -0.5em;
+	margin-bottom: 4em;
+}
+
+/* Article Body */
+
+.mw-body-content {
+	font-size: inherit;
+	text-align: justify;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	line-height: 1.5em;
+}
+
+.mw-body {
+	padding: 2em 0;
+}
+
+.mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6, div#content h1, div#content h2, div#content #firstHeading {
+	font-family: inherit;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.mw-body h1, div#content h1 {
+	font-size: 2em;
+}
+
+.mw-body h2, div#content h2 {
+	font-size: 1.5em;
+}
+
+.mw-body h3 {
+	font-size: 1.2em;
+}
+
+.mw-body h4 {
+	font-size: 1.1em;
+}
+
+.mw-body h5, .mw-body h6 {
+	font-size: 1.0em;
+}
+
+.mw-body p {
+	margin: 0;
+}
+
+.mw-body p + p {
+	text-indent: 2em;
+}
+
+.mw-editsection {
+	/* hide more non-content */
+	display: none;
+}
+
+table.ambox {
+	margin-bottom: 1em;
+}
+
+dl dd {
+	/* center definitions (most useful for display equations) */
+	text-align: center;
+}
+
+span.texhtml {
+	/* revert inline math to default font */
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+/* Table of Contents */
+
+#toc, .toc {
+	border: none;
+	padding: 0;
+	background: none;
+	font-size: inherit;
+	/* span 100% of the width */
+	display: block;
+}
+
+.mw-body #toc h2, .mw-body .toc h2 {
+	font-family: inherit;
+	font-size: 1.5em;
+}
+
+#toc h2, .toc h2 {
+	display: block;
+}
+
+#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle {
+	text-align: left;
+}
+
+.toctoggle {
+	display: none;
+}
+
+/* Figures */
+
+div.tright {
+	margin: 0.5em 0 0.5em 1.5em;
+}
+
+div.tleft {
+	margin: 0.5em 1.5em 0.5em 0;
+}
+
+/* Code */
+
+.mw-code {
+	margin: 1em 0;
+}
+
+pre, code {
+	font-family: "Latin Modern Mono", monospace !important;
+}
+
+sup {
+	text-indent: 0;
+}
+</style>
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
+<h2 id="séance-6--gestion-des-utilisateurs">Séance 6 : Gestion des utilisateurs</h2>
+<ol>
+<li><a href="#creation">Création des utilisateurs</a></li>
+<li><a href="#connexion">Connexion</a></li>
+<li><a href="#deconnexion">Déconnexion</a></li>
+<li><a href="#obligatoire">Rendre obligatoire la connexion sur une route</a></li>
+</ol>
+<p>Créer et gérer des utilisateurs sur un site est courant et presque indispensable désormais. Ce cours se contentera d'apporter les bases de la gestion utilisateurs avec uniquement un prénom et un mot de passe. Rajouter d'autres attributs pourra facilement être fait ultérieurement une fois la méthodologie acquise.</p>
+<p>Avant toutes choses, le modèle de la base de données actuellement utilisée pour le Factbook ne contient pas de tables pour la gestion utilisateurs. Deux solutions s'offrent alors:</p>
+<ul>
+<li>on peut considérer qu'il est nécessaire de séparer les métadonnées du Factbook des données personnelles des utilisateurs; dans ce cas (qui est le meilleur mais plus compliqué à mettre en place dans ce cours), il faudrait créer et brancher une seconde base de données à l'application</li>
+<li>on peut ajouter une table <code>users</code> dans la base de données (c'est ce que nous ferons)</li>
+</ul>
+<p>Pour ajouter la table, exécuter dans un éditeru SQL la requête suivante:</p>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> &quot;users&quot; (
+	&quot;id&quot;	<span class="hljs-type">INTEGER</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+	&quot;prenom&quot;	TEXT <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+	&quot;password&quot;	TEXT <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+	<span class="hljs-keyword">PRIMARY</span> KEY(&quot;id&quot; AUTOINCREMENT)
+);
+</code></pre>
+<p>Vous pouvez sinon utiliser la base de données <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/blob/master/factbook_users.sqlite">factbook_users.sqlite</a>. Dans ce cas, il faut penser à changer dans le fichier <code>.env</code> le nom de la base de données et son chemin.</p>
+<h3 id="création-des-utilisateurs">Création des utilisateurs<a id="creation"></a></h3>
+<p>Comme pour les modèles de base de données ou les modèles de formulaires, les utilisateurs vont utiliser une méthode que l'on connaît déjà.</p>
+<p><img src="img/diagramme_creation_user.png" alt=""></p>
+<p>La première étape est la création de la class <code>Users</code> dans le module <code>models/users.py</code>. Grâce à la requête SQL ci-dessus, on en déduit les attributs de classe suivants:</p>
+<pre><code class="language-python"><span class="hljs-comment"># models/users.py</span>
+
+<span class="hljs-keyword">from</span> ..app <span class="hljs-keyword">import</span> app, db
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Users</span>(db.Model):
+    __tablename__ = <span class="hljs-string">&quot;users&quot;</span>
+
+    <span class="hljs-built_in">id</span> = db.Column(db.Integer, unique=<span class="hljs-literal">True</span>, nullable=<span class="hljs-literal">False</span>, primary_key=<span class="hljs-literal">True</span>, autoincrement=<span class="hljs-literal">True</span>)
+    prenom = db.Column(db.Text, nullable=<span class="hljs-literal">False</span>)
+    password = db.Column(db.String(<span class="hljs-number">100</span>), nullable=<span class="hljs-literal">False</span>)
+</code></pre>
+<p>Adossons à cette classe une méthode statique (avec le décorateur <code>@staticmethod</code>), qui nous permettra de créer facilement un utilisateur ainsi : <code>User.ajout(&quot;jean&quot;, &quot;mot de passe&quot;)</code>. L'avantage de la méthode statique est qu'elle n'a pas besoin d'un objet <code>User()</code> existant pour fonctionner. On iteragit donc avec la classe sans que l'objet lui-même existe. On l'appele statique car elle n'est pas liée à une instance, contrairement aux méthodes classiques.</p>
+<pre><code class="language-python"><span class="hljs-comment"># models/users.py</span>
+<span class="hljs-keyword">from</span> werkzeug.security <span class="hljs-keyword">import</span> generate_password_hash
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Users</span>(db.Model):
+	...
+
+<span class="hljs-meta">	@staticmethod</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">ajout</span>(<span class="hljs-params">prenom, password</span>):
+        erreurs = []
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> prenom:
+            erreurs.append(<span class="hljs-string">&quot;Le prénom est vide&quot;</span>)
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> password <span class="hljs-keyword">or</span> <span class="hljs-built_in">len</span>(password) &lt; <span class="hljs-number">6</span>:
+            erreurs.append(<span class="hljs-string">&quot;Le mot de passe est vide ou trop court&quot;</span>)
+
+        unique = Users.query.<span class="hljs-built_in">filter</span>(
+            db.or_(Users.prenom == prenom)
+        ).count()
+        <span class="hljs-keyword">if</span> unique &gt; <span class="hljs-number">0</span>:
+            erreurs.append(<span class="hljs-string">&quot;Le prénom existe déjà&quot;</span>)
+
+        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(erreurs) &gt; <span class="hljs-number">0</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>, erreurs
+        
+        utilisateur = Users(
+            prenom=prenom,
+            password=generate_password_hash(password)
+        )
+
+        <span class="hljs-keyword">try</span>:
+            db.session.add(utilisateur)
+            db.session.commit()
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>, utilisateur
+        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> erreur:
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>, [<span class="hljs-built_in">str</span>(erreur)]
+</code></pre>
+<p>Commentaires:</p>
+<ul>
+<li>il est nécessaire de vérifier qu'aucun utilisateur similaire n'existe déjà dans la base de données. C'est le rôle de <code>if unique &gt; 0</code>. Ici la clé n'est que le prénom, il faut bien entendu dans un contexte réel effectuer cette vérification sur une adresse mail par exemple</li>
+<li>il ne faut <strong>surtout pas</strong> stocker les mots de passe en clair pour des raisons évidentes de sécurité. Flask, grâce à une de ses dépendences &quot;Werkzeug&quot;, offre une méthode <code>generate_password_hash</code> qui va, grâce à la chaîne de caractères fournit par l'utilisateur et à du sel, générate un hash que l'on pourra stcoker dans la base de données. Le seul moyen de retrouver la valeur du mot de passe sera d'avoir le bon sel et le bon mot de passe.</li>
+</ul>
+<p><em>A propos du sel</em> Pour fonctionner, generate_password_hash a besoin d'une variable <code>SECRET_KEY</code> que l'on définit dans <code>.env</code> et dans <code>config.py</code>. Cette clé secrète doit être unique, non devinable et le plus complexe possible. ATtention, ne pas changer sa valeur durant la vie de l'application, sinon tout ce qui aura été hashé par l'application deviendra introuvable.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># .env</span>
+
+SECRET_KEY=duselnondevinableetunique
+</code></pre>
+<pre><code class="language-python"><span class="hljs-comment"># config.py</span>
+
+...
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Config</span>():
+    ...
+    SECRET_KEY = os.environ.get(<span class="hljs-string">&quot;SECRET_KEY&quot;</span>)
+</code></pre>
+<p>Maintenant que le modèle de <code>users</code> est fait et que sa méthode <code>ajout</code> a été développé, il faut désormais créer ce qui permettra d'exécuter cette méthode <code>ajout</code>, c'est à dire une route, qui renverra un formulaire permettant de saisir un prénom et un mot de passe.</p>
+<p><img src="img/resultat_ajout.jpg" alt=""></p>
+<p>Il faut débuter par la création du FlaskForm:</p>
+<pre><code class="language-python"><span class="hljs-comment"># models/formulaires.py</span>
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">AjoutUtilisateur</span>(<span class="hljs-title class_ inherited__">FlaskForm</span>):
+    prenom = StringField(<span class="hljs-string">&quot;prenom&quot;</span>, validators=[])
+    password = PasswordField(<span class="hljs-string">&quot;password&quot;</span>, validators=[])
+</code></pre>
+<p>On découvre ici le <code>PasswordField</code> de Flask-WTF: il permettra de cacher le mot de passe saisi par des étoiles.</p>
+<p>Ensuite, il faut créer la route <code>ajout_utilisateur</code>:</p>
+<pre><code class="language-python"><span class="hljs-comment">#routes/users.py</span>
+
+<span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> url_for, render_template, redirect, request, flash
+<span class="hljs-keyword">from</span> ..models.users <span class="hljs-keyword">import</span> Users
+<span class="hljs-keyword">from</span> ..models.formulaires <span class="hljs-keyword">import</span> AjoutUtilisateur
+<span class="hljs-keyword">from</span> ..utils.transformations <span class="hljs-keyword">import</span>  clean_arg
+<span class="hljs-keyword">from</span> ..app <span class="hljs-keyword">import</span> app, db
+
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/utilisateurs/ajout&quot;</span>, methods=[<span class="hljs-string">&quot;GET&quot;</span>, <span class="hljs-string">&quot;POST&quot;</span>]</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">ajout_utilisateur</span>():
+    form = AjoutUtilisateur()
+
+    <span class="hljs-keyword">if</span> form.validate_on_submit():
+        statut, donnees = Users.ajout(
+            prenom=clean_arg(request.form.get(<span class="hljs-string">&quot;prenom&quot;</span>, <span class="hljs-literal">None</span>)),
+            password=clean_arg(request.form.get(<span class="hljs-string">&quot;password&quot;</span>, <span class="hljs-literal">None</span>))
+        )
+        <span class="hljs-keyword">if</span> statut <span class="hljs-keyword">is</span> <span class="hljs-literal">True</span>:
+            flash(<span class="hljs-string">&quot;Ajout effectué&quot;</span>, <span class="hljs-string">&quot;success&quot;</span>)
+            <span class="hljs-keyword">return</span> redirect(url_for(<span class="hljs-string">&quot;accueil&quot;</span>))
+        <span class="hljs-keyword">else</span>:
+            flash(<span class="hljs-string">&quot;,&quot;</span>.join(donnees), <span class="hljs-string">&quot;error&quot;</span>)
+            <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/ajout_utilisateur.html&quot;</span>, form=form)
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/ajout_utilisateur.html&quot;</span>, form=form)
+</code></pre>
+<p>Commentaire:</p>
+<ul>
+<li>on voit bien ici que l'on appele la méthode statique <code>ajout()</code> de <code>Users</code> sans avoir eu besoin d'instancier <code>Users</code> au préalable.</li>
+</ul>
+<p>Il reste à créer les templates HTML:</p>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!-- templates/partials/formulaires/ajout_utilisateur.html --&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;{{url_for(&#x27;ajout_utilisateur&#x27;)}}&quot;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;post&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ajout_utilisateur&quot;</span>&gt;</span>
+    {{ form.hidden_tag() }}
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;prenom&quot;</span>&gt;</span>Prénom de l&#x27;utilisateur<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        {{ form.prenom(class_=&quot;form-control&quot;, placeholder_=&quot;Prénom&quot;) }}
+        <span class="hljs-tag">&lt;<span class="hljs-name">small</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;prenom&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-text text-muted&quot;</span>&gt;</span>Entrer le prénom de l&#x27;utilisateur<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;password&quot;</span>&gt;</span>Mot de passe<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        {{ form.password(class_=&quot;form-control&quot;, placeholder_=&quot;Mot de passe&quot;) }}
+        <span class="hljs-tag">&lt;<span class="hljs-name">small</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-text text-muted&quot;</span>&gt;</span>Entrer un mot de passe<span class="hljs-tag">&lt;/<span class="hljs-name">small</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Ajouter&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</code></pre>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!-- templates/pages/ajout_utilisateur.html --&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-sm-8&quot;</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">data-toggle</span>=<span class="hljs-string">&quot;collapse&quot;</span> <span class="hljs-attr">data-target</span>=<span class="hljs-string">&quot;#collapseExample&quot;</span> <span class="hljs-attr">aria-expanded</span>=<span class="hljs-string">&quot;false&quot;</span>
+                <span class="hljs-attr">aria-controls</span>=<span class="hljs-string">&quot;collapseExample&quot;</span>&gt;</span>
+                Ajouter un utilisateur <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa-solid fa-caret-down&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;collapse show&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;collapseExample&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card card-body&quot;</span>&gt;</span>
+                    {% include &quot;partials/formulaires/ajout_utilisateur.html&quot; %}
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance6/ajout_utilisateurs">Seance6/ajout_utilisateurs</a></p>
+<h3 id="connexion-">Connexion <a id="connexion"></a></h3>
+<p>Pour gérer les utilisateurs, il existe la librairie <code>Flask-Login</code>, qui va permettre de savoir, très simplement, pour chaque route, si un utilisateur est connecté ou non, quel est son identifiant, etc. Il permet également de créer des sessions utilisateurs et de poser les cookies nécessaires chez le client de manière à ce que la connexion reste établie. Pour l'installer, <code>pip install flask-login</code>.</p>
+<p>Comme pour Flask avec <code>app</code> et Flask-SQLAlchemy avec <code>db</code>, il va falloir instancier Flask-Login dans <code>app.py</code>.</p>
+<pre><code class="language-python"><span class="hljs-comment"># app/app.py </span>
+
+<span class="hljs-keyword">from</span> flask_login <span class="hljs-keyword">import</span> LoginManager
+
+...
+login = LoginManager(app)
+</code></pre>
+<p><code>login</code> va alors proposer 4 méthodes, dont certaines nous seront utiles:</p>
+<ul>
+<li><code>is_authenticated</code>: retourne True si l'utilisateur est connecté</li>
+<li><code>is_active</code>: retourne True si l'utilisateur est connecté et a un compte valide (non suspendu, validé)</li>
+<li><code>is_anonymous</code>: retourne True si l'utilisateur est anonyme</li>
+<li><code>get_id()</code>: retourne une string qui identifie l'utilisateur connecté</li>
+</ul>
+<p>Pour éviter à avoir à développer ces fonctionnalités de cnotre côté, Flask-Login propose le UserMixin, dont on fera hériter la classe <code>Users</code>:</p>
+<pre><code class="language-python"><span class="hljs-comment"># models/users.py</span>
+
+<span class="hljs-keyword">from</span> flask_login <span class="hljs-keyword">import</span> UserMixin
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Users</span>(UserMixin, db.Model):
+	...
+</code></pre>
+<p>Les seules méthodes de classe que nous avons à développer pour permettre à Flask-Login de fonctionner sont les suivantes:</p>
+<pre><code class="language-python"><span class="hljs-comment"># models/users.py</span>
+<span class="hljs-keyword">from</span> ..app <span class="hljs-keyword">import</span> app, db, login
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Users</span>(UserMixin, db.Model):
+	...
+	<span class="hljs-keyword">def</span> <span class="hljs-title function_">get_id</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-keyword">return</span> self.<span class="hljs-built_in">id</span>
+
+<span class="hljs-meta">	@login.user_loader</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_user_by_id</span>(<span class="hljs-params"><span class="hljs-built_in">id</span></span>):
+        <span class="hljs-keyword">return</span> Users.query.get(<span class="hljs-built_in">int</span>(<span class="hljs-built_in">id</span>))
+</code></pre>
+<p>Commentaires:</p>
+<ul>
+<li><code>get_id(self)</code> est une redéfinition de la méthode <code>LoginManager().get_id()</code>. On indique ici quel est l'attribut de Users qu'il faut considérer comme identifiant unique pour Flask-Login</li>
+<li><code>get_user_by_id()</code> permet de récupérer un utilisateur à partir de son identifiant</li>
+</ul>
+<p>On peut désormais utiliser la gestion des utilisateurs. A nouveau, pour permettre à l'utilisateur de se connecter, il faut faire les étapes habituelles de :</p>
+<ul>
+<li>création de la méthode statique <code>Users.identification</code></li>
+<li>création du FlaskForm <code>Connexion</code></li>
+<li>création de la route <code>connexion</code></li>
+<li>création des templates nécessaires</li>
+</ul>
+<p><img src="img/resultat_connexion.jpg" alt=""></p>
+<p>La méthode statique <code>Users.identification(prenom, mot_de_passe)</code> permettra d'identifier l'utilisateur grâce au prénom et au mot de passe qu'il fournira dans le formulaire de connexion.</p>
+<pre><code class="language-python"><span class="hljs-comment"># models/users.py</span>
+
+<span class="hljs-keyword">from</span> werkzeug.security <span class="hljs-keyword">import</span> check_password_hash
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Users</span>(UserMixin, db.Model):
+    ...
+
+<span class="hljs-meta">    @staticmethod</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">identification</span>(<span class="hljs-params">prenom, password</span>):
+        utilisateur = Users.query.<span class="hljs-built_in">filter</span>(Users.prenom == prenom).first()
+        <span class="hljs-keyword">if</span> utilisateur <span class="hljs-keyword">and</span> check_password_hash(utilisateur.password, password):
+            <span class="hljs-keyword">return</span> utilisateur
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>
+</code></pre>
+<p>Commentaires:</p>
+<ul>
+<li>il faut commencer par récupérer l'utilisateur via l'identifiant unique (ici le prénom). A ce stade, on en peut pas encore attester que cet utilisateur est vraiment le bon</li>
+<li>il faut donc vérifier le mot de passe. Comme le mot de passe n'est pas stocké en clair, on ne peut pas faire <code>Users.query.filter(Users.prenom == prenom, Users.password == password).first()</code>. Werkzeug offre la méthode <code>check_password_hash</code>, c'est à dire qu'il va générer à nouveau un hash avec le mot de passe reçu par le formulaire de connexion, puis va le comparer au hash de l'utilisateur que l'on pense être le bon: si les deux hash correspondent, alors l'identification est correcte</li>
+</ul>
+<p>Création du FlaskForm:</p>
+<pre><code class="language-python"><span class="hljs-comment"># models/formulaires.py</span>
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Connexion</span>(<span class="hljs-title class_ inherited__">FlaskForm</span>):
+    prenom = StringField(<span class="hljs-string">&quot;prenom&quot;</span>, validators=[])
+    password = PasswordField(<span class="hljs-string">&quot;password&quot;</span>, validators=[])
+</code></pre>
+<p>Création de la route de connexion:</p>
+<pre><code class="language-python"><span class="hljs-comment"># routes/users.py</span>
+<span class="hljs-keyword">from</span> flask_login <span class="hljs-keyword">import</span> login_user, current_user
+
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/utilisateurs/connexion&quot;</span>, methods=[<span class="hljs-string">&quot;GET&quot;</span>,<span class="hljs-string">&quot;POST&quot;</span>]</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">connexion</span>():
+    form = Connexion()
+
+    <span class="hljs-keyword">if</span> current_user.is_authenticated <span class="hljs-keyword">is</span> <span class="hljs-literal">True</span>:
+        flash(<span class="hljs-string">&quot;Vous êtes déjà connecté&quot;</span>, <span class="hljs-string">&quot;info&quot;</span>)
+        <span class="hljs-keyword">return</span> redirect(url_for(<span class="hljs-string">&quot;accueil&quot;</span>))
+
+    <span class="hljs-keyword">if</span> form.validate_on_submit():
+        utilisateur = Users.identification(
+            prenom=clean_arg(request.form.get(<span class="hljs-string">&quot;prenom&quot;</span>, <span class="hljs-literal">None</span>)),
+            password=clean_arg(request.form.get(<span class="hljs-string">&quot;password&quot;</span>, <span class="hljs-literal">None</span>))
+        )
+        <span class="hljs-keyword">if</span> utilisateur:
+            flash(<span class="hljs-string">&quot;Connexion effectuée&quot;</span>, <span class="hljs-string">&quot;success&quot;</span>)
+            login_user(utilisateur)
+            <span class="hljs-keyword">return</span> redirect(url_for(<span class="hljs-string">&quot;accueil&quot;</span>))
+        <span class="hljs-keyword">else</span>:
+            flash(<span class="hljs-string">&quot;Les identifiants n&#x27;ont pas été reconnus&quot;</span>, <span class="hljs-string">&quot;error&quot;</span>)
+            <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/connexion.html&quot;</span>, form=form)
+
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/connexion.html&quot;</span>, form=form)
+
+login.login_view = <span class="hljs-string">&#x27;connexion&#x27;</span>
+</code></pre>
+<p>Commentaires:</p>
+<ul>
+<li>il faut vérifier au tout début si l'utilisateur n'est pas déjà connecté: si c'est le cas, il n'y a pas besoin d'exécuter le reste de la fonction</li>
+<li>Flask-Login offre la méthode <code>login_user()</code> qui permet de connecter un utilisateur</li>
+<li><code>login.login_view = 'connexion'</code> permet d'indiquer à Flask-Login quelle est la route de connexion. Si une erreur 401 survient, il renverra à cette route afin que l'utilisateur puisse se connecter et accéder à la ressource demandée.</li>
+</ul>
+<p>Il reste à faire les templates <code>partials/formulaires/connexion.html</code> et <code>pages/connxeion.html</code>.</p>
+<p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance6/connexion">Seance6/connexion</a></p>
+<h3 id="déconnexion-">Déconnexion <a id="deconnexion"></a></h3>
+<p>La déconnexion est très simple avec Flask-Login, elle tient en une route et en une bonne configuration de la barre de navigation en HTML.</p>
+<pre><code class="language-python"><span class="hljs-comment"># routes/users.py</span>
+<span class="hljs-keyword">from</span> flask_login <span class="hljs-keyword">import</span>  current_user, logout_user
+
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/utilisateurs/deconnexion&quot;</span>, methods=[<span class="hljs-string">&quot;POST&quot;</span>, <span class="hljs-string">&quot;GET&quot;</span>]</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">deconnexion</span>():
+    <span class="hljs-keyword">if</span> current_user.is_authenticated <span class="hljs-keyword">is</span> <span class="hljs-literal">True</span>:
+        logout_user()
+    flash(<span class="hljs-string">&quot;Vous êtes déconnecté&quot;</span>, <span class="hljs-string">&quot;info&quot;</span>)
+    <span class="hljs-keyword">return</span> redirect(url_for(<span class="hljs-string">&quot;accueil&quot;</span>))
+</code></pre>
+<p>Commentaires:</p>
+<ul>
+<li>de même qu'il y avait <code>login_user</code> pour la connexion, il y a un <code>logout_user</code> pour la déconnexion: Flask-Login se charge de tout</li>
+<li><code>current_user</code> est un proxy vers l'utilisateur courant, il permet d'accéder aux méthodes de Flask-Login comme <code>is_authenticated</code> ou <code>is_anonymous</code></li>
+</ul>
+<p>Pour une meilleure expérience utilisateur, il convient de cacher le lien de déconnexion quand il n'est pas connecté, et d'afficher le lien de connexion quand il n'est pas connecté.</p>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!-- partials/conteneur.html --&gt;</span>
+
+{% if current_user.is_authenticated %}
+<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;dropdown-item&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{{ url_for(&#x27;deconnexion&#x27;) }}&quot;</span>&gt;</span>Se déconnecter<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+{% else %}
+<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;dropdown-item&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{{ url_for(&#x27;connexion&#x27;) }}&quot;</span>&gt;</span>Se connecter<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+{% endif %}
+</code></pre>
+<h3 id="rendre-obligatoire-la-connexion-sur-une-route-">Rendre obligatoire la connexion sur une route <a id="obligatoire"></a></h3>
+<p>Imaginons que l'on souhaite rendre la recherche avancée dans le Factbook payante. Il faudrait alors restreindre l'accès à cette page uniquement aux utilisateurs ayant payé. Pour cela, il ne suffit que d'une ligne de code dans les routes, en utilisant le décorateur <code>@login_required</code>.</p>
+<pre><code class="language-python"><span class="hljs-comment"># routes/generales.py</span>
+
+<span class="hljs-keyword">from</span> flask_login <span class="hljs-keyword">import</span> login_required
+
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/recherche&quot;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span>
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/recherche/&lt;int:page&gt;&quot;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span>
+<span class="hljs-meta">@login_required</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">recherche</span>(<span class="hljs-params">page=<span class="hljs-number">1</span></span>):
+	...
+</code></pre>
+<p>Si un utilisateur non connecté arrive veut accéder à la route <code>/recherche</code>, il sera alors redirigé vers la page de connexion (indiquée à Flask avec <code>login.login_view = 'connexion'</code> dans <code>routes/users.py</code>) : <code>http://localhost:5000/utilisateurs/connexion?next=%2Frecherche</code>.</p>
+<p><em>Code concerné</em>: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/tree/master/Seance6/obligatoire">Seance6/obligatoire</a></p>
+
+        
+        <script async type="text/javascript">
+/* From extension marp-team.marp-vscode */
+(()=>{var F=Object.defineProperty;var d=(E,k)=>F(E,"name",{value:k,configurable:!0});(()=>{var E={676:(b,f,h)=>{b.exports=h(185)},185:(b,f)=>{"use strict";var h;h={value:!0};const S={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},M="data-marp-auto-scaling-wrapper",p="data-marp-auto-scaling-svg",l="data-marp-auto-scaling-container";class o extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const s=d(r=>([n])=>{const{width:e,height:t}=n.contentRect;this[r]={width:e,height:t},this.updateSVGRect()},"e");this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(s("containerSize")),this.wrapperObserver=new ResizeObserver((...r)=>{s("wrapperSize")(...r),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var s,r,n,e,t;this.shadowRoot.innerHTML=`
+<style>
+  svg[${p}] { display: block; width: 100%; height: auto; vertical-align: top; }
+  span[${l}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
+</style>
+<div ${M}>
+  <svg part="svg" ${p}>
+    <foreignObject><span ${l}><slot></slot></span></foreignObject>
+  </svg>
+</div>
+    `.split(/\n\s*/).join(""),this.wrapper=(s=this.shadowRoot.querySelector(`div[${M}]`))!==null&&s!==void 0?s:void 0;const i=this.svg;this.svg=(n=(r=this.wrapper)===null||r===void 0?void 0:r.querySelector(`svg[${p}]`))!==null&&n!==void 0?n:void 0,this.svg!==i&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=(t=(e=this.svg)===null||e===void 0?void 0:e.querySelector(`span[${l}]`))!==null&&t!==void 0?t:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:s}=this;s&&(s.style.display="inline",requestAnimationFrame(()=>{s.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(s){const r=d(()=>{const n=(()=>{const e=s.getPropertyValue("--preserve-aspect-ratio");return e?e.trim():`x${(({textAlign:t,direction:i})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if(t==="start"||t==="end"){let a=i==="rtl";return t==="end"&&(a=!a),a?"Max":"Min"}return"Mid"})(s)}YMid meet`})();n!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=n,this.updateSVGRect()),s===this.svgComputedStyle&&requestAnimationFrame(r)},"t");r()}updateSVGRect(){var s,r,n,e,t,i,a;let m=Math.ceil((r=(s=this.containerSize)===null||s===void 0?void 0:s.width)!==null&&r!==void 0?r:0);const v=Math.ceil((e=(n=this.containerSize)===null||n===void 0?void 0:n.height)!==null&&e!==void 0?e:0);this.dataset.downscaleOnly!==void 0&&(m=Math.max(m,(i=(t=this.wrapperSize)===null||t===void 0?void 0:t.width)!==null&&i!==void 0?i:0));const y=(a=this.svg)===null||a===void 0?void 0:a.querySelector(":scope > foreignObject");if(y?.setAttribute("width",`${m}`),y?.setAttribute("height",`${v}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${m} ${v}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=m<=0||v<=0?"0":""),this.container){const _=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=_.startsWith("xmid")||_.startsWith("xmax")?"auto":"0",this.container.style.marginRight=_.startsWith("xmi")?"auto":"0"}}}d(o,"s");const u=d((c,{attrs:s={},style:r})=>class extends c{constructor(...n){super(...n);for(const[e,t]of Object.entries(s))this.hasAttribute(e)||this.setAttribute(e,t);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const n=r?`<style>:host { ${r} }</style>`:"";let e="<slot></slot>";const{autoScaling:t}=this.dataset;t!==void 0&&(e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${t==="downscale-only"?"data-downscale-only":""}>${e}</marp-auto-scaling>`),this.shadowRoot.innerHTML=n+e}},"r");let g;const q=Symbol(),V="marpitSVGPolyfill:setZoomFactor,",z=Symbol();let A,C;function N(c){const s=typeof c=="object"&&c.target||document,r=typeof c=="object"?c.zoom:c;window[z]||(Object.defineProperty(window,z,{configurable:!0,value:!0}),window.addEventListener("message",({data:e,origin:t})=>{if(t===window.origin)try{if(e&&typeof e=="string"&&e.startsWith(V)){const[,i]=e.split(","),a=Number.parseFloat(i);Number.isNaN(a)||(C=a)}}catch(i){console.error(i)}}));let n=!1;Array.from(s.querySelectorAll("svg[data-marpit-svg]"),e=>{var t,i,a,m;e.style.transform||(e.style.transform="translateZ(0)");const v=r||C||e.currentScale||1;A!==v&&(A=v,n=v);const y=e.getBoundingClientRect(),{length:_}=e.children;for(let L=0;L<_;L+=1){const x=e.children[L];if(x.getScreenCTM){const w=x.getScreenCTM();if(w){const W=(i=(t=x.x)===null||t===void 0?void 0:t.baseVal.value)!==null&&i!==void 0?i:0,B=(m=(a=x.y)===null||a===void 0?void 0:a.baseVal.value)!==null&&m!==void 0?m:0,G=x.children.length;for(let T=0;T<G;T+=1){const P=x.children[T];if(P.tagName==="SECTION"){const{style:O}=P;O.transformOrigin||(O.transformOrigin=`${-W}px ${-B}px`),O.transform=`scale(${v}) matrix(${w.a}, ${w.b}, ${w.c}, ${w.d}, ${w.e-y.left}, ${w.f-y.top}) translateZ(0.0001px)`;break}}}}}}),n!==!1&&Array.from(s.querySelectorAll("iframe"),({contentWindow:e})=>{e?.postMessage(`${V}${n}`,window.origin==="null"?"*":window.origin)})}d(N,"h");function j({once:c=!1,target:s=document}={}){const r=navigator.vendor==="Apple Computer, Inc."?[N]:[];let n=!c;const e=d(()=>{for(const t of r)t({target:s});n&&window.requestAnimationFrame(e)},"s");return e(),()=>{n=!1}}d(j,"g"),A=1,C=void 0;const $=Symbol(),H=d((c=document)=>{if(typeof window>"u")throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const t=window[q];t||customElements.define("marp-auto-scaling",o);for(const i of Object.keys(S)){const a=`marp-${i}`,m=S[i].proto();g!=null||(g=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),g&&m!==HTMLElement?t||customElements.define(a,u(m,{style:S[i].style}),{extends:i}):(t||customElements.define(a,u(HTMLElement,S[i])),e.querySelectorAll(`${i}[is="${a}"]`).forEach(v=>{v.outerHTML=v.outerHTML.replace(new RegExp(`^<${i}`,"i"),`<${a}`).replace(new RegExp(`</${i}>$`,"i"),`</${a}>`)}))}window[q]=!0})(c),c[$])return c[$];const s=j({target:c}),r=d(()=>{s(),delete c[$]},"n"),n=Object.assign(r,{cleanup:r,update:()=>H(c)});return Object.defineProperty(c,$,{configurable:!0,value:n}),n},"v");f.browser=H,h=H,h=j}},k={};function R(b){var f=k[b];if(f!==void 0)return f.exports;var h=k[b]={exports:{}};return E[b](h,h.exports,R),h.exports}d(R,"__webpack_require__");var Z={};(()=>{"use strict";var b=R(676);function f(){let p,l;const o=d(()=>{const u=document.getElementById("__marp-vscode"),g=!!u;p!==g?(document.body.classList.toggle("marp-vscode",g),g?l=(0,b.browser)():(l?.cleanup(),l=void 0),p=g):g&&l?.update(),p?(u&&h(u),S()):M()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(o,100)),window.addEventListener("vscode.markdown.updateContent",o),o()}d(f,"preview");const h=d(p=>{p.querySelectorAll("[is]").forEach(l=>{if(l.nodeName.includes("-")||document.createElement(l.nodeName).constructor!==l.constructor)return;const{outerHTML:u}=l;l.outerHTML=u,console.debug("[marp-vscode] Custom element has been upgraded forcibly:",u.slice(0,u.indexOf(">")+1||void 0))})},"forceUpgradeCustomElements"),S=d(()=>{const p=document.querySelectorAll("style:not(#__marp-vscode-style):not(#_defaultStyles):not([data-marp-vscode-body])"),l=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');p.forEach(o=>{o.closest("#__marp-vscode")||(o.dataset.marpVscodeBody=o.textContent??"",o.textContent="")}),l.forEach(o=>{if(o.closest("#__marp-vscode"))return;const{href:u}=o;o.dataset.marpVscodeHref=u,o.removeAttribute("href")})},"removeStyles"),M=d(()=>{const p=document.querySelectorAll("style[data-marp-vscode-body]"),l=document.querySelectorAll("link[data-marp-vscode-href]");p.forEach(o=>{o.textContent=o.dataset.marpVscodeBody||"",delete o.dataset.marpVscodeBody}),l.forEach(o=>{o.href=o.dataset.marpVscodeHref||"",delete o.dataset.marpVscodeHref})},"restoreStyles");f()})()})();})();
+
+</script>
+
+    </body>
+    </html>
