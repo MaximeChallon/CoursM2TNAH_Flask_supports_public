@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension marp-team.marp-vscode */
+#__marp-vscode {
+  all: initial;
+}
+
+/* Override VS Code default CSS rules reverting to initial
+   https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
+body.marp-vscode {
+  padding: 0;
+}
+
+body.marp-vscode img {
+  max-width: unset;
+  max-height: unset;
+}
+
+body.marp-vscode a,
+body.marp-vscode a:hover,
+body.marp-vscode code {
+  color: unset;
+}
+
+body.marp-vscode blockquote {
+  background: unset;
+  border-color: unset;
+}
+
+@media screen {
+  body.marp-vscode {
+    overflow-y: scroll;
+  }
+
+  #__marp-vscode [data-marp-vscode-slide-wrapper] {
+    margin: 20px;
+  }
+
+  #__marp-vscode svg[data-marpit-svg] {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+    display: block;
+    margin: 0;
+  }
+
+  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+  #code-csp-warning {
+    background-color: #444;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+    color: white;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    margin: 16px;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    word-wrap: break-word;
+  }
+
+  #code-csp-warning:hover {
+    text-decoration: none;
+    background-color: #007acc;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  }
+}
+
+@media print {
+  body.marp-vscode #code-csp-warning {
+    display: none;
+  }
+}
+
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        <style>
+/*********************************************************************
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+For more information, please refer to <http://unlicense.org/>
+*********************************************************************/
+
+/*
+WiTeX
+https://github.com/AndrewBelt/WiTeX
+*/
+
+
+/* Latin Modern (LaTeX default) font */
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
+}
+
+/* Page Layout */
+
+body {
+	background: none;
+	font-size: 14pt;
+	font-family: 'Latin Modern Roman', serif;
+	color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	border: none;
+	font-weight: bold;
+}
+
+a, a:visited {
+	color: #a00;
+}
+
+a.new, a.new:visited {
+	color: black;
+}
+
+ul {
+	list-style: disc;
+}
+
+#mw-navigation, #mw-page-base, #mw-head-base, #footer {
+	/* nuke everything but the content */
+	display: none;
+}
+
+/* Content Box */
+
+.mw-body {
+	max-width: 720px;
+	margin: 1em auto;
+}
+
+#content, div#content {
+	border: none;
+	color: black;
+}
+
+#firstHeading, #siteSub {
+	text-align: center;
+	display: block;
+}
+
+#siteSub {
+	margin-top: -0.5em;
+	margin-bottom: 4em;
+}
+
+/* Article Body */
+
+.mw-body-content {
+	font-size: inherit;
+	text-align: justify;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	line-height: 1.5em;
+}
+
+.mw-body {
+	padding: 2em 0;
+}
+
+.mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6, div#content h1, div#content h2, div#content #firstHeading {
+	font-family: inherit;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.mw-body h1, div#content h1 {
+	font-size: 2em;
+}
+
+.mw-body h2, div#content h2 {
+	font-size: 1.5em;
+}
+
+.mw-body h3 {
+	font-size: 1.2em;
+}
+
+.mw-body h4 {
+	font-size: 1.1em;
+}
+
+.mw-body h5, .mw-body h6 {
+	font-size: 1.0em;
+}
+
+.mw-body p {
+	margin: 0;
+}
+
+.mw-body p + p {
+	text-indent: 2em;
+}
+
+.mw-editsection {
+	/* hide more non-content */
+	display: none;
+}
+
+table.ambox {
+	margin-bottom: 1em;
+}
+
+dl dd {
+	/* center definitions (most useful for display equations) */
+	text-align: center;
+}
+
+span.texhtml {
+	/* revert inline math to default font */
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+/* Table of Contents */
+
+#toc, .toc {
+	border: none;
+	padding: 0;
+	background: none;
+	font-size: inherit;
+	/* span 100% of the width */
+	display: block;
+}
+
+.mw-body #toc h2, .mw-body .toc h2 {
+	font-family: inherit;
+	font-size: 1.5em;
+}
+
+#toc h2, .toc h2 {
+	display: block;
+}
+
+#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle {
+	text-align: left;
+}
+
+.toctoggle {
+	display: none;
+}
+
+/* Figures */
+
+div.tright {
+	margin: 0.5em 0 0.5em 1.5em;
+}
+
+div.tleft {
+	margin: 0.5em 1.5em 0.5em 0;
+}
+
+/* Code */
+
+.mw-code {
+	margin: 1em 0;
+}
+
+pre, code {
+	font-family: "Latin Modern Mono", monospace !important;
+}
+
+sup {
+	text-indent: 0;
+}
+</style>
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
+<h2 id="séance-7--td-déploiement-dune-application-flask-dans-le-cloud">Séance 7 : TD: déploiement d'une application Flask dans le cloud</h2>
+<p><em>Notes préalables</em>:</p>
+<ul>
+<li>Afin que chacun puisse effectuer ce TD avec la même application, on n'utilisera pas les applications développées au fur et à mesure des séances précédentes sur les PC de chacun. Un dépôt <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_app_finale">https://github.com/MaximeChallon/CoursM2TNAH_Flask_app_finale</a> est disponible avec l'application qui est à déployer ici</li>
+<li>Ce TD nécessite la maîtrise de Git et de Bash</li>
+<li>Une adresse mail vous sera demandé pour créer un compte, vous pouvez utiliser celle de l'école</li>
+<li>Le cloud provider sera <a href="http://PythonAnyWhere.eu">PythonAnyWhere.eu</a> pour ce TD car il est gratuit et très facile d'utilisation</li>
+</ul>
+<h3 id="création-dun-compte-pythonanywhere">Création d'un compte PythonAnyWhere</h3>
+<p>Se rendre à l'URL <a href="https://eu.pythonanywhere.com/registration/register/beginner/">https://eu.pythonanywhere.com/registration/register/beginner/</a> et créer un compte. Vous devriez arriver sur cette page :</p>
+<img src="img/D-1.jpg"   width="600">
+<p>Se rendre dans &quot;Web&quot; afin de créer une nouvelle application</p>
+<img src="img/D-2.jpg"   width="600">
+<p>Comme c'est un compte gratuit, il n'y a pas le choix du nom de domaine: <code>user.eu.pythonanywhere.com</code>. Sélectionner Flask, puis Python 3.10. Le chemin proposé pour l'installation de Flask importe peu, nous allons écraser ce dossier par la quite pour y cloner le dépôt à la place.</p>
+<img src="img/D-3.jpg"    width="600">
+<h3 id="description-de-lapplication-exécutée-par-défaut">Description de l'application exécutée par défaut</h3>
+<p>L'application de base proposée par PythonAnyWhere est fonctionnelle:</p>
+<img src="img/D-4.jpg"   width="600">
+<p>Faisons un tour de son fonctionnement et des différents fichiers qui permettent de la faire tourner. Dans l'onglet &quot;Web&quot; et à la section code, on trouve:</p>
+<img src="img/D-5.jpg"   width="600">
+<ul>
+<li><strong>Source code</strong>: c'est le chemin vers le dossier qui contient l'application Flask; c'est ce chemin que l'on modifiera plus tard pour y indiquer le dépôt de code distant</li>
+<li><strong>Working Directory</strong>: il est pour le moment vide, mais nous y placerons plus tard l'environnement virtuel</li>
+<li><strong>WSGI configuration file</strong> : c'est le fichier qui permet d'indiquer quel est le fichier python à exécuter pour exécuter l'application. Il pointe vers <code>/var/www/user_eu_pythonanywhere_com_wsgi.py</code> et on y trouve notamment le code suivant, où <code>project_home</code> est le Source code indiqué ci-dessus:</li>
+</ul>
+<pre><code class="language-python"><span class="hljs-keyword">import</span> sys
+
+<span class="hljs-comment"># add your project directory to the sys.path</span>
+project_home = <span class="hljs-string">&#x27;/home/user/factbook&#x27;</span>
+<span class="hljs-keyword">if</span> project_home <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> sys.path:
+    sys.path = [project_home] + sys.path
+
+<span class="hljs-comment"># import flask app but need to call it &quot;application&quot; for WSGI to work</span>
+<span class="hljs-keyword">from</span> flask_app <span class="hljs-keyword">import</span> app <span class="hljs-keyword">as</span> application  <span class="hljs-comment"># noqa</span>
+</code></pre>
+<p>Ce qui importe dans ce code est l'import final.</p>
+<p>Les autres sections de l'onglet &quot;Web&quot; renvoient toutes à des notions vues en cours.</p>
+<img src="img/D-6.jpg"   width="600">
+<ul>
+<li><strong>Virtualenv</strong> : on y indiquera le chemin vers l'environnement virtuel; actuellement c'est vide car l'application par défaut tourne sur l'installation initiale</li>
+<li><strong>Log files</strong> : différents types de logs sont stockés, et permettent de suivre, même plusiuers jours après, les différents evénements survenus sur l'application (que ce soient les erreurs ou les simples accès)</li>
+<li><strong>Statics</strong>: endroit pour y placer des fichiers CSS par exemple; mieux vaut privilégier leur placement dans l'application directement</li>
+</ul>
+<h3 id="clonage-du-dépôt">Clonage du dépôt</h3>
+<p>Aller dans l'onglet &quot;Consoles&quot;. Ouvrir une console &quot;Bash&quot;.</p>
+<p>Exécuter les commandes suivantes pour se situer:</p>
+<pre><code class="language-bash">13:48 ~ $ <span class="hljs-built_in">pwd</span>
+/home/user
+13:48 ~ $ <span class="hljs-built_in">dir</span>
+README.txt  factbook
+13:48 ~ $ 
+</code></pre>
+<p>On peut ensuite cloner le dépôt <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_app_finale.git">https://github.com/MaximeChallon/CoursM2TNAH_Flask_app_finale.git</a>, à côté du factbook. On reste donc dans le dossier courant.</p>
+<pre><code class="language-bash">13:48 ~ $ git <span class="hljs-built_in">clone</span> https://github.com/MaximeChallon/CoursM2TNAH_Flask_app_finale.git
+Cloning into <span class="hljs-string">&#x27;CoursM2TNAH_Flask_app_finale&#x27;</span>...
+remote: Enumerating objects: 62, <span class="hljs-keyword">done</span>.
+remote: Counting objects: 100% (62/62), <span class="hljs-keyword">done</span>.
+remote: Compressing objects: 100% (42/42), <span class="hljs-keyword">done</span>.
+remote: Total 62 (delta 15), reused 62 (delta 15), pack-reused 0
+Unpacking objects: 100% (62/62), 31.95 KiB | 25.00 KiB/s, <span class="hljs-keyword">done</span>.
+13:49 ~ $ <span class="hljs-built_in">dir</span>
+CoursM2TNAH_Flask_app_finale  README.txt  factbook
+13:49 ~ $ 
+</code></pre>
+<p>On peut quitter la console.</p>
+<pre><code class="language-bash">13:49 ~ $ <span class="hljs-built_in">exit</span>
+<span class="hljs-built_in">exit</span>
+
+Console closed.
+</code></pre>
+<h3 id="installer-un-environnement-et-le-configurer-selon-les-requirements-de-lapplication">Installer un environnement et le configurer selon les requirements de l'application</h3>
+<p>Rouvrir une console Bash, et exécuter :</p>
+<pre><code class="language-bash">13:55 ~ $ mkvirtualenv <span class="hljs-built_in">env</span> --python=/usr/bin/python3.10
+created virtual environment CPython3.10.5.final.0-64 <span class="hljs-keyword">in</span> 9829ms
+  creator CPython3Posix(dest=/home/user/.virtualenvs/env, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/home/MaximeChallon/.local/share/virtualenv)
+    added seed packages: pip==22.1.2, setuptools==62.6.0, wheel==0.37.1
+  activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
+virtualenvwrapper.user_scripts creating /home/user/.virtualenvs/env/bin/predeactivate
+virtualenvwrapper.user_scripts creating /home/user/.virtualenvs/env/bin/postdeactivate
+virtualenvwrapper.user_scripts creating /home/user/.virtualenvs/env/bin/preactivate
+virtualenvwrapper.user_scripts creating /home/user/.virtualenvs/env/bin/postactivate
+virtualenvwrapper.user_scripts creating /home/user/.virtualenvs/env/bin/get_env_details
+</code></pre>
+<p>Comme indiqué dans les logs, l'environnement virtuel <code>env</code> a été créé dans le dossier <code>/home/user/.virtualenvs/</code> (où <code>user</code> est votre nom d'utilisateur). AUtrement dit, dans le working directory, on trouve désormais les deux répertoires qui nous intéressent:</p>
+<ul>
+<li><code>.virtualenvs/env/</code></li>
+<li><code>CoursM2TNAH_Flask_app_finale</code></li>
+</ul>
+<p>Par défaut, l'environnement virtuel a peut être été activé dans notre console (repérable par un <code>(env)</code> dans le terminal). Si ce n'est pas le cas, effectuer <code>workon env</code>.
+<strong>Important</strong>: comme dans une exécution en local sur son PC, il faut désormais toujours activer l'environnement virtuel dans les consoles pour effectuer des opérations.</p>
+<p>Se rendre dans le répertoire de l'application</p>
+<pre><code class="language-bash">(<span class="hljs-built_in">env</span>) 13:59 ~ $ <span class="hljs-built_in">cd</span> CoursM2TNAH_Flask_app_finale/
+(<span class="hljs-built_in">env</span>) 14:00 ~/CoursM2TNAH_Flask_app_finale (master)$ <span class="hljs-built_in">dir</span>
+app  requirements.txt  run.py
+</code></pre>
+<p>Le fichier <code>requirements.txt</code> contient les dépendances de l'application et leur version; on va l'utiliser avec pip pour tout installer rapidement.</p>
+<pre><code class="language-bash">(<span class="hljs-built_in">env</span>) 14:00 ~/CoursM2TNAH_Flask_app_finale (master)$ pip install -r requirements.txt 
+Looking <span class="hljs-keyword">in</span> links: /usr/share/pip-wheels
+Collecting click==8.1.3
+  Downloading click-8.1.3-py3-none-any.whl (96 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 96.6/96.6 kB 3.2 MB/s eta 0:00:00
+Collecting colorama==0.4.6
+  Downloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Collecting Flask==2.2.2
+  Downloading Flask-2.2.2-py3-none-any.whl (101 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 101.5/101.5 kB 3.2 MB/s eta 0:00:00
+Collecting Flask-Login==0.6.2
+  Downloading Flask_Login-0.6.2-py3-none-any.whl (17 kB)
+Collecting Flask-SQLAlchemy==3.0.2
+  Downloading Flask_SQLAlchemy-3.0.2-py3-none-any.whl (24 kB)
+Collecting Flask-WTF==1.0.1
+  Downloading Flask_WTF-1.0.1-py3-none-any.whl (12 kB)
+Collecting greenlet==2.0.1
+  Downloading greenlet-2.0.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (539 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 539.9/539.9 kB 14.5 MB/s eta 0:00:00
+Collecting itsdangerous==2.1.2
+  Downloading itsdangerous-2.1.2-py3-none-any.whl (15 kB)
+Collecting Jinja2==3.1.2
+  Downloading Jinja2-3.1.2-py3-none-any.whl (133 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.1/133.1 kB 4.4 MB/s eta 0:00:00
+Collecting MarkupSafe==2.1.1
+  Downloading MarkupSafe-2.1.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
+Collecting python-dotenv==0.21.0
+  Downloading python_dotenv-0.21.0-py3-none-any.whl (18 kB)
+Collecting SQLAlchemy==1.4.44
+  Downloading SQLAlchemy-1.4.44-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 29.6 MB/s eta 0:00:00
+Collecting Werkzeug==2.2.2
+  Downloading Werkzeug-2.2.2-py3-none-any.whl (232 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 232.7/232.7 kB 7.4 MB/s eta 0:00:00
+Collecting WTForms==3.0.1
+  Downloading WTForms-3.0.1-py3-none-any.whl (136 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 136.5/136.5 kB 4.7 MB/s eta 0:00:00
+Installing collected packages: python-dotenv, MarkupSafe, itsdangerous, greenlet, colorama, click, WTForms, Werkzeug, SQLAlchemy, Jinja2, Flask, Flask-WTF, Flask-SQLAlchemy, Flask-Login
+Successfully installed Flask-2.2.2 Flask-Login-0.6.2 Flask-SQLAlchemy-3.0.2 Flask-WTF-1.0.1 Jinja2-3.1.2 MarkupSafe-2.1.1 SQLAlchemy-1.4.44 WTForms-3.0.1 Werkzeug-2.2.2 click-8.1.3 colorama-0.4.6 greenlet-2.0.1 itsdangerous-2.1.2 python-dotenv-0.21.0
+</code></pre>
+<p>Le travail sur l'environnement virtuel est terminé, la console peut être fermée.</p>
+<p>Dans l'onglet &quot;Web&quot;, il faut maintenant indiquer le chemin vers cet environnement dans la section &quot;Virtualenv&quot;:
+<code>/home/user/.virtualenvs/env</code>, où <code>user</code> est votre nom d'utilisateur.</p>
+<h3 id="branchement-de-lapplication">Branchement de l'application</h3>
+<p>Il faut d'abord ajouter 2 fichiers essentiels et non présents dans le dépôt:</p>
+<ul>
+<li><code>.env</code></li>
+<li>la base de données sqlite</li>
+</ul>
+<p>Dans l'explorateur de fichiers de PythonAnyWhere (onglet &quot;Files&quot;), importer dans le répertoire de l'application (à côté de <code>run.py</code>), les deux fichiers. Penser à mettre à jour le <code>.env</code>:</p>
+<ul>
+<li>passer le DEBUG à False</li>
+<li>modifier le chemin vers la base de données</li>
+</ul>
+<p>A ce stade, relancer l'application.</p>
+<img src="img/D-7.jpg"   width="600">
+<p>En allant sur le site de l'application, on se rend compte qu'il y a eu un problème. Il est temps d'aller voir les logs d'error.</p>
+<pre><code class="language-bash">2023-02-12 14:14:25,614: Error running WSGI application
+2023-02-12 14:14:25,616: Exception: Install <span class="hljs-string">&#x27;email_validator&#x27;</span> <span class="hljs-keyword">for</span> email validation support.
+2023-02-12 14:14:25,616:   File <span class="hljs-string">&quot;/var/www/maximechallon_eu_pythonanywhere_com_wsgi.py&quot;</span>, line 16, <span class="hljs-keyword">in</span> &lt;module&gt;
+2023-02-12 14:14:25,617:     from run import app as application  <span class="hljs-comment"># noqa</span>
+2023-02-12 14:14:25,617: 
+2023-02-12 14:14:25,617:   File <span class="hljs-string">&quot;/home/MaximeChallon/CoursM2TNAH_Flask_app_finale/run.py&quot;</span>, line 1, <span class="hljs-keyword">in</span> &lt;module&gt;
+2023-02-12 14:14:25,617:     from app.app import app
+2023-02-12 14:14:25,617: 
+2023-02-12 14:14:25,617:   File <span class="hljs-string">&quot;/home/MaximeChallon/CoursM2TNAH_Flask_app_finale/app/app.py&quot;</span>, line 16, <span class="hljs-keyword">in</span> &lt;module&gt;
+2023-02-12 14:14:25,617:     from .routes import generales, insertions, suppressions, erreurs, <span class="hljs-built_in">users</span>, graphiques
+2023-02-12 14:14:25,617: 
+2023-02-12 14:14:25,617:   File <span class="hljs-string">&quot;/home/MaximeChallon/CoursM2TNAH_Flask_app_finale/app/routes/generales.py&quot;</span>, line 5, <span class="hljs-keyword">in</span> &lt;module&gt;
+2023-02-12 14:14:25,618:     from ..models.formulaires import Recherche
+2023-02-12 14:14:25,618: 
+2023-02-12 14:14:25,618:   File <span class="hljs-string">&quot;/home/MaximeChallon/CoursM2TNAH_Flask_app_finale/app/models/formulaires.py&quot;</span>, line 31, <span class="hljs-keyword">in</span> &lt;module&gt;
+2023-02-12 14:14:25,618:     class AjoutUtilisateur(FlaskForm):
+2023-02-12 14:14:25,618: 
+2023-02-12 14:14:25,618:   File <span class="hljs-string">&quot;/home/MaximeChallon/CoursM2TNAH_Flask_app_finale/app/models/formulaires.py&quot;</span>, line 34, <span class="hljs-keyword">in</span> AjoutUtilisateur
+2023-02-12 14:14:25,618:     Email(message=<span class="hljs-string">&quot;Le mail saisi n&#x27;est pas valide&quot;</span>)])
+2023-02-12 14:14:25,618: 
+2023-02-12 14:14:25,618:   File <span class="hljs-string">&quot;/home/MaximeChallon/.virtualenvs/env/lib/python3.10/site-packages/wtforms/validators.py&quot;</span>, line 393, <span class="hljs-keyword">in</span> __init__
+2023-02-12 14:14:25,618:     raise Exception(<span class="hljs-string">&quot;Install &#x27;email_validator&#x27; for email validation support.&quot;</span>)
+</code></pre>
+<p>Il manque visiblement le package <code>email_validator</code>. Il suffit, dans une console, d'effectuer un <code>pip install email_validator</code>.</p>
+<pre><code class="language-bash">(<span class="hljs-built_in">env</span>) 14:19 ~ $ pip install email_validator
+Looking <span class="hljs-keyword">in</span> links: /usr/share/pip-wheels
+Collecting email_validator
+  Downloading email_validator-1.3.1-py2.py3-none-any.whl (22 kB)
+Collecting idna&gt;=2.0.0
+  Downloading idna-3.4-py3-none-any.whl (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.5/61.5 kB 1.1 MB/s eta 0:00:00
+Collecting dnspython&gt;=1.15.0
+  Downloading dnspython-2.3.0-py3-none-any.whl (283 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 283.7/283.7 kB 8.8 MB/s eta 0:00:00
+Installing collected packages: idna, dnspython, email_validator
+Successfully installed dnspython-2.3.0 email_validator-1.3.1 idna-3.4
+</code></pre>
+<h3 id="résultat">Résultat</h3>
+<p>En relançant l'application, le site <code>https://user.eu.pythonanywhere.com</code> fonctionne correctement et renvoie bien la page d'accueil <code>pays</code>.</p>
+<img src="img/D-8.jpg"   width="600">
+<p>Les logs sont très propres, et cette fois-ci, comme l'application est en production, ce sont de vrais logs avec des IPS non locales:</p>
+<pre><code class="language-bash">3.70.53.148 - - [12/Feb/2023:14:20:27 +0000] <span class="hljs-string">&quot;GET / HTTP/1.1&quot;</span> 302 197 <span class="hljs-string">&quot;-&quot;</span> <span class="hljs-string">&quot;python-requests/2.28.1&quot;</span> <span class="hljs-string">&quot;3.70.53.148&quot;</span> response-time=0.006
+90.105.136.79 - - [12/Feb/2023:14:20:31 +0000] <span class="hljs-string">&quot;GET / HTTP/1.1&quot;</span> 302 197 <span class="hljs-string">&quot;-&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36&quot;</span> <span class="hljs-string">&quot;90.105.136.79&quot;</span> response-time=0.002
+90.105.136.79 - - [12/Feb/2023:14:20:31 +0000] <span class="hljs-string">&quot;GET /pays HTTP/1.1&quot;</span> 200 10699 <span class="hljs-string">&quot;-&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36&quot;</span> <span class="hljs-string">&quot;90.105.136.79&quot;</span> response-time=0.180
+90.105.136.79 - - [12/Feb/2023:14:20:31 +0000] <span class="hljs-string">&quot;GET /statics/css/font-awesome.css HTTP/1.1&quot;</span> 200 7141 <span class="hljs-string">&quot;https://maximechallon.eu.pythonanywhere.com/pays&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36&quot;</span> <span class="hljs-string">&quot;90.105.136.79&quot;</span> response-time=0.009
+90.105.136.79 - - [12/Feb/2023:14:20:31 +0000] <span class="hljs-string">&quot;GET /autocompletion HTTP/1.1&quot;</span> 200 1690 <span class="hljs-string">&quot;https://maximechallon.eu.pythonanywhere.com/pays&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36&quot;</span> <span class="hljs-string">&quot;90.105.136.79&quot;</span> response-time=0.031
+90.105.136.79 - - [12/Feb/2023:14:21:49 +0000] <span class="hljs-string">&quot;GET /utilisateurs/connexion HTTP/1.1&quot;</span> 200 3383 <span class="hljs-string">&quot;https://maximechallon.eu.pythonanywhere.com/pays&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36&quot;</span> <span class="hljs-string">&quot;90.105.136.79&quot;</span> response-time=0.019
+90.105.136.79 - - [12/Feb/2023:14:21:49 +0000] <span class="hljs-string">&quot;GET /statics/css/font-awesome.css HTTP/1.1&quot;</span> 304 0 <span class="hljs-string">&quot;https://maximechallon.eu.pythonanywhere.com/utilisateurs/connexion&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36&quot;</span> <span class="hljs-string">&quot;90.105.136.79&quot;</span> response-time=0.004
+90.105.136.79 - - [12/Feb/2023:14:21:49 +0000] <span class="hljs-string">&quot;GET /autocompletion HTTP/1.1&quot;</span> 200 1690 <span class="hljs-string">&quot;https://maximechallon.eu.pythonanywhere.com/utilisateurs/connexion&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36&quot;</span> <span class="hljs-string">&quot;90.105.136.79&quot;</span> response-time=0.023
+90.105.136.79 - - [12/Feb/2023:14:22:01 +0000] <span class="hljs-string">&quot;POST /utilisateurs/connexion HTTP/1.1&quot;</span> 302 189 <span class="hljs-string">&quot;https://maximechallon.eu.pythonanywhere.com/utilisateurs/connexion&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36&quot;</span> <span class="hljs-string">&quot;90.105.136.79&quot;</span> response-time=0.397
+90.105.136.79 - - [12/Feb/2023:14:22:01 +0000] <span class="hljs-string">&quot;GET / HTTP/1.1&quot;</span> 302 197 <span class="hljs-string">&quot;https://maximechallon.eu.pythonanywhere.com/utilisateurs/connexion&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36&quot;</span> <span class="hljs-string">&quot;90.105.136.79&quot;</span> response-time=0.001
+90.105.136.79 - - [12/Feb/2023:14:22:02 +0000] <span class="hljs-string">&quot;GET /pays HTTP/1.1&quot;</span> 200 10766 <span class="hljs-string">&quot;https://maximechallon.eu.pythonanywhere.com/utilisateurs/connexion&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36&quot;</span> <span class="hljs-string">&quot;90.105.136.79&quot;</span> response-time=0.041
+90.105.136.79 - - [12/Feb/2023:14:22:02 +0000] <span class="hljs-string">&quot;GET /statics/css/font-awesome.css HTTP/1.1&quot;</span> 304 0 <span class="hljs-string">&quot;https://maximechallon.eu.pythonanywhere.com/pays&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36&quot;</span> <span class="hljs-string">&quot;90.105.136.79&quot;</span> response-time=0.002
+90.105.136.79 - - [12/Feb/2023:14:22:02 +0000] <span class="hljs-string">&quot;GET /autocompletion HTTP/1.1&quot;</span> 200 1690 <span class="hljs-string">&quot;https://maximechallon.eu.pythonanywhere.com/pays&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36&quot;</span> <span class="hljs-string">&quot;90.105.136.79&quot;</span> response-time=0.025
+</code></pre>
+
+        <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        <script async type="text/javascript">
+/* From extension marp-team.marp-vscode */
+(()=>{var F=Object.defineProperty;var d=(E,k)=>F(E,"name",{value:k,configurable:!0});(()=>{var E={676:(b,f,h)=>{b.exports=h(185)},185:(b,f)=>{"use strict";var h;h={value:!0};const S={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},M="data-marp-auto-scaling-wrapper",p="data-marp-auto-scaling-svg",l="data-marp-auto-scaling-container";class o extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const s=d(r=>([n])=>{const{width:e,height:t}=n.contentRect;this[r]={width:e,height:t},this.updateSVGRect()},"e");this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(s("containerSize")),this.wrapperObserver=new ResizeObserver((...r)=>{s("wrapperSize")(...r),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var s,r,n,e,t;this.shadowRoot.innerHTML=`
+<style>
+  svg[${p}] { display: block; width: 100%; height: auto; vertical-align: top; }
+  span[${l}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
+</style>
+<div ${M}>
+  <svg part="svg" ${p}>
+    <foreignObject><span ${l}><slot></slot></span></foreignObject>
+  </svg>
+</div>
+    `.split(/\n\s*/).join(""),this.wrapper=(s=this.shadowRoot.querySelector(`div[${M}]`))!==null&&s!==void 0?s:void 0;const i=this.svg;this.svg=(n=(r=this.wrapper)===null||r===void 0?void 0:r.querySelector(`svg[${p}]`))!==null&&n!==void 0?n:void 0,this.svg!==i&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=(t=(e=this.svg)===null||e===void 0?void 0:e.querySelector(`span[${l}]`))!==null&&t!==void 0?t:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:s}=this;s&&(s.style.display="inline",requestAnimationFrame(()=>{s.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(s){const r=d(()=>{const n=(()=>{const e=s.getPropertyValue("--preserve-aspect-ratio");return e?e.trim():`x${(({textAlign:t,direction:i})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if(t==="start"||t==="end"){let a=i==="rtl";return t==="end"&&(a=!a),a?"Max":"Min"}return"Mid"})(s)}YMid meet`})();n!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=n,this.updateSVGRect()),s===this.svgComputedStyle&&requestAnimationFrame(r)},"t");r()}updateSVGRect(){var s,r,n,e,t,i,a;let m=Math.ceil((r=(s=this.containerSize)===null||s===void 0?void 0:s.width)!==null&&r!==void 0?r:0);const v=Math.ceil((e=(n=this.containerSize)===null||n===void 0?void 0:n.height)!==null&&e!==void 0?e:0);this.dataset.downscaleOnly!==void 0&&(m=Math.max(m,(i=(t=this.wrapperSize)===null||t===void 0?void 0:t.width)!==null&&i!==void 0?i:0));const y=(a=this.svg)===null||a===void 0?void 0:a.querySelector(":scope > foreignObject");if(y?.setAttribute("width",`${m}`),y?.setAttribute("height",`${v}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${m} ${v}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=m<=0||v<=0?"0":""),this.container){const _=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=_.startsWith("xmid")||_.startsWith("xmax")?"auto":"0",this.container.style.marginRight=_.startsWith("xmi")?"auto":"0"}}}d(o,"s");const u=d((c,{attrs:s={},style:r})=>class extends c{constructor(...n){super(...n);for(const[e,t]of Object.entries(s))this.hasAttribute(e)||this.setAttribute(e,t);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const n=r?`<style>:host { ${r} }</style>`:"";let e="<slot></slot>";const{autoScaling:t}=this.dataset;t!==void 0&&(e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${t==="downscale-only"?"data-downscale-only":""}>${e}</marp-auto-scaling>`),this.shadowRoot.innerHTML=n+e}},"r");let g;const q=Symbol(),V="marpitSVGPolyfill:setZoomFactor,",z=Symbol();let A,C;function N(c){const s=typeof c=="object"&&c.target||document,r=typeof c=="object"?c.zoom:c;window[z]||(Object.defineProperty(window,z,{configurable:!0,value:!0}),window.addEventListener("message",({data:e,origin:t})=>{if(t===window.origin)try{if(e&&typeof e=="string"&&e.startsWith(V)){const[,i]=e.split(","),a=Number.parseFloat(i);Number.isNaN(a)||(C=a)}}catch(i){console.error(i)}}));let n=!1;Array.from(s.querySelectorAll("svg[data-marpit-svg]"),e=>{var t,i,a,m;e.style.transform||(e.style.transform="translateZ(0)");const v=r||C||e.currentScale||1;A!==v&&(A=v,n=v);const y=e.getBoundingClientRect(),{length:_}=e.children;for(let L=0;L<_;L+=1){const x=e.children[L];if(x.getScreenCTM){const w=x.getScreenCTM();if(w){const W=(i=(t=x.x)===null||t===void 0?void 0:t.baseVal.value)!==null&&i!==void 0?i:0,B=(m=(a=x.y)===null||a===void 0?void 0:a.baseVal.value)!==null&&m!==void 0?m:0,G=x.children.length;for(let T=0;T<G;T+=1){const P=x.children[T];if(P.tagName==="SECTION"){const{style:O}=P;O.transformOrigin||(O.transformOrigin=`${-W}px ${-B}px`),O.transform=`scale(${v}) matrix(${w.a}, ${w.b}, ${w.c}, ${w.d}, ${w.e-y.left}, ${w.f-y.top}) translateZ(0.0001px)`;break}}}}}}),n!==!1&&Array.from(s.querySelectorAll("iframe"),({contentWindow:e})=>{e?.postMessage(`${V}${n}`,window.origin==="null"?"*":window.origin)})}d(N,"h");function j({once:c=!1,target:s=document}={}){const r=navigator.vendor==="Apple Computer, Inc."?[N]:[];let n=!c;const e=d(()=>{for(const t of r)t({target:s});n&&window.requestAnimationFrame(e)},"s");return e(),()=>{n=!1}}d(j,"g"),A=1,C=void 0;const $=Symbol(),H=d((c=document)=>{if(typeof window>"u")throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const t=window[q];t||customElements.define("marp-auto-scaling",o);for(const i of Object.keys(S)){const a=`marp-${i}`,m=S[i].proto();g!=null||(g=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),g&&m!==HTMLElement?t||customElements.define(a,u(m,{style:S[i].style}),{extends:i}):(t||customElements.define(a,u(HTMLElement,S[i])),e.querySelectorAll(`${i}[is="${a}"]`).forEach(v=>{v.outerHTML=v.outerHTML.replace(new RegExp(`^<${i}`,"i"),`<${a}`).replace(new RegExp(`</${i}>$`,"i"),`</${a}>`)}))}window[q]=!0})(c),c[$])return c[$];const s=j({target:c}),r=d(()=>{s(),delete c[$]},"n"),n=Object.assign(r,{cleanup:r,update:()=>H(c)});return Object.defineProperty(c,$,{configurable:!0,value:n}),n},"v");f.browser=H,h=H,h=j}},k={};function R(b){var f=k[b];if(f!==void 0)return f.exports;var h=k[b]={exports:{}};return E[b](h,h.exports,R),h.exports}d(R,"__webpack_require__");var Z={};(()=>{"use strict";var b=R(676);function f(){let p,l;const o=d(()=>{const u=document.getElementById("__marp-vscode"),g=!!u;p!==g?(document.body.classList.toggle("marp-vscode",g),g?l=(0,b.browser)():(l?.cleanup(),l=void 0),p=g):g&&l?.update(),p?(u&&h(u),S()):M()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(o,100)),window.addEventListener("vscode.markdown.updateContent",o),o()}d(f,"preview");const h=d(p=>{p.querySelectorAll("[is]").forEach(l=>{if(l.nodeName.includes("-")||document.createElement(l.nodeName).constructor!==l.constructor)return;const{outerHTML:u}=l;l.outerHTML=u,console.debug("[marp-vscode] Custom element has been upgraded forcibly:",u.slice(0,u.indexOf(">")+1||void 0))})},"forceUpgradeCustomElements"),S=d(()=>{const p=document.querySelectorAll("style:not(#__marp-vscode-style):not(#_defaultStyles):not([data-marp-vscode-body])"),l=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');p.forEach(o=>{o.closest("#__marp-vscode")||(o.dataset.marpVscodeBody=o.textContent??"",o.textContent="")}),l.forEach(o=>{if(o.closest("#__marp-vscode"))return;const{href:u}=o;o.dataset.marpVscodeHref=u,o.removeAttribute("href")})},"removeStyles"),M=d(()=>{const p=document.querySelectorAll("style[data-marp-vscode-body]"),l=document.querySelectorAll("link[data-marp-vscode-href]");p.forEach(o=>{o.textContent=o.dataset.marpVscodeBody||"",delete o.dataset.marpVscodeBody}),l.forEach(o=>{o.href=o.dataset.marpVscodeHref||"",delete o.dataset.marpVscodeHref})},"restoreStyles");f()})()})();})();
+
+</script>
+
+    </body>
+    </html>
