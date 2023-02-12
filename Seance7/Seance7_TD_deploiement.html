@@ -352,6 +352,14 @@ sup {
     <body class="vscode-body vscode-light">
         <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
 <h2 id="séance-7--td-déploiement-dune-application-flask-dans-le-cloud">Séance 7 : TD: déploiement d'une application Flask dans le cloud</h2>
+<ol>
+<li><a href="#compte">Création d'un compte PythonAnyWhere</a></li>
+<li><a href="#description">Description de l'application exécutée par défaut</a></li>
+<li><a href="#clonage">Clonage du dépôt</a></li>
+<li><a href="#env">Installer un environnement et le configurer selon les requirements de l'application</a></li>
+<li><a href="#branchement">Branchement de l'application</a></li>
+<li><a href="#resultat">Résultat</a></li>
+</ol>
 <p><em>Notes préalables</em>:</p>
 <ul>
 <li>Afin que chacun puisse effectuer ce TD avec la même application, on n'utilisera pas les applications développées au fur et à mesure des séances précédentes sur les PC de chacun. Un dépôt <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_app_finale">https://github.com/MaximeChallon/CoursM2TNAH_Flask_app_finale</a> est disponible avec l'application qui est à déployer ici</li>
@@ -359,14 +367,14 @@ sup {
 <li>Une adresse mail vous sera demandé pour créer un compte, vous pouvez utiliser celle de l'école</li>
 <li>Le cloud provider sera <a href="http://PythonAnyWhere.eu">PythonAnyWhere.eu</a> pour ce TD car il est gratuit et très facile d'utilisation</li>
 </ul>
-<h3 id="création-dun-compte-pythonanywhere">Création d'un compte PythonAnyWhere</h3>
+<h3 id="création-dun-compte-pythonanywhere-">Création d'un compte PythonAnyWhere <a id="compte"></a></h3>
 <p>Se rendre à l'URL <a href="https://eu.pythonanywhere.com/registration/register/beginner/">https://eu.pythonanywhere.com/registration/register/beginner/</a> et créer un compte. Vous devriez arriver sur cette page :</p>
 <img src="img/D-1.jpg"   width="600">
 <p>Se rendre dans &quot;Web&quot; afin de créer une nouvelle application</p>
 <img src="img/D-2.jpg"   width="600">
 <p>Comme c'est un compte gratuit, il n'y a pas le choix du nom de domaine: <code>user.eu.pythonanywhere.com</code>. Sélectionner Flask, puis Python 3.10. Le chemin proposé pour l'installation de Flask importe peu, nous allons écraser ce dossier par la quite pour y cloner le dépôt à la place.</p>
 <img src="img/D-3.jpg"    width="600">
-<h3 id="description-de-lapplication-exécutée-par-défaut">Description de l'application exécutée par défaut</h3>
+<h3 id="description-de-lapplication-exécutée-par-défaut-">Description de l'application exécutée par défaut <a id="description"></a></h3>
 <p>L'application de base proposée par PythonAnyWhere est fonctionnelle:</p>
 <img src="img/D-4.jpg"   width="600">
 <p>Faisons un tour de son fonctionnement et des différents fichiers qui permettent de la faire tourner. Dans l'onglet &quot;Web&quot; et à la section code, on trouve:</p>
@@ -394,7 +402,7 @@ project_home = <span class="hljs-string">&#x27;/home/user/factbook&#x27;</span>
 <li><strong>Log files</strong> : différents types de logs sont stockés, et permettent de suivre, même plusiuers jours après, les différents evénements survenus sur l'application (que ce soient les erreurs ou les simples accès)</li>
 <li><strong>Statics</strong>: endroit pour y placer des fichiers CSS par exemple; mieux vaut privilégier leur placement dans l'application directement</li>
 </ul>
-<h3 id="clonage-du-dépôt">Clonage du dépôt</h3>
+<h3 id="clonage-du-dépôt-">Clonage du dépôt <a id="clonage"></a></h3>
 <p>Aller dans l'onglet &quot;Consoles&quot;. Ouvrir une console &quot;Bash&quot;.</p>
 <p>Exécuter les commandes suivantes pour se situer:</p>
 <pre><code class="language-bash">13:48 ~ $ <span class="hljs-built_in">pwd</span>
@@ -421,7 +429,7 @@ CoursM2TNAH_Flask_app_finale  README.txt  factbook
 
 Console closed.
 </code></pre>
-<h3 id="installer-un-environnement-et-le-configurer-selon-les-requirements-de-lapplication">Installer un environnement et le configurer selon les requirements de l'application</h3>
+<h3 id="installer-un-environnement-et-le-configurer-selon-les-requirements-de-lapplication-">Installer un environnement et le configurer selon les requirements de l'application <a id="env"></a></h3>
 <p>Rouvrir une console Bash, et exécuter :</p>
 <pre><code class="language-bash">13:55 ~ $ mkvirtualenv <span class="hljs-built_in">env</span> --python=/usr/bin/python3.10
 created virtual environment CPython3.10.5.final.0-64 <span class="hljs-keyword">in</span> 9829ms
@@ -491,7 +499,7 @@ Successfully installed Flask-2.2.2 Flask-Login-0.6.2 Flask-SQLAlchemy-3.0.2 Flas
 <p>Le travail sur l'environnement virtuel est terminé, la console peut être fermée.</p>
 <p>Dans l'onglet &quot;Web&quot;, il faut maintenant indiquer le chemin vers cet environnement dans la section &quot;Virtualenv&quot;:
 <code>/home/user/.virtualenvs/env</code>, où <code>user</code> est votre nom d'utilisateur.</p>
-<h3 id="branchement-de-lapplication">Branchement de l'application</h3>
+<h3 id="branchement-de-lapplication-">Branchement de l'application <a id="branchement"></a></h3>
 <p>Il faut d'abord ajouter 2 fichiers essentiels et non présents dans le dépôt:</p>
 <ul>
 <li><code>.env</code></li>
@@ -542,7 +550,7 @@ Collecting dnspython&gt;=1.15.0
 Installing collected packages: idna, dnspython, email_validator
 Successfully installed dnspython-2.3.0 email_validator-1.3.1 idna-3.4
 </code></pre>
-<h3 id="résultat">Résultat</h3>
+<h3 id="résultat-">Résultat <a id="resultat"></a></h3>
 <p>En relançant l'application, le site <code>https://user.eu.pythonanywhere.com</code> fonctionne correctement et renvoie bien la page d'accueil <code>pays</code>.</p>
 <img src="img/D-8.jpg"   width="600">
 <p>Les logs sont très propres, et cette fois-ci, comme l'application est en production, ce sont de vrais logs avec des IPS non locales:</p>
