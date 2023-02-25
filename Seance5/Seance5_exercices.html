@@ -88,41 +88,6 @@ body.marp-vscode blockquote {
   }
 }
 
-/* From extension ms-toolsai.jupyter */
-/* These classnames are inherited from bootstrap, but are present in most notebook renderers */
-
-.alert {
-    width: auto;
-    padding: 1em;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-.alert > *:last-child {
-    margin-bottom: 0;
-}
-#preview > .alert:last-child {
-    /* Prevent this being set to zero by the default notebook stylesheet */
-    padding-bottom: 1em;
-}
-
-.alert-success {
-    /* Note there is no suitable color available, so we just copy "info" */
-    background-color: var(--theme-info-background);
-    color: var(--theme-info-foreground);
-}
-.alert-info {
-    background-color: var(--theme-info-background);
-    color: var(--theme-info-foreground);
-}
-.alert-warning {
-    background-color: var(--theme-warning-background);
-    color: var(--theme-warning-foreground);
-}
-.alert-danger {
-    background-color: var(--theme-error-background);
-    color: var(--theme-error-foreground);
-}
-
 </style>
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
@@ -399,8 +364,13 @@ sup {
 </ol>
 <h3 id="rev-1--ajout-de-ressources-">REV-1 : Ajout de ressources <a id="ressources"></a></h3>
 <p>Ecrire une nouvelle route <code>/insertions/ressource</code> qui permette d'insérer une nouvelle ressource dans la base de données du factbook.</p>
-<p>Le résultat attendu est le suivant (avec une transaction réussie au clic sur <code>Insérer</code>):
-<img src="img/REV-1.jpg" alt=""></p>
+<p><em>Résultat attendu</em>: (avec une transaction réussie au clic sur <code>Insérer</code>)</p>
+<p><img src="img/REV-1.jpg" alt=""></p>
+<p><em>Rendu possible</em>:</p>
+<ul>
+<li>un .zip de l'application (sans le dossier d'environnement virtuel)</li>
+<li>un lien vers un dépôt Github</li>
+</ul>
 <h3 id="rev-2--suppressions">REV-2 : Suppressions<a id="suppressions"></a></h3>
 <p>Sur le même principe que les routes <code>/insertions</code>, créer deux routes <code>/suppressions</code>:</p>
 <h4 id="suppression-de-pays-">Suppression de pays <a id="pays"></a></h4>
@@ -411,6 +381,20 @@ sup {
 </ul>
 <h4 id="suppression-de-ressources-">Suppression de ressources <a id="res"></a></h4>
 <p>La route <code>/suppressions/ressource</code> fonctionnera sur le même principe que <code>/suppressions/pays</code>.</p>
+<p><em>Résultat attendu</em>:</p>
+<ul>
+<li>pour <code>/suppressions/pays</code></li>
+</ul>
+<p><img src="img/REV-2_1.jpg" alt=""></p>
+<ul>
+<li>pour <code>/suppressions/ressource</code></li>
+</ul>
+<p><img src="img/REV-2_2.jpg" alt=""></p>
+<p><em>Rendu possible</em>:</p>
+<ul>
+<li>un .zip de l'application (sans le dossier d'environnement virtuel)</li>
+<li>un lien vers un dépôt Github</li>
+</ul>
 <h3 id="app-1--propositions-de-recherche-instantanées-">APP-1 : Propositions de recherche instantanées <a id="propositions"></a></h3>
 <p><em>Note</em>: Exercice complexe mêlant routes Flask, Javascript et appels asynchrones, CSS, HTML et SQLAlchemy. Son objectif est de vous orienter progressivement vers des solutions techniques et méthodologiques qui seront nécessaires dans le devoir.</p>
 <p>Il est courant, sur les sites Web, de trouver des champs de recherche où les propositions s'affinent en temps réel selon les caractères rentrés par l'utilisateur.</p>
@@ -420,10 +404,17 @@ sup {
 <p><em>Pistes de réflexion</em>:</p>
 <ul>
 <li>Après le chargement de n'importe quelle route (par exemple <code>pays</code>), le script Javascript de la barre de recherche s'exécute pour aller récupérer la liste des pays présents dans la base de données du Factbook</li>
-<li>Aucune route déjà existante dans l'application ne sera modifiée; en revanche, il est possible d'en ajouter au besoin</li>
+<li>Aucune route déjà existante dans l'application ne sera modifiée; en revanche, il est possible d'en ajouter au besoin pour récupérer des données</li>
 <li>La majeure partie du développement pour cet exercice aura lieu dans le template <code>conteneur.html</code>, en manipulant HTML, CSS et Javascript</li>
 <li>De nombreuses pistes techniques se trouvent dans les forums ou sites internet : il ne faut pas hésiter à les consulter, ce sont des ressources très utiles pour tout développeur</li>
 <li>Penser à identifier le champ <code>&lt;input&gt;</code> du formulaire de recherche rapide afin de pouvoir pointer dessus avec JavaScript</li>
+</ul>
+<p><em>Résultat attendu</em>:</p>
+<p><img src="img/APP-1_resultat.jpg" alt=""></p>
+<p><em>Rendu possible</em>:</p>
+<ul>
+<li>un .zip de l'application (sans le dossier d'environnement virtuel)</li>
+<li>un lien vers un dépôt Github</li>
 </ul>
 <h3 id="ref-1--pages-derreurs-">REF-1 : Pages d'erreurs <a id="pages"></a></h3>
 <p>Pour une meilleure expérience utilisateur, il est nécessaire de renvoyer des pages d'erreur plutôt qu'une erreur serveur. Pour cela, Flask offre bien sûr une <code>HTTPException</code> qui comprend le code d'erreur HTTP, mais offre aussi un décorateur très utile pour exécuter une fonction quand une erreur survient, et donc de renvoyer un template spécifique.</p>
@@ -434,8 +425,13 @@ sup {
 <li>503</li>
 </ul>
 <p>Pour les erreurs 5XX, un rollback peut être nécessaire afin de rendre la base de données dans son état initial.</p>
-<p>Le résultat attendu est le suivant pour l'URL <code>/pays/Albanian</code>: (une 404 serait préférable, mais en mode Débugage seule la 500 sera retournée)
-<img src="img/REF-1_resultat.jpg" alt=""></p>
+<p><em>Résultat attendu</em>: pour l'URL <code>/pays/Albanian</code>: (une 404 serait préférable, mais en mode Débugage seule la 500 sera retournée)</p>
+<p><img src="img/REF-1_resultat.jpg" alt=""></p>
+<p><em>Rendu possible</em>:</p>
+<ul>
+<li>un .zip de l'application (sans le dossier d'environnement virtuel)</li>
+<li>un lien vers un dépôt Github</li>
+</ul>
 
         
         <script async type="text/javascript">
