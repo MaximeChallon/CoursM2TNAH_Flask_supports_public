@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension marp-team.marp-vscode */
+#__marp-vscode {
+  all: initial;
+}
+
+/* Override VS Code default CSS rules reverting to initial
+   https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
+body.marp-vscode {
+  padding: 0;
+}
+
+body.marp-vscode img {
+  max-width: unset;
+  max-height: unset;
+}
+
+body.marp-vscode a,
+body.marp-vscode a:hover,
+body.marp-vscode code {
+  color: unset;
+}
+
+body.marp-vscode blockquote {
+  background: unset;
+  border-color: unset;
+}
+
+@media screen {
+  body.marp-vscode {
+    overflow-y: scroll;
+  }
+
+  #__marp-vscode [data-marp-vscode-slide-wrapper] {
+    margin: 20px;
+  }
+
+  #__marp-vscode svg[data-marpit-svg] {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+    display: block;
+    margin: 0;
+  }
+
+  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+  #code-csp-warning {
+    background-color: #444;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+    color: white;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    margin: 16px;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    word-wrap: break-word;
+  }
+
+  #code-csp-warning:hover {
+    text-decoration: none;
+    background-color: #007acc;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  }
+}
+
+@media print {
+  body.marp-vscode #code-csp-warning {
+    display: none;
+  }
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        <style>
+/*********************************************************************
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+For more information, please refer to <http://unlicense.org/>
+*********************************************************************/
+
+/*
+WiTeX
+https://github.com/AndrewBelt/WiTeX
+*/
+
+
+/* Latin Modern (LaTeX default) font */
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
+}
+
+/* Page Layout */
+
+body {
+	background: none;
+	font-size: 14pt;
+	font-family: 'Latin Modern Roman', serif;
+	color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	border: none;
+	font-weight: bold;
+}
+
+a, a:visited {
+	color: #a00;
+}
+
+a.new, a.new:visited {
+	color: black;
+}
+
+ul {
+	list-style: disc;
+}
+
+#mw-navigation, #mw-page-base, #mw-head-base, #footer {
+	/* nuke everything but the content */
+	display: none;
+}
+
+/* Content Box */
+
+.mw-body {
+	max-width: 720px;
+	margin: 1em auto;
+}
+
+#content, div#content {
+	border: none;
+	color: black;
+}
+
+#firstHeading, #siteSub {
+	text-align: center;
+	display: block;
+}
+
+#siteSub {
+	margin-top: -0.5em;
+	margin-bottom: 4em;
+}
+
+/* Article Body */
+
+.mw-body-content {
+	font-size: inherit;
+	text-align: justify;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	line-height: 1.5em;
+}
+
+.mw-body {
+	padding: 2em 0;
+}
+
+.mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6, div#content h1, div#content h2, div#content #firstHeading {
+	font-family: inherit;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.mw-body h1, div#content h1 {
+	font-size: 2em;
+}
+
+.mw-body h2, div#content h2 {
+	font-size: 1.5em;
+}
+
+.mw-body h3 {
+	font-size: 1.2em;
+}
+
+.mw-body h4 {
+	font-size: 1.1em;
+}
+
+.mw-body h5, .mw-body h6 {
+	font-size: 1.0em;
+}
+
+.mw-body p {
+	margin: 0;
+}
+
+.mw-body p + p {
+	text-indent: 2em;
+}
+
+.mw-editsection {
+	/* hide more non-content */
+	display: none;
+}
+
+table.ambox {
+	margin-bottom: 1em;
+}
+
+dl dd {
+	/* center definitions (most useful for display equations) */
+	text-align: center;
+}
+
+span.texhtml {
+	/* revert inline math to default font */
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+/* Table of Contents */
+
+#toc, .toc {
+	border: none;
+	padding: 0;
+	background: none;
+	font-size: inherit;
+	/* span 100% of the width */
+	display: block;
+}
+
+.mw-body #toc h2, .mw-body .toc h2 {
+	font-family: inherit;
+	font-size: 1.5em;
+}
+
+#toc h2, .toc h2 {
+	display: block;
+}
+
+#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle {
+	text-align: left;
+}
+
+.toctoggle {
+	display: none;
+}
+
+/* Figures */
+
+div.tright {
+	margin: 0.5em 0 0.5em 1.5em;
+}
+
+div.tleft {
+	margin: 0.5em 1.5em 0.5em 0;
+}
+
+/* Code */
+
+.mw-code {
+	margin: 1em 0;
+}
+
+pre, code {
+	font-family: "Latin Modern Mono", monospace !important;
+}
+
+sup {
+	text-indent: 0;
+}
+</style>
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
+<h2 id="séance-7--td-rendre-un-graphique-de-manière-asynchrone">Séance 7 : TD: rendre un graphique de manière asynchrone</h2>
+<ol>
+<li><a href="#init">Initialisation de l'application</a>
+<ol>
+<li><a href="#bdd">Télécharger la base de données</a></li>
+<li><a href="#env">Installer un environnement virtuel et y installer les librairies nécessaires</a></li>
+<li><a href="#var">Indiquer les variables d'environnement</a></li>
+</ol>
+</li>
+<li><a href="#code">Etude du code de la route concernée</a>
+<ol>
+<li><a href="#template">Template <code>templates/pages/graphiques/ressources_pays.html</code></a></li>
+<li><a href="#route">Route <code>/graphiques/ressources_pays</code> de <code>routes/graphiques.py</code></a></li>
+<li><a href="#schema">Vues schématiques du rendu graphique</a></li>
+</ol>
+</li>
+<li><a href="#modifier">Modifier le code</a></li>
+</ol>
+<p><em>Notes préalables</em>:</p>
+<ul>
+<li>Afin que chacun puisse effectuer ce TD avec la même application de départ, on n'utilisera pas les applications développées au fur et à mesure des séances précédentes sur les PC de chacun. Un dépôt <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_app_finale">https://github.com/MaximeChallon/CoursM2TNAH_Flask_app_finale</a> est disponible avec l'application qui est à déployer ici</li>
+<li>Le but de ce TD est d'avoir exactement le même rendu que la route <code>/graphiques/ressources_pays</code> développée dans l'exercice APP-2 de la séance 6. Seul le code sera modifié pour effectuer un appel asynchrone à une route Flask afin de récupérer les données. Le code actuel utilise des variables Jinja pour remplir les données du graphique, ce qui les met en clair dans le code source HTML de la page.</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">new</span> <span class="hljs-title class_">Chart</span>(ctx, {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;polarArea&#x27;</span>,
+    <span class="hljs-attr">data</span>: {
+        <span class="hljs-attr">labels</span>: {{labels |tojson}},
+        <span class="hljs-attr">datasets</span>: [{
+            <span class="hljs-attr">data</span>: {{nombres |tojson}}
+        }]
+    },
+    <span class="hljs-attr">options</span>: {
+    }
+});
+</code></pre>
+<pre><code class="language-javascript"><span class="hljs-keyword">new</span> <span class="hljs-title class_">Chart</span>(ctx, {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;polarArea&#x27;</span>,
+    <span class="hljs-attr">data</span>: {
+        <span class="hljs-attr">labels</span>: [<span class="hljs-string">&quot;China&quot;</span>, <span class="hljs-string">&quot;Turkey&quot;</span>, <span class="hljs-string">&quot;France&quot;</span>, <span class="hljs-string">&quot;United States&quot;</span>, <span class="hljs-string">&quot;Canada&quot;</span>, <span class="hljs-string">&quot;Australia&quot;</span>, <span class="hljs-string">&quot;Namibia&quot;</span>, <span class="hljs-string">&quot;Spain&quot;</span>, <span class="hljs-string">&quot;United Kingdom&quot;</span>, <span class="hljs-string">&quot;South Africa&quot;</span>, <span class="hljs-string">&quot;Cote d\u0027Ivoire&quot;</span>, <span class="hljs-string">&quot;Burundi&quot;</span>, <span class="hljs-string">&quot;Brazil&quot;</span>, <span class="hljs-string">&quot;Bosnia and Herzegovina&quot;</span>, <span class="hljs-string">&quot;Serbia&quot;</span>, <span class="hljs-string">&quot;Portugal&quot;</span>, <span class="hljs-string">&quot;Greenland&quot;</span>, <span class="hljs-string">&quot;Ukraine&quot;</span>, <span class="hljs-string">&quot;Mali&quot;</span>, <span class="hljs-string">&quot;Kazakhstan&quot;</span>],
+        <span class="hljs-attr">datasets</span>: [{
+            <span class="hljs-attr">data</span>: [<span class="hljs-number">36</span>, <span class="hljs-number">21</span>, <span class="hljs-number">21</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">19</span>, <span class="hljs-number">18</span>, <span class="hljs-number">18</span>, <span class="hljs-number">17</span>, <span class="hljs-number">17</span>, <span class="hljs-number">17</span>, <span class="hljs-number">17</span>, <span class="hljs-number">17</span>, <span class="hljs-number">17</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">15</span>, <span class="hljs-number">15</span>, <span class="hljs-number">15</span>]
+        }]
+    },
+    <span class="hljs-attr">options</span>: {
+    }
+});
+</code></pre>
+<p><img src="img/APP-2_resultat.jpg" alt=""></p>
+<h3 id="initialisation-de-lapplication-">Initialisation de l'application <a id="init"></a></h3>
+<p>A l'intérieur d'un dossier (par exemple ses Documents), cloner le dépôt git de l'application <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_app_finale">https://github.com/MaximeChallon/CoursM2TNAH_Flask_app_finale</a>:</p>
+<pre><code class="language-git">git clone https://github.com/MaximeChallon/CoursM2TNAH_Flask_app_finale.git
+
+Cloning into 'CoursM2TNAH_Flask_app_finale'...
+remote: Enumerating objects: 62, done.
+remote: Counting objects: 100% (62/62), done.
+remote: Compressing objects: 100% (42/42), done.
+remote: Total 62 (delta 15), reused 62 (delta 15), pack-reused 0
+Unpacking objects: 100% (62/62), done.
+
+</code></pre>
+<p>Renommer ce dossier en <code>graphique_asynchrone</code>:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">mv</span> CoursM2TNAH_Flask_app_finale graphique_asynchrone
+</code></pre>
+<p>Il faut maintenant configurer l'application pour qu'elle puisse fonctionner:</p>
+<ul>
+<li>il manque la base de données</li>
+<li>le <code>.env</code> est à construire</li>
+<li>il faudra mettre un environnement virtuel et y installer les dépendances nécessaires</li>
+</ul>
+<h4 id="télécharger-la-base-de-données-">Télécharger la base de données <a id="bdd"></a></h4>
+<p>La base de données à utiliser se trouve à l'URL suivante: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/blob/master/factbook_users3.sqlite">https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/blob/master/factbook_users3.sqlite</a>. Comme depuis le début duc ours, elle sera à placer à la racine de l'application, donc dans le dossier <code>graphique_asynchrone/</code>.</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> graphique_asynchrone/
+</code></pre>
+<p>Pour la télécharger, deux options:</p>
+<ul>
+<li>l'option graphique en cliquant sur Télécharger sur Github, puis la déplacer vers le dossier <code>graphique_asynchrone</code></li>
+<li>utiliser <code>wget</code> dans le terminal (pour Windows, si l'utilitaire n'est pas installé, l'installer via l'exécutable disponible <a href="https://sourceforge.net/projects/gnuwin32/files/wget/1.11.4-1/wget-1.11.4-1-setup.exe/download?use_mirror=netix">ici</a>)</li>
+</ul>
+<p>Avec <code>wget</code>, faire ce qui suit:</p>
+<pre><code class="language-bash">wget https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/blob/master/factbook_users3.sqlite
+
+--2023-02-25 09:36:13--  https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/blob/master/factbook_users3.sqlite
+Resolving github.com... 140.82.121.4
+Connecting to github.com|140.82.121.4|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: `factbook_users3.sqlite<span class="hljs-string">&#x27;        [ &lt;=&gt; ] 138,598     --.-K/s   in 0.04s
+2023-02-25 09:36:14 (3.09 MB/s) - `factbook_users3.sqlite&#x27;</span> saved [138598]            ✓
+</code></pre>
+<h4 id="installer-un-environnement-virtuel-et-y-installer-les-librairies-nécessaires-">Installer un environnement virtuel et y installer les librairies nécessaires <a id="env"></a></h4>
+<pre><code class="language-bash">virtualenv <span class="hljs-built_in">env</span> -p python3
+
+
+created virtual environment CPython3.11.0.final.0-64 <span class="hljs-keyword">in</span> 6970ms
+  creator CPython3Windows(dest=\.......\graphique_asynchrone\<span class="hljs-built_in">env</span>, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=\.....\virtualenv)
+    added seed packages: pip==22.3.1, setuptools==66.1.1, wheel==0.38.4
+  activators BashActivator,BatchActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
+
+</code></pre>
+<p>Pour toute variante d'OS, voir le cours de la séance 1.</p>
+<p>Activer cet environnement avec <code>source env/bin/activate</code> ou <code>source env/Scripts/activate</code>.</p>
+<p>Installer les dépendances nécessaires à l'application. Ces dépendances sont listées, avec leur numéro de version, dans le fichier <code>requirements.txt</code>. Pour les installer, exécuter la commande suivante:</p>
+<pre><code class="language-bash">pip install -r requirements.txt
+
+Collecting click==8.1.3
+  Using cached click-8.1.3-py3-none-any.whl (96 kB)
+Collecting colorama==0.4.6
+  Using cached colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Collecting Flask==2.2.2
+  Using cached Flask-2.2.2-py3-none-any.whl (101 kB)
+Collecting Flask-Login==0.6.2
+  Using cached Flask_Login-0.6.2-py3-none-any.whl (17 kB)
+Collecting Flask-SQLAlchemy==3.0.2
+  Using cached Flask_SQLAlchemy-3.0.2-py3-none-any.whl (24 kB)
+Collecting Flask-WTF==1.0.1
+  Using cached Flask_WTF-1.0.1-py3-none-any.whl (12 kB)
+Collecting greenlet==2.0.1
+  Using cached greenlet-2.0.1-cp311-cp311-win_amd64.whl (191 kB)
+Collecting itsdangerous==2.1.2
+  Using cached itsdangerous-2.1.2-py3-none-any.whl (15 kB)
+Collecting Jinja2==3.1.2
+  Using cached Jinja2-3.1.2-py3-none-any.whl (133 kB)
+Collecting MarkupSafe==2.1.1
+  Using cached MarkupSafe-2.1.1-py3-none-any.whl
+Collecting python-dotenv==0.21.0
+  Using cached python_dotenv-0.21.0-py3-none-any.whl (18 kB)
+Collecting SQLAlchemy==1.4.44
+  Using cached SQLAlchemy-1.4.44-cp311-cp311-win_amd64.whl (1.6 MB)
+Collecting Werkzeug==2.2.2
+  Using cached Werkzeug-2.2.2-py3-none-any.whl (232 kB)
+Collecting WTForms==3.0.1
+  Using cached WTForms-3.0.1-py3-none-any.whl (136 kB)
+Installing collected packages: python-dotenv, MarkupSafe, itsdangerous, greenlet, colorama, WTForms, Werkzeug, SQLAlchemy, Jinja2, click, Flask, Flask-WTF, Flask-SQLAlchemy, Flask-Login
+Successfully installed Flask-2.2.2 Flask-Login-0.6.2 Flask-SQLAlchemy-3.0.2 Flask-WTF-1.0.1 Jinja2-3.1.2 MarkupSafe-2.1.1 SQLAlchemy-1.4.44 WTForms-3.0.1 Werkzeug-2.2.2 click-8.1.3 colorama-0.4.6 greenlet-2.0.1 itsdangerous-2.1.2 python-dotenv-0.21.0
+</code></pre>
+<h4 id="indiquer-les-variables-denvironnement-">Indiquer les variables d'environnement <a id="var"></a></h4>
+<p>Enfin, il manque le fichier <code>.env</code> qui contient les variables d'environnement.  CRéer ce fichier à côté de la base de données, dans le dossier <code>graphique_asynchrone</code>, et le remplir avec les variables suivantes:</p>
+<ul>
+<li>DEBUG : la valeur sera True</li>
+<li>SQLALCHEMY_DATABASE_URI : mettre le chemin vers factbook_users3.sqlite</li>
+<li>RESOURCES_PER_PAGE : 10</li>
+<li>PAYS_PER_PAGE : 10</li>
+<li>SQLALCHEMY_ECHO : False</li>
+<li>WTF_CSRF_ENABLE: True</li>
+<li>SECRET_KEY : mettre une clé</li>
+</ul>
+<p>Il est temps de lancer l'application : <code>python run.py</code>.</p>
+<p>L'application doit normalement renvoyer une erreur: <code>Exception: Install 'email_validator' for email validation support.</code>. En lisant l'erreur, on comprend que la librairie email_valdator manque, il suffit donc de l'installer:</p>
+<pre><code class="language-bash">pip install email_validator
+
+Collecting email_validator
+  Using cached email_validator-1.3.1-py2.py3-none-any.whl (22 kB)
+Collecting dnspython&gt;=1.15.0
+  Using cached dnspython-2.3.0-py3-none-any.whl (283 kB)
+Collecting idna&gt;=2.0.0
+  Using cached idna-3.4-py3-none-any.whl (61 kB)
+Installing collected packages: idna, dnspython, email_validator
+Successfully installed dnspython-2.3.0 email_validator-1.3.1 idna-3.4
+</code></pre>
+<p><code>python run.py</code>: tout fonctionne, on peut naviguer sur le site. Pour voir la route <code>/graphiques/ressources_pays</code>, il faudra supprimer le <code>@login_required</code> présent dans le code; la page est actuellement protégée par une connexion utilisateur.</p>
+<p>Dans le fichier <code>app/routes/graphiques.py</code>, supprimer <code>@login_required</code>. La route sera alors accessible sans avoir besoin d'être connecté.</p>
+<h3 id="etude-du-code-de-la-route-concernée-">Etude du code de la route concernée <a id="code"></a></h3>
+<p>Avant d'effectuer des modifications dans le code, il faut comprendre l'actuel, en partant du template, puisque c'est le template qui est le plus proche du résultat affiché.</p>
+<h4 id="template-templatespagesgraphiquesressources_payshtml">Template <code>templates/pages/graphiques/ressources_pays.html</code><a id="template"></a></h4>
+<p>Le graphique est créé par la librairie Javascript <a href="chartjs.org">Chart.js</a>. Sans même lire la documentation, on comprend que l'objet Chart n'a pas besoin que de deux variables pour fonctionner. Ces deux variables sont les données à ingérer pour rendre le graphique:</p>
+<ul>
+<li>il y a les labels, c'est à dire les légendes de chaque donnée du graphique</li>
+<li>il y a les data du datasets, c'est à dire les valeurs numériques que le graphique devra rendre</li>
+</ul>
+<p>Actuellement, les valeurs arrivent par deux variables Jinja (<code>labels</code> et <code>nombres</code>)  provenant directement de la route. En d'autres termes, le chargement de la page se fait de manière synchrone (elle ne s'affiche que quand les données ont été calculées du côté de la route: plus il y aura de données à calculer, plus le temps de chargement sera long). De plus, si on regarde le code source de la page, les données se retrouvent en clair dans le Javascript!</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">new</span> <span class="hljs-title class_">Chart</span>(ctx, {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;polarArea&#x27;</span>,
+    <span class="hljs-attr">data</span>: {
+        <span class="hljs-attr">labels</span>: [<span class="hljs-string">&quot;China&quot;</span>, <span class="hljs-string">&quot;Turkey&quot;</span>, <span class="hljs-string">&quot;France&quot;</span>, <span class="hljs-string">&quot;United States&quot;</span>, <span class="hljs-string">&quot;Canada&quot;</span>, <span class="hljs-string">&quot;Australia&quot;</span>, <span class="hljs-string">&quot;Namibia&quot;</span>, <span class="hljs-string">&quot;Spain&quot;</span>, <span class="hljs-string">&quot;United Kingdom&quot;</span>, <span class="hljs-string">&quot;South Africa&quot;</span>, <span class="hljs-string">&quot;Cote d\u0027Ivoire&quot;</span>, <span class="hljs-string">&quot;Burundi&quot;</span>, <span class="hljs-string">&quot;Brazil&quot;</span>, <span class="hljs-string">&quot;Bosnia and Herzegovina&quot;</span>, <span class="hljs-string">&quot;Serbia&quot;</span>, <span class="hljs-string">&quot;Portugal&quot;</span>, <span class="hljs-string">&quot;Greenland&quot;</span>, <span class="hljs-string">&quot;Ukraine&quot;</span>, <span class="hljs-string">&quot;Mali&quot;</span>, <span class="hljs-string">&quot;Kazakhstan&quot;</span>],
+        <span class="hljs-attr">datasets</span>: [{
+            <span class="hljs-attr">data</span>: [<span class="hljs-number">36</span>, <span class="hljs-number">21</span>, <span class="hljs-number">21</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">19</span>, <span class="hljs-number">18</span>, <span class="hljs-number">18</span>, <span class="hljs-number">17</span>, <span class="hljs-number">17</span>, <span class="hljs-number">17</span>, <span class="hljs-number">17</span>, <span class="hljs-number">17</span>, <span class="hljs-number">17</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">15</span>, <span class="hljs-number">15</span>, <span class="hljs-number">15</span>]
+        }]
+    },
+    <span class="hljs-attr">options</span>: {
+    }
+});
+</code></pre>
+<h4 id="route-graphiquesressources_pays-de-routesgraphiquespy">Route <code>/graphiques/ressources_pays</code> de <code>routes/graphiques.py</code><a id="route"></a></h4>
+<p>La route récupère les 20 pays qui ont le plus de ressources. Pour remplir les variables Jinja, <code>labels</code> et <code>nombres</code> sont précalculés pour être utilisés directement dans le Chart JS.</p>
+<p>En cas de lenteurs sur la base de données, ou de calculs plus longs à effectuer, l'utilisateur n'aura aucune réponse à l'écran.</p>
+<h4 id="vues-schématiques-du-rendu-graphique">Vues schématiques du rendu graphique<a id="schema"></a></h4>
+<p>Actuellement, voici une vue schématique du rendu du graphique depuis l'appel utilisateur jusqu'à l'affichage.</p>
+<p><img src="img/G-1.png" alt=""></p>
+<p>L'objectif est d'obtenir un déroulé qui permette de donner une première réponse à l'utilisateur, et de lui indiquer que les données vont arriver et sont en cours de calcul. Cela évitera de perdre un utilisateur sur le site en raison de temps de réponse trop longs.</p>
+<p><img src="img/G-2.png" alt=""></p>
+<h3 id="modifier-le-code">Modifier le code<a id="modifier"></a></h3>
+<p>La première étape consiste à sortir l'appel aux données de la route <code>graphiques/ressources_pays</code>, et de mettre ces données dans une nouvelle route. C'est cette nouvelle route qui sera ensuite appelée par JS.</p>
+<pre><code class="language-python"><span class="hljs-comment"># routes/graphiques.py</span>
+
+<span class="hljs-keyword">from</span> ..app <span class="hljs-keyword">import</span> app, db
+<span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> render_template, request, flash
+<span class="hljs-keyword">from</span> flask_login <span class="hljs-keyword">import</span> login_required
+<span class="hljs-keyword">from</span> ..models.factbook <span class="hljs-keyword">import</span> Country, country_resources
+<span class="hljs-keyword">from</span> sqlalchemy <span class="hljs-keyword">import</span> func, text
+
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/graphiques/ressources_pays&quot;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">graphiques_ressources_pays</span>():
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/graphiques/ressources_pays.html&quot;</span>)
+
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/graphiques/ressources_pays_donnees&quot;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">graphiques_ressources_pays_donnees</span>():
+    donnees_brutes = db.session.query(Country, func.count(country_resources.c.resource).label(<span class="hljs-string">&#x27;total&#x27;</span>))\
+        .join(country_resources, )\
+        .group_by(Country.<span class="hljs-built_in">id</span>)\
+        .order_by(text(<span class="hljs-string">&#x27;total DESC&#x27;</span>))\
+        .limit(<span class="hljs-number">20</span>)
+
+    donnees = []
+
+    <span class="hljs-keyword">for</span> pays <span class="hljs-keyword">in</span> donnees_brutes.<span class="hljs-built_in">all</span>():
+        donnees.append({
+            <span class="hljs-string">&quot;label&quot;</span>: pays[<span class="hljs-number">0</span>].name,
+            <span class="hljs-string">&quot;nombre&quot;</span>: pays.total
+        })
+
+    <span class="hljs-keyword">return</span> donnees
+</code></pre>
+<p>La nouvelle route renvoie les données structurées en une liste d'objets comprenant chacun les deux clés <code>label</code> et <code>nombre</code>. C'est JS qui se chargera de parser les objets et de les utiliser.</p>
+<p>Il faut ensuite modifier le JS dans le template <code>templates/pages/graphiques/ressources_pays.html</code> afin d'enlever les variables Jinja et d'afficher dans un premier temps un graphique vide grâce à des listes vides sur labels et data.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> ctx = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;graphique&#x27;</span>);
+
+<span class="hljs-keyword">new</span> <span class="hljs-title class_">Chart</span>(ctx, {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;polarArea&#x27;</span>,
+    <span class="hljs-attr">data</span>: {
+        <span class="hljs-attr">labels</span>: [],
+        <span class="hljs-attr">datasets</span>: [{
+            <span class="hljs-attr">data</span>: []
+        }]
+    },
+    <span class="hljs-attr">options</span>: {
+    }
+});
+</code></pre>
+<p>Afin d'aller chercher les données, il faut appeler l'URL de la route <code>graphiques_ressources_pays_donnees</code>, puis récupérer les données et les ajouter dans le graphique.
+En JS, c'est <code>fetch()</code> qui permet d'appeler une URL. On récupère ensuite la réponse avec <code>.then(response)</code> et on peut enfin utiliser les données avec <code>.then(data)</code>.</p>
+<pre><code class="language-js">...
+
+<span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;{{url_for(&quot;graphiques_ressources_pays_donnees&quot;)}}&#x27;</span>)
+    .<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">response</span>) =&gt;</span> {
+        <span class="hljs-keyword">return</span> response.<span class="hljs-title function_">json</span>();
+    })
+    .<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+        <span class="hljs-comment">// calcul des labels et des nombres</span>
+        <span class="hljs-keyword">var</span> labels = [];
+        <span class="hljs-keyword">var</span> nombres = [];
+
+        <span class="hljs-comment">// itération sur le retour de l&#x27;URL graphiques_ressources_pays_donnees</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; data.<span class="hljs-property">length</span>; i++) {
+            <span class="hljs-comment">// comme en Python, on rempli ici les tableaux</span>
+            labels.<span class="hljs-title function_">push</span>(data[i].<span class="hljs-property">label</span>);
+            nombres.<span class="hljs-title function_">push</span>(data[i].<span class="hljs-property">nombre</span>);
+        }
+        
+        <span class="hljs-comment">// ajout des données dans le graphique</span>
+        graphe.<span class="hljs-property">data</span>.<span class="hljs-property">labels</span> = labels; ;
+        graphe.<span class="hljs-property">data</span>.<span class="hljs-property">datasets</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">dataset</span>) =&gt;</span> {
+            dataset.<span class="hljs-property">data</span> = nombres;
+        });
+        <span class="hljs-comment">// mise à jout du graphique une fois les données calculées et insérées dans le graphique</span>
+        graphe.<span class="hljs-title function_">update</span>();
+        
+    });
+</code></pre>
+<p>Lorsqu'on appele la page, les données sont bien chargées, mais elles sont toutes noires ou grises, ce qui n'est vraiment pas joli.</p>
+<p>On va donc terminer par mettre des couleurs sur le graphique. L'update a effacé les couleurs qu'il y avait auparavant. Pour cela, il va falloir utiliser un plugin de Chart.js, et donc retrograder la version de chart.js.</p>
+<p>A la place de</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/npm/chart.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p>Mettre ce qui suit pour réimporter Chart.js, et importer deux plugins</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1.0.2/dist/chartjs-plugin-deferred.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://github.com/nagix/chartjs-plugin-colorschemes/releases/download/v0.4.0/chartjs-plugin-colorschemes.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p>Enfin, juste avant le update, mettre ce qui suit:</p>
+<pre><code class="language-js">...
+    graphe.<span class="hljs-property">options</span>.<span class="hljs-property">plugins</span>.<span class="hljs-property">colorschemes</span>.<span class="hljs-property">scheme</span> = <span class="hljs-string">&#x27;tableau.RedGold21&#x27;</span>;
+    graphe.<span class="hljs-title function_">update</span>();
+</code></pre>
+<p>Relancer l'application. Les couleurs apparaissent bien.</p>
+<p><img src="img/G-3.jpg" alt=""></p>
+
+        
+        <script async type="text/javascript">
+/* From extension marp-team.marp-vscode */
+(()=>{var F=Object.defineProperty;var d=(E,k)=>F(E,"name",{value:k,configurable:!0});(()=>{var E={676:(b,f,h)=>{b.exports=h(185)},185:(b,f)=>{"use strict";var h;h={value:!0};const S={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},M="data-marp-auto-scaling-wrapper",p="data-marp-auto-scaling-svg",l="data-marp-auto-scaling-container";class o extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const s=d(r=>([n])=>{const{width:e,height:t}=n.contentRect;this[r]={width:e,height:t},this.updateSVGRect()},"e");this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(s("containerSize")),this.wrapperObserver=new ResizeObserver((...r)=>{s("wrapperSize")(...r),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var s,r,n,e,t;this.shadowRoot.innerHTML=`
+<style>
+  svg[${p}] { display: block; width: 100%; height: auto; vertical-align: top; }
+  span[${l}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
+</style>
+<div ${M}>
+  <svg part="svg" ${p}>
+    <foreignObject><span ${l}><slot></slot></span></foreignObject>
+  </svg>
+</div>
+    `.split(/\n\s*/).join(""),this.wrapper=(s=this.shadowRoot.querySelector(`div[${M}]`))!==null&&s!==void 0?s:void 0;const i=this.svg;this.svg=(n=(r=this.wrapper)===null||r===void 0?void 0:r.querySelector(`svg[${p}]`))!==null&&n!==void 0?n:void 0,this.svg!==i&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=(t=(e=this.svg)===null||e===void 0?void 0:e.querySelector(`span[${l}]`))!==null&&t!==void 0?t:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:s}=this;s&&(s.style.display="inline",requestAnimationFrame(()=>{s.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(s){const r=d(()=>{const n=(()=>{const e=s.getPropertyValue("--preserve-aspect-ratio");return e?e.trim():`x${(({textAlign:t,direction:i})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if(t==="start"||t==="end"){let a=i==="rtl";return t==="end"&&(a=!a),a?"Max":"Min"}return"Mid"})(s)}YMid meet`})();n!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=n,this.updateSVGRect()),s===this.svgComputedStyle&&requestAnimationFrame(r)},"t");r()}updateSVGRect(){var s,r,n,e,t,i,a;let m=Math.ceil((r=(s=this.containerSize)===null||s===void 0?void 0:s.width)!==null&&r!==void 0?r:0);const v=Math.ceil((e=(n=this.containerSize)===null||n===void 0?void 0:n.height)!==null&&e!==void 0?e:0);this.dataset.downscaleOnly!==void 0&&(m=Math.max(m,(i=(t=this.wrapperSize)===null||t===void 0?void 0:t.width)!==null&&i!==void 0?i:0));const y=(a=this.svg)===null||a===void 0?void 0:a.querySelector(":scope > foreignObject");if(y?.setAttribute("width",`${m}`),y?.setAttribute("height",`${v}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${m} ${v}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=m<=0||v<=0?"0":""),this.container){const _=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=_.startsWith("xmid")||_.startsWith("xmax")?"auto":"0",this.container.style.marginRight=_.startsWith("xmi")?"auto":"0"}}}d(o,"s");const u=d((c,{attrs:s={},style:r})=>class extends c{constructor(...n){super(...n);for(const[e,t]of Object.entries(s))this.hasAttribute(e)||this.setAttribute(e,t);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const n=r?`<style>:host { ${r} }</style>`:"";let e="<slot></slot>";const{autoScaling:t}=this.dataset;t!==void 0&&(e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${t==="downscale-only"?"data-downscale-only":""}>${e}</marp-auto-scaling>`),this.shadowRoot.innerHTML=n+e}},"r");let g;const q=Symbol(),V="marpitSVGPolyfill:setZoomFactor,",z=Symbol();let A,C;function N(c){const s=typeof c=="object"&&c.target||document,r=typeof c=="object"?c.zoom:c;window[z]||(Object.defineProperty(window,z,{configurable:!0,value:!0}),window.addEventListener("message",({data:e,origin:t})=>{if(t===window.origin)try{if(e&&typeof e=="string"&&e.startsWith(V)){const[,i]=e.split(","),a=Number.parseFloat(i);Number.isNaN(a)||(C=a)}}catch(i){console.error(i)}}));let n=!1;Array.from(s.querySelectorAll("svg[data-marpit-svg]"),e=>{var t,i,a,m;e.style.transform||(e.style.transform="translateZ(0)");const v=r||C||e.currentScale||1;A!==v&&(A=v,n=v);const y=e.getBoundingClientRect(),{length:_}=e.children;for(let L=0;L<_;L+=1){const x=e.children[L];if(x.getScreenCTM){const w=x.getScreenCTM();if(w){const W=(i=(t=x.x)===null||t===void 0?void 0:t.baseVal.value)!==null&&i!==void 0?i:0,B=(m=(a=x.y)===null||a===void 0?void 0:a.baseVal.value)!==null&&m!==void 0?m:0,G=x.children.length;for(let T=0;T<G;T+=1){const P=x.children[T];if(P.tagName==="SECTION"){const{style:O}=P;O.transformOrigin||(O.transformOrigin=`${-W}px ${-B}px`),O.transform=`scale(${v}) matrix(${w.a}, ${w.b}, ${w.c}, ${w.d}, ${w.e-y.left}, ${w.f-y.top}) translateZ(0.0001px)`;break}}}}}}),n!==!1&&Array.from(s.querySelectorAll("iframe"),({contentWindow:e})=>{e?.postMessage(`${V}${n}`,window.origin==="null"?"*":window.origin)})}d(N,"h");function j({once:c=!1,target:s=document}={}){const r=navigator.vendor==="Apple Computer, Inc."?[N]:[];let n=!c;const e=d(()=>{for(const t of r)t({target:s});n&&window.requestAnimationFrame(e)},"s");return e(),()=>{n=!1}}d(j,"g"),A=1,C=void 0;const $=Symbol(),H=d((c=document)=>{if(typeof window>"u")throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const t=window[q];t||customElements.define("marp-auto-scaling",o);for(const i of Object.keys(S)){const a=`marp-${i}`,m=S[i].proto();g!=null||(g=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),g&&m!==HTMLElement?t||customElements.define(a,u(m,{style:S[i].style}),{extends:i}):(t||customElements.define(a,u(HTMLElement,S[i])),e.querySelectorAll(`${i}[is="${a}"]`).forEach(v=>{v.outerHTML=v.outerHTML.replace(new RegExp(`^<${i}`,"i"),`<${a}`).replace(new RegExp(`</${i}>$`,"i"),`</${a}>`)}))}window[q]=!0})(c),c[$])return c[$];const s=j({target:c}),r=d(()=>{s(),delete c[$]},"n"),n=Object.assign(r,{cleanup:r,update:()=>H(c)});return Object.defineProperty(c,$,{configurable:!0,value:n}),n},"v");f.browser=H,h=H,h=j}},k={};function R(b){var f=k[b];if(f!==void 0)return f.exports;var h=k[b]={exports:{}};return E[b](h,h.exports,R),h.exports}d(R,"__webpack_require__");var Z={};(()=>{"use strict";var b=R(676);function f(){let p,l;const o=d(()=>{const u=document.getElementById("__marp-vscode"),g=!!u;p!==g?(document.body.classList.toggle("marp-vscode",g),g?l=(0,b.browser)():(l?.cleanup(),l=void 0),p=g):g&&l?.update(),p?(u&&h(u),S()):M()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(o,100)),window.addEventListener("vscode.markdown.updateContent",o),o()}d(f,"preview");const h=d(p=>{p.querySelectorAll("[is]").forEach(l=>{if(l.nodeName.includes("-")||document.createElement(l.nodeName).constructor!==l.constructor)return;const{outerHTML:u}=l;l.outerHTML=u,console.debug("[marp-vscode] Custom element has been upgraded forcibly:",u.slice(0,u.indexOf(">")+1||void 0))})},"forceUpgradeCustomElements"),S=d(()=>{const p=document.querySelectorAll("style:not(#__marp-vscode-style):not(#_defaultStyles):not([data-marp-vscode-body])"),l=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');p.forEach(o=>{o.closest("#__marp-vscode")||(o.dataset.marpVscodeBody=o.textContent??"",o.textContent="")}),l.forEach(o=>{if(o.closest("#__marp-vscode"))return;const{href:u}=o;o.dataset.marpVscodeHref=u,o.removeAttribute("href")})},"removeStyles"),M=d(()=>{const p=document.querySelectorAll("style[data-marp-vscode-body]"),l=document.querySelectorAll("link[data-marp-vscode-href]");p.forEach(o=>{o.textContent=o.dataset.marpVscodeBody||"",delete o.dataset.marpVscodeBody}),l.forEach(o=>{o.href=o.dataset.marpVscodeHref||"",delete o.dataset.marpVscodeHref})},"restoreStyles");f()})()})();})();
+
+</script>
+
+    </body>
+    </html>
