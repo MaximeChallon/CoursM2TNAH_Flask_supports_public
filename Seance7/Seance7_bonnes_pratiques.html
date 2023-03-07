@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension marp-team.marp-vscode */
+#__marp-vscode {
+  all: initial;
+}
+
+/* Override VS Code default CSS rules reverting to initial
+   https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
+body.marp-vscode {
+  padding: 0;
+}
+
+body.marp-vscode img {
+  max-width: unset;
+  max-height: unset;
+}
+
+body.marp-vscode a,
+body.marp-vscode a:hover,
+body.marp-vscode code {
+  color: unset;
+}
+
+body.marp-vscode blockquote {
+  background: unset;
+  border-color: unset;
+}
+
+@media screen {
+  body.marp-vscode {
+    overflow-y: scroll;
+  }
+
+  #__marp-vscode [data-marp-vscode-slide-wrapper] {
+    margin: 20px;
+  }
+
+  #__marp-vscode svg[data-marpit-svg] {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+    display: block;
+    margin: 0;
+  }
+
+  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+  #code-csp-warning {
+    background-color: #444;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+    color: white;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    margin: 16px;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    word-wrap: break-word;
+  }
+
+  #code-csp-warning:hover {
+    text-decoration: none;
+    background-color: #007acc;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  }
+}
+
+@media print {
+  body.marp-vscode #code-csp-warning {
+    display: none;
+  }
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        <style>
+/*********************************************************************
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+For more information, please refer to <http://unlicense.org/>
+*********************************************************************/
+
+/*
+WiTeX
+https://github.com/AndrewBelt/WiTeX
+*/
+
+
+/* Latin Modern (LaTeX default) font */
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
+}
+
+/* Page Layout */
+
+body {
+	background: none;
+	font-size: 14pt;
+	font-family: 'Latin Modern Roman', serif;
+	color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	border: none;
+	font-weight: bold;
+}
+
+a, a:visited {
+	color: #a00;
+}
+
+a.new, a.new:visited {
+	color: black;
+}
+
+ul {
+	list-style: disc;
+}
+
+#mw-navigation, #mw-page-base, #mw-head-base, #footer {
+	/* nuke everything but the content */
+	display: none;
+}
+
+/* Content Box */
+
+.mw-body {
+	max-width: 720px;
+	margin: 1em auto;
+}
+
+#content, div#content {
+	border: none;
+	color: black;
+}
+
+#firstHeading, #siteSub {
+	text-align: center;
+	display: block;
+}
+
+#siteSub {
+	margin-top: -0.5em;
+	margin-bottom: 4em;
+}
+
+/* Article Body */
+
+.mw-body-content {
+	font-size: inherit;
+	text-align: justify;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	line-height: 1.5em;
+}
+
+.mw-body {
+	padding: 2em 0;
+}
+
+.mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6, div#content h1, div#content h2, div#content #firstHeading {
+	font-family: inherit;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.mw-body h1, div#content h1 {
+	font-size: 2em;
+}
+
+.mw-body h2, div#content h2 {
+	font-size: 1.5em;
+}
+
+.mw-body h3 {
+	font-size: 1.2em;
+}
+
+.mw-body h4 {
+	font-size: 1.1em;
+}
+
+.mw-body h5, .mw-body h6 {
+	font-size: 1.0em;
+}
+
+.mw-body p {
+	margin: 0;
+}
+
+.mw-body p + p {
+	text-indent: 2em;
+}
+
+.mw-editsection {
+	/* hide more non-content */
+	display: none;
+}
+
+table.ambox {
+	margin-bottom: 1em;
+}
+
+dl dd {
+	/* center definitions (most useful for display equations) */
+	text-align: center;
+}
+
+span.texhtml {
+	/* revert inline math to default font */
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+/* Table of Contents */
+
+#toc, .toc {
+	border: none;
+	padding: 0;
+	background: none;
+	font-size: inherit;
+	/* span 100% of the width */
+	display: block;
+}
+
+.mw-body #toc h2, .mw-body .toc h2 {
+	font-family: inherit;
+	font-size: 1.5em;
+}
+
+#toc h2, .toc h2 {
+	display: block;
+}
+
+#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle {
+	text-align: left;
+}
+
+.toctoggle {
+	display: none;
+}
+
+/* Figures */
+
+div.tright {
+	margin: 0.5em 0 0.5em 1.5em;
+}
+
+div.tleft {
+	margin: 0.5em 1.5em 0.5em 0;
+}
+
+/* Code */
+
+.mw-code {
+	margin: 1em 0;
+}
+
+pre, code {
+	font-family: "Latin Modern Mono", monospace !important;
+}
+
+sup {
+	text-indent: 0;
+}
+</style>
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
+<h2 id="séance-7--bonnes-pratiques-de-développement-et-rendu-du-devoir">Séance 7 : Bonnes pratiques de développement et rendu du devoir</h2>
+<ol>
+<li><a href="#proprete">Propreté du code</a>
+<ol>
+<li><a href="#commentaires">Commentaires</a></li>
+<li><a href="#nommages">Nommages</a></li>
+<li><a href="#rangement">Rangement</a></li>
+<li><a href="#absolus">Banir les chemins absolus</a></li>
+<li><a href="#variabilisation">Variabilisation</a></li>
+<li><a href="#liens">Liens internes</a></li>
+</ol>
+</li>
+<li><a href="#erreurs">Gestion des erreurs</a></li>
+<li><a href="#rendu">Rendu du devoir</a>
+<ol>
+<li><a href="#bdd">Base de données</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#readme">README.md</a></li>
+<li><a href="#depot">Dépôt du code</a></li>
+<li><a href="#lancer">Ce que je jouerai pour lancer votre application</a></li>
+</ol>
+</li>
+</ol>
+<h3 id="propreté-du-code-">Propreté du code <a id="proprete"></a></h3>
+<p>La propreté et la structure du code de l'application compte pour 5 points dans la note finale. Plusieurs normes et règles sont à respecter.</p>
+<h4 id="commentaires-">Commentaires <a id="commentaires"></a></h4>
+<p>Que ce soit dans une route Flask, une classe d'un modèle SQLAlchemy, un template, du Javascript, etc., tout doit être commenté pour je puisse voir ce que telles lignes de code font et si vous avez compris votre propre code. Le commentaire de code est essentiel, pas seulement pour ce devoir: un code commenté est compréhensible par tous, et modifiable par tous.</p>
+<p>Exemple de commentaires pour différents langages:</p>
+<ul>
+<li>Python</li>
+</ul>
+<pre><code class="language-python"><span class="hljs-comment"># itération sur la liste des pays et affichage des pays un à un</span>
+<span class="hljs-keyword">for</span> un_pays <span class="hljs-keyword">in</span> pays:
+    <span class="hljs-built_in">print</span>(pays)
+</code></pre>
+<ul>
+<li>Javascript</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-comment">// affichage de la variable i</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i);
+</code></pre>
+<ul>
+<li>CSS</li>
+</ul>
+<pre><code class="language-css"><span class="hljs-comment">/* les balises span sont bleues */</span>
+<span class="hljs-selector-tag">span</span> {
+  <span class="hljs-attribute">color</span>: blue;
+}
+</code></pre>
+<ul>
+<li>HTML</li>
+</ul>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!-- Ceci est un paragraphe --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Un paragraphe<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</code></pre>
+<ul>
+<li>SQL</li>
+</ul>
+<pre><code class="language-sql"><span class="hljs-comment">-- sélection de tous les pays</span>
+<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span>
+<span class="hljs-keyword">FROM</span> country a <span class="hljs-comment">-- a est l&#x27;alias de country dans cette requête</span>
+</code></pre>
+<p>Pour Python, un autre type de commentaire doit être présent: il s'agit de la documentation des classes et des fonctions, donc chaque fois qu'il y a un <code>class</code> ou un <code>def</code> dans le code. Prenons deux exemples:</p>
+<ul>
+<li>l'objet Users de <code>models/users.py</code> avec ses attributs et ses méthodes</li>
+</ul>
+<pre><code class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Users</span>(UserMixin, db.Model):
+    <span class="hljs-string">&quot;&quot;&quot;
+    Une classe représentant les utilisateurs. On indique ici une rapide description de la classe.
+
+    Attributes
+    ----------
+    id : sqlalchemy.sql.schema.Column
+        Identifiant de l&#x27;utilisateur. C&#x27;est la clé primaire. Cet attribut est une Column SQLALchemy.
+    prenom : sqlalchemy.sql.schema.Column
+        Prénom de l&#x27;utilisateur
+    password : sqlalchemy.sql.schema.Column
+        Mot de passé hashé de l&#x27;utilisateur
+    mail : sqlalchemy.sql.schema.Column
+        Adresse mail de l&#x27;utilisateur
+
+    Methods
+    -------
+    identification(mail, password)
+        Permet l&#x27;identification d&#x27;un utilisateur à partir d&#x27;un  mail et d&#x27;un mot de passe fournis
+    &quot;&quot;&quot;</span>
+    __tablename__ = <span class="hljs-string">&quot;users&quot;</span>
+
+    <span class="hljs-built_in">id</span> = db.Column(db.Integer, unique=<span class="hljs-literal">True</span>, nullable=<span class="hljs-literal">False</span>, primary_key=<span class="hljs-literal">True</span>, autoincrement=<span class="hljs-literal">True</span>)
+    prenom = db.Column(db.Text, nullable=<span class="hljs-literal">False</span>)
+    password = db.Column(db.String(<span class="hljs-number">100</span>), nullable=<span class="hljs-literal">False</span>)
+    mail = db.Column(db.String(<span class="hljs-number">80</span>), nullable=<span class="hljs-literal">False</span>)
+
+<span class="hljs-meta">    @staticmethod</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">identification</span>(<span class="hljs-params">mail, password</span>):
+        <span class="hljs-string">&quot;&quot;&quot;
+        Permet l&#x27;identification d&#x27;un utilisateur à partir d&#x27;un  mail et d&#x27;un mot de passe fournis
+
+        Les deux arguments sont obligatoires
+
+        Parameters
+        ----------
+        mail : str, required
+            Le mail fourni par le client
+        password : str, required
+            Le mot de passe fourni par le client
+
+        Returns
+        -------
+        app.models.users.Users
+            Une instance de la classe Users si l&#x27;identification est un succès, sinon retourne None
+        &quot;&quot;&quot;</span>
+        utilisateur = Users.query.<span class="hljs-built_in">filter</span>(Users.mail == mail).first()
+        <span class="hljs-keyword">if</span> utilisateur <span class="hljs-keyword">and</span> check_password_hash(utilisateur.password, password):
+            <span class="hljs-keyword">return</span> utilisateur
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>
+</code></pre>
+<ul>
+<li>la route <code>/pays</code> de <code>routes/generales.py</code></li>
+</ul>
+<pre><code class="language-python"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/pays&quot;</span></span>)</span>
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/pays/&lt;int:page&gt;&quot;</span></span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">pays</span>(<span class="hljs-params">page=<span class="hljs-number">1</span></span>):
+    <span class="hljs-string">&quot;&quot;&quot;
+    Route permettant l&#x27;affichage des pays, avec une pagination possible
+
+    Parameters
+    ----------
+    page : int, optional
+        Le numéro de la page à afficher (si non fourni, 1 par défaut)
+
+    Returns
+    -------
+    template
+        Retourne le template pays.html
+    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/pays.html&quot;</span>, 
+        sous_titre=<span class="hljs-string">&quot;Pays&quot;</span>, 
+        donnees= Country.query.order_by(Country.name).paginate(page=page, per_page=app.config[<span class="hljs-string">&quot;PAYS_PER_PAGE&quot;</span>]))
+</code></pre>
+<h4 id="nommages-">Nommages <a id="nommages"></a></h4>
+<p>Les fichiers, les variables, les classes et les fonctions doivent être nommés de manière logique et compréhensible. Ils doivent porter le nom de ce qu'ils sont ou font vraiment.</p>
+<h4 id="rangement-">Rangement <a id="rangement"></a></h4>
+<p>Les packages (par exemple <code>routes</code> ou <code>templates</code>) doivent être rangés en différents modules:</p>
+<ul>
+<li>ne pas mettre toutes les routes dans le même module</li>
+<li>ordonner le dossier templates qui contient plusieurs dizaines de fichiers</li>
+<li>etc.</li>
+</ul>
+<h4 id="banir-les-chemins-absolus-">Banir les chemins absolus <a id="absolus"></a></h4>
+<p>Aucun chemin absolu ne doit se trouver dans l'application:</p>
+<ul>
+<li>ni pour les imports au début des fichiers Python</li>
+<li>ni pour d'éventuels chemins vers des bases de données ou des fichiers statiques ou des images</li>
+<li>les chemins vers les fichiers CSS, JS ou les images se feront grâce à des chemins relatifs</li>
+</ul>
+<p>Le seul chemin absolu qu'il y aura est éventuellement un chemin absolu vers la base SQLite: il sera à indiquer dans le fichier <code>.env</code>.</p>
+<h4 id="variabilisation--">Variabilisation  <a id="variabilisation"></a></h4>
+<p>Toute valeur de configuration (comme le PER_PAGE de la pagination, des URL d'API, etc.) doit être sortie de l'application pour être mise en variable d'environnement (donc dans <code>.env</code>).</p>
+<h4 id="liens-internes--">Liens internes  <a id="liens"></a></h4>
+<p>Comme vu en Séance2, les liens internes se font via <code>url_for()</code> dans les routes et les templates. L'écriture de ces liens en dur est à proscrire, le domaine et le port changent constamment.</p>
+<h3 id="gestion-des-erreurs-">Gestion des erreurs <a id="erreurs"></a></h3>
+<p>La gestion des erreurs a été vue en Séance5; elle implique notamment:</p>
+<ul>
+<li>d'attraper les erreurs avec <code>try</code> et <code>except</code></li>
+<li>d'effectuer un rollback sur la base de données quand nécessaire</li>
+<li>d'utiliser Flash pour communiquer avec l'utilisatuer, même quand une opération s'est bien déroulée</li>
+</ul>
+<p>Aucune erreur 4XX ou 5XX ne devra être retournée directement à l'utilisateur: une page indiquant qu'une erreur est survenue devra être retournée. C'était l'objet de l'exercice REF-1 de la Séance5.</p>
+<h3 id="rendu-du-devoir-">Rendu du devoir <a id="rendu"></a></h3>
+<h4 id="base-de-données-">Base de données <a id="bdd"></a></h4>
+<p>Plusieurs solutions pour me fournir une base de données :</p>
+<ul>
+<li>soit me fournir un fichier <code>.sqlite</code> (il ne doit pas se trouver dans le dépôt du code mais m'être envoyé à part): ce fichier peut contenir uniquement des tables vides, ou bien rempli avec des données</li>
+<li>soit me décrire en mode pas à pas comment installer un serveur de base de données et l'initialiser avec des scripts indiquant comment :
+<ul>
+<li>créer la base de données, les schémas éventuels, les tables: c'est un script SQL DDL avec des <code>CREATE</code></li>
+<li>créer et attribuer des rôles si nécessaire: script SQL DCL (<code>GRANT</code> notamment)</li>
+<li>remplir les tables si nécessaires : script SQL DML (<code>INSERT</code>)</li>
+</ul>
+</li>
+</ul>
+<p>Dans tous les cas, si une base de données est adossée à l'application, il faudra me fournir le <strong>MRD</strong> (modèle relationnel de données) de la base de données correctement représenté.</p>
+<h4 id="requirements-">Requirements <a id="requirements"></a></h4>
+<p>Le fichier <code>requirements.txt</code>, mis à la racine de l'application, est obligatoire. Il permet d'indiquer toutes les dépendances de l'application et leurs versions. Il est nécessaire pour pouvoir lancer l'application sur d'autres machines (dont la mienne pour la correction).</p>
+<p>Pour le générer, se rendre à la racine de l'application (à côté du fichier <code>run.py</code>). Activer l'environnement virtuel.</p>
+<p>Simplement exécuter la commande suivante: <code>pip freeze &gt; requirements.txt</code>.</p>
+<h4 id="readmemd-"><a href="http://README.html">README.md</a> <a id="readme"></a></h4>
+<p>Le README est le fichier qui donne une première documentation de l'application. Il est présent à la racine de l'application. C'est ce fichier qui est rendu par Github quand on va sur un dépôt.</p>
+<p>Pour le devoir, voici ce que le README doit indiquer:</p>
+<ul>
+<li>une description en une ligne de ce que fait l'application</li>
+<li>les contributeurs</li>
+<li>la description des fonctionnalités de l'application (il est possible de mettre des captures d'écran, des schémas, etc.)</li>
+<li>variables à mettre dans <code>.env</code>, avec une description de la valeur à leur attribuer ou une valeur par défaut à mettre</li>
+<li>un pas à pas pour lancer l'application la première fois</li>
+<li>les instructions pour lancer l'application hors première fois</li>
+</ul>
+<p>Les instructions d'installation et de lancement de l'application doivent être le plus précises possibles, et sont pour la plupart évidentes. Il faut se mettre à la place d'une personne qui n'y connaît rien et qui doit installer puis lancer une application en Python. Des exemples d'étapes:</p>
+<ul>
+<li>cloner le dépôt</li>
+<li>installer Python 3.X</li>
+<li>installer une base de données</li>
+<li>installer en environnement virtuel, le lancer</li>
+<li>quelles variables dans le <code>.env</code>?</li>
+<li>installer les requirements</li>
+<li>lancer <code>run.py</code></li>
+</ul>
+<h4 id="dépôt-du-code-">Dépôt du code <a id="depot"></a></h4>
+<p>Le devoir sera obligatoirement rendu via un dépôt disponible sur Github, les cours de Git étant désormais passés. Aucune autre forme de rendu (.zip, etc.) ne sera accepté.</p>
+<p><strong>Note 1 : Il est fortement recommandé de développer l'application en utilisant Git et Github. C'est le moyen le plus viable et rapide de développer en groupe.</strong></p>
+<p><strong>Note 2 : Déployer sur le cloud est optionnel et ne rentre pas en compte dans la note. Vous pouvez le faire par pur plaisir, ou pour vérifier que votre dépôt de code est correct et fonctionne bien.</strong></p>
+<p>Ne doivent pas être présents dans le dépôt les éléments suivants:</p>
+<ul>
+<li>les bases de données</li>
+<li>le dossier <code>env/</code></li>
+<li>le fichier <code>.env</code></li>
+</ul>
+<p>Vous trouverez un exemple de <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code/blob/master/.gitignore"><code>.gitignore</code> ici</a></p>
+<h4 id="ce-que-je-jouerai-pour-lancer-votre-application-">Ce que je jouerai pour lancer votre application <a id="lancer"></a></h4>
+<p>Voici toutes les étapes que je jouerai dans l'ordre pour lancer votre application. Je les indique ici pour que vous les testiez de votre côté avant de me rendre le devoir. <strong>Si ça ne fonctionne pas de votre côté, ça ne risque pas de fonctionner chez moi; ce n'est donc pas la peine de rendre le devoir</strong>.</p>
+<p>On suppose que j'ai Python 3.6 installé sur ma machine Ubuntu 20.04 (ou plus).</p>
+<ol>
+<li><code>git clone lien_vers_le_depot.git</code></li>
+<li><code>cd depot/</code></li>
+<li><code>virtualenv env -p python3</code></li>
+<li>Installation de la base de données: posage du <code>.sqlite</code> à côté de <code>run.py</code>, ou installation d'un serveur</li>
+<li>Création du fichier <code>.env</code> à côté de <code>run.py</code> à partir des variables indiquées dans le README</li>
+<li><code>source env/bin/activate</code></li>
+<li><code>pip install -r requirements.txt</code></li>
+<li><code>python run.py</code></li>
+</ol>
+
+        
+        <script async type="text/javascript">
+/* From extension marp-team.marp-vscode */
+(()=>{var Y=Object.defineProperty;var d=($,E)=>Y($,"name",{value:E,configurable:!0});(()=>{var $={676:(w,b,g)=>{w.exports=g(185)},185:(w,b)=>{"use strict";var g;g={value:!0};const x={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},k="data-marp-auto-scaling-wrapper",u="data-marp-auto-scaling-svg",c="data-marp-auto-scaling-container";class r extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const s=d(i=>([n])=>{const{width:e,height:t}=n.contentRect;this[i]={width:e,height:t},this.updateSVGRect()},"t");this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(s("containerSize")),this.wrapperObserver=new ResizeObserver((...i)=>{s("wrapperSize")(...i),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var s,i,n,e,t;this.shadowRoot.innerHTML=`
+<style>
+  svg[${u}] { display: block; width: 100%; height: auto; vertical-align: top; }
+  span[${c}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
+</style>
+<div ${k}>
+  <svg part="svg" ${u}>
+    <foreignObject><span ${c}><slot></slot></span></foreignObject>
+  </svg>
+</div>
+    `.split(/\n\s*/).join(""),this.wrapper=(s=this.shadowRoot.querySelector(`div[${k}]`))!==null&&s!==void 0?s:void 0;const o=this.svg;this.svg=(n=(i=this.wrapper)===null||i===void 0?void 0:i.querySelector(`svg[${u}]`))!==null&&n!==void 0?n:void 0,this.svg!==o&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=(t=(e=this.svg)===null||e===void 0?void 0:e.querySelector(`span[${c}]`))!==null&&t!==void 0?t:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:s}=this;s&&(s.style.display="inline",requestAnimationFrame(()=>{s.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(s){const i=d(()=>{const n=(()=>{const e=s.getPropertyValue("--preserve-aspect-ratio");return e?e.trim():`x${(({textAlign:t,direction:o})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if(t==="start"||t==="end"){let a=o==="rtl";return t==="end"&&(a=!a),a?"Max":"Min"}return"Mid"})(s)}YMid meet`})();n!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=n,this.updateSVGRect()),s===this.svgComputedStyle&&requestAnimationFrame(i)},"e");i()}updateSVGRect(){var s,i,n,e,t,o,a;let p=Math.ceil((i=(s=this.containerSize)===null||s===void 0?void 0:s.width)!==null&&i!==void 0?i:0);const h=Math.ceil((e=(n=this.containerSize)===null||n===void 0?void 0:n.height)!==null&&e!==void 0?e:0);this.dataset.downscaleOnly!==void 0&&(p=Math.max(p,(o=(t=this.wrapperSize)===null||t===void 0?void 0:t.width)!==null&&o!==void 0?o:0));const f=(a=this.svg)===null||a===void 0?void 0:a.querySelector(":scope > foreignObject");if(f?.setAttribute("width",`${p}`),f?.setAttribute("height",`${h}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${p} ${h}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=p<=0||h<=0?"0":""),this.container){const _=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=_.startsWith("xmid")||_.startsWith("xmax")?"auto":"0",this.container.style.marginRight=_.startsWith("xmi")?"auto":"0"}}}d(r,"s");const m=d((l,{attrs:s={},style:i})=>class extends l{constructor(...n){super(...n);for(const[e,t]of Object.entries(s))this.hasAttribute(e)||this.setAttribute(e,t);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const n=i?`<style>:host { ${i} }</style>`:"";let e="<slot></slot>";const{autoScaling:t}=this.dataset;t!==void 0&&(e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${t==="downscale-only"?"data-downscale-only":""}>${e}</marp-auto-scaling>`),this.shadowRoot.innerHTML=n+e}},"o");let v;const V=Symbol();let C;const j="marpitSVGPolyfill:setZoomFactor,",A=Symbol(),z=Symbol(),N=d(()=>{const l=navigator.vendor==="Apple Computer, Inc.",s=l?[D]:[],i={then:n=>(l?(async()=>{if(C===void 0){const e=document.createElement("canvas");e.width=10,e.height=10;const t=e.getContext("2d"),o=new Image(10,10),a=new Promise(p=>{o.addEventListener("load",()=>p())});o.crossOrigin="anonymous",o.src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%201%201%22%3E%3CforeignObject%20width%3D%221%22%20height%3D%221%22%20requiredExtensions%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%3E%3Cdiv%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%20style%3D%22width%3A%201px%3B%20height%3A%201px%3B%20background%3A%20red%3B%20position%3A%20relative%22%3E%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fsvg%3E",await a,t.drawImage(o,0,0),C=t.getImageData(5,5,1,1).data[3]<128}return C})().then(e=>{n?.(e?[D]:[])}):n?.([]),i)};return Object.assign(s,i)},"h");let H,O;function D(l){const s=typeof l=="object"&&l.target||document,i=typeof l=="object"?l.zoom:l;window[z]||(Object.defineProperty(window,z,{configurable:!0,value:!0}),document.body.style.zoom=1.0001,document.body.offsetHeight,document.body.style.zoom=1,window.addEventListener("message",({data:e,origin:t})=>{if(t===window.origin)try{if(e&&typeof e=="string"&&e.startsWith(j)){const[,o]=e.split(","),a=Number.parseFloat(o);Number.isNaN(a)||(O=a)}}catch(o){console.error(o)}}));let n=!1;Array.from(s.querySelectorAll("svg[data-marpit-svg]"),e=>{var t,o,a,p;e.style.transform||(e.style.transform="translateZ(0)");const h=i||O||e.currentScale||1;H!==h&&(H=h,n=h);const f=e.getBoundingClientRect(),{length:_}=e.children;for(let T=0;T<_;T+=1){const S=e.children[T];if(S.getScreenCTM){const y=S.getScreenCTM();if(y){const G=(o=(t=S.x)===null||t===void 0?void 0:t.baseVal.value)!==null&&o!==void 0?o:0,I=(p=(a=S.y)===null||a===void 0?void 0:a.baseVal.value)!==null&&p!==void 0?p:0,Z=S.children.length;for(let F=0;F<Z;F+=1){const P=S.children[F];if(P.tagName==="SECTION"){const{style:R}=P;R.transformOrigin||(R.transformOrigin=`${-G}px ${-I}px`),R.transform=`scale(${h}) matrix(${y.a}, ${y.b}, ${y.c}, ${y.d}, ${y.e-f.left}, ${y.f-f.top}) translateZ(0.0001px)`;break}}}}}}),n!==!1&&Array.from(s.querySelectorAll("iframe"),({contentWindow:e})=>{e?.postMessage(`${j}${n}`,window.origin==="null"?"*":window.origin)})}d(D,"u");function B({once:l=!1,target:s=document}={}){const i=function(n=document){if(n[A])return n[A];let e=!0;const t=d(()=>{e=!1,delete n[A]},"i");Object.defineProperty(n,A,{configurable:!0,value:t});let o=[],a=!1;(async()=>{try{o=await N()}finally{a=!0}})();const p=d(()=>{for(const h of o)h({target:n});a&&o.length===0||e&&window.requestAnimationFrame(p)},"o");return p(),t}(s);return l?(i(),()=>{}):i}d(B,"v"),H=1,O=void 0;const W=B,M=Symbol(),L=d((l=document)=>{if(typeof window>"u")throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const t=window[V];t||customElements.define("marp-auto-scaling",r);for(const o of Object.keys(x)){const a=`marp-${o}`,p=x[o].proto();v!=null||(v=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),v&&p!==HTMLElement?t||customElements.define(a,m(p,{style:x[o].style}),{extends:o}):(t||customElements.define(a,m(HTMLElement,x[o])),e.querySelectorAll(`${o}[is="${a}"]`).forEach(h=>{h.outerHTML=h.outerHTML.replace(new RegExp(`^<${o}`,"i"),`<${a}`).replace(new RegExp(`</${o}>$`,"i"),`</${a}>`)}))}window[V]=!0})(l),l[M])return l[M];const s=B({target:l}),i=d(()=>{s(),delete l[M]},"n"),n=Object.assign(i,{cleanup:i,update:()=>L(l)});return Object.defineProperty(l,M,{configurable:!0,value:n}),n},"y");b.browser=L,g=L,g=W}},E={};function q(w){var b=E[w];if(b!==void 0)return b.exports;var g=E[w]={exports:{}};return $[w](g,g.exports,q),g.exports}d(q,"__webpack_require__");var U={};(()=>{"use strict";var w=q(676);function b(){let u,c;const r=d(()=>{const m=document.getElementById("__marp-vscode"),v=!!m;u!==v?(document.body.classList.toggle("marp-vscode",v),v?c=(0,w.browser)():(c?.cleanup(),c=void 0),u=v):v&&c?.update(),u?(m&&g(m),x()):k()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(r,100)),window.addEventListener("vscode.markdown.updateContent",r),r()}d(b,"preview");const g=d(u=>{u.querySelectorAll("[is]").forEach(c=>{if(c.nodeName.includes("-")||document.createElement(c.nodeName).constructor!==c.constructor)return;const{outerHTML:m}=c;c.outerHTML=m,console.debug("[marp-vscode] Custom element has been upgraded forcibly:",m.slice(0,m.indexOf(">")+1||void 0))})},"forceUpgradeCustomElements"),x=d(()=>{const u=document.querySelectorAll("style:not(#__marp-vscode-style):not(#_defaultStyles):not([data-marp-vscode-body])"),c=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');u.forEach(r=>{r.closest("#__marp-vscode")||(r.dataset.marpVscodeBody=r.textContent??"",r.textContent="")}),c.forEach(r=>{if(r.closest("#__marp-vscode"))return;const{href:m}=r;r.dataset.marpVscodeHref=m,r.removeAttribute("href")})},"removeStyles"),k=d(()=>{const u=document.querySelectorAll("style[data-marp-vscode-body]"),c=document.querySelectorAll("link[data-marp-vscode-href]");u.forEach(r=>{r.textContent=r.dataset.marpVscodeBody||"",delete r.dataset.marpVscodeBody}),c.forEach(r=>{r.href=r.dataset.marpVscodeHref||"",delete r.dataset.marpVscodeHref})},"restoreStyles");b()})()})();})();
+
+</script>
+
+    </body>
+    </html>
