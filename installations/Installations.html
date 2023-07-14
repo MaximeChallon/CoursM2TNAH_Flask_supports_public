@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension marp-team.marp-vscode */
+#__marp-vscode {
+  all: initial;
+}
+
+/* Override VS Code default CSS rules reverting to initial
+   https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
+body.marp-vscode {
+  padding: 0;
+}
+
+body.marp-vscode img {
+  max-width: unset;
+  max-height: unset;
+}
+
+body.marp-vscode a,
+body.marp-vscode a:hover,
+body.marp-vscode code {
+  color: unset;
+}
+
+body.marp-vscode blockquote {
+  background: unset;
+  border-color: unset;
+}
+
+@media screen {
+  body.marp-vscode {
+    overflow-y: scroll;
+  }
+
+  #__marp-vscode [data-marp-vscode-slide-wrapper] {
+    margin: 20px;
+  }
+
+  #__marp-vscode svg[data-marpit-svg] {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+    display: block;
+    margin: 0;
+  }
+
+  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+  #code-csp-warning {
+    background-color: #444;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+    color: white;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    margin: 16px;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    word-wrap: break-word;
+  }
+
+  #code-csp-warning:hover {
+    text-decoration: none;
+    background-color: #007acc;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  }
+}
+
+@media print {
+  body.marp-vscode #code-csp-warning {
+    display: none;
+  }
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        <style>
+/*********************************************************************
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+For more information, please refer to <http://unlicense.org/>
+*********************************************************************/
+
+/*
+WiTeX
+https://github.com/AndrewBelt/WiTeX
+*/
+
+
+/* Latin Modern (LaTeX default) font */
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
+}
+
+/* Page Layout */
+
+body {
+	background: none;
+	font-size: 14pt;
+	font-family: 'Latin Modern Roman', serif;
+	color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	border: none;
+	font-weight: bold;
+}
+
+a, a:visited {
+	color: #a00;
+}
+
+a.new, a.new:visited {
+	color: black;
+}
+
+ul {
+	list-style: disc;
+}
+
+#mw-navigation, #mw-page-base, #mw-head-base, #footer {
+	/* nuke everything but the content */
+	display: none;
+}
+
+/* Content Box */
+
+.mw-body {
+	max-width: 720px;
+	margin: 1em auto;
+}
+
+#content, div#content {
+	border: none;
+	color: black;
+}
+
+#firstHeading, #siteSub {
+	text-align: center;
+	display: block;
+}
+
+#siteSub {
+	margin-top: -0.5em;
+	margin-bottom: 4em;
+}
+
+/* Article Body */
+
+.mw-body-content {
+	font-size: inherit;
+	text-align: justify;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	line-height: 1.5em;
+}
+
+.mw-body {
+	padding: 2em 0;
+}
+
+.mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6, div#content h1, div#content h2, div#content #firstHeading {
+	font-family: inherit;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.mw-body h1, div#content h1 {
+	font-size: 2em;
+}
+
+.mw-body h2, div#content h2 {
+	font-size: 1.5em;
+}
+
+.mw-body h3 {
+	font-size: 1.2em;
+}
+
+.mw-body h4 {
+	font-size: 1.1em;
+}
+
+.mw-body h5, .mw-body h6 {
+	font-size: 1.0em;
+}
+
+.mw-body p {
+	margin: 0;
+}
+
+.mw-body p + p {
+	text-indent: 2em;
+}
+
+.mw-editsection {
+	/* hide more non-content */
+	display: none;
+}
+
+table.ambox {
+	margin-bottom: 1em;
+}
+
+dl dd {
+	/* center definitions (most useful for display equations) */
+	text-align: center;
+}
+
+span.texhtml {
+	/* revert inline math to default font */
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+/* Table of Contents */
+
+#toc, .toc {
+	border: none;
+	padding: 0;
+	background: none;
+	font-size: inherit;
+	/* span 100% of the width */
+	display: block;
+}
+
+.mw-body #toc h2, .mw-body .toc h2 {
+	font-family: inherit;
+	font-size: 1.5em;
+}
+
+#toc h2, .toc h2 {
+	display: block;
+}
+
+#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle {
+	text-align: left;
+}
+
+.toctoggle {
+	display: none;
+}
+
+/* Figures */
+
+div.tright {
+	margin: 0.5em 0 0.5em 1.5em;
+}
+
+div.tleft {
+	margin: 0.5em 1.5em 0.5em 0;
+}
+
+/* Code */
+
+.mw-code {
+	margin: 1em 0;
+}
+
+pre, code {
+	font-family: "Latin Modern Mono", monospace !important;
+}
+
+sup {
+	text-indent: 0;
+}
+</style>
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
+<h2 id="installations">Installations</h2>
+<ol>
+<li><a href="#vscode">VS Code</a>
+<ol>
+<li><a href="#vscode_ubuntu">Ubuntu</a></li>
+<li><a href="#vscode_mac">Mac</a></li>
+<li><a href="#vscode_win">Windows</a></li>
+<li><a href="#presentation">Présentation de l'application</a></li>
+</ol>
+</li>
+<li><a href="#python">Python</a>
+<ol>
+<li><a href="#python_ubuntu">Ubuntu</a></li>
+<li><a href="#python_mac">Mac</a></li>
+<li><a href="#python_win">Windows</a></li>
+</ol>
+</li>
+<li><a href="#env">Environnements virtuels</a>
+<ol>
+<li><a href="#env_ubuntu_macos">Ubuntu et MacOS</a></li>
+<li><a href="#env_windows">Windows</a></li>
+</ol>
+</li>
+<li><a href="#git_vscode">Travailler dans un dépôt Git dans VSCode</a>
+<ol>
+<li><a href="#install_git">Installation de Git</a>
+<ol>
+<li><a href="#ubuntu">Ubuntu</a></li>
+<li><a href="#mac">Mac</a></li>
+<li><a href="#win">Windows</a></li>
+</ol>
+</li>
+<li><a href="#cloner">Cloner un répertoire et y accéder visuellement</a></li>
+</ol>
+</li>
+</ol>
+<h3 id="vs-code-">VS CODE <a id="vscode"></a></h3>
+<h4 id="ubuntu-">Ubuntu <a id="vscode_ubuntu"></a></h4>
+<p>Télécharger le fichier <code>.deb</code> sur le site suivant : <a href="https://code.visualstudio.com/download">https://code.visualstudio.com/download</a>.</p>
+<p>Dans un terminal, aller dans le dossier dans lequel le fichier a été téléchargé (normalement <code>Downloads</code> ou <code>Téléchargements</code>).
+Exemple: <code>cd Downloads</code></p>
+<p>Une fois dans ce dossier, exécuter la commande suivante: <code>sudo dpkg -i code_*.deb</code></p>
+<p>Pour lancer VSCode, deux solutions:</p>
+<ul>
+<li>soit une icône apparaît sur le Bureau</li>
+<li>soit exécuter dans un terminal la commande <code>code</code>. Ne pas clore le terminal, sinon l'application se ferme</li>
+</ul>
+<h4 id="mac-">Mac <a id="vscode_mac"></a></h4>
+<p>Suivre les explications suivantes : <a href="https://adamtheautomator.com/visual-studio-code-on-mac/">https://adamtheautomator.com/visual-studio-code-on-mac/</a>.</p>
+<h4 id="windows-">Windows <a id="vscode_win"></a></h4>
+<p>Télécharger le fichier pour Windows sur le site suivant (cliquer sur le gros bouton bleu Windows) : <a href="https://code.visualstudio.com/download">https://code.visualstudio.com/download</a>.</p>
+<p>Une fois téléchargé (dans les Téléchargements normalement), double-cliquer sur le fichier <code>VSCodeUserSetup-{version}.exe</code> et suivre les instructions.</p>
+<h4 id="présentation-rapide-">Présentation rapide <a id="presentation"></a></h4>
+<p>VSCode est un éditeur de code léger (par rapport à d'autres logiciels comme PyCharm), agréable et très fonctionnel (ce qui le différencie de NotePad, Vim et autres éditeurs de texte). Il permet entre autres fonctionnalités d'afficher les dossiers et leurs enfants, et d'éditer différents types de fichiers (colorés syntaxiquement selon le langage défini/détecté). Il permet également de travailler en équipe grâce à son intégration graphique de Git.</p>
+<p><em>Note</em>: pour exécuter le code de l'application Flask, il est préférable d'utiliser un terminal avec l'environnement virtuel activé (voir plus bas); VSCode n'est qu'un éditeur de code, utiliser son terminal intégré fait prendre le risque de ne pas travailler dans son environnement virtuel.</p>
+<p>Pour travailler dans le dossier de l'application en cours de développement, il est possible de l'afficher dans l'espace à gauche.</p>
+<p><img src="img/vscode_1.jpg" alt=""></p>
+<p>Pour l'afficher, aller dans <code>Fichier &gt; Ouvrir le dossier</code> , puis sélectionner le dossier souhaité. Ce dossier, avec toute son arborescence, s'affiche alors dans l'Explorer.</p>
+<h3 id="python-">Python <a id="python"></a></h3>
+<h4 id="ubuntu--1">Ubuntu <a id="python_ubuntu"></a></h4>
+<p>Installer la dernière version de Python avec <code>sudo apt-get install python3</code>.</p>
+<p>Installer <code>pip</code>: <code>sudo apt install python3-pip</code></p>
+<h4 id="mac--1">Mac <a id="python_mac"></a></h4>
+<p>Télécharger l'installer Python pourr Mac ici: [<a href="https://www.python.org/ftp/python/3.11.1/python-3.11.1-macos11.pkg">https://www.python.org/ftp/python/3.11.1/python-3.11.1-macos11.pkg</a>][<a href="https://www.python.org/ftp/python/3.11.1/python-3.11.1-macos11.pkg">https://www.python.org/ftp/python/3.11.1/python-3.11.1-macos11.pkg</a>]</p>
+<p>Une fois téléchargé, aller dans les Téléchargements et double-cliquer sur le fichier <code>.pkg</code> qui vient d'être téléchargé. Suivre ensuite les instructions.</p>
+<p>Installer <code>pip</code> avec <code>python3 -m ensurepip</code>. Si cela ne fonctionne pas, suivre les instructions suivantes via <a href="http://get-pip.py">get-pip.py</a>: <a href="https://phoenixnap.com/kb/install-pip-mac">https://phoenixnap.com/kb/install-pip-mac</a>.</p>
+<h4 id="windows--1">Windows <a id="python_win"></a></h4>
+<p>Télécharger sur <a href="https://www.python.org/downloads/windows/">https://www.python.org/downloads/windows/</a> le <strong>Windows Installer</strong> 32bit ou 64bit selon votre machine.</p>
+<p>Dans les Téléchargements, double-cliquer sur l'exécutable et suivre les instructions. Bien sélectionner l'ajout de Python dans le PATH.</p>
+<p>Dans le cas normal, Python s'installera dans le répertoire suivant: <code>C:\Users\nom_user\AppData\Local\Programs\Python\Python311</code>. Dans le répertoire <code>Scripts</code>, il devrait y avoir l'exécutable suivant: <code>pip3.exe</code>. Si pip n'y est pas, suivre les instruction suivantes : <a href="https://phoenixnap.com/kb/install-pip-windows">https://phoenixnap.com/kb/install-pip-windows</a>.</p>
+<h3 id="environnements-virtuels-">Environnements virtuels <a id="env"></a></h3>
+<p>Avant de commencer le développement de tout projet Python, il convient d'installer un environnement virtuel spécifique à ce projet (un vase clos dans lequel seul le projet s'exécutera). Il est courant d'avoir plusieurs projets en cours de développement sur sa
+machine, or chaque projet peut utiliser des versions différentes des packages Python. Pour éviter les erreurs sur les packages, l'environnement virtuel est essentiel.</p>
+<p><img src="img/venv.png" alt=""></p>
+<p>Hors d'un environnement, la commande <code>which python</code> (ne fonctionne pas sur Windows) indiquera l'installation globale de Python sur la machine.</p>
+<pre><code class="language-bash"><span class="hljs-built_in">which</span> python
+</code></pre>
+<p>L'installation d'un environnement virtuel pour un projet Python se fait en plusieurs étapes, et dans le dossier racine de notre projet.</p>
+<h4 id="ubuntu-et-macos-">Ubuntu et MacOS <a id="env_ubuntu_macos"></a></h4>
+<pre><code class="language-bash"><span class="hljs-comment"># dans un terminal, effectuer les étapes suivantes</span>
+<span class="hljs-comment"># installation du package virtualenv, si ce n&#x27;est pas déjà fait, dans le Python global de la machine</span>
+pip install virtualenv
+
+<span class="hljs-comment"># on s&#x27;assure ensuite que l&#x27;on est dans le dossier racine de l&#x27;application</span>
+<span class="hljs-built_in">pwd</span>
+<span class="hljs-comment"># si ce n&#x27;est pas le cas, y aller</span>
+<span class="hljs-built_in">cd</span> dossier_racine/
+
+<span class="hljs-comment"># installation de l&#x27;environnement</span>
+virtualenv <span class="hljs-built_in">env</span> -p python3
+</code></pre>
+<p>Les étapes d'installation ne sont à réaliser qu'une seule fois. Une fois l'environnement installé, il suffit de l'activer/désactiver au début et à la fin de chaque séance de développement. Les packagaes installés quand on est dans l'environnement resteront dans cet environnement et n'auront pas d'interférence avec le reste de la machine.</p>
+<pre><code class="language-python"><span class="hljs-comment"># pour activer l&#x27;environnement:</span>
+<span class="hljs-comment"># Ubuntu</span>
+source env/<span class="hljs-built_in">bin</span>/activate
+
+<span class="hljs-comment"># Mac OS</span>
+source env/<span class="hljs-built_in">bin</span>/activate
+</code></pre>
+<p>Une fois activé, <code>(env)</code> apparaît au début de chaque ligne du terminal: c'est l'assurance que l'on travaille dans cet environnement. Pour s'assurer définitivement que l'on a bien un Python dédié au projet, on peut relancer un <code>which python</code>.</p>
+<pre><code class="language-bash"><span class="hljs-built_in">which</span> python
+</code></pre>
+<p>Pour désactiver l'environnement, il suffit d'exécuter la commande <code>deactivate</code>.</p>
+<h4 id="windows--2">Windows <a id="env_windows"></a></h4>
+<pre><code class="language-bash"><span class="hljs-comment"># dans PowerShell ou le cmd, effectuer les étapes suivantes</span>
+<span class="hljs-comment"># installation du package virtualenv, si ce n&#x27;est pas déjà fait, dans le Python global de la machine</span>
+C:\Users\nom_user\AppData\Local\Programs\Python\Python311\Scripts\pip3.exe install virtualenv
+
+<span class="hljs-comment"># on s&#x27;assure ensuite que l&#x27;on est dans le dossier racine de l&#x27;application</span>
+<span class="hljs-built_in">pwd</span>
+<span class="hljs-comment"># si ce n&#x27;est pas le cas, y aller</span>
+<span class="hljs-built_in">cd</span> dossier_racine/
+
+<span class="hljs-comment"># installation de l&#x27;environnement</span>
+C:\Users\nom_user\AppData\Local\Programs\Python\Python311\Scripts\virtualenv.exe <span class="hljs-built_in">env</span> -p python3
+</code></pre>
+<p>Les étapes d'installation ne sont à réaliser qu'une seule fois. Une fois l'environnement installé, il suffit de l'activer/désactiver au début et à la fin de chaque séance de développement. Les packagaes installés quand on est dans l'environnement resteront dans cet environnement et n'auront pas d'interférence avec le reste de la machine.</p>
+<pre><code class="language-python"><span class="hljs-comment"># pour activer l&#x27;environnement:</span>
+<span class="hljs-comment"># Windows</span>
+source env/Scripts/activate
+</code></pre>
+<p>Une fois activé, <code>(env)</code> apparaît au début de chaque ligne du terminal: c'est l'assurance que l'on travaille dans cet environnement.</p>
+<p>Pour désactiver l'environnement, il suffit d'exécuter la commande <code>deactivate</code>.</p>
+<h3 id="travailler-dans-un-dépôt-git-dans-vscode-">Travailler dans un dépôt Git dans VSCode <a id="git_vscode"></a></h3>
+<h4 id="installation-de-git-">Installation de Git <a id="install_git"></a></h4>
+<h5 id="ubuntu--2">Ubuntu <a id="ubuntu"></a></h5>
+<p><code>sudo apt install git</code></p>
+<h5 id="mac--2">Mac <a id="mac"></a></h5>
+<p>Télécharger le packet binaire au lien suivant: <a href="https://sourceforge.net/projects/git-osx-installer/">https://sourceforge.net/projects/git-osx-installer/</a>.</p>
+<p>Dans les téléchargements, double-cliquer sur l'installeur de Git et suivre les instructions.</p>
+<h5 id="windows--3">Windows <a id="windows"></a></h5>
+<p>Télécharger le Standalone Installer 32 ou 64-bit disponible sur le site <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a>.</p>
+<p>Aller dans les Téléchargements et lancer l'installeur de Git. Suivre les instructions.</p>
+<h4 id="cloner-un-répertoire-et-y-accéder-visuellement-">Cloner un répertoire et y accéder visuellement <a id="cloner"></a></h4>
+<p>Dans VSCode, avec la commande <code>CTRL</code> + <code>SHIFT</code> + <code>P</code>, la <code>Command Palette</code> s'ouvre. Sélectionner <code>Git: clone</code> et y entrer le lien vers le dépôt Github à cloner.</p>
+<p><img src="img/clone.jpg" alt=""></p>
+<p>Une fenêtre de connexion à son compte Git peut peut-être s'afficher. Ensuite, VSCode demande de sélectionner le dossier dans lequel cloner le répertoire distant.</p>
+<p>Ces étapes reviennent à faire un <code>git clone http://repertoire.git</code> dans le terminal à l'endroit voulu. Le faire avec VSCode permet d'ajouter directement le répertoire dans le Workspace, et d'avoir les fonctionnalités Git associées directement dans l'éditeur de code.</p>
+<p><img src="img/git.jpg" alt=""></p>
+
+        
+        <script async type="text/javascript">
+/* From extension marp-team.marp-vscode */
+(()=>{var Y=Object.defineProperty;var d=($,E)=>Y($,"name",{value:E,configurable:!0});(()=>{var $={676:(w,b,g)=>{w.exports=g(185)},185:(w,b)=>{"use strict";var g;g={value:!0};const x={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},k="data-marp-auto-scaling-wrapper",u="data-marp-auto-scaling-svg",c="data-marp-auto-scaling-container";class r extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const o=d(i=>([n])=>{const{width:e,height:t}=n.contentRect;this[i]={width:e,height:t},this.updateSVGRect()},"t");this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(o("containerSize")),this.wrapperObserver=new ResizeObserver((...i)=>{o("wrapperSize")(...i),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var o,i,n,e,t;this.shadowRoot.innerHTML=`
+<style>
+  svg[${u}] { display: block; width: 100%; height: auto; vertical-align: top; }
+  span[${c}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
+</style>
+<div ${k}>
+  <svg part="svg" ${u}>
+    <foreignObject><span ${c}><slot></slot></span></foreignObject>
+  </svg>
+</div>
+    `.split(/\n\s*/).join(""),this.wrapper=(o=this.shadowRoot.querySelector(`div[${k}]`))!==null&&o!==void 0?o:void 0;const s=this.svg;this.svg=(n=(i=this.wrapper)===null||i===void 0?void 0:i.querySelector(`svg[${u}]`))!==null&&n!==void 0?n:void 0,this.svg!==s&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=(t=(e=this.svg)===null||e===void 0?void 0:e.querySelector(`span[${c}]`))!==null&&t!==void 0?t:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:o}=this;o&&(o.style.display="inline",requestAnimationFrame(()=>{o.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(o){const i=d(()=>{const n=(()=>{const e=o.getPropertyValue("--preserve-aspect-ratio");return e?e.trim():`x${(({textAlign:t,direction:s})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if(t==="start"||t==="end"){let a=s==="rtl";return t==="end"&&(a=!a),a?"Max":"Min"}return"Mid"})(o)}YMid meet`})();n!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=n,this.updateSVGRect()),o===this.svgComputedStyle&&requestAnimationFrame(i)},"e");i()}updateSVGRect(){var o,i,n,e,t,s,a;let p=Math.ceil((i=(o=this.containerSize)===null||o===void 0?void 0:o.width)!==null&&i!==void 0?i:0);const h=Math.ceil((e=(n=this.containerSize)===null||n===void 0?void 0:n.height)!==null&&e!==void 0?e:0);this.dataset.downscaleOnly!==void 0&&(p=Math.max(p,(s=(t=this.wrapperSize)===null||t===void 0?void 0:t.width)!==null&&s!==void 0?s:0));const f=(a=this.svg)===null||a===void 0?void 0:a.querySelector(":scope > foreignObject");if(f?.setAttribute("width",`${p}`),f?.setAttribute("height",`${h}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${p} ${h}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=p<=0||h<=0?"0":""),this.container){const _=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=_.startsWith("xmid")||_.startsWith("xmax")?"auto":"0",this.container.style.marginRight=_.startsWith("xmi")?"auto":"0"}}}d(r,"s");const m=d((l,{attrs:o={},style:i})=>class extends l{constructor(...n){super(...n);for(const[e,t]of Object.entries(o))this.hasAttribute(e)||this.setAttribute(e,t);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const n=i?`<style>:host { ${i} }</style>`:"";let e="<slot></slot>";const{autoScaling:t}=this.dataset;t!==void 0&&(e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${t==="downscale-only"?"data-downscale-only":""}>${e}</marp-auto-scaling>`),this.shadowRoot.innerHTML=n+e}},"o");let v;const V=Symbol();let C;const j="marpitSVGPolyfill:setZoomFactor,",A=Symbol(),z=Symbol(),N=d(()=>{const l=navigator.vendor==="Apple Computer, Inc.",o=l?[D]:[],i={then:n=>(l?(async()=>{if(C===void 0){const e=document.createElement("canvas");e.width=10,e.height=10;const t=e.getContext("2d"),s=new Image(10,10),a=new Promise(p=>{s.addEventListener("load",()=>p())});s.crossOrigin="anonymous",s.src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%201%201%22%3E%3CforeignObject%20width%3D%221%22%20height%3D%221%22%20requiredExtensions%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%3E%3Cdiv%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%20style%3D%22width%3A%201px%3B%20height%3A%201px%3B%20background%3A%20red%3B%20position%3A%20relative%22%3E%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fsvg%3E",await a,t.drawImage(s,0,0),C=t.getImageData(5,5,1,1).data[3]<128}return C})().then(e=>{n?.(e?[D]:[])}):n?.([]),i)};return Object.assign(o,i)},"h");let H,O;function D(l){const o=typeof l=="object"&&l.target||document,i=typeof l=="object"?l.zoom:l;window[z]||(Object.defineProperty(window,z,{configurable:!0,value:!0}),document.body.style.zoom=1.0001,document.body.offsetHeight,document.body.style.zoom=1,window.addEventListener("message",({data:e,origin:t})=>{if(t===window.origin)try{if(e&&typeof e=="string"&&e.startsWith(j)){const[,s]=e.split(","),a=Number.parseFloat(s);Number.isNaN(a)||(O=a)}}catch(s){console.error(s)}}));let n=!1;Array.from(o.querySelectorAll("svg[data-marpit-svg]"),e=>{var t,s,a,p;e.style.transform||(e.style.transform="translateZ(0)");const h=i||O||e.currentScale||1;H!==h&&(H=h,n=h);const f=e.getBoundingClientRect(),{length:_}=e.children;for(let T=0;T<_;T+=1){const S=e.children[T];if(S.getScreenCTM){const y=S.getScreenCTM();if(y){const G=(s=(t=S.x)===null||t===void 0?void 0:t.baseVal.value)!==null&&s!==void 0?s:0,I=(p=(a=S.y)===null||a===void 0?void 0:a.baseVal.value)!==null&&p!==void 0?p:0,Z=S.children.length;for(let F=0;F<Z;F+=1){const P=S.children[F];if(P.tagName==="SECTION"){const{style:R}=P;R.transformOrigin||(R.transformOrigin=`${-G}px ${-I}px`),R.transform=`scale(${h}) matrix(${y.a}, ${y.b}, ${y.c}, ${y.d}, ${y.e-f.left}, ${y.f-f.top}) translateZ(0.0001px)`;break}}}}}}),n!==!1&&Array.from(o.querySelectorAll("iframe"),({contentWindow:e})=>{e?.postMessage(`${j}${n}`,window.origin==="null"?"*":window.origin)})}d(D,"u");function B({once:l=!1,target:o=document}={}){const i=function(n=document){if(n[A])return n[A];let e=!0;const t=d(()=>{e=!1,delete n[A]},"i");Object.defineProperty(n,A,{configurable:!0,value:t});let s=[],a=!1;(async()=>{try{s=await N()}finally{a=!0}})();const p=d(()=>{for(const h of s)h({target:n});a&&s.length===0||e&&window.requestAnimationFrame(p)},"o");return p(),t}(o);return l?(i(),()=>{}):i}d(B,"v"),H=1,O=void 0;const W=B,M=Symbol(),L=d((l=document)=>{if(typeof window>"u")throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const t=window[V];t||customElements.define("marp-auto-scaling",r);for(const s of Object.keys(x)){const a=`marp-${s}`,p=x[s].proto();v!=null||(v=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),v&&p!==HTMLElement?t||customElements.define(a,m(p,{style:x[s].style}),{extends:s}):(t||customElements.define(a,m(HTMLElement,x[s])),e.querySelectorAll(`${s}[is="${a}"]`).forEach(h=>{h.outerHTML=h.outerHTML.replace(new RegExp(`^<${s}`,"i"),`<${a}`).replace(new RegExp(`</${s}>$`,"i"),`</${a}>`)}))}window[V]=!0})(l),l[M])return l[M];const o=B({target:l}),i=d(()=>{o(),delete l[M]},"n"),n=Object.assign(i,{cleanup:i,update:()=>L(l)});return Object.defineProperty(l,M,{configurable:!0,value:n}),n},"y");b.browser=L,g=L,g=W}},E={};function q(w){var b=E[w];if(b!==void 0)return b.exports;var g=E[w]={exports:{}};return $[w](g,g.exports,q),g.exports}d(q,"__webpack_require__");var U={};(()=>{"use strict";var w=q(676);function b(){let u,c;const r=d(()=>{const m=document.getElementById("__marp-vscode"),v=!!m;u!==v?(document.body.classList.toggle("marp-vscode",v),v?c=(0,w.browser)():(c?.cleanup(),c=void 0),u=v):v&&c?.update(),u?(m&&g(m),x()):k()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(r,100)),window.addEventListener("vscode.markdown.updateContent",r),r()}d(b,"preview");const g=d(u=>{u.querySelectorAll("[is]").forEach(c=>{if(c.nodeName.includes("-")||document.createElement(c.nodeName).constructor!==c.constructor)return;const{outerHTML:m}=c;c.outerHTML=m,console.debug("[marp-vscode] Custom element has been upgraded forcibly:",m.slice(0,m.indexOf(">")+1||void 0))})},"forceUpgradeCustomElements"),x=d(()=>{const u=document.querySelectorAll("style:not(#__marp-vscode-style,#_defaultStyles,[data-marp-vscode-body])"),c=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');u.forEach(r=>{r.closest("#__marp-vscode")||(r.dataset.marpVscodeBody=r.textContent??"",r.textContent="")}),c.forEach(r=>{if(r.closest("#__marp-vscode"))return;const{href:m}=r;r.dataset.marpVscodeHref=m,r.removeAttribute("href")})},"removeStyles"),k=d(()=>{const u=document.querySelectorAll("style[data-marp-vscode-body]"),c=document.querySelectorAll("link[data-marp-vscode-href]");u.forEach(r=>{r.textContent=r.dataset.marpVscodeBody||"",delete r.dataset.marpVscodeBody}),c.forEach(r=>{r.href=r.dataset.marpVscodeHref||"",delete r.dataset.marpVscodeHref})},"restoreStyles");b()})()})();})();
+
+</script>
+
+    </body>
+    </html>
