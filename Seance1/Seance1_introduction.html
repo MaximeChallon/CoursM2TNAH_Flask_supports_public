@@ -1,117 +1,119 @@
 <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
-        <style>
-/* From extension vscode.github */
-/*---------------------------------------------------------------------------------------------
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
+	<style>
+		/* From extension vscode.github */
+		/*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-.vscode-dark img[src$=\#gh-light-mode-only],
-.vscode-light img[src$=\#gh-dark-mode-only] {
-	display: none;
-}
+		.vscode-dark img[src$=\#gh-light-mode-only],
+		.vscode-light img[src$=\#gh-dark-mode-only] {
+			display: none;
+		}
 
-/* From extension marp-team.marp-vscode */
-#__marp-vscode {
-  all: initial;
-}
+		/* From extension marp-team.marp-vscode */
+		#__marp-vscode {
+			all: initial;
+		}
 
-/* Override VS Code default CSS rules reverting to initial
+		/* Override VS Code default CSS rules reverting to initial
    https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
-body.marp-vscode {
-  padding: 0;
-}
+		body.marp-vscode {
+			padding: 0;
+		}
 
-body.marp-vscode img {
-  max-width: unset;
-  max-height: unset;
-}
+		body.marp-vscode img {
+			max-width: unset;
+			max-height: unset;
+		}
 
-body.marp-vscode a,
-body.marp-vscode a:hover,
-body.marp-vscode code {
-  color: unset;
-}
+		body.marp-vscode a,
+		body.marp-vscode a:hover,
+		body.marp-vscode code {
+			color: unset;
+		}
 
-body.marp-vscode blockquote {
-  background: unset;
-  border-color: unset;
-}
+		body.marp-vscode blockquote {
+			background: unset;
+			border-color: unset;
+		}
 
-@media screen {
-  body.marp-vscode {
-    overflow-y: scroll;
-  }
+		@media screen {
+			body.marp-vscode {
+				overflow-y: scroll;
+			}
 
-  #__marp-vscode [data-marp-vscode-slide-wrapper] {
-    margin: 20px;
-  }
+			#__marp-vscode [data-marp-vscode-slide-wrapper] {
+				margin: 20px;
+			}
 
-  #__marp-vscode svg[data-marpit-svg] {
-    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
-    display: block;
-    margin: 0;
-  }
+			#__marp-vscode svg[data-marpit-svg] {
+				box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+				display: block;
+				margin: 0;
+			}
 
-  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
-  #code-csp-warning {
-    background-color: #444;
-    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
-    color: white;
-    cursor: pointer;
-    font-family: sans-serif;
-    font-size: 12px;
-    line-height: 22px;
-    margin: 16px;
-    padding: 6px;
-    position: fixed;
-    right: 0;
-    text-align: center;
-    top: 0;
-    word-wrap: break-word;
-  }
+			/* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+			#code-csp-warning {
+				background-color: #444;
+				box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+				color: white;
+				cursor: pointer;
+				font-family: sans-serif;
+				font-size: 12px;
+				line-height: 22px;
+				margin: 16px;
+				padding: 6px;
+				position: fixed;
+				right: 0;
+				text-align: center;
+				top: 0;
+				word-wrap: break-word;
+			}
 
-  #code-csp-warning:hover {
-    text-decoration: none;
-    background-color: #007acc;
-    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
-  }
-}
+			#code-csp-warning:hover {
+				text-decoration: none;
+				background-color: #007acc;
+				box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+			}
+		}
 
-@media print {
-  body.marp-vscode #code-csp-warning {
-    display: none;
-  }
-}
+		@media print {
+			body.marp-vscode #code-csp-warning {
+				display: none;
+			}
+		}
+	</style>
 
-</style>
-        
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
-<style>
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
-                font-size: 14px;
-                line-height: 1.6;
-            }
-        </style>
-        <style>
-.task-list-item {
-    list-style-type: none;
-}
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+	<style>
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+			font-size: 14px;
+			line-height: 1.6;
+		}
+	</style>
+	<style>
+		.task-list-item {
+			list-style-type: none;
+		}
 
-.task-list-item-checkbox {
-    margin-left: -20px;
-    vertical-align: middle;
-    pointer-events: none;
-}
-</style>
-        <style>
-/*********************************************************************
+		.task-list-item-checkbox {
+			margin-left: -20px;
+			vertical-align: middle;
+			pointer-events: none;
+		}
+	</style>
+	<style>
+		/*********************************************************************
 This is free and unencumbered software released into the public domain.
 
 Anyone is free to copy, modify, publish, use, compile, sell, or
@@ -122,399 +124,411 @@ means.
 For more information, please refer to <http://unlicense.org/>
 *********************************************************************/
 
-/*
+		/*
 WiTeX
 https://github.com/AndrewBelt/WiTeX
 */
 
 
-/* Latin Modern (LaTeX default) font */
+		/* Latin Modern (LaTeX default) font */
 
-@font-face {
-	font-family: 'Latin Modern Roman';
-	font-weight: normal;
-	font-style: normal;
-	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff');
-}
+		@font-face {
+			font-family: 'Latin Modern Roman';
+			font-weight: normal;
+			font-style: normal;
+			src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff');
+		}
 
-@font-face {
-	font-family: 'Latin Modern Roman';
-	font-weight: bold;
-	font-style: normal;
-	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff');
-}
+		@font-face {
+			font-family: 'Latin Modern Roman';
+			font-weight: bold;
+			font-style: normal;
+			src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff');
+		}
 
-@font-face {
-	font-family: 'Latin Modern Roman';
-	font-weight: normal;
-	font-style: italic;
-	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff');
-}
+		@font-face {
+			font-family: 'Latin Modern Roman';
+			font-weight: normal;
+			font-style: italic;
+			src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff');
+		}
 
-@font-face {
-	font-family: 'Latin Modern Roman';
-	font-weight: bold;
-	font-style: italic;
-	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff');
-}
+		@font-face {
+			font-family: 'Latin Modern Roman';
+			font-weight: bold;
+			font-style: italic;
+			src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff');
+		}
 
-@font-face {
-	font-family: 'Latin Modern Mono';
-	font-weight: normal;
-	font-style: normal;
-	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff');
-}
+		@font-face {
+			font-family: 'Latin Modern Mono';
+			font-weight: normal;
+			font-style: normal;
+			src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff');
+		}
 
-@font-face {
-	font-family: 'Latin Modern Mono';
-	font-weight: normal;
-	font-style: italic;
-	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
-}
+		@font-face {
+			font-family: 'Latin Modern Mono';
+			font-weight: normal;
+			font-style: italic;
+			src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
+		}
 
-/* Page Layout */
+		/* Page Layout */
 
-body {
-	background: none;
-	font-size: 14pt;
-	font-family: 'Latin Modern Roman', serif;
-	color: black;
-}
+		body {
+			background: none;
+			font-size: 14pt;
+			font-family: 'Latin Modern Roman', serif;
+			color: black;
+		}
 
-h1, h2, h3, h4, h5, h6 {
-	border: none;
-	font-weight: bold;
-}
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			border: none;
+			font-weight: bold;
+		}
 
-a, a:visited {
-	color: #a00;
-}
+		a,
+		a:visited {
+			color: #a00;
+		}
 
-a.new, a.new:visited {
-	color: black;
-}
+		a.new,
+		a.new:visited {
+			color: black;
+		}
 
-ul {
-	list-style: disc;
-}
+		ul {
+			list-style: disc;
+		}
 
-#mw-navigation, #mw-page-base, #mw-head-base, #footer {
-	/* nuke everything but the content */
-	display: none;
-}
+		#mw-navigation,
+		#mw-page-base,
+		#mw-head-base,
+		#footer {
+			/* nuke everything but the content */
+			display: none;
+		}
 
-/* Content Box */
+		/* Content Box */
 
-.mw-body {
-	max-width: 720px;
-	margin: 1em auto;
-}
+		.mw-body {
+			max-width: 720px;
+			margin: 1em auto;
+		}
 
-#content, div#content {
-	border: none;
-	color: black;
-}
+		#content,
+		div#content {
+			border: none;
+			color: black;
+		}
 
-#firstHeading, #siteSub {
-	text-align: center;
-	display: block;
-}
+		#firstHeading,
+		#siteSub {
+			text-align: center;
+			display: block;
+		}
 
-#siteSub {
-	margin-top: -0.5em;
-	margin-bottom: 4em;
-}
+		#siteSub {
+			margin-top: -0.5em;
+			margin-bottom: 4em;
+		}
 
-/* Article Body */
+		/* Article Body */
 
-.mw-body-content {
-	font-size: inherit;
-	text-align: justify;
-	-moz-hyphens: auto;
-	-webkit-hyphens: auto;
-	hyphens: auto;
-	line-height: 1.5em;
-}
+		.mw-body-content {
+			font-size: inherit;
+			text-align: justify;
+			-moz-hyphens: auto;
+			-webkit-hyphens: auto;
+			hyphens: auto;
+			line-height: 1.5em;
+		}
 
-.mw-body {
-	padding: 2em 0;
-}
+		.mw-body {
+			padding: 2em 0;
+		}
 
-.mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6, div#content h1, div#content h2, div#content #firstHeading {
-	font-family: inherit;
-	line-height: 1.5em;
-	margin-bottom: 0.5em;
-}
+		.mw-body h1,
+		.mw-body h2,
+		.mw-body h3,
+		.mw-body h4,
+		.mw-body h5,
+		.mw-body h6,
+		div#content h1,
+		div#content h2,
+		div#content #firstHeading {
+			font-family: inherit;
+			line-height: 1.5em;
+			margin-bottom: 0.5em;
+		}
 
-.mw-body h1, div#content h1 {
-	font-size: 2em;
-}
+		.mw-body h1,
+		div#content h1 {
+			font-size: 2em;
+		}
 
-.mw-body h2, div#content h2 {
-	font-size: 1.5em;
-}
+		.mw-body h2,
+		div#content h2 {
+			font-size: 1.5em;
+		}
 
-.mw-body h3 {
-	font-size: 1.2em;
-}
+		.mw-body h3 {
+			font-size: 1.2em;
+		}
 
-.mw-body h4 {
-	font-size: 1.1em;
-}
+		.mw-body h4 {
+			font-size: 1.1em;
+		}
 
-.mw-body h5, .mw-body h6 {
-	font-size: 1.0em;
-}
+		.mw-body h5,
+		.mw-body h6 {
+			font-size: 1.0em;
+		}
 
-.mw-body p {
-	margin: 0;
-}
+		.mw-body p {
+			margin: 0;
+		}
 
-.mw-body p + p {
-	text-indent: 2em;
-}
+		.mw-body p+p {
+			text-indent: 2em;
+		}
 
-.mw-editsection {
-	/* hide more non-content */
-	display: none;
-}
+		.mw-editsection {
+			/* hide more non-content */
+			display: none;
+		}
 
-table.ambox {
-	margin-bottom: 1em;
-}
+		table.ambox {
+			margin-bottom: 1em;
+		}
 
-dl dd {
-	/* center definitions (most useful for display equations) */
-	text-align: center;
-}
+		dl dd {
+			/* center definitions (most useful for display equations) */
+			text-align: center;
+		}
 
-span.texhtml {
-	/* revert inline math to default font */
-	font-family: inherit;
-	font-size: inherit;
-	line-height: inherit;
-}
+		span.texhtml {
+			/* revert inline math to default font */
+			font-family: inherit;
+			font-size: inherit;
+			line-height: inherit;
+		}
 
-/* Table of Contents */
+		/* Table of Contents */
 
-#toc, .toc {
-	border: none;
-	padding: 0;
-	background: none;
-	font-size: inherit;
-	/* span 100% of the width */
-	display: block;
-}
+		#toc,
+		.toc {
+			border: none;
+			padding: 0;
+			background: none;
+			font-size: inherit;
+			/* span 100% of the width */
+			display: block;
+		}
 
-.mw-body #toc h2, .mw-body .toc h2 {
-	font-family: inherit;
-	font-size: 1.5em;
-}
+		.mw-body #toc h2,
+		.mw-body .toc h2 {
+			font-family: inherit;
+			font-size: 1.5em;
+		}
 
-#toc h2, .toc h2 {
-	display: block;
-}
+		#toc h2,
+		.toc h2 {
+			display: block;
+		}
 
-#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle {
-	text-align: left;
-}
+		#toc #toctitle,
+		.toc #toctitle,
+		#toc .toctitle,
+		.toc .toctitle {
+			text-align: left;
+		}
 
-.toctoggle {
-	display: none;
-}
+		.toctoggle {
+			display: none;
+		}
 
-/* Figures */
+		/* Figures */
 
-div.tright {
-	margin: 0.5em 0 0.5em 1.5em;
-}
+		div.tright {
+			margin: 0.5em 0 0.5em 1.5em;
+		}
 
-div.tleft {
-	margin: 0.5em 1.5em 0.5em 0;
-}
+		div.tleft {
+			margin: 0.5em 1.5em 0.5em 0;
+		}
 
-/* Code */
+		/* Code */
 
-.mw-code {
-	margin: 1em 0;
-}
+		.mw-code {
+			margin: 1em 0;
+		}
 
-pre, code {
-	font-family: "Latin Modern Mono", monospace !important;
-}
+		pre,
+		code {
+			font-family: "Latin Modern Mono", monospace !important;
+		}
 
-sup {
-	text-indent: 0;
-}
-</style>
-    </head>
-    <body class="vscode-body vscode-light">
-        <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
-<h2 id="séance-1--introduction">Séance 1 : Introduction</h2>
-<ol>
-<li><a href="#deroule">Déroulé du cours</a></li>
-<li><a href="#objectifs">Objectifs principaux</a></li>
-<li><a href="#description">Description pratique du cours</a></li>
-<li><a href="#exercices">Exercices</a></li>
-<li><a href="#eval">Evalution</a>
-<ol>
-<li><a href="#sujets">Sujets</a></li>
-<li><a href="#criteres">Critères communs d'évaluation</a></li>
-</ol>
-</li>
-</ol>
-<h3 id="déroulé-du-cours-">Déroulé du cours <a id="deroule"></a></h3>
-<table>
-<thead>
-<tr>
-<th>Date</th>
-<th>Séance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Mardi 7 février 14-17h</td>
-<td>Une première application</td>
-</tr>
-<tr>
-<td>Mardi 14 février 14-17h</td>
-<td>Routes et templates</td>
-</tr>
-<tr>
-<td>Mardi 21 février 14-17h</td>
-<td>Penser les données par un ORM: création des objets</td>
-</tr>
-<tr>
-<td>Mercredi 22 février 9h-12h</td>
-<td>Penser les données par un ORM: implémentation et interactions</td>
-</tr>
-<tr>
-<td>Lundi 27 février 14-16h</td>
-<td>Interactions avec les utilisateurs: les formulaires</td>
-</tr>
-<tr>
-<td>Mardi 28 février 14-17h</td>
-<td>Gestion des utilisateurs</td>
-</tr>
-<tr>
-<td>Mardi 7 mars 13-16h</td>
-<td>TP et bonnes pratiques</td>
-</tr>
-</tbody>
-</table>
-<h3 id="objectifs-principaux-du-cours-">Objectifs principaux du cours <a id="objectifs"></a></h3>
-<ul>
-<li>utiliser une bibliothèque Python en s’appuyant sur sa documentation</li>
-<li>organiser la conception et la réalisation d’une application web avec back- et front-office</li>
-<li>découvrir un ORM (Object-Relational Mapping)</li>
-</ul>
-<h3 id="description-pratique-du-cours-">Description pratique du cours <a id="description"></a></h3>
-<p>Ce cours est construit comme un pas à pas dans le développement d’une application Web Python reposant sur une base de données. <em>Nous prendrons comme exemple des données du World Factbook de la CIA.</em> Plusieurs frameworks Python existent pour le développement Web (Django, Flask): Flask sera utilisé.</p>
-<p>Documents fournis à chaque cours et déposés sur le Moodle de la classe:</p>
-<ul>
-<li>la présentation</li>
-<li>un ensemble de fichiers HTML (déployés <a href="https://maximechallon.github.io/CoursM2TNAH_Flask_supports_public/sommaire.html">ici</a>) comprenant :
-<ul>
-<li>des explications détaillées sur ce qui a été évoqué lors du cours</li>
-<li>les exercices</li>
-<li>les ressources et les exemples du cours</li>
-<li>des liens vers le code source des applications développées</li>
-</ul>
-</li>
-<li>un dépôt Github avec le code source de l’application est accessible à tous: <a href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code">lien</a>. Si Git n'est pas familier, un zip avec le code source pourra être fourni.</li>
-</ul>
-<p>Il est normal de ne pas tout comprendre et maîtriser dès le cours. L’enjeu est de reprendre ce qui a été vu, de refaire ce qui a été fait en cours. Je suis disponible par <a href="mailto:maxime.challon@gmail.com">mail</a> et répondrai au plus vite en cas d'interrogations.</p>
-<h3 id="les-exercices-">Les exercices <a id="exercices"></a></h3>
-<p>A la fin de chaque cours, des exercices seront proposés pour le cours suivant. Ils seront parfois nombreux, mais ils restent optionnels dans leur totalité. Il est possible de les effectuer en groupe, les échanges sont toujours plus utiles que de longues heures de questionnements devant son écran.</p>
-<ul>
-<li>soit un simple énoncé sera donné afin de développer l’application demandée <em>(une fois la base d'une application Flask vue en cours, je vous conseille de garder une copie de cette structure de base quelque part afin d'éviter de devoir tout redévelopper à chaque fois)</em></li>
-<li>soit une application initialisée est fournie, et il faudra y développer des fonctionnalités précises</li>
-</ul>
-<p>Aucune correction ne sera effectuée en cours, les exercices sont à m’envoyer par mail (de préférence quelques jours avant le cours) pour que je puisse corriger et apporter des pistes de correction/améliorations. Une note de participation basée sur la réalisation (i.e. tentative de résolution) d'au moins un exercice à l'issue de chaque cours sera attribuée en fin d'UE.</p>
-<p>3 types d’exercices seront proposés :</p>
-<ul>
-<li>révisions sur ce qui a été vu dans le cours précédent (REV)</li>
-<li>approfondissement de notions vues en cours, ou découverte de librairies ou de nouvelles méthodes de développement (APP)</li>
-<li>réflexions sur une problématique autour d'un exercice afin de préparer le cours suivant (REF)</li>
-</ul>
-<h3 id="evaluation-">Evaluation <a id="eval"></a></h3>
-<p>Par groupe de 2 ou 3 (groupes différents de ceux de l'UE3), les étudiants réaliseront le développement d’une application web correspondant à l’un des 3 sujets ci-dessous. Ce travail est à rendre pour le <strong>31 mars 2023</strong>.</p>
-<p><em>Note</em>: des exemples de rendus de devoirs des années précédentes sont disponibles <a href="https://github.com/Chartes-TNAH/">dans ce dépôt</a>. Ils étaient auparavant réalisés individuellement.</p>
-<h4 id="sujets-">Sujets <a id="sujets"></a></h4>
-<ul>
-<li>Réaliser une application lisant, modifiant et écrivant dans une base de données relationnelle (SGBDR au choix: SQLITE, PostreSQL, MariaDB) préremplie (possibilité d’utiliser les données utilisées dans l’UE3)
-<ul>
-<li>plusieurs pages de rendus de données seront demandées, par exemple: un catalogue, un endpoint JSON, des cartes, des graphes, etc.</li>
-<li>la page de catalogue et le endpoint JSON devront intégrer des filtres sur les données. Faire de même pour les cartes et les graphes serait un plus.</li>
-<li>notions appelées: tables HTML, SQL, une bibliothèque JS pour les cartes et/ou les graphes</li>
-</ul>
-</li>
-<li>Réaliser une application d’annotation d’images utilisant le standard IIIF : une application de prises de notes sur un document des collections de la BNF, avec affichage des images à la demande.
-<ul>
-<li>Pour chaque image affichée, possibilité de rédiger des commentaires et d’avoir des champs de description (numéro de page, titre, couleur, etc).</li>
-<li>En complément, optionnel : pouvoir éditer pour chaque ouvrage un rapport pdf (ou autre format) reprenant l’image, les champs de description et les commentaires</li>
-<li>notions appelées : formulaires Flask-WTF, SQL, API, IIIF</li>
-</ul>
-</li>
-<li>Réaliser une application qui cherche dans Wikidata des monuments ou des lieux (par ex. les châteaux en France, les musées, les bibliothèques…), puis dans BANO et/ou OpenStreetMap (OSM) les coordonnées de localisation et si possible les polygones: afficher le tout (données Wikidata, liens) dans une carte dynamique
-<ul>
-<li>Pas d’écriture de données dans une base demandée pour ce sujet, la lecture depuis des API suffit</li>
-<li>une variante pourrait être de créer un formulaire qui permette d’affiner les requêtes Wikidata: sur une région de notre choix, ou avoir le choix entre
-châteaux/musées/bibliothèques/etc.</li>
-<li>notions appelées: package “requests” Python, API REST, web de données, JS Leaflet (ou autre framework)</li>
-</ul>
-</li>
-</ul>
-<p>Ces trois types de sujets peuvent être réalisés avec d'autres données. Les étudiants devront penser l'application en amont et se répartir les fonctionnalités et les recherches au sein de chaque groupe. La mise en place de cette organisation projet sera notée dans le cadre de l’UE4.</p>
-<h4 id="critères-dévaluation-communs-">Critères d'évaluation communs <a id="criteres"></a></h4>
-<table>
-<thead>
-<tr>
-<th>Critère</th>
-<th>Notions vues en cours</th>
-<th>Notions à présenter dans l'évaluation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Création du front-office</td>
-<td>Utilisation de templates Flask (utilisation de HTML/CSS/JS)</td>
-<td>Utilisation d’une extension Flask non vue en cours, par exemple : Flask-Admin, Flask-Mail, Flask-RESTFul, SQLAlchemy-Searchable, Flask-Paginate, etc</td>
-</tr>
-<tr>
-<td>Gestion d’utilisateurs et de leurs connexions</td>
-<td>Utilisation d'un ORM ; écriture, lecture et modification dans une base SQL simple</td>
-<td>Inclure une fonctionnalité non vue en cours liée aux utilisateurs (par exemple créer des règles d’accès à des pages ou des données selon le statut d’un utilisateur)</td>
-</tr>
-<tr>
-<td>Rendu graphique de données (carte ou graphes au choix)</td>
-<td>Méthodologie d’envoi de données du back-office vers le front-office ; pistes d’utilisation d’OpenStreetMap et de JS Leaflet</td>
-<td>Utiliser une méthode au choix de rendu graphique (au choix : Javascript avec LeafletJS, Python avec matplotlib, JS Plotly…) à partir de sa documentation</td>
-</tr>
-<tr>
-<td>Exploiter une source de données</td>
-<td>Dans l’UE3 : SQL et bases de données relationnelles ; Consommation d’API ouvertes (cf. UE1, UE3, UE6) ; possibilité d’utiliser une base SQL préremplie à partir des données travaillées dans l’UE3</td>
-<td>Mettre en pratique la consommation de données via des API en s’appuyant sur les notions vues dans d’autres UE et la documentation des API</td>
-</tr>
-</tbody>
-</table>
+		sup {
+			text-indent: 0;
+		}
+	</style>
+</head>
 
-        
-        <script async type="text/javascript">
-/* From extension marp-team.marp-vscode */
-(()=>{var F=Object.defineProperty;var d=(E,k)=>F(E,"name",{value:k,configurable:!0});(()=>{var E={676:(b,f,h)=>{b.exports=h(185)},185:(b,f)=>{"use strict";var h;h={value:!0};const S={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},M="data-marp-auto-scaling-wrapper",p="data-marp-auto-scaling-svg",l="data-marp-auto-scaling-container";class o extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const s=d(r=>([n])=>{const{width:e,height:t}=n.contentRect;this[r]={width:e,height:t},this.updateSVGRect()},"e");this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(s("containerSize")),this.wrapperObserver=new ResizeObserver((...r)=>{s("wrapperSize")(...r),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var s,r,n,e,t;this.shadowRoot.innerHTML=`
+<body class="vscode-body vscode-light">
+	<h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal,
+		niveau 2</h1>
+	<h2 id="séance-1--introduction">Séance 1 : Introduction</h2>
+	<ol>
+		<li><a href="#deroule">Déroulé du cours</a></li>
+		<li><a href="#objectifs">Objectifs principaux</a></li>
+		<li><a href="#description">Description pratique du cours</a></li>
+		<li><a href="#exercices">Exercices</a></li>
+		<li><a href="#eval">Evalution</a>
+			<ol>
+				<li><a href="#sujets">Sujets</a></li>
+				<li><a href="#criteres">Critères communs d'évaluation</a></li>
+			</ol>
+		</li>
+	</ol>
+	<h3 id="déroulé-du-cours-">Déroulé du cours <a id="deroule"></a></h3>
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Séance</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>2h</td>
+				<td>Une première application</td>
+			</tr>
+			<tr>
+				<td>3h</td>
+				<td>Routes et templates</td>
+			</tr>
+			<tr>
+				<td>2h</td>
+				<td>Penser les données par un ORM: création des objets</td>
+			</tr>
+			<tr>
+				<td>3h</td>
+				<td>Penser les données par un ORM: implémentation et interactions</td>
+			</tr>
+			<tr>
+				<td>4h</td>
+				<td>Interactions avec les utilisateurs: les formulaires</td>
+			</tr>
+			<tr>
+				<td>3h</td>
+				<td>Gestion des utilisateurs</td>
+			</tr>
+			<tr>
+				<td>3h</td>
+				<td>TP et bonnes pratiques</td>
+			</tr>
+		</tbody>
+	</table>
+	<h3 id="objectifs-principaux-du-cours-">Objectifs principaux du cours <a id="objectifs"></a></h3>
+	<ul>
+		<li>utiliser une bibliothèque Python en s’appuyant sur sa documentation</li>
+		<li>organiser la conception et la réalisation d’une application web avec back- et front-office</li>
+		<li>découvrir un ORM (Object-Relational Mapping)</li>
+	</ul>
+	<h3 id="description-pratique-du-cours-">Description pratique du cours <a id="description"></a></h3>
+	<p>Ce cours est construit comme un pas à pas dans le développement d’une application Web Python reposant sur une
+		base de données. <em>Nous prendrons comme exemple des données du World Factbook de la CIA.</em> Plusieurs
+		frameworks Python existent pour le développement Web (Django, Flask): Flask sera utilisé.</p>
+	<p>Documents fournis à chaque cours et déposés sur le Moodle de la classe:</p>
+	<ul>
+		<li>la présentation</li>
+		<li>un ensemble de fichiers HTML (déployés <a
+				href="https://maximechallon.github.io/CoursM2TNAH_Flask_supports_public/sommaire.html">ici</a>)
+			comprenant :
+			<ul>
+				<li>des explications détaillées sur ce qui a été évoqué lors du cours</li>
+				<li>les exercices</li>
+				<li>les ressources et les exemples du cours</li>
+				<li>des liens vers le code source des applications développées</li>
+			</ul>
+		</li>
+		<li>un dépôt Github avec le code source de l’application est accessible à tous: <a
+				href="https://github.com/MaximeChallon/CoursM2TNAH_Flask_code">lien</a>. Si Git n'est pas familier, un
+			zip avec le code source pourra être fourni.</li>
+	</ul>
+	<p>Il est normal de ne pas tout comprendre et maîtriser dès le cours. L’enjeu est de reprendre ce qui a été vu, de
+		refaire ce qui a été fait en cours. Je suis disponible par <a href="mailto:maxime.challon@gmail.com">mail</a> et
+		répondrai au plus vite en cas d'interrogations.</p>
+	<h3 id="les-exercices-">Les exercices <a id="exercices"></a></h3>
+	<p>A la fin de chaque cours, des exercices seront proposés pour le cours suivant. Ils seront parfois nombreux, mais
+		ils restent optionnels dans leur totalité. Il est possible de les effectuer en groupe, les échanges sont
+		toujours plus utiles que de longues heures de questionnements devant son écran.</p>
+	<ul>
+		<li>soit un simple énoncé sera donné afin de développer l’application demandée <em>(une fois la base d'une
+				application Flask vue en cours, je vous conseille de garder une copie de cette structure de base quelque
+				part afin d'éviter de devoir tout redévelopper à chaque fois)</em></li>
+		<li>soit une application initialisée est fournie, et il faudra y développer des fonctionnalités précises</li>
+	</ul>
+	<p>Aucune correction ne sera effectuée en cours, les exercices sont à m’envoyer par mail (de préférence quelques
+		jours avant le cours) pour que je puisse corriger et apporter des pistes de correction/améliorations. Une note
+		de participation basée sur la réalisation (i.e. tentatives de résolution) d'<strong>au moins un exercice à
+			l'issue de chaque cours</strong> sera attribuée en fin d'UE.</p>
+	<p>3 types d’exercices seront proposés :</p>
+	<ul>
+		<li>révisions sur ce qui a été vu dans le cours précédent (REV)</li>
+		<li>approfondissement de notions vues en cours, ou découverte de librairies ou de nouvelles méthodes de
+			développement (APP)</li>
+		<li>réflexions sur une problématique autour d'un exercice afin de préparer le cours suivant (REF)</li>
+	</ul>
+	<h3 id="evaluation-">Evaluation <a id="eval"></a></h3>
+	<p>Par groupe de 4 , les étudiants réaliseront le développement d’une application web. L'évaluation s'inscrit dans
+		le projet de groupe commun aux UE3, UE4 et UE5 (voir le support fourni par la scolarité).</p>
+	<p>Cette évaluation comporte deux livrables / étapes:</p>
+	<ul>
+		<li>une revue de projet sera faite pour chaque groupe avant ou après les cours des <strong>16 et 22 janvier
+				2024</strong>: le cahier des charges de l'application qui sera développée sera rendu lors de cette revue
+			de projet</li>
+		<li>l'application sera à rendre pour le <strong>31 mars 2024</strong></li>
+	</ul>
+	<p>Un point sera proposé à chaque groupe courant février ou début mars selon les besoins de chacun: il aura pour but
+		de voir les bugs éventuels, l'avancement, les difficultés rencontrées.</p>
+
+
+	<script async type="text/javascript">
+		/* From extension marp-team.marp-vscode */
+		(() => {
+			var U = Object.defineProperty; var d = ($, E) => U($, "name", { value: E, configurable: !0 }); (() => {
+				var $ = {
+					676: (w, b, g) => { w.exports = g(185) }, 185: (w, b) => {
+						"use strict"; var g; g = { value: !0 }; const x = { h1: { proto: () => HTMLHeadingElement, attrs: { role: "heading", "aria-level": "1" }, style: "display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;" }, h2: { proto: () => HTMLHeadingElement, attrs: { role: "heading", "aria-level": "2" }, style: "display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;" }, h3: { proto: () => HTMLHeadingElement, attrs: { role: "heading", "aria-level": "3" }, style: "display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;" }, h4: { proto: () => HTMLHeadingElement, attrs: { role: "heading", "aria-level": "4" }, style: "display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;" }, h5: { proto: () => HTMLHeadingElement, attrs: { role: "heading", "aria-level": "5" }, style: "display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;" }, h6: { proto: () => HTMLHeadingElement, attrs: { role: "heading", "aria-level": "6" }, style: "display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;" }, span: { proto: () => HTMLSpanElement }, pre: { proto: () => HTMLElement, style: "display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;" } }, k = "data-marp-auto-scaling-wrapper", u = "data-marp-auto-scaling-svg", c = "data-marp-auto-scaling-container", T = class T extends HTMLElement {
+							constructor() { super(), this.svgPreserveAspectRatio = "xMinYMid meet"; const s = d(i => ([n]) => { const { width: e, height: t } = n.contentRect; this[i] = { width: e, height: t }, this.updateSVGRect() }, "t"); this.attachShadow({ mode: "open" }), this.containerObserver = new ResizeObserver(s("containerSize")), this.wrapperObserver = new ResizeObserver((...i) => { s("wrapperSize")(...i), this.flushSvgDisplay() }) } static get observedAttributes() { return ["data-downscale-only"] } connectedCallback() {
+								var s, i, n, e, t; this.shadowRoot.innerHTML = `
 <style>
-  svg[${p}] { display: block; width: 100%; height: auto; vertical-align: top; }
-  span[${l}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
+  svg[${u}] { display: block; width: 100%; height: auto; vertical-align: top; }
+  span[${c}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
 </style>
-<div ${M}>
-  <svg part="svg" ${p}>
-    <foreignObject><span ${l}><slot></slot></span></foreignObject>
+<div ${k}>
+  <svg part="svg" ${u}>
+    <foreignObject><span ${c}><slot></slot></span></foreignObject>
   </svg>
 </div>
-    `.split(/\n\s*/).join(""),this.wrapper=(s=this.shadowRoot.querySelector(`div[${M}]`))!==null&&s!==void 0?s:void 0;const i=this.svg;this.svg=(n=(r=this.wrapper)===null||r===void 0?void 0:r.querySelector(`svg[${p}]`))!==null&&n!==void 0?n:void 0,this.svg!==i&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=(t=(e=this.svg)===null||e===void 0?void 0:e.querySelector(`span[${l}]`))!==null&&t!==void 0?t:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:s}=this;s&&(s.style.display="inline",requestAnimationFrame(()=>{s.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(s){const r=d(()=>{const n=(()=>{const e=s.getPropertyValue("--preserve-aspect-ratio");return e?e.trim():`x${(({textAlign:t,direction:i})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if(t==="start"||t==="end"){let a=i==="rtl";return t==="end"&&(a=!a),a?"Max":"Min"}return"Mid"})(s)}YMid meet`})();n!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=n,this.updateSVGRect()),s===this.svgComputedStyle&&requestAnimationFrame(r)},"t");r()}updateSVGRect(){var s,r,n,e,t,i,a;let m=Math.ceil((r=(s=this.containerSize)===null||s===void 0?void 0:s.width)!==null&&r!==void 0?r:0);const v=Math.ceil((e=(n=this.containerSize)===null||n===void 0?void 0:n.height)!==null&&e!==void 0?e:0);this.dataset.downscaleOnly!==void 0&&(m=Math.max(m,(i=(t=this.wrapperSize)===null||t===void 0?void 0:t.width)!==null&&i!==void 0?i:0));const y=(a=this.svg)===null||a===void 0?void 0:a.querySelector(":scope > foreignObject");if(y?.setAttribute("width",`${m}`),y?.setAttribute("height",`${v}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${m} ${v}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=m<=0||v<=0?"0":""),this.container){const _=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=_.startsWith("xmid")||_.startsWith("xmax")?"auto":"0",this.container.style.marginRight=_.startsWith("xmi")?"auto":"0"}}}d(o,"s");const u=d((c,{attrs:s={},style:r})=>class extends c{constructor(...n){super(...n);for(const[e,t]of Object.entries(s))this.hasAttribute(e)||this.setAttribute(e,t);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const n=r?`<style>:host { ${r} }</style>`:"";let e="<slot></slot>";const{autoScaling:t}=this.dataset;t!==void 0&&(e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${t==="downscale-only"?"data-downscale-only":""}>${e}</marp-auto-scaling>`),this.shadowRoot.innerHTML=n+e}},"r");let g;const q=Symbol(),V="marpitSVGPolyfill:setZoomFactor,",z=Symbol();let A,C;function N(c){const s=typeof c=="object"&&c.target||document,r=typeof c=="object"?c.zoom:c;window[z]||(Object.defineProperty(window,z,{configurable:!0,value:!0}),window.addEventListener("message",({data:e,origin:t})=>{if(t===window.origin)try{if(e&&typeof e=="string"&&e.startsWith(V)){const[,i]=e.split(","),a=Number.parseFloat(i);Number.isNaN(a)||(C=a)}}catch(i){console.error(i)}}));let n=!1;Array.from(s.querySelectorAll("svg[data-marpit-svg]"),e=>{var t,i,a,m;e.style.transform||(e.style.transform="translateZ(0)");const v=r||C||e.currentScale||1;A!==v&&(A=v,n=v);const y=e.getBoundingClientRect(),{length:_}=e.children;for(let L=0;L<_;L+=1){const x=e.children[L];if(x.getScreenCTM){const w=x.getScreenCTM();if(w){const W=(i=(t=x.x)===null||t===void 0?void 0:t.baseVal.value)!==null&&i!==void 0?i:0,B=(m=(a=x.y)===null||a===void 0?void 0:a.baseVal.value)!==null&&m!==void 0?m:0,G=x.children.length;for(let T=0;T<G;T+=1){const P=x.children[T];if(P.tagName==="SECTION"){const{style:O}=P;O.transformOrigin||(O.transformOrigin=`${-W}px ${-B}px`),O.transform=`scale(${v}) matrix(${w.a}, ${w.b}, ${w.c}, ${w.d}, ${w.e-y.left}, ${w.f-y.top}) translateZ(0.0001px)`;break}}}}}}),n!==!1&&Array.from(s.querySelectorAll("iframe"),({contentWindow:e})=>{e?.postMessage(`${V}${n}`,window.origin==="null"?"*":window.origin)})}d(N,"h");function j({once:c=!1,target:s=document}={}){const r=navigator.vendor==="Apple Computer, Inc."?[N]:[];let n=!c;const e=d(()=>{for(const t of r)t({target:s});n&&window.requestAnimationFrame(e)},"s");return e(),()=>{n=!1}}d(j,"g"),A=1,C=void 0;const $=Symbol(),H=d((c=document)=>{if(typeof window>"u")throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const t=window[q];t||customElements.define("marp-auto-scaling",o);for(const i of Object.keys(S)){const a=`marp-${i}`,m=S[i].proto();g!=null||(g=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),g&&m!==HTMLElement?t||customElements.define(a,u(m,{style:S[i].style}),{extends:i}):(t||customElements.define(a,u(HTMLElement,S[i])),e.querySelectorAll(`${i}[is="${a}"]`).forEach(v=>{v.outerHTML=v.outerHTML.replace(new RegExp(`^<${i}`,"i"),`<${a}`).replace(new RegExp(`</${i}>$`,"i"),`</${a}>`)}))}window[q]=!0})(c),c[$])return c[$];const s=j({target:c}),r=d(()=>{s(),delete c[$]},"n"),n=Object.assign(r,{cleanup:r,update:()=>H(c)});return Object.defineProperty(c,$,{configurable:!0,value:n}),n},"v");f.browser=H,h=H,h=j}},k={};function R(b){var f=k[b];if(f!==void 0)return f.exports;var h=k[b]={exports:{}};return E[b](h,h.exports,R),h.exports}d(R,"__webpack_require__");var Z={};(()=>{"use strict";var b=R(676);function f(){let p,l;const o=d(()=>{const u=document.getElementById("__marp-vscode"),g=!!u;p!==g?(document.body.classList.toggle("marp-vscode",g),g?l=(0,b.browser)():(l?.cleanup(),l=void 0),p=g):g&&l?.update(),p?(u&&h(u),S()):M()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(o,100)),window.addEventListener("vscode.markdown.updateContent",o),o()}d(f,"preview");const h=d(p=>{p.querySelectorAll("[is]").forEach(l=>{if(l.nodeName.includes("-")||document.createElement(l.nodeName).constructor!==l.constructor)return;const{outerHTML:u}=l;l.outerHTML=u,console.debug("[marp-vscode] Custom element has been upgraded forcibly:",u.slice(0,u.indexOf(">")+1||void 0))})},"forceUpgradeCustomElements"),S=d(()=>{const p=document.querySelectorAll("style:not(#__marp-vscode-style):not(#_defaultStyles):not([data-marp-vscode-body])"),l=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');p.forEach(o=>{o.closest("#__marp-vscode")||(o.dataset.marpVscodeBody=o.textContent??"",o.textContent="")}),l.forEach(o=>{if(o.closest("#__marp-vscode"))return;const{href:u}=o;o.dataset.marpVscodeHref=u,o.removeAttribute("href")})},"removeStyles"),M=d(()=>{const p=document.querySelectorAll("style[data-marp-vscode-body]"),l=document.querySelectorAll("link[data-marp-vscode-href]");p.forEach(o=>{o.textContent=o.dataset.marpVscodeBody||"",delete o.dataset.marpVscodeBody}),l.forEach(o=>{o.href=o.dataset.marpVscodeHref||"",delete o.dataset.marpVscodeHref})},"restoreStyles");f()})()})();})();
+    `.split(/\n\s*/).join(""), this.wrapper = (s = this.shadowRoot.querySelector(`div[${k}]`)) !== null && s !== void 0 ? s : void 0; const o = this.svg; this.svg = (n = (i = this.wrapper) === null || i === void 0 ? void 0 : i.querySelector(`svg[${u}]`)) !== null && n !== void 0 ? n : void 0, this.svg !== o && (this.svgComputedStyle = this.svg ? window.getComputedStyle(this.svg) : void 0), this.container = (t = (e = this.svg) === null || e === void 0 ? void 0 : e.querySelector(`span[${c}]`)) !== null && t !== void 0 ? t : void 0, this.observe()
+							} disconnectedCallback() { this.svg = void 0, this.svgComputedStyle = void 0, this.wrapper = void 0, this.container = void 0, this.observe() } attributeChangedCallback() { this.observe() } flushSvgDisplay() { const { svg: s } = this; s && (s.style.display = "inline", requestAnimationFrame(() => { s.style.display = "" })) } observe() { this.containerObserver.disconnect(), this.wrapperObserver.disconnect(), this.wrapper && this.wrapperObserver.observe(this.wrapper), this.container && this.containerObserver.observe(this.container), this.svgComputedStyle && this.observeSVGStyle(this.svgComputedStyle) } observeSVGStyle(s) { const i = d(() => { const n = (() => { const e = s.getPropertyValue("--preserve-aspect-ratio"); return e ? e.trim() : `x${(({ textAlign: t, direction: o }) => { if (t.endsWith("left")) return "Min"; if (t.endsWith("right")) return "Max"; if (t === "start" || t === "end") { let a = o === "rtl"; return t === "end" && (a = !a), a ? "Max" : "Min" } return "Mid" })(s)}YMid meet` })(); n !== this.svgPreserveAspectRatio && (this.svgPreserveAspectRatio = n, this.updateSVGRect()), s === this.svgComputedStyle && requestAnimationFrame(i) }, "e"); i() } updateSVGRect() { var s, i, n, e, t, o, a; let p = Math.ceil((i = (s = this.containerSize) === null || s === void 0 ? void 0 : s.width) !== null && i !== void 0 ? i : 0); const h = Math.ceil((e = (n = this.containerSize) === null || n === void 0 ? void 0 : n.height) !== null && e !== void 0 ? e : 0); this.dataset.downscaleOnly !== void 0 && (p = Math.max(p, (o = (t = this.wrapperSize) === null || t === void 0 ? void 0 : t.width) !== null && o !== void 0 ? o : 0)); const f = (a = this.svg) === null || a === void 0 ? void 0 : a.querySelector(":scope > foreignObject"); if (f?.setAttribute("width", `${p}`), f?.setAttribute("height", `${h}`), this.svg && (this.svg.setAttribute("viewBox", `0 0 ${p} ${h}`), this.svg.setAttribute("preserveAspectRatio", this.svgPreserveAspectRatio), this.svg.style.height = p <= 0 || h <= 0 ? "0" : ""), this.container) { const _ = this.svgPreserveAspectRatio.toLowerCase(); this.container.style.marginLeft = _.startsWith("xmid") || _.startsWith("xmax") ? "auto" : "0", this.container.style.marginRight = _.startsWith("xmi") ? "auto" : "0" } }
+						}; d(T, "s"); let r = T; const m = d((l, { attrs: s = {}, style: i }) => class extends l { constructor(...n) { super(...n); for (const [e, t] of Object.entries(s)) this.hasAttribute(e) || this.setAttribute(e, t); this.attachShadow({ mode: "open" }) } static get observedAttributes() { return ["data-auto-scaling"] } connectedCallback() { this._update() } attributeChangedCallback() { this._update() } _update() { const n = i ? `<style>:host { ${i} }</style>` : ""; let e = "<slot></slot>"; const { autoScaling: t } = this.dataset; t !== void 0 && (e = `<marp-auto-scaling exportparts="svg:auto-scaling" ${t === "downscale-only" ? "data-downscale-only" : ""}>${e}</marp-auto-scaling>`), this.shadowRoot.innerHTML = n + e } }, "o"); let v; const j = Symbol(); let C; const z = "marpitSVGPolyfill:setZoomFactor,", A = Symbol(), D = Symbol(), W = d(() => { const l = navigator.vendor === "Apple Computer, Inc.", s = l ? [B] : [], i = { then: n => (l ? (async () => { if (C === void 0) { const e = document.createElement("canvas"); e.width = 10, e.height = 10; const t = e.getContext("2d"), o = new Image(10, 10), a = new Promise(p => { o.addEventListener("load", () => p()) }); o.crossOrigin = "anonymous", o.src = "data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%201%201%22%3E%3CforeignObject%20width%3D%221%22%20height%3D%221%22%20requiredExtensions%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%3E%3Cdiv%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%20style%3D%22width%3A%201px%3B%20height%3A%201px%3B%20background%3A%20red%3B%20position%3A%20relative%22%3E%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fsvg%3E", await a, t.drawImage(o, 0, 0), C = t.getImageData(5, 5, 1, 1).data[3] < 128 } return C })().then(e => { n?.(e ? [B] : []) }) : n?.([]), i) }; return Object.assign(s, i) }, "h"); let H, O; function B(l) { const s = typeof l == "object" && l.target || document, i = typeof l == "object" ? l.zoom : l; window[D] || (Object.defineProperty(window, D, { configurable: !0, value: !0 }), document.body.style.zoom = 1.0001, document.body.offsetHeight, document.body.style.zoom = 1, window.addEventListener("message", ({ data: e, origin: t }) => { if (t === window.origin) try { if (e && typeof e == "string" && e.startsWith(z)) { const [, o] = e.split(","), a = Number.parseFloat(o); Number.isNaN(a) || (O = a) } } catch (o) { console.error(o) } })); let n = !1; Array.from(s.querySelectorAll("svg[data-marpit-svg]"), e => { var t, o, a, p; e.style.transform || (e.style.transform = "translateZ(0)"); const h = i || O || e.currentScale || 1; H !== h && (H = h, n = h); const f = e.getBoundingClientRect(), { length: _ } = e.children; for (let F = 0; F < _; F += 1) { const S = e.children[F]; if (S.getScreenCTM) { const y = S.getScreenCTM(); if (y) { const I = (o = (t = S.x) === null || t === void 0 ? void 0 : t.baseVal.value) !== null && o !== void 0 ? o : 0, Z = (p = (a = S.y) === null || a === void 0 ? void 0 : a.baseVal.value) !== null && p !== void 0 ? p : 0, Y = S.children.length; for (let R = 0; R < Y; R += 1) { const N = S.children[R]; if (N.tagName === "SECTION") { const { style: q } = N; q.transformOrigin || (q.transformOrigin = `${-I}px ${-Z}px`), q.transform = `scale(${h}) matrix(${y.a}, ${y.b}, ${y.c}, ${y.d}, ${y.e - f.left}, ${y.f - f.top}) translateZ(0.0001px)`; break } } } } } }), n !== !1 && Array.from(s.querySelectorAll("iframe"), ({ contentWindow: e }) => { e?.postMessage(`${z}${n}`, window.origin === "null" ? "*" : window.origin) }) } d(B, "u"); function P({ once: l = !1, target: s = document } = {}) { const i = function (n = document) { if (n[A]) return n[A]; let e = !0; const t = d(() => { e = !1, delete n[A] }, "i"); Object.defineProperty(n, A, { configurable: !0, value: t }); let o = [], a = !1; (async () => { try { o = await W() } finally { a = !0 } })(); const p = d(() => { for (const h of o) h({ target: n }); a && o.length === 0 || e && window.requestAnimationFrame(p) }, "o"); return p(), t }(s); return l ? (i(), () => { }) : i } d(P, "v"), H = 1, O = void 0; const G = P, M = Symbol(), L = d((l = document) => { if (typeof window > "u") throw new Error("Marp Core's browser script is valid only in browser context."); if (((e = document) => { const t = window[j]; t || customElements.define("marp-auto-scaling", r); for (const o of Object.keys(x)) { const a = `marp-${o}`, p = x[o].proto(); v != null || (v = !!document.createElement("div", { is: "marp-auto-scaling" }).outerHTML.startsWith("<div is")), v && p !== HTMLElement ? t || customElements.define(a, m(p, { style: x[o].style }), { extends: o }) : (t || customElements.define(a, m(HTMLElement, x[o])), e.querySelectorAll(`${o}[is="${a}"]`).forEach(h => { h.outerHTML = h.outerHTML.replace(new RegExp(`^<${o}`, "i"), `<${a}`).replace(new RegExp(`</${o}>$`, "i"), `</${a}>`) })) } window[j] = !0 })(l), l[M]) return l[M]; const s = P({ target: l }), i = d(() => { s(), delete l[M] }, "n"), n = Object.assign(i, { cleanup: i, update: () => L(l) }); return Object.defineProperty(l, M, { configurable: !0, value: n }), n }, "y"); b.browser = L, g = L, g = G
+					}
+				}, E = {}; function V(w) { var b = E[w]; if (b !== void 0) return b.exports; var g = E[w] = { exports: {} }; return $[w](g, g.exports, V), g.exports } d(V, "__webpack_require__"); var J = {}; (() => { "use strict"; var w = V(676); function b() { let u, c; const r = d(() => { const m = document.getElementById("__marp-vscode"), v = !!m; u !== v ? (document.body.classList.toggle("marp-vscode", v), v ? c = (0, w.browser)() : (c?.cleanup(), c = void 0), u = v) : v && c?.update(), u ? (m && g(m), x()) : k() }, "updateCallback"); window.addEventListener("load", () => window.setTimeout(r, 100)), window.addEventListener("vscode.markdown.updateContent", r), r() } d(b, "preview"); const g = d(u => { u.querySelectorAll("[is]").forEach(c => { if (c.nodeName.includes("-") || document.createElement(c.nodeName).constructor !== c.constructor) return; const { outerHTML: m } = c; c.outerHTML = m, console.debug("[marp-vscode] Custom element has been upgraded forcibly:", m.slice(0, m.indexOf(">") + 1 || void 0)) }) }, "forceUpgradeCustomElements"), x = d(() => { const u = document.querySelectorAll("style:not(#__marp-vscode-style,#_defaultStyles,[data-marp-vscode-body])"), c = document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])'); u.forEach(r => { r.closest("#__marp-vscode") || (r.dataset.marpVscodeBody = r.textContent ?? "", r.textContent = "") }), c.forEach(r => { if (r.closest("#__marp-vscode")) return; const { href: m } = r; r.dataset.marpVscodeHref = m, r.removeAttribute("href") }) }, "removeStyles"), k = d(() => { const u = document.querySelectorAll("style[data-marp-vscode-body]"), c = document.querySelectorAll("link[data-marp-vscode-href]"); u.forEach(r => { r.textContent = r.dataset.marpVscodeBody || "", delete r.dataset.marpVscodeBody }), c.forEach(r => { r.href = r.dataset.marpVscodeHref || "", delete r.dataset.marpVscodeHref }) }, "restoreStyles"); b() })()
+			})();
+		})();
 
-</script>
+	</script>
 
-    </body>
-    </html>
+</body>
+
+</html>
