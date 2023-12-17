@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension marp-team.marp-vscode */
+#__marp-vscode {
+  all: revert;
+}
+
+/* Override VS Code default CSS rules reverting to initial
+   https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
+body.marp-vscode {
+  padding: 0;
+}
+
+body.marp-vscode img {
+  max-width: unset;
+  max-height: unset;
+}
+
+body.marp-vscode a,
+body.marp-vscode a:hover,
+body.marp-vscode code {
+  color: unset;
+}
+
+body.marp-vscode blockquote {
+  background: unset;
+  border-color: unset;
+}
+
+@media screen {
+  body.marp-vscode {
+    overflow-y: scroll;
+  }
+
+  #__marp-vscode [data-marp-vscode-slide-wrapper] {
+    margin: 20px;
+  }
+
+  #__marp-vscode svg[data-marpit-svg] {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+    display: block;
+    margin: 0;
+  }
+
+  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+  #code-csp-warning {
+    background-color: #444;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+    color: white;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    margin: 16px;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    word-wrap: break-word;
+  }
+
+  #code-csp-warning:hover {
+    text-decoration: none;
+    background-color: #007acc;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  }
+}
+
+@media print {
+  body.marp-vscode #code-csp-warning {
+    display: none;
+  }
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        <style>
+/*********************************************************************
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+For more information, please refer to <http://unlicense.org/>
+*********************************************************************/
+
+/*
+WiTeX
+https://github.com/AndrewBelt/WiTeX
+*/
+
+
+/* Latin Modern (LaTeX default) font */
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
+}
+
+/* Page Layout */
+
+body {
+	background: none;
+	font-size: 14pt;
+	font-family: 'Latin Modern Roman', serif;
+	color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	border: none;
+	font-weight: bold;
+}
+
+a, a:visited {
+	color: #a00;
+}
+
+a.new, a.new:visited {
+	color: black;
+}
+
+ul {
+	list-style: disc;
+}
+
+#mw-navigation, #mw-page-base, #mw-head-base, #footer {
+	/* nuke everything but the content */
+	display: none;
+}
+
+/* Content Box */
+
+.mw-body {
+	max-width: 720px;
+	margin: 1em auto;
+}
+
+#content, div#content {
+	border: none;
+	color: black;
+}
+
+#firstHeading, #siteSub {
+	text-align: center;
+	display: block;
+}
+
+#siteSub {
+	margin-top: -0.5em;
+	margin-bottom: 4em;
+}
+
+/* Article Body */
+
+.mw-body-content {
+	font-size: inherit;
+	text-align: justify;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	line-height: 1.5em;
+}
+
+.mw-body {
+	padding: 2em 0;
+}
+
+.mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6, div#content h1, div#content h2, div#content #firstHeading {
+	font-family: inherit;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.mw-body h1, div#content h1 {
+	font-size: 2em;
+}
+
+.mw-body h2, div#content h2 {
+	font-size: 1.5em;
+}
+
+.mw-body h3 {
+	font-size: 1.2em;
+}
+
+.mw-body h4 {
+	font-size: 1.1em;
+}
+
+.mw-body h5, .mw-body h6 {
+	font-size: 1.0em;
+}
+
+.mw-body p {
+	margin: 0;
+}
+
+.mw-body p + p {
+	text-indent: 2em;
+}
+
+.mw-editsection {
+	/* hide more non-content */
+	display: none;
+}
+
+table.ambox {
+	margin-bottom: 1em;
+}
+
+dl dd {
+	/* center definitions (most useful for display equations) */
+	text-align: center;
+}
+
+span.texhtml {
+	/* revert inline math to default font */
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+/* Table of Contents */
+
+#toc, .toc {
+	border: none;
+	padding: 0;
+	background: none;
+	font-size: inherit;
+	/* span 100% of the width */
+	display: block;
+}
+
+.mw-body #toc h2, .mw-body .toc h2 {
+	font-family: inherit;
+	font-size: 1.5em;
+}
+
+#toc h2, .toc h2 {
+	display: block;
+}
+
+#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle {
+	text-align: left;
+}
+
+.toctoggle {
+	display: none;
+}
+
+/* Figures */
+
+div.tright {
+	margin: 0.5em 0 0.5em 1.5em;
+}
+
+div.tleft {
+	margin: 0.5em 1.5em 0.5em 0;
+}
+
+/* Code */
+
+.mw-code {
+	margin: 1em 0;
+}
+
+pre, code {
+	font-family: "Latin Modern Mono", monospace !important;
+}
+
+sup {
+	text-indent: 0;
+}
+</style>
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
+<h2 id="séance-3--td--bases-de-données-connexion-et-modélisation-objet">Séance 3 : TD : Bases de données, connexion et modélisation objet</h2>
+<h3 id="installations-et-configurations">Installations et configurations</h3>
+<h4 id="une-application-flask-commune">Une application Flask commune</h4>
+<p>Afin que tout le monde réalise ce TD sur une application Flask sans erreurs et correctement configurée:</p>
+<ol>
+<li>Installer sur son PC l'application <a href="Seance3_app_base_TD.zip">Seance3_app_base_TD</a></li>
+<li>Y installer un environnement virtuel Python3</li>
+<li>Installer les dépendances de l'application</li>
+<li>Télécharger la base de données <a href="factbook.sqlite">factbook.sqlite</a> quelque part sur son PC</li>
+</ol>
+<h4 id="installations-système-ou-applicative">Installations système ou applicative</h4>
+<p>Tout type de base de données peut être branché à une application Flask grâce à des librairies externes de Python. Pour plus de facilités, une base relationnelle SQLite sera utilisée.</p>
+<ol>
+<li>Installer sur sa machine <a href="https://www.sqlite.org/download.html">SQLite pour Windows</a> ou sqlite3 pour Linux ou MacOS</li>
+<li>Installer <code>flask-sqlalchemy</code> dans l'environnement virtuel de l'application</li>
+</ol>
+<h4 id="configuration-de-la-connexion-à-la-base-de-données">Configuration de la connexion à la base de données</h4>
+<p>Tout comme notre application est une instance de Flask, nommée <code>app</code>, la connexion à la base de donnée sera une instance de SQLAlchemy, communément nommée <code>db</code>. L'objet <code>db</code> prend comme premier argument l'application Flask. <a href="https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/api/#flask_sqlalchemy.SQLAlchemy">Documentation de l'objet SQLAlchemy</a></p>
+<ol>
+<li>Dans le fichier <code>app.py</code>, créer l'instance <code>db</code>. Attention à bien positionner cette instanciation par rapport à l'instance <code>app</code> et aux imports finaux des routes.</li>
+<li>Lancer l'application. L'erreur <code>Either 'SQLALCHEMY_DATABASE_URI' or 'SQLALCHEMY_BINDS' must be set.</code> doit apparaître.</li>
+<li>SQLAlchemy a besoin qu'on lui indique le &quot;chemin&quot; vers la base de données SQLite dans une variable <code>SQLALCHEMY_DATABASE_URI</code>
+<ol>
+<li>Se demander où doit être valuée cette variable dans l'application: est-ce une donnée sensible? est-ce une donnée qui sera partagée par toutes les machines qui lanceraient l'application?</li>
+<li>Deux pistes:
+<ol>
+<li>Le nom de la variable <code>SQLALCHEMY_DATABASE_URI</code> et sa valeur nécessitent une seule ligne dans un fichier</li>
+<li>La récupération de la valeur par l'application (et donc par <code>db</code> puisque <code>db</code> est configurée avec <code>app</code>) s'écrit en une seule ligne dans un fichier de configuration</li>
+</ol>
+</li>
+<li>La valeur de <code>SQLALCHEMY_DATABASE_URI</code> sera le chemin vers la base de données . Ce chemin peut être absolu ou relatif, et varie selon les OS. Ecrire ce chemin selon la <a href="SQLALCHEMY_DATABASE_URI">documentation</a></li>
+</ol>
+</li>
+<li>Lancer l'application. Elle doit cette fois se lancer correctement et afficher <code>* Running on http://127.0.0.1:5000</code> dans le terminal</li>
+</ol>
+<h3 id="une-première-requête">Une première requête</h3>
+<p>Pour le moment, aucun rendu via un template HTML n'est demandé. On va se concentrer sur les retours dans le terminal. Le lancement de l'application sans erreurs est normalement gage de bonne connectivité avec la base de données SQLite. Néanmoins, il faut s'assurer que l'on puisse lire des données, sans utiliser pour le moment les fonctionnalités d'ORM de SQLAlchemy. On va donc simplement exécuter une requête SQL.</p>
+<p>Voici le modèle de données de la base:
+<img src="img/factbook_model.png" alt="h:300"></p>
+<ol>
+<li>Il existe une route <code>/pays</code> dans le module <code>routes/generales</code>. Cette route est actuellement fonctionnelle et affiche des données écrites à la main dans le code.</li>
+<li>Dans cette route, faire un print des résultats de la requête SQL suivante: <code>SELECT * FROM country LIMIT 10</code>
+<ol>
+<li>Cette requête doit s'exécuter sur la base de données, soit sur l'instance <code>db</code> de SQLAlchemy que l'on a configuré plus haut. Faire en sorte d'avoir accès à <code>db</code> dans le module de la route</li>
+<li>Comme nous n'utilisons pas encore une méthode orientée objet, nous fournissons une chaîne de caractères correspondant à la requête SQL. AVec les deux documentations suivantes, créer une variable <code>resultats</code> dans la route <code>/pays</code> qui correspondent aux résultats de la requête: <a href="https://docs.sqlalchemy.org/en/20/orm/session_api.html#sqlalchemy.orm.Session.execute">https://docs.sqlalchemy.org/en/20/orm/session_api.html#sqlalchemy.orm.Session.execute</a> et <a href="https://stackoverflow.com/a/22084672/17586135">Ticket StackOverFlow</a></li>
+<li>Effectuer un print() de resultats</li>
+<li>Relancer l'application et appeler <code>localhost:5000/pays</code></li>
+<li>Bien lire le message d'erreur et effectuer la correction. La correction à apporter est explicitement indiquée dans le message d'erreur.</li>
+<li>Le résultat correct doit être un retour 200 de  <code>localhost:5000/pays</code> et l'affichage dans les logs de ```[(&quot;<p>Algeria has known many empires and dynasties starting with the ancient Numidians (3rd century B.C.), Phoenicians, Carthaginians, Romans, Vandals,  ... (
+2790 characters truncated) ... arbon revenues to fund the government and finance the large subsidies for the population has fallen under stress because of dec
+lining oil prices.</p>&quot;, 'ag', 'Algeria', 'sovereign'), (&quot;From the late 14th to the mid 19th century a Kingdom of Kongo stretched across central Africa from p
+resent-day northern Angola into the current Congo ... (1141 characters truncated) ...  He pushed through a new constitution in 2010. Joao LOURENCO was elected
+president in August 2017 and became president of the MPLA in September 2018.&quot;, 'ao', 'Angola', 'sovereign'), ('Seeking to stop the incorporation of their lan
+d into Rhodesia (Zimbabwe) or the Union of South Africa, in 1885, three tribal chiefs traveled to Great ... (965 characters truncated) ... the world's highes
+t rates of HIV/AIDS infection, but also one of Africa's most progressive and comprehensive programs for dealing with the disease.', 'bc', 'Botswana', 'sovere
+ign'), ('Present day Benin is comprised of about 42 ethnic groups, including the Yoruba in the southeast, who migrated from what is now Nigeria in the 12th ce
+... (1657 characters truncated) ... k office in 2016; the space for pluralism, dissent, and free expression has narrowed under his administration. TALON won
+a second term in April 2021.', 'bn', 'Benin', 'sovereign'), (&quot;<p>Established in the 1600s, the Burundi Kingdom has had borders similar to those of modern Buru
+ndi since the 1800s. Burundi’s two major ethnic group ... (2274 characters truncated) ... al court decision allowed him to circumvent a term limit. President
+Evariste NDAYISHIMIYE - from NKURUNZIZA’s ruling party - was elected in 2020.</p>&quot;, 'by', 'Burundi', 'sovereign'), ('<p>Chad emerged from a collection of powe
+rful states that controlled the Sahelian belt starting around the 9th century. These states focused on contr ... (3028 characters truncated) ...  Chadian mili
+tary camp in the Lake Chad Basin and killed nearly 100 soldiers; it was the deadliest attack in the history of the Chadian military.</p>', 'cd', 'Chad', 'sove
+reign'), (&quot;Upon independence in 1960, the former French region of Middle Congo became the Republic of the Congo. A quarter century of experimentation with Mar
+xi ... (821 characters truncated) ... rica's largest petroleum producers, but with declining production it will need new offshore oil finds to sustain its oil
+earnings over the long term.&quot;, 'cf', 'Congo', 'sovereign'), (&quot;<p>The Kingdom of Kongo ruled the area around the mouth of the Congo River from the 14th to 19t
+h centuries. To the center and east, the Kingdoms of L ... (3506 characters truncated) ... n the DRC (MONUSCO) has operated in the region since 1999 and is th
+e largest and most expensive UN peacekeeping mission in the world.</p> <p>\xa0</p>&quot;, 'cg', 'Congo DR', 'sovereign'), ('Much of the area of present-day Cameroo
+n was ruled by powerful chiefdoms before becoming a German colony in 1884 known as Kamerun. After World War I, ... (528 characters truncated) ...  as well as
+a petroleum industry. Despite slow movement toward democratic reform, political power remains firmly in the hands of President Paul BIYA.', 'cm', 'Cameroon',
+'sovereign'), (&quot;The archipelago of the Comoros in the Indian Ocean, composed of the islands of Mayotte, Anjouan, Moheli, and Grande Comore declared independen
+ce from ... (1789 characters truncated) ... between the three main islands. In August 2018, President AZALI formed a new government and subsequently ran and w
+as elected president in March 2019.&quot;, 'cn', 'Comoros', 'sovereign')]</li>
+</ol>
+<pre><code>
+</code></pre>
+</li>
+</ol>
+<h3 id="les-modèles-de-bases-de-données-ou-comment-représenter-la-base-de-données-en-objets-sqlalchemy">Les modèles de bases de données, ou comment représenter la base de données en objets SQLAlchemy</h3>
+<p>Plutôt que d'effectuer des requêtes SQL à la main, l'ORM propose de les générer à notre place. Pour cela, il est nécessaire d'indiquer à l'ORM une représentation de nos données. Les données conservées en base sont alors représentées en une collection d'objets (de classes), ce qui est nommé modèles de base de données. La couche ORM va alors effectuer le mapping modèle&gt;table elle-même.</p>
+<p>Chaque table est représentée par un modèle, qui est lui-même une classe Python dérivée de SQLAlchemy(app).Model qui porte le même nom que la table (l'ORM est insensible à la casse pour le nom de table; par convention, il est préférable de nommer chaque classe en camelCase). Les modèles sont stockés dans un au plusieurs fichiers Python dans le package models. Chaque attribut de la classe représente une colonne de la table.</p>
+<p>De manière théorique, les classes représentant les tables s'écrivent ainsi (ce qui est entre &lt;&lt;&gt;&gt; est spécifique à la table décrite):</p>
+<pre><code>class &lt;&lt;objectName&gt;&gt;(db.Model):
+    &lt;&lt;colonne1&gt;&gt; = db.Column(db.&lt;&lt;objectType&gt;&gt;)
+    &lt;&lt;colonne2&gt;&gt; = db.Column(db.&lt;&lt;objectType&gt;&gt;)
+    ...
+</code></pre>
+<ol>
+<li>Créer le package <code>models</code>, à côté des packages <code>routes</code> ou <code>templates</code> déjà existants</li>
+<li>Créer un module <code>factbook</code> dans le package <code>models</code></li>
+<li>Dans ce module, créer une classe représentant la table Country
+<ol>
+<li>Les différents types d'objets sont décrits dans la <a href="https://docs.sqlalchemy.org/en/14/core/type_basics.html#generic-camelcase-types">documentation</a></li>
+</ol>
+</li>
+<li>Importer la classe Country dans <code>routes/generales</code></li>
+<li>Lancer l'application. Une erreur de clé primaire doit apparaître. Cette erreur est normale. La déclaration de l'objet Country doit être identique au modèle physique de la base de données. Or celui-ci contient une clé primaire.</li>
+<li>A partir de la <a href="https://docs.sqlalchemy.org/en/20/core/metadata.html#sqlalchemy.schema.Column">documentation</a> et du modèle de données, poser la clé primaire dans la classe Country</li>
+<li>Relancer l'application. Elle doit s'exécuter normalement.</li>
+</ol>
+<p>Maintenant que la base de données est branchée et qu'un premier objet Country représente une des tables de la base, on va pouvoir brancher la base de données à la route <code>/pays</code>. Le but des étapes suivantes est de ne pas avoir à toucher aux templates, seulement à la fonction <code>pays()</code>: autrement dit, il s'agit simplement de renvoyer au template des données au format demandé</p>
+<pre><code>[{
+    &quot;nom&quot;:&quot;string&quot;,
+    &quot;capitale&quot;:&quot;string&quot;,
+    &quot;continent&quot;:&quot;string&quot;
+}]
+</code></pre>
+<p>à partir des résultats d'une requête faite par l'ORM à la base de données.</p>
+<ol>
+<li>Traduire le SQL <code>SELECT * FROM Country</code> en SQLAlchemy à partir de la classe Country : <a href="https://flask-sqlalchemy.palletsprojects.com/en/2.x/queries/">https://flask-sqlalchemy.palletsprojects.com/en/2.x/queries/</a>. Plusieurs méthodes sont possibles; toutes doivent renvoyer une liste d'objets qui représentent les pays : <code>[&lt;Country ag&gt;, &lt;Country ao&gt;, &lt;Country bc&gt;, &lt;Country bn&gt;, &lt;Country by&gt;, &lt;Country cd&gt;, &lt;Country cf&gt;, &lt;Country cg&gt;, ...,  &lt;Country par&gt;]</code></li>
+<li>Afin de comprendre que le résultat renvoyé est une succession d'objets, on peut tenter d'itérer sur la liste de résultats afin d'afficher:
+<ol>
+<li>l'objet courant</li>
+<li>son type</li>
+<li>Le résultat devrait être pour chaque pays :</li>
+</ol>
+<pre><code>&lt;Country par&gt;
+&lt;class 'app.models.factbook.Country'&gt;
+</code></pre>
+</li>
+<li>Comme Country est une classe, afficher pour chaque pays dans le terminal son nom et son id:</li>
+</ol>
+<pre><code>xx
+World
+</code></pre>
+<ol start="4">
+<li>L'actuelle variable <code>donnees</code> contient des données écrites en dur. Remplir cette variable avec les données requises de chaque pays pour qu'elles s'affichent dans le template (sans toucher à celui-ci):
+<ol>
+<li>le champ capitale prendra &quot;inconnue&quot; comme valeur</li>
+<li>le champ continent prendra &quot;inconnu&quot; comme valuer</li>
+<li>le champ nom prendra le nom du pays</li>
+</ol>
+</li>
+<li>Lancer l'application et accéder à la page <code>/pays</code>. Les pays doivent s'afficher en tableau.</li>
+</ol>
+
+        
+        <script async type="text/javascript">
+/* From extension marp-team.marp-vscode */
+(()=>{var U=Object.defineProperty;var d=($,E)=>U($,"name",{value:E,configurable:!0});(()=>{var $={676:(w,b,g)=>{w.exports=g(185)},185:(w,b)=>{"use strict";var g;g={value:!0};const x={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},k="data-marp-auto-scaling-wrapper",u="data-marp-auto-scaling-svg",c="data-marp-auto-scaling-container",T=class T extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const s=d(i=>([n])=>{const{width:e,height:t}=n.contentRect;this[i]={width:e,height:t},this.updateSVGRect()},"t");this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(s("containerSize")),this.wrapperObserver=new ResizeObserver((...i)=>{s("wrapperSize")(...i),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var s,i,n,e,t;this.shadowRoot.innerHTML=`
+<style>
+  svg[${u}] { display: block; width: 100%; height: auto; vertical-align: top; }
+  span[${c}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
+</style>
+<div ${k}>
+  <svg part="svg" ${u}>
+    <foreignObject><span ${c}><slot></slot></span></foreignObject>
+  </svg>
+</div>
+    `.split(/\n\s*/).join(""),this.wrapper=(s=this.shadowRoot.querySelector(`div[${k}]`))!==null&&s!==void 0?s:void 0;const o=this.svg;this.svg=(n=(i=this.wrapper)===null||i===void 0?void 0:i.querySelector(`svg[${u}]`))!==null&&n!==void 0?n:void 0,this.svg!==o&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=(t=(e=this.svg)===null||e===void 0?void 0:e.querySelector(`span[${c}]`))!==null&&t!==void 0?t:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:s}=this;s&&(s.style.display="inline",requestAnimationFrame(()=>{s.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(s){const i=d(()=>{const n=(()=>{const e=s.getPropertyValue("--preserve-aspect-ratio");return e?e.trim():`x${(({textAlign:t,direction:o})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if(t==="start"||t==="end"){let a=o==="rtl";return t==="end"&&(a=!a),a?"Max":"Min"}return"Mid"})(s)}YMid meet`})();n!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=n,this.updateSVGRect()),s===this.svgComputedStyle&&requestAnimationFrame(i)},"e");i()}updateSVGRect(){var s,i,n,e,t,o,a;let p=Math.ceil((i=(s=this.containerSize)===null||s===void 0?void 0:s.width)!==null&&i!==void 0?i:0);const h=Math.ceil((e=(n=this.containerSize)===null||n===void 0?void 0:n.height)!==null&&e!==void 0?e:0);this.dataset.downscaleOnly!==void 0&&(p=Math.max(p,(o=(t=this.wrapperSize)===null||t===void 0?void 0:t.width)!==null&&o!==void 0?o:0));const f=(a=this.svg)===null||a===void 0?void 0:a.querySelector(":scope > foreignObject");if(f?.setAttribute("width",`${p}`),f?.setAttribute("height",`${h}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${p} ${h}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=p<=0||h<=0?"0":""),this.container){const _=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=_.startsWith("xmid")||_.startsWith("xmax")?"auto":"0",this.container.style.marginRight=_.startsWith("xmi")?"auto":"0"}}};d(T,"s");let r=T;const m=d((l,{attrs:s={},style:i})=>class extends l{constructor(...n){super(...n);for(const[e,t]of Object.entries(s))this.hasAttribute(e)||this.setAttribute(e,t);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const n=i?`<style>:host { ${i} }</style>`:"";let e="<slot></slot>";const{autoScaling:t}=this.dataset;t!==void 0&&(e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${t==="downscale-only"?"data-downscale-only":""}>${e}</marp-auto-scaling>`),this.shadowRoot.innerHTML=n+e}},"o");let v;const j=Symbol();let C;const z="marpitSVGPolyfill:setZoomFactor,",A=Symbol(),D=Symbol(),W=d(()=>{const l=navigator.vendor==="Apple Computer, Inc.",s=l?[B]:[],i={then:n=>(l?(async()=>{if(C===void 0){const e=document.createElement("canvas");e.width=10,e.height=10;const t=e.getContext("2d"),o=new Image(10,10),a=new Promise(p=>{o.addEventListener("load",()=>p())});o.crossOrigin="anonymous",o.src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%201%201%22%3E%3CforeignObject%20width%3D%221%22%20height%3D%221%22%20requiredExtensions%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%3E%3Cdiv%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%20style%3D%22width%3A%201px%3B%20height%3A%201px%3B%20background%3A%20red%3B%20position%3A%20relative%22%3E%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fsvg%3E",await a,t.drawImage(o,0,0),C=t.getImageData(5,5,1,1).data[3]<128}return C})().then(e=>{n?.(e?[B]:[])}):n?.([]),i)};return Object.assign(s,i)},"h");let H,O;function B(l){const s=typeof l=="object"&&l.target||document,i=typeof l=="object"?l.zoom:l;window[D]||(Object.defineProperty(window,D,{configurable:!0,value:!0}),document.body.style.zoom=1.0001,document.body.offsetHeight,document.body.style.zoom=1,window.addEventListener("message",({data:e,origin:t})=>{if(t===window.origin)try{if(e&&typeof e=="string"&&e.startsWith(z)){const[,o]=e.split(","),a=Number.parseFloat(o);Number.isNaN(a)||(O=a)}}catch(o){console.error(o)}}));let n=!1;Array.from(s.querySelectorAll("svg[data-marpit-svg]"),e=>{var t,o,a,p;e.style.transform||(e.style.transform="translateZ(0)");const h=i||O||e.currentScale||1;H!==h&&(H=h,n=h);const f=e.getBoundingClientRect(),{length:_}=e.children;for(let F=0;F<_;F+=1){const S=e.children[F];if(S.getScreenCTM){const y=S.getScreenCTM();if(y){const I=(o=(t=S.x)===null||t===void 0?void 0:t.baseVal.value)!==null&&o!==void 0?o:0,Z=(p=(a=S.y)===null||a===void 0?void 0:a.baseVal.value)!==null&&p!==void 0?p:0,Y=S.children.length;for(let R=0;R<Y;R+=1){const N=S.children[R];if(N.tagName==="SECTION"){const{style:q}=N;q.transformOrigin||(q.transformOrigin=`${-I}px ${-Z}px`),q.transform=`scale(${h}) matrix(${y.a}, ${y.b}, ${y.c}, ${y.d}, ${y.e-f.left}, ${y.f-f.top}) translateZ(0.0001px)`;break}}}}}}),n!==!1&&Array.from(s.querySelectorAll("iframe"),({contentWindow:e})=>{e?.postMessage(`${z}${n}`,window.origin==="null"?"*":window.origin)})}d(B,"u");function P({once:l=!1,target:s=document}={}){const i=function(n=document){if(n[A])return n[A];let e=!0;const t=d(()=>{e=!1,delete n[A]},"i");Object.defineProperty(n,A,{configurable:!0,value:t});let o=[],a=!1;(async()=>{try{o=await W()}finally{a=!0}})();const p=d(()=>{for(const h of o)h({target:n});a&&o.length===0||e&&window.requestAnimationFrame(p)},"o");return p(),t}(s);return l?(i(),()=>{}):i}d(P,"v"),H=1,O=void 0;const G=P,M=Symbol(),L=d((l=document)=>{if(typeof window>"u")throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const t=window[j];t||customElements.define("marp-auto-scaling",r);for(const o of Object.keys(x)){const a=`marp-${o}`,p=x[o].proto();v!=null||(v=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),v&&p!==HTMLElement?t||customElements.define(a,m(p,{style:x[o].style}),{extends:o}):(t||customElements.define(a,m(HTMLElement,x[o])),e.querySelectorAll(`${o}[is="${a}"]`).forEach(h=>{h.outerHTML=h.outerHTML.replace(new RegExp(`^<${o}`,"i"),`<${a}`).replace(new RegExp(`</${o}>$`,"i"),`</${a}>`)}))}window[j]=!0})(l),l[M])return l[M];const s=P({target:l}),i=d(()=>{s(),delete l[M]},"n"),n=Object.assign(i,{cleanup:i,update:()=>L(l)});return Object.defineProperty(l,M,{configurable:!0,value:n}),n},"y");b.browser=L,g=L,g=G}},E={};function V(w){var b=E[w];if(b!==void 0)return b.exports;var g=E[w]={exports:{}};return $[w](g,g.exports,V),g.exports}d(V,"__webpack_require__");var J={};(()=>{"use strict";var w=V(676);function b(){let u,c;const r=d(()=>{const m=document.getElementById("__marp-vscode"),v=!!m;u!==v?(document.body.classList.toggle("marp-vscode",v),v?c=(0,w.browser)():(c?.cleanup(),c=void 0),u=v):v&&c?.update(),u?(m&&g(m),x()):k()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(r,100)),window.addEventListener("vscode.markdown.updateContent",r),r()}d(b,"preview");const g=d(u=>{u.querySelectorAll("[is]").forEach(c=>{if(c.nodeName.includes("-")||document.createElement(c.nodeName).constructor!==c.constructor)return;const{outerHTML:m}=c;c.outerHTML=m,console.debug("[marp-vscode] Custom element has been upgraded forcibly:",m.slice(0,m.indexOf(">")+1||void 0))})},"forceUpgradeCustomElements"),x=d(()=>{const u=document.querySelectorAll("style:not(#__marp-vscode-style,#_defaultStyles,[data-marp-vscode-body])"),c=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');u.forEach(r=>{r.closest("#__marp-vscode")||(r.dataset.marpVscodeBody=r.textContent??"",r.textContent="")}),c.forEach(r=>{if(r.closest("#__marp-vscode"))return;const{href:m}=r;r.dataset.marpVscodeHref=m,r.removeAttribute("href")})},"removeStyles"),k=d(()=>{const u=document.querySelectorAll("style[data-marp-vscode-body]"),c=document.querySelectorAll("link[data-marp-vscode-href]");u.forEach(r=>{r.textContent=r.dataset.marpVscodeBody||"",delete r.dataset.marpVscodeBody}),c.forEach(r=>{r.href=r.dataset.marpVscodeHref||"",delete r.dataset.marpVscodeHref})},"restoreStyles");b()})()})();})();
+
+</script>
+
+    </body>
+    </html>
