@@ -17,7 +17,7 @@
 
 /* From extension marp-team.marp-vscode */
 #__marp-vscode {
-  all: initial;
+  all: revert;
 }
 
 /* Override VS Code default CSS rules reverting to initial
@@ -356,6 +356,32 @@ sup {
 <li><a href="#os">APP-1: découverte du package <code>os</code></a></li>
 <li><a href="#var">APP-2: variables de package</a></li>
 <li><a href="#nom">REF-1: afficher le nom de l'application</a></li>
+<li><a href="#classes2">Les classes</a>
+<ol>
+<li><a href="#livres">Pas à pas sur les livres</a>
+<ol>
+<li><a href="#livres1">APP-3: Création d'une classe</a></li>
+<li><a href="#livres2">APP-4: Méthodes de classe</a></li>
+<li><a href="#livres3">APP-5: Attribut de classe</a></li>
+<li><a href="#livres4">APP-6: Comparaison d'instances</a></li>
+<li><a href="#livres5">APP-7: Commentaires</a></li>
+</ol>
+</li>
+<li><a href="#app8">APP-8: De l'aléatoire dans un attribut d'instance</a></li>
+<li><a href="#app9">APP-9: Un système bancaire</a></li>
+<li><a href="#app10">APP-10: Des statistiques</a></li>
+<li><a href="#app11">APP-11: Tableau de scores</a></li>
+<li><a href="#app12">APP-12: Créer des classes à la volée</a></li>
+<li><a href="#cldy">Des classes dynamiques</a>
+<ol>
+<li><a href="#app13">APP-13: Changement de nom de classe</a></li>
+<li><a href="#app14">APP-14: Héritage de classe</a></li>
+</ol>
+</li>
+<li><a href="#app15">APP-15: En voyage scolaire</a></li>
+<li><a href="#app16">APP-16: Des potions magiques</a></li>
+</ol>
+</li>
 </ol>
 <p><em>Note préalable</em>: quel que soit le type de rendu, ce qui m'intéresse est le code que vous avez écrit, et non ce qui s'affiche à votre écran. A partir de ce que vous m'envoyez (fichier, application zipée, dépôt), je le rejouerai de mon côté si besoin pour voir le résultat. N'oubliez pas de <strong>commenter</strong> votre code.</p>
 <h3 id="rev-1--les-classes-python">REV-1 : Les classes Python<a id="classes"></a></h3>
@@ -434,21 +460,417 @@ s'affiche dans <code>Serving Flask app XXX</code> quand on lance le serveur?</li
 <li>un .zip de l'application (sans le dossier d'environnement virtuel)</li>
 <li>un lien vers un dépôt Github</li>
 </ul>
+<h3 id="les-classes-">Les classes <a id="classes2"></a></h3>
+<h4 id="pas-à-pas-sur-les-livres-">Pas à pas sur les livres <a id="livres"></a></h4>
+<p>Prenons 2 livres:</p>
+<ul>
+<li>Le Seigneur des Anneaux, J.R.R. Tolkien, 1954</li>
+<li>Harry Potter à l'école des sorciers, J.K. Rowling, 1997</li>
+</ul>
+<h5 id="app-3--création-dune-classe-">APP-3 : Création d'une classe <a id="livres1"></a></h5>
+<ul>
+<li>Créer une classe Livre avec les attributs titre, auteur, et annee_publication.</li>
+<li>Instancier deux objets de la classe Livre avec des valeurs différentes.</li>
+<li>Afficher les informations des deux livres.</li>
+</ul>
+<p><em>Résultat attendu dans le terminal</em>:</p>
+<pre><code class="language-bash">Le Seigneur des Anneaux J.R.R. Tolkien 1954
+Harry Potter à l<span class="hljs-string">&#x27;école des sorciers J.K. Rowling 1997
+</span></code></pre>
+<p><em>Type de rendu possible</em> :</p>
+<ul>
+<li>un fichier .py</li>
+<li>un Jupyter Notebook (fichier .ipynb)</li>
+<li>un Google Colab (lien vers le fichier hébergé chez Google; ou bien fichier .ipynb)</li>
+</ul>
+<h5 id="app-4--méthodes-de-classe-">APP-4 : Méthodes de classe <a id="livres2"></a></h5>
+<ul>
+<li>Ajouter une méthode afficher_details à la classe Livre qui affiche toutes les informations du livre.</li>
+<li>Appeler cette méthode pour les deux objets créés dans l'exercice précédent.</li>
+</ul>
+<p><em>Résultat attendu dans le terminal</em>:</p>
+<pre><code class="language-bash">Le Seigneur des Anneaux par J.R.R. Tolkien, publié en 1954.
+Harry Potter à l<span class="hljs-string">&#x27;école des sorciers par J.K. Rowling, publié en 1997.
+</span></code></pre>
+<p><em>Type de rendu possible</em> :</p>
+<ul>
+<li>un fichier .py</li>
+<li>un Jupyter Notebook (fichier .ipynb)</li>
+<li>un Google Colab (lien vers le fichier hébergé chez Google; ou bien fichier .ipynb)</li>
+</ul>
+<h5 id="app-5--attribut-de-classe-">APP-5 : Attribut de classe <a id="livres3"></a></h5>
+<ul>
+<li>Ajouter un attribut de classe nombre_editions à la classe Livre pour suivre le nombre total d'éditions d'un livre.</li>
+<li>Modifier le constructeur pour incrémenter cet attribut à chaque création d'objet.</li>
+<li>Ajouter une méthode de classe get_nombre_editions qui renvoie le nombre total d'éditions.</li>
+</ul>
+<p><em>Résultat attendu dans le terminal</em>:</p>
+<pre><code class="language-bash">2
+</code></pre>
+<p><em>Type de rendu possible</em> :</p>
+<ul>
+<li>un fichier .py</li>
+<li>un Jupyter Notebook (fichier .ipynb)</li>
+<li>un Google Colab (lien vers le fichier hébergé chez Google; ou bien fichier .ipynb)</li>
+</ul>
+<h5 id="app-6--comparaisons-dinstances-">APP-6 : Comparaisons d'instances <a id="livres4"></a></h5>
+<ul>
+<li>Ajouter une méthode spéciale <strong>eq</strong> à la classe Livre pour comparer deux livres par leur titre, auteur, et année de publication.</li>
+<li>Utiliser l'opérateur == pour comparer deux livres et affichez le résultat.</li>
+</ul>
+<p><em>Résultat attendu dans le terminal</em>:
+Pour les deux instances suivantes,</p>
+<pre><code class="language-bash">livre1 = Livre(<span class="hljs-string">&quot;Le Seigneur des Anneaux&quot;</span>, <span class="hljs-string">&quot;J.R.R. Tolkien&quot;</span>, 1954)
+livre2 = Livre(<span class="hljs-string">&quot;Le Seigneur des Anneaux&quot;</span>, <span class="hljs-string">&quot;J.R.R. Tolkien&quot;</span>, 1954)
+</code></pre>
+<p>il faut que ça retourne:</p>
+<pre><code class="language-bash">Les livres sont identiques.
+</code></pre>
+<p>En revanche, pour les deux instances suivantes,</p>
+<pre><code class="language-bash">livre3 = Livre(<span class="hljs-string">&quot;Le Seigneur des Anneaux&quot;</span>, <span class="hljs-string">&quot;J.R.R. Tolkien&quot;</span>, 1956)
+livre4 = Livre(<span class="hljs-string">&quot;Le Seigneur des Anneaux&quot;</span>, <span class="hljs-string">&quot;J.R.R. Tolkien&quot;</span>, 1954)
+</code></pre>
+<p>il faut que ça retourne:</p>
+<pre><code class="language-bash">Les livres sont différents.
+</code></pre>
+<p><em>Type de rendu possible</em> :</p>
+<ul>
+<li>un fichier .py</li>
+<li>un Jupyter Notebook (fichier .ipynb)</li>
+<li>un Google Colab (lien vers le fichier hébergé chez Google; ou bien fichier .ipynb)</li>
+</ul>
+<h5 id="app-7--commentaires-">APP-7 : Commentaires <a id="livres5"></a></h5>
+<ul>
+<li>Ajouter un attribut commentaires à la classe Livre qui est une liste vide par défaut.</li>
+<li>Ajouter une méthode ajouter_commentaire qui prend un commentaire en paramètre et l'ajoute à la liste.</li>
+<li>Ajouter une méthode afficher_commentaires qui affiche tous les commentaires du livre.</li>
+</ul>
+<p><em>Résultat attendu dans le terminal</em>:
+Le code suivant</p>
+<pre><code class="language-bash">livre.ajouter_commentaire(<span class="hljs-string">&quot;Excellent livre!&quot;</span>)
+livre.ajouter_commentaire(<span class="hljs-string">&quot;J&#x27;ai adoré l&#x27;intrigue.&quot;</span>)
+livre.afficher_commentaires()
+</code></pre>
+<p>doit renvoyer</p>
+<pre><code class="language-bash">Commentaires:
+Excellent livre!
+J<span class="hljs-string">&#x27;ai adoré l&#x27;</span>intrigue.
+</code></pre>
+<p><em>Type de rendu possible</em> :</p>
+<ul>
+<li>un fichier .py</li>
+<li>un Jupyter Notebook (fichier .ipynb)</li>
+<li>un Google Colab (lien vers le fichier hébergé chez Google; ou bien fichier .ipynb)</li>
+</ul>
+<h4 id="app-8--de-laléatoire-dans-un-attribut-dinstance-">APP-8 : De l'aléatoire dans un attribut d'instance <a id="app8"></a></h4>
+<p>Voici un bout de code qui permet d'afficher le nombre de fantômes répartis par couleur:</p>
+<pre><code class="language-python">fantomes = []
+<span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">100</span>):
+    fantomes.append(Fantome().couleur)
+
+<span class="hljs-keyword">for</span> coul <span class="hljs-keyword">in</span> <span class="hljs-built_in">sorted</span>(<span class="hljs-built_in">set</span>([i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> fantomes])):
+   <span class="hljs-built_in">print</span>(coul + <span class="hljs-string">&quot; : &quot;</span> + <span class="hljs-built_in">str</span>(fantomes.count(coul)))
+</code></pre>
+<ul>
+<li>Ecrire la classe Fantome() et son attribut couleur de telle sorte qu'une couleur soit attribuée au hasard à chaque fantôme parmi la liste suivante: <code>[&quot;blanc&quot;, &quot;rouge&quot;, &quot;bleu&quot;, &quot;vert&quot;, &quot;noir&quot;, &quot;violet&quot;, &quot;orange&quot;]</code></li>
+</ul>
+<p><em>Résultat attendu dans le terminal (les nombres varieront toujours)</em>:</p>
+<pre><code class="language-bash">blanc : 19
+bleu : 9
+noir : 18
+orange : 20
+rouge : 12
+vert : 10
+violet : 12
+</code></pre>
+<p><em>Type de rendu possible</em> :</p>
+<ul>
+<li>un fichier .py</li>
+<li>un Jupyter Notebook (fichier .ipynb)</li>
+<li>un Google Colab (lien vers le fichier hébergé chez Google; ou bien fichier .ipynb)</li>
+</ul>
+<h4 id="app-9--un-système-bancaire-">APP-9 : Un système bancaire <a id="app9"></a></h4>
+<p>Une banque vient de se rendre compte que la classe la plus importante manque: Client() (des attributs d'instance sont à paramétrer, à vous de les trouver). Elle doit absolument contenir les méthodes suivantes:</p>
+<ul>
+<li><code>retirer(montant)</code>:
+<ul>
+<li>permet de retirer un certain montant  du solde du client</li>
+<li>doit retourner une ValueError en cas de solde insuffisant</li>
+<li>en cas de succès du retrait du montant, doit renvoyer une string avec le nom du client et le solde mis à jour</li>
+</ul>
+</li>
+<li><code>virement(donateur, montant)</code>
+<ul>
+<li>permet de virer un certain montant depuis le donateur vers le client courant</li>
+<li>le donateur doit toujours être un client valide</li>
+<li>renvoie une ValueError si le donateur n'a pas assez d'argent</li>
+<li>renvoie une ValueError si le compte du donateur n'est pas son compte_courant</li>
+<li>renvoie une string avec le nom du client courant, son nouveau solde; et le nom du donateur et son solde mis à jour</li>
+</ul>
+</li>
+<li><code>depot(montant)</code>:
+<ul>
+<li>ajoute le montant sur le solde du client courant</li>
+<li>renvoie une string avec le nom du client et son nouveau solde</li>
+</ul>
+</li>
+</ul>
+<p>Quelques aides:</p>
+<ul>
+<li>compte_courant doit être stocké comme un booléen</li>
+<li>aucun montant passé en paramètre ne peut être négatif</li>
+<li>les soldes et montant ne sont que des integer, pas des float</li>
+</ul>
+<p><em>Résultat attendu dans le terminal</em>:
+Il y a 2 clients à la banque, définis initialement comme suit:</p>
+<pre><code class="language-python">Dupont = Client(<span class="hljs-string">&#x27;Dupont&#x27;</span>, <span class="hljs-number">70</span>, <span class="hljs-literal">True</span>)
+Dupond = Client(<span class="hljs-string">&#x27;Dupond&#x27;</span>, <span class="hljs-number">70</span>, <span class="hljs-literal">False</span>)
+</code></pre>
+<p>Chacune des opérations effectuées ci-dessous, et dans l'ordre, doivent renvoyer ce qui suit:</p>
+<ul>
+<li><code>Dupont.retirer(2)</code> renvoie <code>Dupont a 68.</code></li>
+<li><code>Dupond.virement(Dupont, 50)</code> renvoie <code>Dupond a 120 et Dupont a 18.</code></li>
+<li><code>Dupont.virement(Dupond, 80)</code> renvoie <code>ValueError: Dupond n'a pas de compte_courant.</code></li>
+<li><code>Dupond.compte_courant = True</code> ne renvoie rien</li>
+<li><code>Dupont.virement(Dupond, 80)</code> renvoie <code>Dupont a 98 et Dupond a 40.</code></li>
+<li><code>Dupond.virement(Dupont, 100)</code> renvoie <code>ValueError: Dupont n'a pas assez d'argent pour effectuer ce virement de 100.</code></li>
+<li><code>Dupont.depot(20)</code> renvoie <code>Dupont a 118.</code></li>
+</ul>
+<p><em>Type de rendu possible</em> :</p>
+<ul>
+<li>un fichier .py</li>
+<li>un Jupyter Notebook (fichier .ipynb)</li>
+<li>un Google Colab (lien vers le fichier hébergé chez Google; ou bien fichier .ipynb)</li>
+</ul>
+<h4 id="app-10--des-statistiques-">APP-10 : Des statistiques <a id="app10"></a></h4>
+<p>Un producteur de musique a besoin, pour chacun des titres de son catalogue, de connaître, de jour en jour, le nombre de nouvelles personnes qui écoutent chaque titre.</p>
+<ul>
+<li>Ecrire une classe Chanson qui prenne au minimum un titre et un auteur en entrée.</li>
+<li>Ecrire une méthode <code>nouveaux(liste_personnes)</code> qui retourne le nombre de nouvelles personnes qui ont écouté le titre ce jour; le paramètre d'entrée est une liste de noms de personnes (insensible à la casse) qui ont écouté le titre dans la journée</li>
+</ul>
+<p><a href="https://www.w3schools.com/python/ref_set_update.asp">Ceci</a> peut être utile</p>
+<p><em>Résultat attendu dans le terminal</em>:
+Soit une chanson &quot;All I Want for Christmas Is You&quot; de M. Carey.</p>
+<p>Le premier jour d'exploitation du titre, les personnes suivantes ont été écouté le titre: <code>[&quot;BéatriCe&quot;, &quot;Michel&quot;, &quot;bertranD&quot;, &quot;Zoé&quot;]</code>.</p>
+<pre><code class="language-python">jour1_personnes =[<span class="hljs-string">&quot;BéatriCe&quot;</span>, <span class="hljs-string">&quot;Michel&quot;</span>, <span class="hljs-string">&quot;bertranD&quot;</span>, <span class="hljs-string">&quot;Zoé&quot;</span>] 
+christmas_song.nouveaux(jour1_personnes)
+</code></pre>
+<p>doit renvoyer</p>
+<pre><code class="language-bash">Il y a eu 4 nouvelles personnes aujourd<span class="hljs-string">&#x27;hui qui ont découvert le titre All I Want for Christmas Is You de M. Carey
+</span></code></pre>
+<p>Le deuxième jour, les personnes suivantes ont été écouté le titre: <code>[&quot;béatrice&quot;, &quot;Agathe&quot;, &quot;Bertrand&quot;, &quot;Micheline&quot;, &quot;marin&quot;]</code>.</p>
+<pre><code class="language-python">jour2_personnes =[<span class="hljs-string">&quot;béatrice&quot;</span>, <span class="hljs-string">&quot;Agathe&quot;</span>, <span class="hljs-string">&quot;Bertrand&quot;</span>, <span class="hljs-string">&quot;Micheline&quot;</span>, <span class="hljs-string">&quot;marin&quot;</span>] 
+christmas_song.nouveaux(jour2_personnes)
+</code></pre>
+<p>doit renvoyer</p>
+<pre><code class="language-bash">Il y a eu 3 nouvelles personnes aujourd<span class="hljs-string">&#x27;hui qui ont découvert le titre All I Want for Christmas Is You de M. Carey
+</span></code></pre>
+<p><em>Type de rendu possible</em> :</p>
+<ul>
+<li>un fichier .py</li>
+<li>un Jupyter Notebook (fichier .ipynb)</li>
+<li>un Google Colab (lien vers le fichier hébergé chez Google; ou bien fichier .ipynb)</li>
+</ul>
+<h4 id="app-11--tableau-de-scores-">APP-11 : Tableau de scores <a id="app11"></a></h4>
+<p>A la foire, il y a un chambouletout. Chaque couleur de brique vaut les points suivants:</p>
+<ul>
+<li>rouge : 2 points</li>
+<li>bleu : 3 points</li>
+<li>vert : 5 points</li>
+<li>noir: 10 points</li>
+</ul>
+<p>Le but sera de trouver le vainqueur parmi tous les joueurs suivants:</p>
+<pre><code class="language-python">[
+  {nom: <span class="hljs-string">&quot;Jean&quot;</span>, rouge: <span class="hljs-number">1</span> , bleu: <span class="hljs-number">2</span>, vert: <span class="hljs-number">2</span>},
+  {name: <span class="hljs-string">&quot;Jacques&quot;</span> , rouge: <span class="hljs-number">1</span> , bleu: <span class="hljs-number">2</span>, vert: <span class="hljs-number">3</span>},
+  {name: <span class="hljs-string">&quot;Zoé&quot;</span> , rouge: <span class="hljs-number">1</span> , bleu: <span class="hljs-number">1</span>, vert: <span class="hljs-number">2</span>, noir:<span class="hljs-number">1</span>}
+]
+</code></pre>
+<ul>
+<li>Ecrire une classe Joueur() qui permette de calculer le score du joueur</li>
+<li>Ecrire, en dehors de la classe, une fonction <code>get_winner(liste_resultats)</code> qui permette de trouver le gagnant. La liste_resultats est le tableau donné plus haut.</li>
+</ul>
+<p><em>Résultat attendu dans le terminal</em>:</p>
+<p>Avec le code suivant,</p>
+<pre><code class="language-python">liste_resultats = [
+  {<span class="hljs-string">&quot;nom&quot;</span>: <span class="hljs-string">&quot;Jean&quot;</span>, <span class="hljs-string">&quot;rouge&quot;</span>: <span class="hljs-number">1</span> , <span class="hljs-string">&quot;bleu&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vert&quot;</span>: <span class="hljs-number">2</span>},
+  {<span class="hljs-string">&quot;nom&quot;</span>: <span class="hljs-string">&quot;Jacques&quot;</span> , <span class="hljs-string">&quot;rouge&quot;</span>: <span class="hljs-number">1</span> , <span class="hljs-string">&quot;bleu&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vert&quot;</span>: <span class="hljs-number">3</span>},
+  {<span class="hljs-string">&quot;nom&quot;</span>: <span class="hljs-string">&quot;Zoé&quot;</span> , <span class="hljs-string">&quot;rouge&quot;</span>: <span class="hljs-number">1</span> , <span class="hljs-string">&quot;bleu&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vert&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;noir&quot;</span>:<span class="hljs-number">1</span>}
+]
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Et le gagnant est ... &quot;</span> + <span class="hljs-built_in">str</span>(get_winner(liste_resultats)[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;nom&quot;</span>])+ <span class="hljs-string">&quot; avec &quot;</span>+<span class="hljs-built_in">str</span>(get_winner(liste_resultats)[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;score&quot;</span>])+<span class="hljs-string">&quot; points!&quot;</span>)
+</code></pre>
+<p>, obtenir</p>
+<pre><code class="language-bash">Et le gagnant est ... Zoé avec 25 points!
+</code></pre>
+<p><em>Type de rendu possible</em> :</p>
+<ul>
+<li>un fichier .py</li>
+<li>un Jupyter Notebook (fichier .ipynb)</li>
+<li>un Google Colab (lien vers le fichier hébergé chez Google; ou bien fichier .ipynb)</li>
+</ul>
+<h4 id="app-12--créer-des-classes-à-la-volée-">APP-12 : Créer des classes à la volée <a id="app12"></a></h4>
+<p>Ecrire des classes et déclarer leurs attributs peut être long et fastidieux quand on veut des classes simples. Par exemple, on écrirait:</p>
+<pre><code class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Animal</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, nom, espece, age, sante, masse, couleur</span>):
+        self.nom = namnome
+        self.espece = espece
+        self.age = age
+        self.sante = sante
+        self.masse = masse
+        self.couleur = couleur
+</code></pre>
+<ul>
+<li>Ecrire une fonction qui renvoie une nouvelle classe en ayant déclaré les attributs dans le constructeur <strong>init</strong>()</li>
+</ul>
+<p><em>Résultat attendu dans le terminal</em>:</p>
+<p>Voici deux classes Animal et Maison créées à la volée, et dont a un instancier un ou plusieurs objets à chaque fois:</p>
+<pre><code class="language-python">Animal = make_class(<span class="hljs-string">&quot;nom&quot;</span>, <span class="hljs-string">&quot;espece&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;sante&quot;</span>, <span class="hljs-string">&quot;masse&quot;</span>, <span class="hljs-string">&quot;couleur&quot;</span>)
+<span class="hljs-built_in">print</span>(Animal)
+<span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(Animal))
+un_animal = Animal(<span class="hljs-string">&quot;Brebis&quot;</span>, <span class="hljs-string">&quot;inconnue&quot;</span>, <span class="hljs-number">3</span>, <span class="hljs-string">&quot;excellente&quot;</span>, <span class="hljs-number">30</span>, <span class="hljs-string">&quot;blanc&quot;</span>)
+<span class="hljs-built_in">print</span>(un_animal.couleur)
+
+Maison = make_class(<span class="hljs-string">&quot;superficie&quot;</span>, <span class="hljs-string">&quot;pieces&quot;</span>,<span class="hljs-string">&quot;ville&quot;</span>)
+<span class="hljs-built_in">print</span>(Maison)
+<span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(Maison))
+une_maison = Maison(<span class="hljs-number">70</span>, <span class="hljs-number">4</span>, <span class="hljs-string">&quot;Paris&quot;</span>)
+<span class="hljs-built_in">print</span>(une_maison.superficie)
+une_deuxieme_maison = Maison(<span class="hljs-number">30</span>, <span class="hljs-number">2</span>, <span class="hljs-string">&quot;Marseille&quot;</span>)
+<span class="hljs-built_in">print</span>(une_deuxieme_maison.superficie)
+</code></pre>
+<p>Le retour sera:</p>
+<pre><code class="language-bash">&lt;class <span class="hljs-string">&#x27;__main__.make_class.&lt;locals&gt;.MaClass&#x27;</span>&gt;
+blanc
+&lt;class <span class="hljs-string">&#x27;__main__.make_class.&lt;locals&gt;.MaClass&#x27;</span>&gt;
+70
+30
+</code></pre>
+<p><em>Type de rendu possible</em> :</p>
+<ul>
+<li>un fichier .py</li>
+<li>un Jupyter Notebook (fichier .ipynb)</li>
+<li>un Google Colab (lien vers le fichier hébergé chez Google; ou bien fichier .ipynb)</li>
+</ul>
+<h4 id="des-classes-dynamiques-">Des classes dynamiques <a id="cldy"></a></h4>
+<h5 id="app-13--changement-de-nom-de-classe-">APP-13 : Changement de nom de classe <a id="app13"></a></h5>
+<p>Jacques a développer une fantastique classe SuperClasse. Mais son camarade n'apprécie ce nom de classe et veut à tout prix changer son nom en CetteSuperClasse. Jacques se rend compte que changer le nom dans tous ses scripts Python va être très long, et que son camarade risque de lui demander ça d'autres fois.</p>
+<p>Le mieux est donc de créer une fonction qui change le nom d'une classe donnée (les nouveaux noms ne doivent comporter que des lettres peu importe la casse, mais en commençant toujours par une majuscule).</p>
+<ul>
+<li>Ecrire cette fonction <code>change_nom_classe(classe, nouveau_nom)</code> qui permette de changer le nom d'une classe donnée en paramètre</li>
+</ul>
+<p><em>Résultat attendu dans le terminal</em>:</p>
+<p>En lançant ces quelques lignes,</p>
+<pre><code class="language-python">un_joueur = Joueur(<span class="hljs-string">&quot;Harry&quot;</span>)
+<span class="hljs-built_in">print</span>(un_joueur.__repr__)
+change_nom_classe(Joueur, <span class="hljs-string">&quot;SuperJoueur&quot;</span>)
+<span class="hljs-built_in">print</span>(un_joueur.__repr__)
+</code></pre>
+<p>, le terminal doit renvoyer:</p>
+<pre><code class="language-bash">&lt;method-wrapper <span class="hljs-string">&#x27;__repr__&#x27;</span> of Joueur object at 0x0000022256F84D90&gt;
+&lt;method-wrapper <span class="hljs-string">&#x27;__repr__&#x27;</span> of SuperJoueur object at 0x0000022256F84D90&gt;
+</code></pre>
+<p><em>Type de rendu possible</em> :</p>
+<ul>
+<li>un fichier .py</li>
+<li>un Jupyter Notebook (fichier .ipynb)</li>
+<li>un Google Colab (lien vers le fichier hébergé chez Google; ou bien fichier .ipynb)</li>
+</ul>
+<h5 id="app-14--héritage-de-classe-">APP-14 : Héritage de classe <a id="app14"></a></h5>
+<p>Le camarade dit à Jacques que sa fonction est vraiment super, mais il lui demande si ce ne serait pas possible de cacher cette fonction dans les classes elles-mêmes. Jacques se souvient qu'il a entendu parler de l'héritage de classe, et se dit que ce serait sûrement le bon moment de le faire!</p>
+<ul>
+<li>Ecrire une nouvelle classe ClasseRenommage()</li>
+<li>Elle a une méthode <code>change_nom_classe(classe, nouveau_nom)</code>, qui est la fonction écrite en APP-13</li>
+<li>Grâce à la méthode par défaut de Python <strong>str</strong> dans les classes, permettre l'affichage du nouveau nom de la classe</li>
+</ul>
+<p><em>Résultat attendu dans le terminal</em>:</p>
+<p>En lançant ces quelques lignes,</p>
+<pre><code class="language-python">un_joueur = Joueur(<span class="hljs-string">&quot;Harry&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-built_in">str</span>(un_joueur))
+un_joueur.change_nom_classe(Joueur, <span class="hljs-string">&quot;SuperJoueur&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-built_in">str</span>(un_joueur))
+</code></pre>
+<p>, le terminal doit renvoyer:</p>
+<pre><code class="language-bash">Le nom de la classe est : Joueur
+Le nom de la classe est : SuperJoueur
+</code></pre>
+<p><em>Type de rendu possible</em> :</p>
+<ul>
+<li>un fichier .py</li>
+<li>un Jupyter Notebook (fichier .ipynb)</li>
+<li>un Google Colab (lien vers le fichier hébergé chez Google; ou bien fichier .ipynb)</li>
+</ul>
+<h4 id="app-15--en-voyage-scolaire-">APP-15 : En voyage scolaire <a id="app15"></a></h4>
+<p>La professeure qui emmène ses étudiants en voyage gère leur argent de poche. Pour lui faciliter la vie dans les comptes des étudiants, elle a besoin de savoir lequel d'entre eux a le plus d'argent.</p>
+<ul>
+<li>Ecrire la classe Etudiant()</li>
+<li>Ecrire une fonction (hors de la classe) <code>plus_argent(etudiants)</code> qui prend en entrée une liste d'étudiants et qui retourne:
+<ul>
+<li>soit l'étudiant avec le plus d'argent s'il est seul à avoir le plus d'argent</li>
+<li>soit ils ont tous pareil et il faut afficher &quot;tous&quot;</li>
+</ul>
+</li>
+</ul>
+<p><em>Résultat attendu dans le terminal</em>:</p>
+<p>En lançant ces quelques lignes,</p>
+<pre><code class="language-python">andy = Etudiant(<span class="hljs-string">&quot;Andy&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)          
+stephen = Etudiant(<span class="hljs-string">&quot;Stephen&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>, <span class="hljs-number">0</span>)    
+eric = Etudiant(<span class="hljs-string">&quot;Eric&quot;</span>, <span class="hljs-number">8</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)          
+david = Etudiant(<span class="hljs-string">&quot;David&quot;</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)        
+phil = Etudiant(<span class="hljs-string">&quot;Phil&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>)          
+cam = Etudiant(<span class="hljs-string">&quot;Cameron&quot;</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>)        
+geoff = Etudiant(<span class="hljs-string">&quot;Geoff&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>) 
+
+
+<span class="hljs-built_in">print</span>(plus_argent([cam, geoff, andy, stephen, eric, david, phil])) 
+<span class="hljs-built_in">print</span>(plus_argent([andy]))
+<span class="hljs-built_in">print</span>(plus_argent([cam, geoff])) 
+</code></pre>
+<p>, le terminal doit renvoyer:</p>
+<pre><code class="language-bash">Eric
+Andy
+tous
+</code></pre>
+<p><em>Type de rendu possible</em> :</p>
+<ul>
+<li>un fichier .py</li>
+<li>un Jupyter Notebook (fichier .ipynb)</li>
+<li>un Google Colab (lien vers le fichier hébergé chez Google; ou bien fichier .ipynb)</li>
+</ul>
+<h4 id="app-16--des-potions-magiques-">APP-16 : Des potions magiques <a id="app16"></a></h4>
+<p>C'est votre premier cours de potions magiques à Poudlard, et le professeur vous a donné un devoir pour comprendre quelle couleur aura la potion si elle est mélangée avec une autre potion. Toutes les potions ont une couleur qui est notée comme une couleur RVB de [0, 0, 0] à [255, 255, 255]. Pour rendre la tâche plus compliquée, le professeur fera quelques mélanges et vous demandera ensuite la couleur finale. En plus de la couleur, vous devez également comprendre quel volume aura la potion après le mélange final.</p>
+<p>Après avoir mélangé deux potions, les couleurs se mélangeront comme si vous mélangez deux couleurs RVB. Par exemple, si vous mélangez une potion qui a la couleur [255, 255, 0] et un volume de 10 avec une autre qui a la couleur [0, 254, 0] et un volume de 5, vous obtiendrez une nouvelle potion avec la couleur [170, 255, 0] et un volume de 15. Vous avez donc décidé de créer une classe Potion qui aura deux propriétés : couleur (une liste avec 3 entiers) et volume (un nombre), et une méthode mix qui acceptera une autre Potion et renverra une Potion mélangée.</p>
+<p><em>Résultat attendu dans le terminal</em>:</p>
+<p>En lançant ces quelques lignes,</p>
+<pre><code class="language-python">felix_felicis  =  Potion([<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>],  <span class="hljs-number">7</span>)
+miseria_miseris =  Potion([ <span class="hljs-number">51</span>, <span class="hljs-number">102</span>,  <span class="hljs-number">51</span>], <span class="hljs-number">12</span>)
+nouvelle_potion =  felix_felicis.mix(miseria_miseris)
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;La nouvelle potion est de couleur &quot;</span> +<span class="hljs-built_in">str</span>(nouvelle_potion.color) + <span class="hljs-string">&quot; et son volume est de &quot;</span> + <span class="hljs-built_in">str</span>(nouvelle_potion.volume))
+</code></pre>
+<p>, le terminal doit renvoyer:</p>
+<pre><code class="language-bash">La nouvelle potion est de couleur (127, 159, 127) et son volume est de 19
+</code></pre>
+<p><em>Type de rendu possible</em> :</p>
+<ul>
+<li>un fichier .py</li>
+<li>un Jupyter Notebook (fichier .ipynb)</li>
+<li>un Google Colab (lien vers le fichier hébergé chez Google; ou bien fichier .ipynb)</li>
+</ul>
 
         
         <script async type="text/javascript">
 /* From extension marp-team.marp-vscode */
-(()=>{var F=Object.defineProperty;var d=(E,k)=>F(E,"name",{value:k,configurable:!0});(()=>{var E={676:(b,f,h)=>{b.exports=h(185)},185:(b,f)=>{"use strict";var h;h={value:!0};const S={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},M="data-marp-auto-scaling-wrapper",p="data-marp-auto-scaling-svg",l="data-marp-auto-scaling-container";class o extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const s=d(r=>([n])=>{const{width:e,height:t}=n.contentRect;this[r]={width:e,height:t},this.updateSVGRect()},"e");this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(s("containerSize")),this.wrapperObserver=new ResizeObserver((...r)=>{s("wrapperSize")(...r),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var s,r,n,e,t;this.shadowRoot.innerHTML=`
+(()=>{var U=Object.defineProperty;var d=($,E)=>U($,"name",{value:E,configurable:!0});(()=>{var $={676:(w,b,g)=>{w.exports=g(185)},185:(w,b)=>{"use strict";var g;g={value:!0};const x={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},k="data-marp-auto-scaling-wrapper",u="data-marp-auto-scaling-svg",c="data-marp-auto-scaling-container",T=class T extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const s=d(i=>([n])=>{const{width:e,height:t}=n.contentRect;this[i]={width:e,height:t},this.updateSVGRect()},"t");this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(s("containerSize")),this.wrapperObserver=new ResizeObserver((...i)=>{s("wrapperSize")(...i),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var s,i,n,e,t;this.shadowRoot.innerHTML=`
 <style>
-  svg[${p}] { display: block; width: 100%; height: auto; vertical-align: top; }
-  span[${l}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
+  svg[${u}] { display: block; width: 100%; height: auto; vertical-align: top; }
+  span[${c}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
 </style>
-<div ${M}>
-  <svg part="svg" ${p}>
-    <foreignObject><span ${l}><slot></slot></span></foreignObject>
+<div ${k}>
+  <svg part="svg" ${u}>
+    <foreignObject><span ${c}><slot></slot></span></foreignObject>
   </svg>
 </div>
-    `.split(/\n\s*/).join(""),this.wrapper=(s=this.shadowRoot.querySelector(`div[${M}]`))!==null&&s!==void 0?s:void 0;const i=this.svg;this.svg=(n=(r=this.wrapper)===null||r===void 0?void 0:r.querySelector(`svg[${p}]`))!==null&&n!==void 0?n:void 0,this.svg!==i&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=(t=(e=this.svg)===null||e===void 0?void 0:e.querySelector(`span[${l}]`))!==null&&t!==void 0?t:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:s}=this;s&&(s.style.display="inline",requestAnimationFrame(()=>{s.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(s){const r=d(()=>{const n=(()=>{const e=s.getPropertyValue("--preserve-aspect-ratio");return e?e.trim():`x${(({textAlign:t,direction:i})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if(t==="start"||t==="end"){let a=i==="rtl";return t==="end"&&(a=!a),a?"Max":"Min"}return"Mid"})(s)}YMid meet`})();n!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=n,this.updateSVGRect()),s===this.svgComputedStyle&&requestAnimationFrame(r)},"t");r()}updateSVGRect(){var s,r,n,e,t,i,a;let m=Math.ceil((r=(s=this.containerSize)===null||s===void 0?void 0:s.width)!==null&&r!==void 0?r:0);const v=Math.ceil((e=(n=this.containerSize)===null||n===void 0?void 0:n.height)!==null&&e!==void 0?e:0);this.dataset.downscaleOnly!==void 0&&(m=Math.max(m,(i=(t=this.wrapperSize)===null||t===void 0?void 0:t.width)!==null&&i!==void 0?i:0));const y=(a=this.svg)===null||a===void 0?void 0:a.querySelector(":scope > foreignObject");if(y?.setAttribute("width",`${m}`),y?.setAttribute("height",`${v}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${m} ${v}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=m<=0||v<=0?"0":""),this.container){const _=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=_.startsWith("xmid")||_.startsWith("xmax")?"auto":"0",this.container.style.marginRight=_.startsWith("xmi")?"auto":"0"}}}d(o,"s");const u=d((c,{attrs:s={},style:r})=>class extends c{constructor(...n){super(...n);for(const[e,t]of Object.entries(s))this.hasAttribute(e)||this.setAttribute(e,t);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const n=r?`<style>:host { ${r} }</style>`:"";let e="<slot></slot>";const{autoScaling:t}=this.dataset;t!==void 0&&(e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${t==="downscale-only"?"data-downscale-only":""}>${e}</marp-auto-scaling>`),this.shadowRoot.innerHTML=n+e}},"r");let g;const q=Symbol(),V="marpitSVGPolyfill:setZoomFactor,",z=Symbol();let A,C;function N(c){const s=typeof c=="object"&&c.target||document,r=typeof c=="object"?c.zoom:c;window[z]||(Object.defineProperty(window,z,{configurable:!0,value:!0}),window.addEventListener("message",({data:e,origin:t})=>{if(t===window.origin)try{if(e&&typeof e=="string"&&e.startsWith(V)){const[,i]=e.split(","),a=Number.parseFloat(i);Number.isNaN(a)||(C=a)}}catch(i){console.error(i)}}));let n=!1;Array.from(s.querySelectorAll("svg[data-marpit-svg]"),e=>{var t,i,a,m;e.style.transform||(e.style.transform="translateZ(0)");const v=r||C||e.currentScale||1;A!==v&&(A=v,n=v);const y=e.getBoundingClientRect(),{length:_}=e.children;for(let L=0;L<_;L+=1){const x=e.children[L];if(x.getScreenCTM){const w=x.getScreenCTM();if(w){const W=(i=(t=x.x)===null||t===void 0?void 0:t.baseVal.value)!==null&&i!==void 0?i:0,B=(m=(a=x.y)===null||a===void 0?void 0:a.baseVal.value)!==null&&m!==void 0?m:0,G=x.children.length;for(let T=0;T<G;T+=1){const P=x.children[T];if(P.tagName==="SECTION"){const{style:O}=P;O.transformOrigin||(O.transformOrigin=`${-W}px ${-B}px`),O.transform=`scale(${v}) matrix(${w.a}, ${w.b}, ${w.c}, ${w.d}, ${w.e-y.left}, ${w.f-y.top}) translateZ(0.0001px)`;break}}}}}}),n!==!1&&Array.from(s.querySelectorAll("iframe"),({contentWindow:e})=>{e?.postMessage(`${V}${n}`,window.origin==="null"?"*":window.origin)})}d(N,"h");function j({once:c=!1,target:s=document}={}){const r=navigator.vendor==="Apple Computer, Inc."?[N]:[];let n=!c;const e=d(()=>{for(const t of r)t({target:s});n&&window.requestAnimationFrame(e)},"s");return e(),()=>{n=!1}}d(j,"g"),A=1,C=void 0;const $=Symbol(),H=d((c=document)=>{if(typeof window>"u")throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const t=window[q];t||customElements.define("marp-auto-scaling",o);for(const i of Object.keys(S)){const a=`marp-${i}`,m=S[i].proto();g!=null||(g=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),g&&m!==HTMLElement?t||customElements.define(a,u(m,{style:S[i].style}),{extends:i}):(t||customElements.define(a,u(HTMLElement,S[i])),e.querySelectorAll(`${i}[is="${a}"]`).forEach(v=>{v.outerHTML=v.outerHTML.replace(new RegExp(`^<${i}`,"i"),`<${a}`).replace(new RegExp(`</${i}>$`,"i"),`</${a}>`)}))}window[q]=!0})(c),c[$])return c[$];const s=j({target:c}),r=d(()=>{s(),delete c[$]},"n"),n=Object.assign(r,{cleanup:r,update:()=>H(c)});return Object.defineProperty(c,$,{configurable:!0,value:n}),n},"v");f.browser=H,h=H,h=j}},k={};function R(b){var f=k[b];if(f!==void 0)return f.exports;var h=k[b]={exports:{}};return E[b](h,h.exports,R),h.exports}d(R,"__webpack_require__");var Z={};(()=>{"use strict";var b=R(676);function f(){let p,l;const o=d(()=>{const u=document.getElementById("__marp-vscode"),g=!!u;p!==g?(document.body.classList.toggle("marp-vscode",g),g?l=(0,b.browser)():(l?.cleanup(),l=void 0),p=g):g&&l?.update(),p?(u&&h(u),S()):M()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(o,100)),window.addEventListener("vscode.markdown.updateContent",o),o()}d(f,"preview");const h=d(p=>{p.querySelectorAll("[is]").forEach(l=>{if(l.nodeName.includes("-")||document.createElement(l.nodeName).constructor!==l.constructor)return;const{outerHTML:u}=l;l.outerHTML=u,console.debug("[marp-vscode] Custom element has been upgraded forcibly:",u.slice(0,u.indexOf(">")+1||void 0))})},"forceUpgradeCustomElements"),S=d(()=>{const p=document.querySelectorAll("style:not(#__marp-vscode-style):not(#_defaultStyles):not([data-marp-vscode-body])"),l=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');p.forEach(o=>{o.closest("#__marp-vscode")||(o.dataset.marpVscodeBody=o.textContent??"",o.textContent="")}),l.forEach(o=>{if(o.closest("#__marp-vscode"))return;const{href:u}=o;o.dataset.marpVscodeHref=u,o.removeAttribute("href")})},"removeStyles"),M=d(()=>{const p=document.querySelectorAll("style[data-marp-vscode-body]"),l=document.querySelectorAll("link[data-marp-vscode-href]");p.forEach(o=>{o.textContent=o.dataset.marpVscodeBody||"",delete o.dataset.marpVscodeBody}),l.forEach(o=>{o.href=o.dataset.marpVscodeHref||"",delete o.dataset.marpVscodeHref})},"restoreStyles");f()})()})();})();
+    `.split(/\n\s*/).join(""),this.wrapper=(s=this.shadowRoot.querySelector(`div[${k}]`))!==null&&s!==void 0?s:void 0;const o=this.svg;this.svg=(n=(i=this.wrapper)===null||i===void 0?void 0:i.querySelector(`svg[${u}]`))!==null&&n!==void 0?n:void 0,this.svg!==o&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=(t=(e=this.svg)===null||e===void 0?void 0:e.querySelector(`span[${c}]`))!==null&&t!==void 0?t:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:s}=this;s&&(s.style.display="inline",requestAnimationFrame(()=>{s.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(s){const i=d(()=>{const n=(()=>{const e=s.getPropertyValue("--preserve-aspect-ratio");return e?e.trim():`x${(({textAlign:t,direction:o})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if(t==="start"||t==="end"){let a=o==="rtl";return t==="end"&&(a=!a),a?"Max":"Min"}return"Mid"})(s)}YMid meet`})();n!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=n,this.updateSVGRect()),s===this.svgComputedStyle&&requestAnimationFrame(i)},"e");i()}updateSVGRect(){var s,i,n,e,t,o,a;let p=Math.ceil((i=(s=this.containerSize)===null||s===void 0?void 0:s.width)!==null&&i!==void 0?i:0);const h=Math.ceil((e=(n=this.containerSize)===null||n===void 0?void 0:n.height)!==null&&e!==void 0?e:0);this.dataset.downscaleOnly!==void 0&&(p=Math.max(p,(o=(t=this.wrapperSize)===null||t===void 0?void 0:t.width)!==null&&o!==void 0?o:0));const f=(a=this.svg)===null||a===void 0?void 0:a.querySelector(":scope > foreignObject");if(f?.setAttribute("width",`${p}`),f?.setAttribute("height",`${h}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${p} ${h}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=p<=0||h<=0?"0":""),this.container){const _=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=_.startsWith("xmid")||_.startsWith("xmax")?"auto":"0",this.container.style.marginRight=_.startsWith("xmi")?"auto":"0"}}};d(T,"s");let r=T;const m=d((l,{attrs:s={},style:i})=>class extends l{constructor(...n){super(...n);for(const[e,t]of Object.entries(s))this.hasAttribute(e)||this.setAttribute(e,t);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const n=i?`<style>:host { ${i} }</style>`:"";let e="<slot></slot>";const{autoScaling:t}=this.dataset;t!==void 0&&(e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${t==="downscale-only"?"data-downscale-only":""}>${e}</marp-auto-scaling>`),this.shadowRoot.innerHTML=n+e}},"o");let v;const j=Symbol();let C;const z="marpitSVGPolyfill:setZoomFactor,",A=Symbol(),D=Symbol(),W=d(()=>{const l=navigator.vendor==="Apple Computer, Inc.",s=l?[B]:[],i={then:n=>(l?(async()=>{if(C===void 0){const e=document.createElement("canvas");e.width=10,e.height=10;const t=e.getContext("2d"),o=new Image(10,10),a=new Promise(p=>{o.addEventListener("load",()=>p())});o.crossOrigin="anonymous",o.src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%201%201%22%3E%3CforeignObject%20width%3D%221%22%20height%3D%221%22%20requiredExtensions%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%3E%3Cdiv%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%20style%3D%22width%3A%201px%3B%20height%3A%201px%3B%20background%3A%20red%3B%20position%3A%20relative%22%3E%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fsvg%3E",await a,t.drawImage(o,0,0),C=t.getImageData(5,5,1,1).data[3]<128}return C})().then(e=>{n?.(e?[B]:[])}):n?.([]),i)};return Object.assign(s,i)},"h");let H,O;function B(l){const s=typeof l=="object"&&l.target||document,i=typeof l=="object"?l.zoom:l;window[D]||(Object.defineProperty(window,D,{configurable:!0,value:!0}),document.body.style.zoom=1.0001,document.body.offsetHeight,document.body.style.zoom=1,window.addEventListener("message",({data:e,origin:t})=>{if(t===window.origin)try{if(e&&typeof e=="string"&&e.startsWith(z)){const[,o]=e.split(","),a=Number.parseFloat(o);Number.isNaN(a)||(O=a)}}catch(o){console.error(o)}}));let n=!1;Array.from(s.querySelectorAll("svg[data-marpit-svg]"),e=>{var t,o,a,p;e.style.transform||(e.style.transform="translateZ(0)");const h=i||O||e.currentScale||1;H!==h&&(H=h,n=h);const f=e.getBoundingClientRect(),{length:_}=e.children;for(let F=0;F<_;F+=1){const S=e.children[F];if(S.getScreenCTM){const y=S.getScreenCTM();if(y){const I=(o=(t=S.x)===null||t===void 0?void 0:t.baseVal.value)!==null&&o!==void 0?o:0,Z=(p=(a=S.y)===null||a===void 0?void 0:a.baseVal.value)!==null&&p!==void 0?p:0,Y=S.children.length;for(let R=0;R<Y;R+=1){const N=S.children[R];if(N.tagName==="SECTION"){const{style:q}=N;q.transformOrigin||(q.transformOrigin=`${-I}px ${-Z}px`),q.transform=`scale(${h}) matrix(${y.a}, ${y.b}, ${y.c}, ${y.d}, ${y.e-f.left}, ${y.f-f.top}) translateZ(0.0001px)`;break}}}}}}),n!==!1&&Array.from(s.querySelectorAll("iframe"),({contentWindow:e})=>{e?.postMessage(`${z}${n}`,window.origin==="null"?"*":window.origin)})}d(B,"u");function P({once:l=!1,target:s=document}={}){const i=function(n=document){if(n[A])return n[A];let e=!0;const t=d(()=>{e=!1,delete n[A]},"i");Object.defineProperty(n,A,{configurable:!0,value:t});let o=[],a=!1;(async()=>{try{o=await W()}finally{a=!0}})();const p=d(()=>{for(const h of o)h({target:n});a&&o.length===0||e&&window.requestAnimationFrame(p)},"o");return p(),t}(s);return l?(i(),()=>{}):i}d(P,"v"),H=1,O=void 0;const G=P,M=Symbol(),L=d((l=document)=>{if(typeof window>"u")throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const t=window[j];t||customElements.define("marp-auto-scaling",r);for(const o of Object.keys(x)){const a=`marp-${o}`,p=x[o].proto();v!=null||(v=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),v&&p!==HTMLElement?t||customElements.define(a,m(p,{style:x[o].style}),{extends:o}):(t||customElements.define(a,m(HTMLElement,x[o])),e.querySelectorAll(`${o}[is="${a}"]`).forEach(h=>{h.outerHTML=h.outerHTML.replace(new RegExp(`^<${o}`,"i"),`<${a}`).replace(new RegExp(`</${o}>$`,"i"),`</${a}>`)}))}window[j]=!0})(l),l[M])return l[M];const s=P({target:l}),i=d(()=>{s(),delete l[M]},"n"),n=Object.assign(i,{cleanup:i,update:()=>L(l)});return Object.defineProperty(l,M,{configurable:!0,value:n}),n},"y");b.browser=L,g=L,g=G}},E={};function V(w){var b=E[w];if(b!==void 0)return b.exports;var g=E[w]={exports:{}};return $[w](g,g.exports,V),g.exports}d(V,"__webpack_require__");var J={};(()=>{"use strict";var w=V(676);function b(){let u,c;const r=d(()=>{const m=document.getElementById("__marp-vscode"),v=!!m;u!==v?(document.body.classList.toggle("marp-vscode",v),v?c=(0,w.browser)():(c?.cleanup(),c=void 0),u=v):v&&c?.update(),u?(m&&g(m),x()):k()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(r,100)),window.addEventListener("vscode.markdown.updateContent",r),r()}d(b,"preview");const g=d(u=>{u.querySelectorAll("[is]").forEach(c=>{if(c.nodeName.includes("-")||document.createElement(c.nodeName).constructor!==c.constructor)return;const{outerHTML:m}=c;c.outerHTML=m,console.debug("[marp-vscode] Custom element has been upgraded forcibly:",m.slice(0,m.indexOf(">")+1||void 0))})},"forceUpgradeCustomElements"),x=d(()=>{const u=document.querySelectorAll("style:not(#__marp-vscode-style,#_defaultStyles,[data-marp-vscode-body])"),c=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');u.forEach(r=>{r.closest("#__marp-vscode")||(r.dataset.marpVscodeBody=r.textContent??"",r.textContent="")}),c.forEach(r=>{if(r.closest("#__marp-vscode"))return;const{href:m}=r;r.dataset.marpVscodeHref=m,r.removeAttribute("href")})},"removeStyles"),k=d(()=>{const u=document.querySelectorAll("style[data-marp-vscode-body]"),c=document.querySelectorAll("link[data-marp-vscode-href]");u.forEach(r=>{r.textContent=r.dataset.marpVscodeBody||"",delete r.dataset.marpVscodeBody}),c.forEach(r=>{r.href=r.dataset.marpVscodeHref||"",delete r.dataset.marpVscodeHref})},"restoreStyles");b()})()})();})();
 
 </script>
 
