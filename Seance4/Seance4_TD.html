@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension marp-team.marp-vscode */
+#__marp-vscode {
+  all: revert;
+}
+
+/* Override VS Code default CSS rules reverting to initial
+   https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
+body.marp-vscode {
+  padding: 0;
+}
+
+body.marp-vscode img {
+  max-width: unset;
+  max-height: unset;
+}
+
+body.marp-vscode a,
+body.marp-vscode a:hover,
+body.marp-vscode code {
+  color: unset;
+}
+
+body.marp-vscode blockquote {
+  background: unset;
+  border-color: unset;
+}
+
+@media screen {
+  body.marp-vscode {
+    overflow-y: scroll;
+  }
+
+  #__marp-vscode [data-marp-vscode-slide-wrapper] {
+    margin: 20px;
+  }
+
+  #__marp-vscode svg[data-marpit-svg] {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+    display: block;
+    margin: 0;
+  }
+
+  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+  #code-csp-warning {
+    background-color: #444;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+    color: white;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    margin: 16px;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    word-wrap: break-word;
+  }
+
+  #code-csp-warning:hover {
+    text-decoration: none;
+    background-color: #007acc;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  }
+}
+
+@media print {
+  body.marp-vscode #code-csp-warning {
+    display: none;
+  }
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        <style>
+/*********************************************************************
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+For more information, please refer to <http://unlicense.org/>
+*********************************************************************/
+
+/*
+WiTeX
+https://github.com/AndrewBelt/WiTeX
+*/
+
+
+/* Latin Modern (LaTeX default) font */
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
+}
+
+/* Page Layout */
+
+body {
+	background: none;
+	font-size: 14pt;
+	font-family: 'Latin Modern Roman', serif;
+	color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	border: none;
+	font-weight: bold;
+}
+
+a, a:visited {
+	color: #a00;
+}
+
+a.new, a.new:visited {
+	color: black;
+}
+
+ul {
+	list-style: disc;
+}
+
+#mw-navigation, #mw-page-base, #mw-head-base, #footer {
+	/* nuke everything but the content */
+	display: none;
+}
+
+/* Content Box */
+
+.mw-body {
+	max-width: 720px;
+	margin: 1em auto;
+}
+
+#content, div#content {
+	border: none;
+	color: black;
+}
+
+#firstHeading, #siteSub {
+	text-align: center;
+	display: block;
+}
+
+#siteSub {
+	margin-top: -0.5em;
+	margin-bottom: 4em;
+}
+
+/* Article Body */
+
+.mw-body-content {
+	font-size: inherit;
+	text-align: justify;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	line-height: 1.5em;
+}
+
+.mw-body {
+	padding: 2em 0;
+}
+
+.mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6, div#content h1, div#content h2, div#content #firstHeading {
+	font-family: inherit;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.mw-body h1, div#content h1 {
+	font-size: 2em;
+}
+
+.mw-body h2, div#content h2 {
+	font-size: 1.5em;
+}
+
+.mw-body h3 {
+	font-size: 1.2em;
+}
+
+.mw-body h4 {
+	font-size: 1.1em;
+}
+
+.mw-body h5, .mw-body h6 {
+	font-size: 1.0em;
+}
+
+.mw-body p {
+	margin: 0;
+}
+
+.mw-body p + p {
+	text-indent: 2em;
+}
+
+.mw-editsection {
+	/* hide more non-content */
+	display: none;
+}
+
+table.ambox {
+	margin-bottom: 1em;
+}
+
+dl dd {
+	/* center definitions (most useful for display equations) */
+	text-align: center;
+}
+
+span.texhtml {
+	/* revert inline math to default font */
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+/* Table of Contents */
+
+#toc, .toc {
+	border: none;
+	padding: 0;
+	background: none;
+	font-size: inherit;
+	/* span 100% of the width */
+	display: block;
+}
+
+.mw-body #toc h2, .mw-body .toc h2 {
+	font-family: inherit;
+	font-size: 1.5em;
+}
+
+#toc h2, .toc h2 {
+	display: block;
+}
+
+#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle {
+	text-align: left;
+}
+
+.toctoggle {
+	display: none;
+}
+
+/* Figures */
+
+div.tright {
+	margin: 0.5em 0 0.5em 1.5em;
+}
+
+div.tleft {
+	margin: 0.5em 1.5em 0.5em 0;
+}
+
+/* Code */
+
+.mw-code {
+	margin: 1em 0;
+}
+
+pre, code {
+	font-family: "Latin Modern Mono", monospace !important;
+}
+
+sup {
+	text-indent: 0;
+}
+</style>
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
+<h2 id="séance-4--td--intercations-avec-les-données-avec-un-orm">Séance 4 : TD : Intercations avec les données avec un ORM</h2>
+<p>L'objectif de ce TD est de réviser l'écriture d'un modèle de données avec la représentation des tables en objets SQLAlchemy, de découvrir le requêtage de la base via l'ORM, puis d'écrire des données et enfin voir comment paginer les résultats. On s'intéressera plus ici à SQLAlchemy qu'aux templates ou aux routes: routes et templates seront donc très simples, ce qui importera sera d'utiliser l'ORM pour interagir avec les données.</p>
+<h3 id="installations-et-configurations">Installations et configurations</h3>
+<p>Afin que tout le monde réalise ce TD sur une application Flask sans erreurs et correctement configurée:</p>
+<ol>
+<li>Installer sur son PC l'application <a href="Seance4_base_TD.zip">Seance4__base_TD</a></li>
+<li>Y installer un environnement virtuel Python3</li>
+<li>Installer les dépendances de l'application</li>
+<li>Télécharger la base de données <a href="factbook.sqlite">factbook.sqlite</a> quelque part sur son PC</li>
+<li>Remplir la variable SQLALCHEMY_DATABASE_URI dans le fichier <code>.env</code></li>
+</ol>
+<h3 id="terminer-lécriture-du-modèle-de-données">Terminer l'écriture du modèle de données</h3>
+<p>Pour rappel, le modèle de données du factbook est le suivant :
+<img src="img/factbook_model.png" alt="h:300px"></p>
+<p>Il manque, dans le module factbook des models, la représentation de deux tables physiquement présentes:</p>
+<ul>
+<li><code>resources</code>: écrire la classe représentant cette table</li>
+<li><code>country_resources</code> : écrire ce qu'il faut pour lier la table resources et la table country. Si besoin, s'inspirer de ce qui est fait pour <code>country_maps</code></li>
+</ul>
+<h3 id="lire-les-données-avec-lorm">Lire les données avec l'ORM</h3>
+<h4 id="construire-un-template-commun">Construire un template commun</h4>
+<p>Afin de ne plus se préoccuper des templates par la suite, il vaut mieux en créer un générique rapidement. Toutes les routes écrites par la suite appeleront ce template en lui donnant des données différentes en paramètre.</p>
+<p>Ecrire le template <code>pages/generique.html</code> selon les critères suivants:</p>
+<ul>
+<li>les données reçues dans le template arriveront par le paramètre <code>donnees</code></li>
+<li>le format des données est le suivant : [&lt;Objet 1&gt;, &lt;Objet 2&gt;, etc.], où <Objet x> est un objet remontant de l'ORM</li>
+<li>rendre les données sous forme de tableau, avec seulement trois colonnes <code>nom</code>, <code>type</code>, <code>description</code></li>
+<li>les valeurs de ces colonnes seront les suivantes : <code>{{pays.name}}</code>, <code>{{pays.type}}</code>, <code>{{pays.Introduction}}</code></li>
+</ul>
+<p>Ainsi, les futures routes seront par exemple:</p>
+<pre><code class="language-python"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/uneroute&quot;</span></span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">uneroute</span>():
+    resultats = <span class="hljs-comment"># mettre ici la requête ORM de récupération des données</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/generique.html&quot;</span>, donnees=resultats)
+</code></pre>
+<h4 id="quelques-requêtes-simples">Quelques requêtes simples</h4>
+<p>Nous avons déjà vu en Séance 3 l'utilisation de <code>Country.query.all()</code> qui permet de ramener tous les résultats de la table Country. Grâce à la <a href="https://docs.sqlalchemy.org/en/14/orm/query.html">documentation</a>, écrire les routes suivantes:</p>
+<ul>
+<li><code>/tous_pays</code>: affiche tous les pays de la table Country</li>
+<li><code>/le_premier_pays</code>: affiche le premier pays de la table Country</li>
+</ul>
+<h4 id="filtrer-les-données">Filtrer les données</h4>
+<p><code>filter()</code> est un des membres de <code>query</code>. Il permet de filtrer les données de la table relationnelle. Afin d'avoir les potentiels résultats en retour, il est nécessaire d'appeler <code>all()</code> ou <code>first()</code> à la suite. <code>filter()</code> prend autant de paramètres qu'il y a de conditions. Une condition s'exprime ainsi:</p>
+<pre><code class="language-python">query.<span class="hljs-built_in">filter</span>(Classe_du_modele.champ operateur_de_comparaison Valeur)
+</code></pre>
+<p>Ecrire les routes suivantes:</p>
+<ul>
+<li><code>/pays_differents_de_souverain</code>: affiche tous les pays dont le type n'est pas &quot;sovereign&quot;</li>
+<li><code>/condition_or_autre_condition</code>: affiche tous les pays qui sont soit de type &quot;sovereign&quot; ou bien dont l'id est &quot;ay&quot;. L'utilisation de cette <a href="https://docs.sqlalchemy.org/en/14/core/sqlelement.html#column-element-foundational-constructors">documentation</a> est conseillée.</li>
+</ul>
+<h4 id="aggrégations-sql">Aggrégations SQL</h4>
+<p>Les fonctions d'aggrégation telles que COUNT, GROUP BY, HAVING et ORDER BY sont essentielles en SQL et sont reprises avec SQLAlchemy.</p>
+<p>Ecrire la route suivante:</p>
+<ul>
+<li><code>/pays_souverains_autres_ranges_ordre_decroissant</code>: affiche tous les pays souverains ou de type <code>other</code>, rangés par ordre alphabétique décroissant. Cette <a href="https://docs.sqlalchemy.org/en/20/core/sqlelement.html#column-element-modifier-constructors">documentation</a> est toujours utile, en plus de <a href="https://docs.sqlalchemy.org/en/14/orm/query.html#the-query-object">celle-ci</a>.</li>
+</ul>
+<h4 id="jointures-naturelles">Jointures naturelles</h4>
+<p>Cette partie du TD reprend ce qui est dit dans le cours. Essayer de l'implémenter dans l'application.</p>
+<p>Cette méthode est à privilègier dès lors que les jointures sont simples puisqu'elles sont incluses dans la déclaration des classes du modèle de base de données.</p>
+<p>Lors de la création des classes dans <code>models/factbook.py</code>, nous avons créé des champs qui ne sont pas physiquement dans les tables grâce à <code>db.relationship()</code>. Pour la classe <code>Country()</code>, c'est notamment le cas de <code>resources</code>.
+Dès lors qu'une relation est indiquée dans une classe, l'objet sur lequel pointe la relation est accessible depuis notre objet requêté. Prenons l'exemple des ressources des pays:</p>
+<ul>
+<li>
+<pre><code class="language-python">  <span class="hljs-comment"># models/factbook.py Country()</span>
+
+  ...
+  resources = db.relationship(
+      <span class="hljs-string">&#x27;Resources&#x27;</span>, 
+      secondary=country_resources, 
+      backref=<span class="hljs-string">&quot;resources&quot;</span>
+  )
+  ...
+</code></pre>
+Ici, <code>resources</code> renvoie vers la table <code>country_resources</code>, qui a été décalrée en tout début de modèle.</li>
+<li>Cette table <code>country_resources</code> a elle-même une relation, grâce à une clé étrangère, vers la classe <code>Resources</code>:<pre><code class="language-python"><span class="hljs-comment"># models/factbook.py Country()</span>
+
+...
+db.Column(<span class="hljs-string">&#x27;resource&#x27;</span>, db.String(<span class="hljs-number">100</span>), db.ForeignKey(<span class="hljs-string">&#x27;resources.id&#x27;</span>), primary_key=<span class="hljs-literal">True</span>)
+...
+</code></pre>
+</li>
+</ul>
+<p>Les objets de la <code>Resources</code> liés aux objets <code>Country</code> via la table <code>country_resources</code> sont alors accessibles depuis les objets <code>Country</code> sans avoir à le spécifier dans la requête SQLAlchemy.</p>
+<p>Avec SQLAlchemy, il suffit donc de faire la requête suivante:</p>
+<pre><code class="language-python">Country.query.<span class="hljs-built_in">all</span>()
+</code></pre>
+<p>Tout s'effectue ensuite dans la manière d'appeler les attributs de classes; par exemple, pour obtenir le nom de la ressource, il faut écrire : <code>country.resources.name</code> (où country est un des objets de la liste de résultats).</p>
+<p>Créer une route <code>/ressources</code> qui affiche les ressources d'un pays donné en paramètre (le template n'est pas à créer, il est déjà fourni dans <code>pages/</code>):</p>
+<pre><code class="language-python"><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/ressources/&lt;string:nom&gt;&quot;</span></span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">ressources</span>(<span class="hljs-params">nom</span>):
+    ressources = []
+
+    query =  Country.query
+    ressources = query.<span class="hljs-built_in">filter</span>(Country.name == nom).first()
+
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/pays_ressources.html&quot;</span>, pays=nom, ressources=ressources, sous_titre=nom)
+</code></pre>
+<p>Puisqu'un seul pays est indiqué en paramètre et passé en filtre, il est suffisant de faire un <code>first()</code> dans la requête.</p>
+<p>Accéder à cette route n'est pas simple pour l'utilisateur (il doit taper l'URL /ressources/France par exemple). Dans le template <code>pages/generique.html</code>, ajouter, sur chaque nom dans la colonne &quot;nom&quot;, un lien vers la route &quot;/ressources/<a href="string:nom">string:nom</a>&quot;.</p>
+<h4 id="jointures-forcées">Jointures forcées</h4>
+<p>S'il y a le temps, creuser les jointures avec le cours sur les jointures spécifiées manuellement : <a href="https://maximechallon.github.io/CoursM2TNAH_Flask_supports_public/Seance4/Seance4_requetes.html#join">Seance4_requetes.html#join</a> et <a href="https://maximechallon.github.io/CoursM2TNAH_Flask_supports_public/Seance4/Seance4_requetes.html#union">/Seance4_requetes.html#union</a></p>
+<h3 id="ecrire-sur-la-base-de-données">Ecrire sur la base de données</h3>
+<ul>
+<li>Ajouter une nouvelle route <code>/ajout_pays/&lt;string:id&gt;/&lt;string:name&gt;/&lt;string:type&gt;/&lt;string:rapide_description&gt;</code> qui insère un nouveau pays: elle ne retournera pas de template, mais simplement la chaîne &quot;OK&quot;</li>
+<li>Appeler l'URL suivante  dans le navigateur :  <code>localhost:5000/ajout_pays/xxxx/Nouveau pays/sovereign/Un nouveau pays</code>: le retour doit être &quot;OK&quot;</li>
+<li>Créer une route <code>/get_pays/&lt;string:id&gt;</code> en utilisant le template <code>pages/generique.html</code>: cette route doit renvoyer tous les pays (normalement un seul) correspondant à l'id fourni:
+<ul>
+<li>soit utiliser la méthode de filtrage vue précédement</li>
+<li>soit utiliser cet <a href="https://docs.sqlalchemy.org/en/14/orm/query.html#sqlalchemy.orm.Query.get">objet de requête</a></li>
+</ul>
+</li>
+<li>Ajouter une route <code>/suppression_pays/&lt;string:id&gt;</code> qui permette de supprimer un pays: elle retournera simplement la chaîne &quot;OK&quot;</li>
+<li>Appeler l'URL suivante dans le navigateur  <code>localhost:5000/suppression_pays/xxxx</code></li>
+<li>Vérifier en appelant <code>http://localhost:5000/get_pays/xxxx</code> qu'il y a bien aucun résultat</li>
+</ul>
+<h3 id="pagination-des-résultats">Pagination des résultats</h3>
+<pre><code class="language-bash"><span class="hljs-comment"># .env</span>
+
+...
+PAYS_PER_PAGE=10
+</code></pre>
+<pre><code class="language-python"><span class="hljs-comment"># config.py Config()</span>
+
+...
+    PAYS_PER_PAGE = <span class="hljs-built_in">int</span>(os.environ.get(<span class="hljs-string">&quot;PAYS_PER_PAGE&quot;</span>))
+</code></pre>
+<p>Il est ensuite temps de modifier la route en ne renvoyant pas un ensemble de résultats au template via <code>all()</code>, mais en renvoyant uniquement l'objet Pagination résultant de <code>paginate()</code>.</p>
+<pre><code class="language-python"><span class="hljs-comment"># routes/generales.py </span>
+
+...
+<span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/pays_pagination/&lt;int:page&gt;&quot;</span></span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">pays_pagination</span>(<span class="hljs-params">page</span>):
+    donnees = []
+
+    query =  Country.query
+    tous_resultats = query.paginate(page=page, per_page=app.config[<span class="hljs-string">&quot;PAYS_PER_PAGE&quot;</span>])
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/pays_pagination.html&quot;</span>, donnees=tous_resultats, sous_titre=<span class="hljs-string">&quot;Tous les pays&quot;</span>)
+</code></pre>
+<p>Une fois l'objet Pagination (<code>tous_resultats</code> dans notre cas) transmis au template, tout se fait dans ce dernier.</p>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!-- templates/pages/pays_pagination.html--&gt;</span>
+
+{%if pagination%}
+    <span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;table&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;col&quot;</span>&gt;</span>#<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;col&quot;</span>&gt;</span>Nom<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;col&quot;</span>&gt;</span>Type<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;col&quot;</span>&gt;</span>Description<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span>&gt;</span>
+            {%for pays in pagination.items%}
+            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;row&quot;</span>&gt;</span>{{loop.index}}<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>{{pays.name}}<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>{{pays.type}}<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>{{pays.Introduction}}<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+            {%endfor%}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+{%endif%}
+</code></pre>
+<ul>
+<li>au lieu d'itérer sur les résultats de <code>all()</code>, l'itération se fait ici sur l'objet Pagination <code>.items</code></li>
+<li>chaque item est en réalité un objet <code>Country</code> dans notre cas, comme ce que l'on trouvait auparavant dans la liste de résultats <code>all</code></li>
+</ul>
+<p>Afin d'afficher une barre de navigation entre les pages, <code>paginate</code> nous aide à nouveau.</p>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!--templates/pages/pays_pagination.html --&gt;</span>
+...
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">nav</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;research-pagination&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;pagination&quot;</span>&gt;</span>
+            {%- for page in pagination.iter_pages() %}
+                {% if page %}
+        
+                {% if page != pagination.page %}
+                    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item&quot;</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{{ url_for(&quot;</span><span class="hljs-attr">pays</span>&quot;, <span class="hljs-attr">page</span>=<span class="hljs-string">page+1)</span> }}&quot;&gt;</span>{{page}}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+                {% else %}
+                    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item active disabled&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span>&gt;</span>{{page}} <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;sr-only&quot;</span>&gt;</span>(actuelle)<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+                {% endif %}
+        
+                {% else %}
+                    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-item disabled&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;page-link&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+                {% endif %}
+        
+            {%- endfor %}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+...
+</code></pre>
+
+        
+        <script async type="text/javascript">
+/* From extension marp-team.marp-vscode */
+(()=>{var U=Object.defineProperty;var d=($,E)=>U($,"name",{value:E,configurable:!0});(()=>{var $={676:(w,b,g)=>{w.exports=g(185)},185:(w,b)=>{"use strict";var g;g={value:!0};const x={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},k="data-marp-auto-scaling-wrapper",u="data-marp-auto-scaling-svg",c="data-marp-auto-scaling-container",T=class T extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const s=d(i=>([n])=>{const{width:e,height:t}=n.contentRect;this[i]={width:e,height:t},this.updateSVGRect()},"t");this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(s("containerSize")),this.wrapperObserver=new ResizeObserver((...i)=>{s("wrapperSize")(...i),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var s,i,n,e,t;this.shadowRoot.innerHTML=`
+<style>
+  svg[${u}] { display: block; width: 100%; height: auto; vertical-align: top; }
+  span[${c}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
+</style>
+<div ${k}>
+  <svg part="svg" ${u}>
+    <foreignObject><span ${c}><slot></slot></span></foreignObject>
+  </svg>
+</div>
+    `.split(/\n\s*/).join(""),this.wrapper=(s=this.shadowRoot.querySelector(`div[${k}]`))!==null&&s!==void 0?s:void 0;const o=this.svg;this.svg=(n=(i=this.wrapper)===null||i===void 0?void 0:i.querySelector(`svg[${u}]`))!==null&&n!==void 0?n:void 0,this.svg!==o&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=(t=(e=this.svg)===null||e===void 0?void 0:e.querySelector(`span[${c}]`))!==null&&t!==void 0?t:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:s}=this;s&&(s.style.display="inline",requestAnimationFrame(()=>{s.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(s){const i=d(()=>{const n=(()=>{const e=s.getPropertyValue("--preserve-aspect-ratio");return e?e.trim():`x${(({textAlign:t,direction:o})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if(t==="start"||t==="end"){let a=o==="rtl";return t==="end"&&(a=!a),a?"Max":"Min"}return"Mid"})(s)}YMid meet`})();n!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=n,this.updateSVGRect()),s===this.svgComputedStyle&&requestAnimationFrame(i)},"e");i()}updateSVGRect(){var s,i,n,e,t,o,a;let p=Math.ceil((i=(s=this.containerSize)===null||s===void 0?void 0:s.width)!==null&&i!==void 0?i:0);const h=Math.ceil((e=(n=this.containerSize)===null||n===void 0?void 0:n.height)!==null&&e!==void 0?e:0);this.dataset.downscaleOnly!==void 0&&(p=Math.max(p,(o=(t=this.wrapperSize)===null||t===void 0?void 0:t.width)!==null&&o!==void 0?o:0));const f=(a=this.svg)===null||a===void 0?void 0:a.querySelector(":scope > foreignObject");if(f?.setAttribute("width",`${p}`),f?.setAttribute("height",`${h}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${p} ${h}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=p<=0||h<=0?"0":""),this.container){const _=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=_.startsWith("xmid")||_.startsWith("xmax")?"auto":"0",this.container.style.marginRight=_.startsWith("xmi")?"auto":"0"}}};d(T,"s");let r=T;const m=d((l,{attrs:s={},style:i})=>class extends l{constructor(...n){super(...n);for(const[e,t]of Object.entries(s))this.hasAttribute(e)||this.setAttribute(e,t);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const n=i?`<style>:host { ${i} }</style>`:"";let e="<slot></slot>";const{autoScaling:t}=this.dataset;t!==void 0&&(e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${t==="downscale-only"?"data-downscale-only":""}>${e}</marp-auto-scaling>`),this.shadowRoot.innerHTML=n+e}},"o");let v;const j=Symbol();let C;const z="marpitSVGPolyfill:setZoomFactor,",A=Symbol(),D=Symbol(),W=d(()=>{const l=navigator.vendor==="Apple Computer, Inc.",s=l?[B]:[],i={then:n=>(l?(async()=>{if(C===void 0){const e=document.createElement("canvas");e.width=10,e.height=10;const t=e.getContext("2d"),o=new Image(10,10),a=new Promise(p=>{o.addEventListener("load",()=>p())});o.crossOrigin="anonymous",o.src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%201%201%22%3E%3CforeignObject%20width%3D%221%22%20height%3D%221%22%20requiredExtensions%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%3E%3Cdiv%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%20style%3D%22width%3A%201px%3B%20height%3A%201px%3B%20background%3A%20red%3B%20position%3A%20relative%22%3E%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fsvg%3E",await a,t.drawImage(o,0,0),C=t.getImageData(5,5,1,1).data[3]<128}return C})().then(e=>{n?.(e?[B]:[])}):n?.([]),i)};return Object.assign(s,i)},"h");let H,O;function B(l){const s=typeof l=="object"&&l.target||document,i=typeof l=="object"?l.zoom:l;window[D]||(Object.defineProperty(window,D,{configurable:!0,value:!0}),document.body.style.zoom=1.0001,document.body.offsetHeight,document.body.style.zoom=1,window.addEventListener("message",({data:e,origin:t})=>{if(t===window.origin)try{if(e&&typeof e=="string"&&e.startsWith(z)){const[,o]=e.split(","),a=Number.parseFloat(o);Number.isNaN(a)||(O=a)}}catch(o){console.error(o)}}));let n=!1;Array.from(s.querySelectorAll("svg[data-marpit-svg]"),e=>{var t,o,a,p;e.style.transform||(e.style.transform="translateZ(0)");const h=i||O||e.currentScale||1;H!==h&&(H=h,n=h);const f=e.getBoundingClientRect(),{length:_}=e.children;for(let F=0;F<_;F+=1){const S=e.children[F];if(S.getScreenCTM){const y=S.getScreenCTM();if(y){const I=(o=(t=S.x)===null||t===void 0?void 0:t.baseVal.value)!==null&&o!==void 0?o:0,Z=(p=(a=S.y)===null||a===void 0?void 0:a.baseVal.value)!==null&&p!==void 0?p:0,Y=S.children.length;for(let R=0;R<Y;R+=1){const N=S.children[R];if(N.tagName==="SECTION"){const{style:q}=N;q.transformOrigin||(q.transformOrigin=`${-I}px ${-Z}px`),q.transform=`scale(${h}) matrix(${y.a}, ${y.b}, ${y.c}, ${y.d}, ${y.e-f.left}, ${y.f-f.top}) translateZ(0.0001px)`;break}}}}}}),n!==!1&&Array.from(s.querySelectorAll("iframe"),({contentWindow:e})=>{e?.postMessage(`${z}${n}`,window.origin==="null"?"*":window.origin)})}d(B,"u");function P({once:l=!1,target:s=document}={}){const i=function(n=document){if(n[A])return n[A];let e=!0;const t=d(()=>{e=!1,delete n[A]},"i");Object.defineProperty(n,A,{configurable:!0,value:t});let o=[],a=!1;(async()=>{try{o=await W()}finally{a=!0}})();const p=d(()=>{for(const h of o)h({target:n});a&&o.length===0||e&&window.requestAnimationFrame(p)},"o");return p(),t}(s);return l?(i(),()=>{}):i}d(P,"v"),H=1,O=void 0;const G=P,M=Symbol(),L=d((l=document)=>{if(typeof window>"u")throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const t=window[j];t||customElements.define("marp-auto-scaling",r);for(const o of Object.keys(x)){const a=`marp-${o}`,p=x[o].proto();v!=null||(v=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),v&&p!==HTMLElement?t||customElements.define(a,m(p,{style:x[o].style}),{extends:o}):(t||customElements.define(a,m(HTMLElement,x[o])),e.querySelectorAll(`${o}[is="${a}"]`).forEach(h=>{h.outerHTML=h.outerHTML.replace(new RegExp(`^<${o}`,"i"),`<${a}`).replace(new RegExp(`</${o}>$`,"i"),`</${a}>`)}))}window[j]=!0})(l),l[M])return l[M];const s=P({target:l}),i=d(()=>{s(),delete l[M]},"n"),n=Object.assign(i,{cleanup:i,update:()=>L(l)});return Object.defineProperty(l,M,{configurable:!0,value:n}),n},"y");b.browser=L,g=L,g=G}},E={};function V(w){var b=E[w];if(b!==void 0)return b.exports;var g=E[w]={exports:{}};return $[w](g,g.exports,V),g.exports}d(V,"__webpack_require__");var J={};(()=>{"use strict";var w=V(676);function b(){let u,c;const r=d(()=>{const m=document.getElementById("__marp-vscode"),v=!!m;u!==v?(document.body.classList.toggle("marp-vscode",v),v?c=(0,w.browser)():(c?.cleanup(),c=void 0),u=v):v&&c?.update(),u?(m&&g(m),x()):k()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(r,100)),window.addEventListener("vscode.markdown.updateContent",r),r()}d(b,"preview");const g=d(u=>{u.querySelectorAll("[is]").forEach(c=>{if(c.nodeName.includes("-")||document.createElement(c.nodeName).constructor!==c.constructor)return;const{outerHTML:m}=c;c.outerHTML=m,console.debug("[marp-vscode] Custom element has been upgraded forcibly:",m.slice(0,m.indexOf(">")+1||void 0))})},"forceUpgradeCustomElements"),x=d(()=>{const u=document.querySelectorAll("style:not(#__marp-vscode-style,#_defaultStyles,[data-marp-vscode-body])"),c=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');u.forEach(r=>{r.closest("#__marp-vscode")||(r.dataset.marpVscodeBody=r.textContent??"",r.textContent="")}),c.forEach(r=>{if(r.closest("#__marp-vscode"))return;const{href:m}=r;r.dataset.marpVscodeHref=m,r.removeAttribute("href")})},"removeStyles"),k=d(()=>{const u=document.querySelectorAll("style[data-marp-vscode-body]"),c=document.querySelectorAll("link[data-marp-vscode-href]");u.forEach(r=>{r.textContent=r.dataset.marpVscodeBody||"",delete r.dataset.marpVscodeBody}),c.forEach(r=>{r.href=r.dataset.marpVscodeHref||"",delete r.dataset.marpVscodeHref})},"restoreStyles");b()})()})();})();
+
+</script>
+
+    </body>
+    </html>
