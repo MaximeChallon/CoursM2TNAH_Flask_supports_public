@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>UE5 &colon; Fondamentaux du d&eacute;veloppement web frontal&comma; niveau 2</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension marp-team.marp-vscode */
+#__marp-vscode {
+  all: revert;
+}
+
+/* Override VS Code default CSS rules reverting to initial
+   https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
+body.marp-vscode {
+  padding: 0;
+}
+
+body.marp-vscode img {
+  max-width: unset;
+  max-height: unset;
+}
+
+body.marp-vscode a,
+body.marp-vscode a:hover,
+body.marp-vscode code {
+  color: unset;
+}
+
+body.marp-vscode blockquote {
+  background: unset;
+  border-color: unset;
+}
+
+@media screen {
+  body.marp-vscode {
+    overflow-y: scroll;
+  }
+
+  #__marp-vscode [data-marp-vscode-slide-wrapper] {
+    margin: 20px;
+  }
+
+  #__marp-vscode svg[data-marpit-svg] {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+    display: block;
+    margin: 0;
+  }
+
+  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+  #code-csp-warning {
+    background-color: #444;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+    color: white;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    margin: 16px;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    word-wrap: break-word;
+  }
+
+  #code-csp-warning:hover {
+    text-decoration: none;
+    background-color: #007acc;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  }
+}
+
+@media print {
+  body.marp-vscode #code-csp-warning {
+    display: none;
+  }
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        <style>
+/*********************************************************************
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+For more information, please refer to <http://unlicense.org/>
+*********************************************************************/
+
+/*
+WiTeX
+https://github.com/AndrewBelt/WiTeX
+*/
+
+
+/* Latin Modern (LaTeX default) font */
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-italic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Roman';
+	font-weight: bold;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmroman10-bolditalic.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: normal;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Latin Modern Mono';
+	font-weight: normal;
+	font-style: italic;
+	src: url('https://cdn.rawgit.com/AndrewBelt/WiTeX/master/fonts/lmmono10-italic.woff') format('woff');
+}
+
+/* Page Layout */
+
+body {
+	background: none;
+	font-size: 14pt;
+	font-family: 'Latin Modern Roman', serif;
+	color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	border: none;
+	font-weight: bold;
+}
+
+a, a:visited {
+	color: #a00;
+}
+
+a.new, a.new:visited {
+	color: black;
+}
+
+ul {
+	list-style: disc;
+}
+
+#mw-navigation, #mw-page-base, #mw-head-base, #footer {
+	/* nuke everything but the content */
+	display: none;
+}
+
+/* Content Box */
+
+.mw-body {
+	max-width: 720px;
+	margin: 1em auto;
+}
+
+#content, div#content {
+	border: none;
+	color: black;
+}
+
+#firstHeading, #siteSub {
+	text-align: center;
+	display: block;
+}
+
+#siteSub {
+	margin-top: -0.5em;
+	margin-bottom: 4em;
+}
+
+/* Article Body */
+
+.mw-body-content {
+	font-size: inherit;
+	text-align: justify;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	line-height: 1.5em;
+}
+
+.mw-body {
+	padding: 2em 0;
+}
+
+.mw-body h1, .mw-body h2, .mw-body h3, .mw-body h4, .mw-body h5, .mw-body h6, div#content h1, div#content h2, div#content #firstHeading {
+	font-family: inherit;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.mw-body h1, div#content h1 {
+	font-size: 2em;
+}
+
+.mw-body h2, div#content h2 {
+	font-size: 1.5em;
+}
+
+.mw-body h3 {
+	font-size: 1.2em;
+}
+
+.mw-body h4 {
+	font-size: 1.1em;
+}
+
+.mw-body h5, .mw-body h6 {
+	font-size: 1.0em;
+}
+
+.mw-body p {
+	margin: 0;
+}
+
+.mw-body p + p {
+	text-indent: 2em;
+}
+
+.mw-editsection {
+	/* hide more non-content */
+	display: none;
+}
+
+table.ambox {
+	margin-bottom: 1em;
+}
+
+dl dd {
+	/* center definitions (most useful for display equations) */
+	text-align: center;
+}
+
+span.texhtml {
+	/* revert inline math to default font */
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+/* Table of Contents */
+
+#toc, .toc {
+	border: none;
+	padding: 0;
+	background: none;
+	font-size: inherit;
+	/* span 100% of the width */
+	display: block;
+}
+
+.mw-body #toc h2, .mw-body .toc h2 {
+	font-family: inherit;
+	font-size: 1.5em;
+}
+
+#toc h2, .toc h2 {
+	display: block;
+}
+
+#toc #toctitle, .toc #toctitle, #toc .toctitle, .toc .toctitle {
+	text-align: left;
+}
+
+.toctoggle {
+	display: none;
+}
+
+/* Figures */
+
+div.tright {
+	margin: 0.5em 0 0.5em 1.5em;
+}
+
+div.tleft {
+	margin: 0.5em 1.5em 0.5em 0;
+}
+
+/* Code */
+
+.mw-code {
+	margin: 1em 0;
+}
+
+pre, code {
+	font-family: "Latin Modern Mono", monospace !important;
+}
+
+sup {
+	text-indent: 0;
+}
+</style>
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="ue5--fondamentaux-du-développement-web-frontal-niveau-2">UE5 : Fondamentaux du développement web frontal, niveau 2</h1>
+<h2 id="séance-5--td--les-formulaires">Séance 5 : TD : Les formulaires</h2>
+<p>L'objectif de ce TD est d'implémenter des formulaires en POST afin que l'utilisateur puisse interagir avec les données.</p>
+<h3 id="installations-et-configurations">Installations et configurations</h3>
+<p>Afin que tout le monde réalise ce TD sur une application Flask sans erreurs et correctement configurée:</p>
+<ol>
+<li>Installer sur son PC l'application <a href="Seance5_base_TD.zip">Seance5_base_TD</a></li>
+<li>Y installer un environnement virtuel Python3</li>
+<li>Installer les dépendances de l'application</li>
+<li>Télécharger la base de données <a href="factbook.sqlite">factbook.sqlite</a> quelque part sur son PC</li>
+<li>Remplir les variables SQLALCHEMY_DATABASE_URI, RESOURCES_PER_PAGE et PAYS_PER_PAGE dans le fichier <code>.env</code></li>
+</ol>
+<h3 id="effectuer-un-filtre-multi-critères-sur-les-données-à-afficher">Effectuer un filtre multi-critères sur les données à afficher</h3>
+<p>Le but de cette partie est d'obtenir, sur la future page <code>/recherche</code>, un formulaire qui permette de filtrer sur le nom du pays, une de ses ressources, son continent.</p>
+<p><img src="img/get_avance_resultat.jpg" alt="h:300px"></p>
+<p>Suivant la méthodologie décrite en cours, suivre les quatre étapes suivantes:</p>
+<ul>
+<li>création du FlaskForm</li>
+<li>création du template du formulaire</li>
+<li>création de la route</li>
+<li>création du template de la route</li>
+</ul>
+<h4 id="classe-flaskform">Classe FlaskForm</h4>
+<p>De même que SQLAlchemy est une librairie utilisée dans Flask-SQLAlchemy pour interagir avec une base de données, il existe une librairie Flask-WTF utilisant WTForms pour la gestion des formulaires. Cette librairie facilitera le développement en:</p>
+<ul>
+<li>définissant des classes pour chaque formulaire</li>
+<li>rendant le formulaire avec peu de HTML à écrire côté developpeur</li>
+<li>personnalisant facilement le comportement du formulaire</li>
+</ul>
+<p>D'abord, il faut installer Flask-WTF:</p>
+<pre><code class="language-bash">pip install flask-wtf
+</code></pre>
+<p>Les classes représentant nos formulaires sont finalement des modèles au même titre que celles de la base de données. C'est pour cela que l'on peut les ranger dans <code>app/models/</code> dans un fichier <code>formulaires.py</code>. Ces modèles détermineront quelles données nos formulaires vont capturer, de même que les logiques de validation de ces dernières.</p>
+<p>Comme pour toute extension, Flask-WTF nécessite une petite configuration initiale avec 2 variables d'environnement supplémentaires:</p>
+<ul>
+<li><code>WTF_CSRF_ENABLE</code>: par défaut à True; si elle est activée, cette option permet de se prémunir contre l'attaque <a href="https://fr.wikipedia.org/wiki/Cross-site_request_forgery">&quot;Cross-site request forgery&quot;</a>. Sauf exception, cette option doit être toujours activée pour assurer la sécurité des échanges entre le client et le serveur, et la sécurité du site.</li>
+<li><code>SECRET_KEY</code> n'est demandé que si l'option précédente est activée; cette clé créé un jeton cryptographique qui servira à valider les formulaires</li>
+</ul>
+<p>En utilisant la <a href="https://flask-wtf.readthedocs.io/en/1.2.x/quickstart/#creating-forms">documentation</a> et <a href="https://wtforms.readthedocs.io/en/2.3.x/fields/#basic-fields">celle-ci</a>, écrire la classe Recherche() représentant un formulaire contenant les entrées suivantes:</p>
+<ul>
+<li>nom_pays: un champ texte libre</li>
+<li>ressources: les choix possibles seront <code>('PET', 'pétrole'), ('GOL', 'or')</code></li>
+<li>continents: les choix possibles seront <code>('Europe', 'Europe'), ('Asia', 'Asie'), ('Africa', 'Afrique')</code></li>
+</ul>
+<h4 id="template-du-formulaire">Template du formulaire</h4>
+<p>Les formulaires pouvant être utilisés à divers endroits de l'application, il convient de les considérer comme des &quot;partials&quot;.</p>
+<ul>
+<li>A partir de la documentation de Flask-WTF, compléter le template <code>partials/formulaires/recherche.html</code>: la structure HTML est déjà faite, il faut simplement injecter les bonnes variables Jinja aux bons endroits et paramétrer correctement la balise form</li>
+<li>Inclure ce template ( en haut de la page, avant la pagination ) dans le template de la page <code>pages/resultats_recherche.html</code>: c'est ce template qui sera renvoyé par la future route. Les commentaires dans le template doivent aider à identifier le ou les endroits où inclure le template du formulaire
+<ul>
+<li>si aucun formulaire n'est soumis par l'utilisateur (ce qui est le cas quand on atterrit sur <code>/recherche</code> depuis la barre de navigation), la page <code>/recherche</code> affichera alors seulement le formulaire</li>
+<li>si un formulaire est soumis, alors il réapparaîtra en étant prérempli, et seront affichées en-dessous les éventuels résultats de la recherche</li>
+</ul>
+</li>
+</ul>
+<h4 id="construction-de-la-route-recherche">Construction de la route /recherche</h4>
+<p>Voici ci-dessous la route écrite:</p>
+<ul>
+<li>la commenter selon ce que fait chaque ligne</li>
+</ul>
+<pre  onmousedown='return false;' onselectstart='return false;'><code class="language-python"><span class="hljs-keyword">from</span> ..app <span class="hljs-keyword">import</span> app, db
+    <span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> render_template, request
+    <span class="hljs-keyword">from</span> ..models.factbook <span class="hljs-keyword">import</span> Country
+    <span class="hljs-keyword">from</span> ..models.formulaires <span class="hljs-keyword">import</span> Recherche
+    <span class="hljs-keyword">from</span> ..utils.transformations <span class="hljs-keyword">import</span>  clean_arg
+
+    ...
+
+    <span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/recherche&quot;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>,<span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span>
+    <span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&quot;/recherche/&lt;int:page&gt;&quot;</span>, methods=[<span class="hljs-string">&#x27;GET&#x27;</span>,<span class="hljs-string">&#x27;POST&#x27;</span>]</span>)</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">recherche</span>(<span class="hljs-params">page=<span class="hljs-number">1</span></span>):
+        form = Recherche() 
+
+        <span class="hljs-comment"># récupération des éventuels arguments de l&#x27;URL qui seraient le signe de l&#x27;envoi d&#x27;un formulaire</span>
+        nom_pays =  clean_arg(request.form.get(<span class="hljs-string">&quot;nom_pays&quot;</span>, <span class="hljs-literal">None</span>))
+        ressource =  clean_arg(request.form.get(<span class="hljs-string">&quot;ressources&quot;</span>, <span class="hljs-literal">None</span>))
+        continent =  clean_arg(request.form.get(<span class="hljs-string">&quot;continents&quot;</span>, <span class="hljs-literal">None</span>))
+
+        <span class="hljs-comment"># initialisation des données de retour dans le cas où il n&#x27;y ait pas de requête</span>
+        donnees = []
+
+        <span class="hljs-keyword">if</span> form.validate_on_submit():
+            <span class="hljs-comment"># si l&#x27;un des champs de recherche a une valeur, alors cela veut dire que le formulaire a été rempli et qu&#x27;il faut lancer une recherche </span>
+            <span class="hljs-comment"># dans les données</span>
+            <span class="hljs-keyword">if</span> nom_pays  <span class="hljs-keyword">or</span> continent <span class="hljs-keyword">or</span> ressource:
+                <span class="hljs-comment"># initialisation de la recherche; en fonction de la présence ou nom d&#x27;un filtre côté utilisateur, nous effectuerons des filtres SQLAlchemy,</span>
+                <span class="hljs-comment"># ce qui signifie que nous pouvons jouer ici plusieurs filtres d&#x27;affilée</span>
+                query_results = Country.query
+
+                <span class="hljs-keyword">if</span> nom_pays:
+                    query_results = query_results.<span class="hljs-built_in">filter</span>(Country.name.ilike(<span class="hljs-string">&quot;%&quot;</span>+nom_pays.lower()+<span class="hljs-string">&quot;%&quot;</span>))
+                
+                <span class="hljs-keyword">if</span> ressource:
+                    resource = db.session.execute(text(<span class="hljs-string">&quot;&quot;&quot;select a.id from country a 
+                        inner join country_resources b on b.id = a.id and b.resource  == &#x27;&quot;&quot;&quot;</span>+ressource+<span class="hljs-string">&quot;&quot;&quot;&#x27;
+                        &quot;&quot;&quot;</span>)).fetchall()
+                    query_results = query_results.<span class="hljs-built_in">filter</span>(Country.<span class="hljs-built_in">id</span>.in_([r.<span class="hljs-built_in">id</span> <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> resource] ))
+                
+                <span class="hljs-keyword">if</span> continent:
+                    <span class="hljs-built_in">map</span> = db.session.execute(text(<span class="hljs-string">&quot;&quot;&quot;select a.id from country a 
+                        inner join country_map b on b.id = a.id and map_ref == &#x27;&quot;&quot;&quot;</span>+continent+<span class="hljs-string">&quot;&quot;&quot;&#x27;
+                        &quot;&quot;&quot;</span>)).fetchall()
+                    query_results = query_results.<span class="hljs-built_in">filter</span>(Country.<span class="hljs-built_in">id</span>.in_([m.<span class="hljs-built_in">id</span> <span class="hljs-keyword">for</span> m <span class="hljs-keyword">in</span> <span class="hljs-built_in">map</span>] ))
+                
+                donnees = query_results.order_by(Country.name).paginate(page=page, per_page=app.config[<span class="hljs-string">&quot;PAYS_PER_PAGE&quot;</span>])
+
+                <span class="hljs-comment"># renvoi des filtres de recherche pour préremplissage du formulaire</span>
+                form.nom_pays.data = nom_pays
+                form.continents.data = continent
+                form.ressources.data = ressource
+
+        <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&quot;pages/resultats_recherche.html&quot;</span>, 
+                sous_titre= <span class="hljs-string">&quot;Recherche&quot;</span> , 
+                donnees=donnees,
+                form=form)
+</code></pre>
+<h4 id="template-de-la-route">Template de la route</h4>
+<p>Le template de la route a déjà été rempli lors de l'inclusion du template du formulaire. La route est accessible à <code>localhost:5000/recherche</code>.</p>
+<ul>
+<li>Ajouter dans le menu de l'application un lien vers la page de recherche</li>
+</ul>
+<h3 id="insérer-des-données-avec-un-formulaire">Insérer des données avec un formulaire</h3>
+<p>Développer une route <code>POST /insertions/pays</code> qui permette d'ajouter un pays dans la base de données selon la méthodologie vue précédemment. Le résultat attendu est :</p>
+<p><img src="img/TD_1.jpg" alt="!h:300px">
+<img src="img/TD_2.jpg" alt="!h:300px"></p>
+<ul>
+<li>Créer le modèle de formulaire: les champs de formulaires sont à trouver en fonction de ce qu'il est nécessaire d'avoir pour insérer un nouveau pays dans la base de données</li>
+<li>Compléter le template de formulaire <code>partials/formulaires/insertion_pays.html</code></li>
+<li>Créer la route <code>POST /insertions/pays</code> dans le module &quot;insertions&quot; des routes avec la fonction insertion_pays()</li>
+<li>Ne pas oublier d'importer ce nouveau module dans <a href="http://app.py">app.py</a></li>
+<li>Le template de la route <code>pages/insertion_pays.html</code> est déjà fourni</li>
+<li>Mettre un lien vers cette nouvelle route dans le menu de l'application</li>
+</ul>
+
+            
+            <script async type="text/javascript">
+/* From extension marp-team.marp-vscode */
+(()=>{var U=Object.defineProperty;var d=($,E)=>U($,"name",{value:E,configurable:!0});(()=>{var $={676:(w,b,g)=>{w.exports=g(185)},185:(w,b)=>{"use strict";var g;g={value:!0};const x={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},k="data-marp-auto-scaling-wrapper",u="data-marp-auto-scaling-svg",c="data-marp-auto-scaling-container",T=class T extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const s=d(i=>([n])=>{const{width:e,height:t}=n.contentRect;this[i]={width:e,height:t},this.updateSVGRect()},"t");this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(s("containerSize")),this.wrapperObserver=new ResizeObserver((...i)=>{s("wrapperSize")(...i),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var s,i,n,e,t;this.shadowRoot.innerHTML=`
+<style>
+  svg[${u}] { display: block; width: 100%; height: auto; vertical-align: top; }
+  span[${c}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
+</style>
+<div ${k}>
+  <svg part="svg" ${u}>
+    <foreignObject><span ${c}><slot></slot></span></foreignObject>
+  </svg>
+</div>
+    `.split(/\n\s*/).join(""),this.wrapper=(s=this.shadowRoot.querySelector(`div[${k}]`))!==null&&s!==void 0?s:void 0;const o=this.svg;this.svg=(n=(i=this.wrapper)===null||i===void 0?void 0:i.querySelector(`svg[${u}]`))!==null&&n!==void 0?n:void 0,this.svg!==o&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=(t=(e=this.svg)===null||e===void 0?void 0:e.querySelector(`span[${c}]`))!==null&&t!==void 0?t:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:s}=this;s&&(s.style.display="inline",requestAnimationFrame(()=>{s.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(s){const i=d(()=>{const n=(()=>{const e=s.getPropertyValue("--preserve-aspect-ratio");return e?e.trim():`x${(({textAlign:t,direction:o})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if(t==="start"||t==="end"){let a=o==="rtl";return t==="end"&&(a=!a),a?"Max":"Min"}return"Mid"})(s)}YMid meet`})();n!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=n,this.updateSVGRect()),s===this.svgComputedStyle&&requestAnimationFrame(i)},"e");i()}updateSVGRect(){var s,i,n,e,t,o,a;let p=Math.ceil((i=(s=this.containerSize)===null||s===void 0?void 0:s.width)!==null&&i!==void 0?i:0);const h=Math.ceil((e=(n=this.containerSize)===null||n===void 0?void 0:n.height)!==null&&e!==void 0?e:0);this.dataset.downscaleOnly!==void 0&&(p=Math.max(p,(o=(t=this.wrapperSize)===null||t===void 0?void 0:t.width)!==null&&o!==void 0?o:0));const f=(a=this.svg)===null||a===void 0?void 0:a.querySelector(":scope > foreignObject");if(f?.setAttribute("width",`${p}`),f?.setAttribute("height",`${h}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${p} ${h}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=p<=0||h<=0?"0":""),this.container){const _=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=_.startsWith("xmid")||_.startsWith("xmax")?"auto":"0",this.container.style.marginRight=_.startsWith("xmi")?"auto":"0"}}};d(T,"s");let r=T;const m=d((l,{attrs:s={},style:i})=>class extends l{constructor(...n){super(...n);for(const[e,t]of Object.entries(s))this.hasAttribute(e)||this.setAttribute(e,t);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const n=i?`<style>:host { ${i} }</style>`:"";let e="<slot></slot>";const{autoScaling:t}=this.dataset;t!==void 0&&(e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${t==="downscale-only"?"data-downscale-only":""}>${e}</marp-auto-scaling>`),this.shadowRoot.innerHTML=n+e}},"o");let v;const j=Symbol();let C;const z="marpitSVGPolyfill:setZoomFactor,",A=Symbol(),D=Symbol(),W=d(()=>{const l=navigator.vendor==="Apple Computer, Inc.",s=l?[B]:[],i={then:n=>(l?(async()=>{if(C===void 0){const e=document.createElement("canvas");e.width=10,e.height=10;const t=e.getContext("2d"),o=new Image(10,10),a=new Promise(p=>{o.addEventListener("load",()=>p())});o.crossOrigin="anonymous",o.src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%201%201%22%3E%3CforeignObject%20width%3D%221%22%20height%3D%221%22%20requiredExtensions%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%3E%3Cdiv%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%20style%3D%22width%3A%201px%3B%20height%3A%201px%3B%20background%3A%20red%3B%20position%3A%20relative%22%3E%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fsvg%3E",await a,t.drawImage(o,0,0),C=t.getImageData(5,5,1,1).data[3]<128}return C})().then(e=>{n?.(e?[B]:[])}):n?.([]),i)};return Object.assign(s,i)},"h");let H,O;function B(l){const s=typeof l=="object"&&l.target||document,i=typeof l=="object"?l.zoom:l;window[D]||(Object.defineProperty(window,D,{configurable:!0,value:!0}),document.body.style.zoom=1.0001,document.body.offsetHeight,document.body.style.zoom=1,window.addEventListener("message",({data:e,origin:t})=>{if(t===window.origin)try{if(e&&typeof e=="string"&&e.startsWith(z)){const[,o]=e.split(","),a=Number.parseFloat(o);Number.isNaN(a)||(O=a)}}catch(o){console.error(o)}}));let n=!1;Array.from(s.querySelectorAll("svg[data-marpit-svg]"),e=>{var t,o,a,p;e.style.transform||(e.style.transform="translateZ(0)");const h=i||O||e.currentScale||1;H!==h&&(H=h,n=h);const f=e.getBoundingClientRect(),{length:_}=e.children;for(let F=0;F<_;F+=1){const S=e.children[F];if(S.getScreenCTM){const y=S.getScreenCTM();if(y){const I=(o=(t=S.x)===null||t===void 0?void 0:t.baseVal.value)!==null&&o!==void 0?o:0,Z=(p=(a=S.y)===null||a===void 0?void 0:a.baseVal.value)!==null&&p!==void 0?p:0,Y=S.children.length;for(let R=0;R<Y;R+=1){const N=S.children[R];if(N.tagName==="SECTION"){const{style:q}=N;q.transformOrigin||(q.transformOrigin=`${-I}px ${-Z}px`),q.transform=`scale(${h}) matrix(${y.a}, ${y.b}, ${y.c}, ${y.d}, ${y.e-f.left}, ${y.f-f.top}) translateZ(0.0001px)`;break}}}}}}),n!==!1&&Array.from(s.querySelectorAll("iframe"),({contentWindow:e})=>{e?.postMessage(`${z}${n}`,window.origin==="null"?"*":window.origin)})}d(B,"u");function P({once:l=!1,target:s=document}={}){const i=function(n=document){if(n[A])return n[A];let e=!0;const t=d(()=>{e=!1,delete n[A]},"i");Object.defineProperty(n,A,{configurable:!0,value:t});let o=[],a=!1;(async()=>{try{o=await W()}finally{a=!0}})();const p=d(()=>{for(const h of o)h({target:n});a&&o.length===0||e&&window.requestAnimationFrame(p)},"o");return p(),t}(s);return l?(i(),()=>{}):i}d(P,"v"),H=1,O=void 0;const G=P,M=Symbol(),L=d((l=document)=>{if(typeof window>"u")throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const t=window[j];t||customElements.define("marp-auto-scaling",r);for(const o of Object.keys(x)){const a=`marp-${o}`,p=x[o].proto();v!=null||(v=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),v&&p!==HTMLElement?t||customElements.define(a,m(p,{style:x[o].style}),{extends:o}):(t||customElements.define(a,m(HTMLElement,x[o])),e.querySelectorAll(`${o}[is="${a}"]`).forEach(h=>{h.outerHTML=h.outerHTML.replace(new RegExp(`^<${o}`,"i"),`<${a}`).replace(new RegExp(`</${o}>$`,"i"),`</${a}>`)}))}window[j]=!0})(l),l[M])return l[M];const s=P({target:l}),i=d(()=>{s(),delete l[M]},"n"),n=Object.assign(i,{cleanup:i,update:()=>L(l)});return Object.defineProperty(l,M,{configurable:!0,value:n}),n},"y");b.browser=L,g=L,g=G}},E={};function V(w){var b=E[w];if(b!==void 0)return b.exports;var g=E[w]={exports:{}};return $[w](g,g.exports,V),g.exports}d(V,"__webpack_require__");var J={};(()=>{"use strict";var w=V(676);function b(){let u,c;const r=d(()=>{const m=document.getElementById("__marp-vscode"),v=!!m;u!==v?(document.body.classList.toggle("marp-vscode",v),v?c=(0,w.browser)():(c?.cleanup(),c=void 0),u=v):v&&c?.update(),u?(m&&g(m),x()):k()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(r,100)),window.addEventListener("vscode.markdown.updateContent",r),r()}d(b,"preview");const g=d(u=>{u.querySelectorAll("[is]").forEach(c=>{if(c.nodeName.includes("-")||document.createElement(c.nodeName).constructor!==c.constructor)return;const{outerHTML:m}=c;c.outerHTML=m,console.debug("[marp-vscode] Custom element has been upgraded forcibly:",m.slice(0,m.indexOf(">")+1||void 0))})},"forceUpgradeCustomElements"),x=d(()=>{const u=document.querySelectorAll("style:not(#__marp-vscode-style,#_defaultStyles,[data-marp-vscode-body])"),c=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');u.forEach(r=>{r.closest("#__marp-vscode")||(r.dataset.marpVscodeBody=r.textContent??"",r.textContent="")}),c.forEach(r=>{if(r.closest("#__marp-vscode"))return;const{href:m}=r;r.dataset.marpVscodeHref=m,r.removeAttribute("href")})},"removeStyles"),k=d(()=>{const u=document.querySelectorAll("style[data-marp-vscode-body]"),c=document.querySelectorAll("link[data-marp-vscode-href]");u.forEach(r=>{r.textContent=r.dataset.marpVscodeBody||"",delete r.dataset.marpVscodeBody}),c.forEach(r=>{r.href=r.dataset.marpVscodeHref||"",delete r.dataset.marpVscodeHref})},"restoreStyles");b()})()})();})();
+
+</script>
+
+        </body>
+        </html>
